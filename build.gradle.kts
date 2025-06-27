@@ -1,17 +1,18 @@
 plugins {
     kotlin("jvm") version "2.1.21"
+    `maven-publish`
 }
 
-group = "me.aliorpse"
-version = "1.0.0"
+group = "tech.aliorpse"
+version = "0.1.0"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation("com.google.code.gson:gson:2.13.1")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+    api("com.google.code.gson:gson:2.13.1")
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
 
     testImplementation(kotlin("test"))
 }

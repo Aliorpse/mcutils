@@ -1,20 +1,21 @@
-package me.aliorpse.mcutils.status
+package tech.aliorpse.mcutils.status
 
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import me.aliorpse.mcutils.model.Description
-import me.aliorpse.mcutils.model.DescriptionDeserializer
-import me.aliorpse.mcutils.model.JavaServerStatus
+import tech.aliorpse.mcutils.model.Description
+import tech.aliorpse.mcutils.model.DescriptionDeserializer
+import tech.aliorpse.mcutils.model.JavaServerStatus
 import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.io.IOException
 import java.io.OutputStream
+import java.net.IDN
 import java.net.InetSocketAddress
 import java.net.Socket
 import java.nio.charset.StandardCharsets
+import javax.naming.directory.InitialDirContext
 
 @Suppress("MagicNumber")
 object JavaPing {
@@ -39,14 +40,14 @@ object JavaPing {
      *
      * @throws IOException
      */
-    suspend fun getStatus(
+    suspend fun     getStatus(
         host: String,
         port: Int = 25565,
         timeout: Int = 2000,
         enableSrv: Boolean = true
     ): StatusResult = withContext(Dispatchers.IO) {
         // Unicode 域名
-        val asciiHost = java.net.IDN.toASCII(host)
+        val asciiHost = IDN.toASCII(host)
 
         // SRV 记录
         val (resolvedHost, resolvedPort) = if (enableSrv) {
@@ -81,7 +82,7 @@ object JavaPing {
 
     private fun resolveSrvRecord(host: String): Pair<String, Int>? {
         return try {
-            val dnsContext = javax.naming.directory.InitialDirContext()
+            val dnsContext = InitialDirContext()
             val records = dnsContext.getAttributes(
                 "_minecraft._tcp.$host",
                 arrayOf("SRV")

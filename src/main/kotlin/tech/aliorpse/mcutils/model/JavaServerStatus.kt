@@ -1,4 +1,4 @@
-package me.aliorpse.mcutils.model
+package tech.aliorpse.mcutils.model
 
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
