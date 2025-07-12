@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "tech.aliorpse.mcutils"
-version = "0.1.0"
+version = "0.1.1"
 
 repositories {
     mavenCentral()
@@ -32,7 +32,7 @@ java {
 configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
     publishToMavenCentral()
     signAllPublications()
-    coordinates("tech.aliorpse", "mcutils", "0.1.0")
+    coordinates("tech.aliorpse", "mcutils", "0.1.1")
 
     pom {
         name = "mcutils"
