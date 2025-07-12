@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version "2.1.21"
     id("com.vanniktech.maven.publish") version "0.33.0"
+    id("org.jetbrains.dokka") version "2.0.0"
 }
 
 group = "tech.aliorpse.mcutils"
@@ -19,6 +20,12 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.register<Jar>("javadocJar") {
+    dependsOn("dokkaHtml")
+    archiveClassifier.set("javadoc")
+    from(layout.buildDirectory.dir("dokka"))
 }
 
 kotlin {

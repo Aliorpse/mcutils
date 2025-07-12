@@ -40,7 +40,7 @@ object JavaPing {
      *
      * @throws IOException
      */
-    suspend fun     getStatus(
+    suspend fun getStatus(
         host: String,
         port: Int = 25565,
         timeout: Int = 2000,
