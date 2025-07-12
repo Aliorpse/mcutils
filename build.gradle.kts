@@ -17,6 +17,10 @@ dependencies {
     testImplementation(kotlin("test"))
 }
 
+tasks.test {
+    useJUnitPlatform()
+}
+
 tasks.dokkaJavadoc {
     outputDirectory.set(layout.buildDirectory.dir("dokka"))
 }

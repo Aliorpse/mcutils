@@ -31,12 +31,12 @@ object JavaPing {
         .create()
 
     /**
-     * 获取 MC Java 服务器状态
+     * Fetch Java server status.
      *
-     * @param host 主机地址
-     * @param port 端口 (25565)
-     * @param timeout 超时时间 (2000ms)
-     * @param enableSrv 启用 Srv 解析 (true)
+     * @param host Host
+     * @param port Port (25565)
+     * @param timeout Timeout (2000ms)
+     * @param enableSrv Srv (true)
      *
      * @throws IOException
      */
@@ -46,10 +46,10 @@ object JavaPing {
         timeout: Int = 2000,
         enableSrv: Boolean = true
     ): StatusResult = withContext(Dispatchers.IO) {
-        // Unicode 域名
+        // Unicode domains
         val asciiHost = IDN.toASCII(host)
 
-        // SRV 记录
+        // SRV records
         val (resolvedHost, resolvedPort) = if (enableSrv) {
             resolveSrvRecord(asciiHost) ?: (asciiHost to port)
         } else {
@@ -63,11 +63,11 @@ object JavaPing {
             val out = DataOutputStream(socket.getOutputStream())
             val input = DataInputStream(socket.getInputStream())
 
-            // 握手请求
+            // Handshake request
             sendHandshake(out, asciiHost, resolvedPort)
             sendStatusRequest(out)
 
-            // 解析 JSON
+            // JSON
             val json = readStatusResponse(input)
             val status = gson.fromJson(json, JavaServerStatus::class.java)
 
