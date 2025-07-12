@@ -72,7 +72,8 @@ enum class GameMode {
     SURVIVAL,
     CREATIVE,
     ADVENTURE,
-    SPECTATOR;
+    SPECTATOR,
+    UNKNOWN;
 }
 
 /**

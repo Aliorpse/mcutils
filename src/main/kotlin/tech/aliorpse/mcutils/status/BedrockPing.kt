@@ -18,14 +18,20 @@ import java.nio.charset.StandardCharsets
 
 @Suppress("MagicNumber")
 object BedrockPing {
-    private const val DEFAULT_PORT = 19132
     private val MAGIC_BYTES = byteArrayOf(
         0x00, 0xFF.toByte(), 0xFF.toByte(), 0x00,
         0xFE.toByte(), 0xFE.toByte(), 0xFE.toByte(), 0xFE.toByte(),
         0xFD.toByte(), 0xFD.toByte(), 0xFD.toByte(), 0xFD.toByte()
     )
+
     private val CLIENT_ID = byteArrayOf(0x12, 0x34, 0x56, 0x78, 0x00)
     private val CLIENT_GUID = ByteArray(8) { 0 }
+
+    private const val PACKET_ID_UNCONNECTED_PONG = 0x1C.toByte()
+    private const val PACKET_ID_UNCONNECTED_PING = 0x01.toByte()
+    private const val BUFFER_SIZE = 256
+    private const val MIN_EXPECTED_PARTS = 9
+    private const val SERVER_INFO_OFFSET = 33
 
     /**
      * Fetch Bedrock server status.
@@ -38,7 +44,7 @@ object BedrockPing {
      */
     suspend fun getStatus(
         host: String,
-        port: Int = DEFAULT_PORT,
+        port: Int = 19132,
         timeout: Int = 2000
     ): BedrockServerStatus = withContext(Dispatchers.IO) {
         val asciiHost = IDN.toASCII(host)
@@ -47,59 +53,52 @@ object BedrockPing {
         DatagramSocket().use { socket ->
             socket.soTimeout = timeout
 
-            // Construct request packet
-            val buffer = ByteBuffer.allocate(1 + 8 + 12 + 5 + 8).order(ByteOrder.BIG_ENDIAN)
-            buffer.put(0x01) // Packet ID for ping
-            buffer.putLong(System.currentTimeMillis()) // Client sends timestamp
-            buffer.put(MAGIC_BYTES)                    // Protocol magic bytes
-            buffer.put(CLIENT_ID)                      // Client ID
-            buffer.put(CLIENT_GUID)                    // Client GUID (0)
+            val requestBuffer = ByteBuffer.allocate(1 + 8 + MAGIC_BYTES.size + CLIENT_ID.size + CLIENT_GUID.size)
+                .order(ByteOrder.BIG_ENDIAN)
+            requestBuffer.put(PACKET_ID_UNCONNECTED_PING)
+            requestBuffer.putLong(System.currentTimeMillis())
+            requestBuffer.put(MAGIC_BYTES)
+            requestBuffer.put(CLIENT_ID)
+            requestBuffer.put(CLIENT_GUID)
 
-            val sendData = buffer.array()
-            val sendPacket = DatagramPacket(sendData, sendData.size, address, port)
+            val sendPacket = DatagramPacket(requestBuffer.array(), requestBuffer.position(), address, port)
+            val receiveBuffer = ByteArray(BUFFER_SIZE)
+            val receivePacket = DatagramPacket(receiveBuffer, BUFFER_SIZE)
 
-            val receiveBuffer = ByteArray(256)
-            val receivePacket = DatagramPacket(receiveBuffer, receiveBuffer.size)
-
-            val startTime = System.currentTimeMillis()
+            val start = System.currentTimeMillis()
             socket.send(sendPacket)
             socket.receive(receivePacket)
-            val endTime = System.currentTimeMillis()
+            val end = System.currentTimeMillis()
 
             val data = receivePacket.data
-            // Packet ID for response is 0x1C
-            if (data.isEmpty() || data[0] != 0x1C.toByte()) {
-                throw IOException("Invalid response packet, expected packet ID 0x1C")
+            if (data.isEmpty() || data[0] != PACKET_ID_UNCONNECTED_PONG) {
+                throw IOException("Invalid response: expected packet ID 0x1C, got ${data[0]}")
             }
 
-            // Server info string starts at byte offset 33
-            val serverInfoRaw = data.copyOfRange(33, receivePacket.length)
-            val serverInfoStr = serverInfoRaw.toString(StandardCharsets.UTF_8).trim('\u0000')
+            if (receivePacket.length <= SERVER_INFO_OFFSET) {
+                throw IOException("Received packet too short to contain server info")
+            }
 
-            // Split the info string by ';' and parse fields
-            val parts = serverInfoStr.split(";")
-            if (parts.size < 9) {
-                throw IOException("Incomplete server info data, expected at least 9 parts")
+            val infoRaw = data.copyOfRange(SERVER_INFO_OFFSET, receivePacket.length)
+            val infoStr = infoRaw.toString(StandardCharsets.UTF_8).trimEnd('\u0000')
+
+            val parts = infoStr.split(";")
+            if (parts.size < MIN_EXPECTED_PARTS) {
+                throw IOException("Malformed response: expected at least $MIN_EXPECTED_PARTS parts, got ${parts.size}")
             }
 
             val protocol = parts[2].toIntOrNull() ?: 0
             val online = parts[4].toIntOrNull() ?: 0
             val max = parts[5].toIntOrNull() ?: 0
+            val gameMode = runCatching { GameMode.valueOf(parts[8].uppercase()) }.getOrDefault(GameMode.UNKNOWN)
 
-            BedrockServerStatus(
+            return@withContext BedrockServerStatus(
                 description = Description(parts[1]),
-                players = Players(
-                    max = max,
-                    online = online,
-                    sample = emptyList()
-                ),
-                version = Version(
-                    name = parts[3],
-                    protocol = protocol
-                ),
-                ping = endTime - startTime,
+                players = Players(online = online, max = max, sample = emptyList()),
+                version = Version(name = parts[3], protocol = protocol),
+                ping = end - start,
                 levelName = parts[7],
-                gameMode = GameMode.valueOf(parts[8].uppercase()),
+                gameMode = gameMode,
                 serverUniqueID = parts[6]
             )
         }
