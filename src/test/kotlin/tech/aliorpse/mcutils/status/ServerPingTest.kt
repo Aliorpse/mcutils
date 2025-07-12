@@ -3,7 +3,7 @@ package tech.aliorpse.mcutils.status
 import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
 
-class JavaPingTest {
+class ServerPingTest {
     @Test
     fun javaGetStatusTest() = runBlocking {
         val result = JavaPing.getStatus("wdsj.net")
