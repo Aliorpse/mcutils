@@ -5,8 +5,16 @@ import kotlin.test.Test
 
 class JavaPingTest {
     @Test
-    fun getStatusTest() = runBlocking {
+    fun javaGetStatusTest() = runBlocking {
         val result = JavaPing.getStatus("wdsj.net")
+        println(result)
+
+        assert(result.ping > 0)
+    }
+
+    @Test
+    fun bedrockGetStatusTest() = runBlocking {
+        val result = BedrockPing.getStatus("play.easecation.net")
         println(result)
 
         assert(result.ping > 0)

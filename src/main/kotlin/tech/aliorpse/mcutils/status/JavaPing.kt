@@ -4,8 +4,10 @@ import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import tech.aliorpse.mcutils.model.Description
-import tech.aliorpse.mcutils.model.DescriptionDeserializer
+import tech.aliorpse.mcutils.model.JavaServerDescriptionDeserializer
 import tech.aliorpse.mcutils.model.JavaServerStatus
+import tech.aliorpse.mcutils.model.Players
+import tech.aliorpse.mcutils.model.Version
 import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
 import java.io.DataOutputStream
@@ -27,8 +29,16 @@ object JavaPing {
     private const val NEXT_STATE_STATUS = 1
 
     private val gson = GsonBuilder()
-        .registerTypeAdapter(Description::class.java, DescriptionDeserializer())
+        .registerTypeAdapter(Description::class.java, JavaServerDescriptionDeserializer())
         .create()
+
+    private data class RawJavaStatus(
+        val description: Description,
+        val players: Players,
+        val version: Version,
+        val favicon: String? = null,
+        val enforcesSecureChat: Boolean? = false
+    )
 
     /**
      * Fetch Java server status.
@@ -45,11 +55,9 @@ object JavaPing {
         port: Int = 25565,
         timeout: Int = 2000,
         enableSrv: Boolean = true
-    ): StatusResult = withContext(Dispatchers.IO) {
-        // Unicode domains
+    ): JavaServerStatus = withContext(Dispatchers.IO) {
         val asciiHost = IDN.toASCII(host)
 
-        // SRV records
         val (resolvedHost, resolvedPort) = if (enableSrv) {
             resolveSrvRecord(asciiHost) ?: (asciiHost to port)
         } else {
@@ -63,20 +71,25 @@ object JavaPing {
             val out = DataOutputStream(socket.getOutputStream())
             val input = DataInputStream(socket.getInputStream())
 
-            // Handshake request
             sendHandshake(out, asciiHost, resolvedPort)
             sendStatusRequest(out)
 
-            // JSON
             val json = readStatusResponse(input)
-            val status = gson.fromJson(json, JavaServerStatus::class.java)
+            val parsed = gson.fromJson(json, RawJavaStatus::class.java)
 
             val pingStart = System.currentTimeMillis()
             sendPing(out, pingStart)
             readPong(input, pingStart)
             val ping = System.currentTimeMillis() - pingStart
 
-            StatusResult(status, ping)
+            JavaServerStatus(
+                description = parsed.description,
+                players = parsed.players,
+                version = parsed.version,
+                ping = ping,
+                enforcesSecureChat = parsed.enforcesSecureChat ?: false,
+                favicon = parsed.favicon ?: ""
+            )
         }
     }
 
@@ -111,7 +124,7 @@ object JavaPing {
         writeVarInt(handshakeData, NEXT_STATE_STATUS)
 
         val body = handshakePayload.toByteArray()
-        writeVarInt(out, body.size + 1) // 总长度
+        writeVarInt(out, body.size + 1)
         writeVarInt(out, HANDSHAKE_PACKET_ID)
         out.write(body)
     }
@@ -184,9 +197,4 @@ object JavaPing {
         writeVarInt(out, bytes.size)
         out.write(bytes)
     }
-
-    data class StatusResult(
-        val status: JavaServerStatus,
-        val ping: Long
-    )
 }
