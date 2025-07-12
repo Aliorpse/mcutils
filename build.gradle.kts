@@ -1,9 +1,9 @@
 plugins {
     kotlin("jvm") version "2.1.21"
-    `maven-publish`
+    id("com.vanniktech.maven.publish") version "0.33.0"
 }
 
-group = "tech.aliorpse"
+group = "tech.aliorpse.mcutils"
 version = "0.1.0"
 
 repositories {
@@ -20,6 +20,42 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
 kotlin {
     jvmToolchain(21)
+}
+
+java {
+    withSourcesJar()
+}
+
+configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
+    publishToMavenCentral()
+    signAllPublications()
+    coordinates("tech.aliorpse", "mcutils", "0.1.0")
+
+    pom {
+        name = "mcutils"
+        description = "Kotlin library for minecraft operations"
+        url = "https://github.com/Aliorpse/kotlin-mcutils/"
+        inceptionYear = "2025"
+        licenses {
+            license {
+                name = "MIT"
+                url = "https://opensource.org/licenses/MIT"
+            }
+        }
+        developers {
+            developer {
+                id = "aliorpse"
+                name = "Aliorpse"
+                url = "https://github.com/Aliorpse/"
+            }
+        }
+        scm {
+            url = "https://github.com/Aliorpse/kotlin-mcutils/"
+            connection = "scm:git:git://github.com/Aliorpse/kotlin-mcutils.git"
+            developerConnection = "scm:git:ssh://git@github.com/Aliorpse/kotlin-mcutils.git"
+        }
+    }
 }
