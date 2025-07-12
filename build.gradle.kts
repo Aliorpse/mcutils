@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "tech.aliorpse.mcutils"
-version = "0.1.1"
+version = "0.1.3"
 
 repositories {
     mavenCentral()
@@ -22,12 +22,15 @@ tasks.test {
     useJUnitPlatform()
 }
 
+tasks.dokkaHtml {
+    outputDirectory.set(layout.buildDirectory.dir("dokka"))
+}
+
 tasks.register<Jar>("javadocJar") {
-    dependsOn("dokkaHtml")
+    dependsOn(tasks.dokkaHtml)
     archiveClassifier.set("javadoc")
     from(layout.buildDirectory.dir("dokka"))
 }
-
 kotlin {
     jvmToolchain(21)
 }
@@ -39,7 +42,7 @@ java {
 configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
     publishToMavenCentral()
     signAllPublications()
-    coordinates("tech.aliorpse", "mcutils", "0.1.1")
+    coordinates("tech.aliorpse", "mcutils", "0.1.3")
 
     pom {
         name = "mcutils"
