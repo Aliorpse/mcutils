@@ -18,6 +18,9 @@ jobs:
           distribution: zulu
           java-version: 21
 
+      - name: Grant execute permission to gradlew
+        run: chmod +x ./gradlew
+
       - name: Publish and release to Maven Central
         run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
         env:
