@@ -18,11 +18,11 @@ jobs:
           distribution: 'temurin'
           java-version: 21
 
+      - name: Make Gradle wrapper executable
+        run: chmod +x ./gradlew
+
       - name: Generate Dokka HTML
         run: ./gradlew dokkaHtml
-
-      - name: List contents (debug)
-        run: ls -R build/dokka
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
