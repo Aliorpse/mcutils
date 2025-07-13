@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "tech.aliorpse.mcutils"
-version = System.getenv("GITHUB_REF_NAME")
+version = System.getenv("GITHUB_REF_NAME") ?: "0.0.1" // fallback 防止 null
 
 repositories {
     mavenCentral()
@@ -24,8 +24,12 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.dokkaJavadoc {
+tasks.named<org.jetbrains.dokka.gradle.DokkaTask>("dokkaHtml") {
     outputDirectory.set(layout.buildDirectory.dir("dokka"))
+}
+
+tasks.dokkaJavadoc {
+    outputDirectory.set(layout.buildDirectory.dir("dokkaJavaDoc"))
 }
 
 @Suppress("unused")
@@ -48,7 +52,7 @@ configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
 
     pom {
         name.set("mcutils")
-        description.set("Kotlin library for minecraft operations")
+        description.set("Kotlin library for Minecraft operations")
         url.set("https://github.com/Aliorpse/kotlin-mcutils/")
         inceptionYear.set("2025")
         licenses {
