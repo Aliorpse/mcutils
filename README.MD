@@ -1,5 +1,7 @@
 # mcutils
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/d83f9fcc077b448f9ce2a40865b17343)](https://app.codacy.com/gh/Aliorpse/kotlin-mcutils/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+
 基于 Kotlin 的 mc 请求库, 封装了与 Minecraft 查询相关的实用功能。
 
 ## 安装
