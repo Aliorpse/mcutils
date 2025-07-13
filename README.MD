@@ -1,9 +1,11 @@
 # mcutils
+
 基于 Kotlin 的 mc 请求库, 封装了与 Minecraft 查询相关的实用功能。
 
 ## 安装
 
 ### Gradle
+
 ```kotlin
 dependencies {
     implementation("tech.aliorpse:mcutils:<version>")
@@ -11,6 +13,7 @@ dependencies {
 ```
 
 ### Maven
+
 ```xml
 <dependency>
     <groupId>tech.aliorpse</groupId>
@@ -20,7 +23,9 @@ dependencies {
 ```
 
 ## 使用示例
+
 项目文档较为详细, 这里不多赘述
+
 ```kotlin
 fun main() = runBlocking {
     var status
