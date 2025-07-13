@@ -2,9 +2,9 @@
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/d83f9fcc077b448f9ce2a40865b17343)](https://app.codacy.com/gh/Aliorpse/kotlin-mcutils/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
-基于 Kotlin 的 mc 请求库, 封装了与 Minecraft 查询相关的实用功能。
+A Kotlin-based Minecraft request library provides utility functions related to Minecraft queries.
 
-## 安装
+## Installation
 
 ### Gradle
 
@@ -24,9 +24,7 @@ dependencies {
 </dependency>
 ```
 
-## 使用示例
-
-项目文档较为详细, 这里不多赘述
+## Examples
 
 ```kotlin
 fun main() = runBlocking {

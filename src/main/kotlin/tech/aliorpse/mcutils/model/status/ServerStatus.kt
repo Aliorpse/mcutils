@@ -100,6 +100,10 @@ data class Sample(
     val name: String
 )
 
+
+/**
+ * Represents the various game modes available in Minecraft. For [tech.aliorpse.mcutils.status.BedrockPing.getStatus].
+ */
 enum class GameMode {
     SURVIVAL,
     CREATIVE,
