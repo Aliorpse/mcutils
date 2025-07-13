@@ -17,6 +17,9 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.charset.StandardCharsets
 
+/**
+ * Provides functionality to fetch and parse the status of a Bedrock Minecraft server.
+ */
 @Suppress("MagicNumber")
 object BedrockPing {
     private val MAGIC_BYTES = byteArrayOf(

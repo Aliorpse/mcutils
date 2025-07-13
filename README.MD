@@ -2,12 +2,14 @@
 基于 Kotlin 的 mc 请求库, 封装了与 Minecraft 查询相关的实用功能。
 
 ## 安装
+
 ### Gradle
 ```kotlin
 dependencies {
     implementation("tech.aliorpse:mcutils:<version>")
 }
 ```
+
 ### Maven
 ```xml
 <dependency>

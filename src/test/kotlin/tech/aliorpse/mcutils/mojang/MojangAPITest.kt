@@ -4,6 +4,9 @@ import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
 
 class MojangAPITest {
+    /**
+     * Simple test for getting player's profile.
+     */
     @Test
     fun getProfileTest() = runBlocking {
         val result = MojangAPI.getProfileByName("Aliorpse")

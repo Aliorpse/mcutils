@@ -2,6 +2,9 @@ package tech.aliorpse.mcutils.mojang
 
 import tech.aliorpse.mcutils.model.mojang.PlayerProfile
 
+/**
+ * A utility object for interacting with the Mojang API to retrieve player profile data.
+ */
 object MojangAPI {
     /**
      * Retrieves the player's profile from the Mojang session server based on the provided UUID.

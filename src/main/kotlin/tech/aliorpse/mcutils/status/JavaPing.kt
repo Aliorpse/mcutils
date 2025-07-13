@@ -20,6 +20,16 @@ import java.net.Socket
 import java.nio.charset.StandardCharsets
 import javax.naming.directory.InitialDirContext
 
+/**
+ * Provides functionality to fetch and parse the status of a Java Minecraft server.
+ *
+ * The object supports asynchronous and blocking methods to retrieve server details such as
+ * server description, version, players, and ping latency. It also includes support for SRV record
+ * resolution and Unicode domains.
+ *
+ * Internal constants and helper methods handle Minecraft's communication protocol, including
+ * packet construction and parsing.
+ */
 @Suppress("MagicNumber")
 object JavaPing {
     private const val HANDSHAKE_PACKET_ID = 0x00

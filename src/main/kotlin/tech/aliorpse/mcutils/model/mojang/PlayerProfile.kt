@@ -26,6 +26,13 @@ data class PlayerProfile(
     val skinModel: SkinModel
 )
 
+/**
+ * Enum representing the model type of player's skin.
+ *
+ * The player's skin model can too be:
+ * - CLASSIC: The default model type, also known as "Steve".
+ * - SLIM: A more slender model type, also known as "Alex".
+ */
 enum class SkinModel {
     CLASSIC, SLIM;
 
@@ -49,6 +56,20 @@ private data class RawPlayerProfile(
     )
 }
 
+/**
+ * A custom deserializer for converting JSON data into a `PlayerProfile` object.
+ *
+ * This class implements `JsonDeserializer<PlayerProfile>` and provides functionality
+ * to parse player profile data, including details such as UUID, name, skin URL, cape URL,
+ * and skin model type, from the Mojang session server JSON response.
+ *
+ * The deserialization process includes:
+ * - Parsing the raw profile data (`RawPlayerProfile`) to extract basic player information.
+ * - Decoding and parsing Base64-encoded textures from the profile's property list.
+ * - Extracting texture URLs for skin and cape as well as determining the player's skin model.
+ *
+ * In case of errors during the decoding or parsing of textures, default values are used.
+ */
 class PlayerProfileDeserializer : JsonDeserializer<PlayerProfile> {
     override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): PlayerProfile {
         val rawProfile = Gson().fromJson(json, RawPlayerProfile::class.java)
