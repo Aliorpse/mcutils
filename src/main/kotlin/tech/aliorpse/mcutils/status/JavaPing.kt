@@ -2,6 +2,7 @@ package tech.aliorpse.mcutils.status
 
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import tech.aliorpse.mcutils.model.Description
 import tech.aliorpse.mcutils.model.JavaServerDescriptionDeserializer
@@ -91,6 +92,18 @@ object JavaPing {
                 favicon = parsed.favicon ?: ""
             )
         }
+    }
+
+    /**
+     * Blocking method for [getStatus].
+     */
+    fun getStatusBlocking(
+        host: String,
+        port: Int = 25565,
+        timeout: Int = 2000,
+        enableSrv: Boolean = true
+    ) = runBlocking {
+        getStatus(host, port, timeout, enableSrv)
     }
 
     private fun resolveSrvRecord(host: String): Pair<String, Int>? {

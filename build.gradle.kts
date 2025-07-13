@@ -5,6 +5,7 @@ plugins {
 }
 
 group = "tech.aliorpse.mcutils"
+version = System.getenv("GITHUB_REF_NAME")
 
 repositories {
     mavenCentral()
@@ -39,7 +40,7 @@ val javadocJar by tasks.registering(Jar::class) {
 configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
     publishToMavenCentral()
     signAllPublications()
-    coordinates("tech.aliorpse", "mcutils", "0.1.4")
+    coordinates("tech.aliorpse", "mcutils", version.toString())
 
     pom {
         name.set("mcutils")

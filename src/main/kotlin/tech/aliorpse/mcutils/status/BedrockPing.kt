@@ -1,6 +1,7 @@
 package tech.aliorpse.mcutils.status
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import tech.aliorpse.mcutils.model.BedrockServerStatus
 import tech.aliorpse.mcutils.model.Description
@@ -102,5 +103,16 @@ object BedrockPing {
                 serverUniqueID = parts[6]
             )
         }
+    }
+
+    /**
+     * Blocking method for [getStatus].
+     */
+    fun getStatusBlocking(
+        host: String,
+        port: Int = 19132,
+        timeout: Int = 2000
+    ) = runBlocking {
+        getStatus(host, port, timeout)
     }
 }
