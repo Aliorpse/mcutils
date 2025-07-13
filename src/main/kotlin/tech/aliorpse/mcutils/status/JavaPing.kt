@@ -4,11 +4,11 @@ import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import tech.aliorpse.mcutils.model.Description
-import tech.aliorpse.mcutils.model.JavaServerDescriptionDeserializer
-import tech.aliorpse.mcutils.model.JavaServerStatus
-import tech.aliorpse.mcutils.model.Players
-import tech.aliorpse.mcutils.model.Version
+import tech.aliorpse.mcutils.model.status.Description
+import tech.aliorpse.mcutils.model.status.JavaServerDescriptionDeserializer
+import tech.aliorpse.mcutils.model.status.JavaServerStatus
+import tech.aliorpse.mcutils.model.status.Players
+import tech.aliorpse.mcutils.model.status.Version
 import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
 import java.io.DataOutputStream
@@ -97,6 +97,7 @@ object JavaPing {
     /**
      * Blocking method for [getStatus].
      */
+    @JvmStatic
     fun getStatusBlocking(
         host: String,
         port: Int = 25565,

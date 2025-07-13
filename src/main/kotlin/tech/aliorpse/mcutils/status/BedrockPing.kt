@@ -3,11 +3,11 @@ package tech.aliorpse.mcutils.status
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import tech.aliorpse.mcutils.model.BedrockServerStatus
-import tech.aliorpse.mcutils.model.Description
-import tech.aliorpse.mcutils.model.GameMode
-import tech.aliorpse.mcutils.model.Players
-import tech.aliorpse.mcutils.model.Version
+import tech.aliorpse.mcutils.model.status.BedrockServerStatus
+import tech.aliorpse.mcutils.model.status.Description
+import tech.aliorpse.mcutils.model.status.GameMode
+import tech.aliorpse.mcutils.model.status.Players
+import tech.aliorpse.mcutils.model.status.Version
 import java.io.IOException
 import java.net.DatagramPacket
 import java.net.DatagramSocket
@@ -108,6 +108,7 @@ object BedrockPing {
     /**
      * Blocking method for [getStatus].
      */
+    @JvmStatic
     fun getStatusBlocking(
         host: String,
         port: Int = 19132,

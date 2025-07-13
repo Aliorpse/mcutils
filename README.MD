@@ -29,5 +29,9 @@ fun main() = runBlocking {
         enableSrv = true
     )
     status = BedrockPing.getStatus("play.easecation.net")
+    
+    var playerInfo
+    playerInfo = MojangAPI.getProfile("ec042e1200ac4a249cc83eb1fab0bd88")
+    playerInfo = MojangAPI.getProfileByName("Aliorpse")
 }
 ```

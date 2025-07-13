@@ -12,8 +12,10 @@ repositories {
 }
 
 dependencies {
-    api("com.google.code.gson:gson:2.13.1")
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+    api("com.google.code.gson:gson:2.13.1")
+    api("com.squareup.retrofit2:retrofit:3.0.0")
+    api("com.squareup.retrofit2:converter-gson:3.0.0")
 
     testImplementation(kotlin("test"))
 }
@@ -26,11 +28,13 @@ tasks.dokkaJavadoc {
     outputDirectory.set(layout.buildDirectory.dir("dokka"))
 }
 
+@Suppress("unused")
 val sourcesJar by tasks.registering(Jar::class) {
     archiveClassifier.set("sources")
     from(sourceSets["main"].allSource)
 }
 
+@Suppress("unused")
 val javadocJar by tasks.registering(Jar::class) {
     dependsOn(tasks.dokkaJavadoc)
     archiveClassifier.set("javadoc")
