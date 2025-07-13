@@ -22,10 +22,11 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Generate Dokka HTML
-        run: ./gradlew dokkaHtml
+        run: ./gradlew dokkaGeneratePublicationHtml
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build/dokka
+          publish_branch: gh-pages

@@ -1,3 +1,5 @@
+import org.jetbrains.dokka.gradle.tasks.DokkaGeneratePublicationTask
+
 plugins {
     kotlin("jvm") version "2.1.21"
     id("org.jetbrains.dokka") version "2.0.0"
@@ -5,7 +7,7 @@ plugins {
 }
 
 group = "tech.aliorpse.mcutils"
-version = System.getenv("GITHUB_REF_NAME") ?: "0.0.1" // fallback 防止 null
+version = System.getenv("GITHUB_REF_NAME") ?: "0.1.0"
 
 repositories {
     mavenCentral()
@@ -24,25 +26,14 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.named<org.jetbrains.dokka.gradle.DokkaTask>("dokkaHtml") {
+tasks.named<DokkaGeneratePublicationTask>("dokkaGeneratePublicationHtml") {
     outputDirectory.set(layout.buildDirectory.dir("dokka"))
-}
-
-tasks.dokkaJavadoc {
-    outputDirectory.set(layout.buildDirectory.dir("dokkaJavaDoc"))
 }
 
 @Suppress("unused")
 val sourcesJar by tasks.registering(Jar::class) {
     archiveClassifier.set("sources")
     from(sourceSets["main"].allSource)
-}
-
-@Suppress("unused")
-val javadocJar by tasks.registering(Jar::class) {
-    dependsOn(tasks.dokkaJavadoc)
-    archiveClassifier.set("javadoc")
-    from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
 }
 
 configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
@@ -55,12 +46,14 @@ configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
         description.set("Kotlin library for Minecraft operations")
         url.set("https://github.com/Aliorpse/kotlin-mcutils/")
         inceptionYear.set("2025")
+
         licenses {
             license {
                 name.set("MIT")
                 url.set("https://opensource.org/licenses/MIT")
             }
         }
+
         developers {
             developer {
                 id.set("aliorpse")
@@ -68,6 +61,7 @@ configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
                 url.set("https://github.com/Aliorpse/")
             }
         }
+
         scm {
             url.set("https://github.com/Aliorpse/kotlin-mcutils/")
             connection.set("scm:git:git://github.com/Aliorpse/kotlin-mcutils.git")
