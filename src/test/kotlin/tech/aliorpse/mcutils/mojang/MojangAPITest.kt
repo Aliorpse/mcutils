@@ -1,6 +1,7 @@
 package tech.aliorpse.mcutils.mojang
 
 import kotlinx.coroutines.runBlocking
+import tech.aliorpse.mcutils.module.mojang.MojangAPI
 import kotlin.test.Test
 
 class MojangAPITest {

@@ -1,11 +1,13 @@
 package tech.aliorpse.mcutils.status
 
+import tech.aliorpse.mcutils.module.status.BedrockPing
+import tech.aliorpse.mcutils.module.status.JavaPing
 import kotlin.test.Test
 
 class ServerPingTest {
     @Test
     fun javaGetStatusTest() {
-        val result = JavaPing.getStatusBlocking("mc.hypixel.net")
+        val result = JavaPing.getStatusBlocking("wdsj.net")
         println(result)
         assert(result.ping > 0)
     }

@@ -1,4 +1,4 @@
-package tech.aliorpse.mcutils.status
+package tech.aliorpse.mcutils.module.status
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -8,6 +8,7 @@ import tech.aliorpse.mcutils.model.status.Description
 import tech.aliorpse.mcutils.model.status.GameMode
 import tech.aliorpse.mcutils.model.status.Players
 import tech.aliorpse.mcutils.model.status.Version
+import tech.aliorpse.mcutils.util.MOTDParser.sectionFormatToObject
 import java.io.IOException
 import java.net.DatagramPacket
 import java.net.DatagramSocket
@@ -97,7 +98,7 @@ object BedrockPing {
             val gameMode = runCatching { GameMode.valueOf(parts[8].uppercase()) }.getOrDefault(GameMode.UNKNOWN)
 
             return@withContext BedrockServerStatus(
-                description = Description(parts[1]),
+                description = Description(parts[1], sectionFormatToObject(parts[1])),
                 players = Players(online = online, max = max, sample = emptyList()),
                 version = Version(name = parts[3], protocol = protocol),
                 ping = end - start,

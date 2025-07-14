@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "tech.aliorpse.mcutils"
-version = System.getenv("GITHUB_REF_NAME") ?: "0.1.0"
+version = System.getenv("GITHUB_REF_NAME")
 
 repositories {
     mavenCentral()

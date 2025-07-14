@@ -10,7 +10,7 @@ A Kotlin-based Minecraft request library provides utility functions related to M
 
 ```kotlin
 dependencies {
-    implementation("tech.aliorpse:mcutils:<version>")
+    implementation("tech.aliorpse:mcutils:$version")
 }
 ```
 
@@ -24,7 +24,7 @@ dependencies {
 </dependency>
 ```
 
-## Examples
+## Basic examples
 
 ```kotlin
 fun main() = runBlocking {

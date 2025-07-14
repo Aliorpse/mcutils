@@ -1,4 +1,4 @@
-package tech.aliorpse.mcutils.mojang
+package tech.aliorpse.mcutils.module.mojang
 
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit

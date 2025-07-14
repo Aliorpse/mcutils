@@ -1,4 +1,4 @@
-package tech.aliorpse.mcutils.mojang
+package tech.aliorpse.mcutils.module.mojang
 
 import tech.aliorpse.mcutils.model.mojang.PlayerProfile
 

@@ -1,14 +1,18 @@
-package tech.aliorpse.mcutils.status
+package tech.aliorpse.mcutils.module.status
 
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import tech.aliorpse.mcutils.model.status.ColorTypeAdapter
 import tech.aliorpse.mcutils.model.status.Description
-import tech.aliorpse.mcutils.model.status.JavaServerDescriptionDeserializer
+import tech.aliorpse.mcutils.model.status.DescriptionDeserializer
 import tech.aliorpse.mcutils.model.status.JavaServerStatus
+import tech.aliorpse.mcutils.model.status.MOTDTextComponent
+import tech.aliorpse.mcutils.model.status.MOTDTextComponentDeserializer
 import tech.aliorpse.mcutils.model.status.Players
 import tech.aliorpse.mcutils.model.status.Version
+import tech.aliorpse.mcutils.util.Color
 import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
 import java.io.DataOutputStream
@@ -40,7 +44,9 @@ object JavaPing {
     private const val NEXT_STATE_STATUS = 1
 
     private val gson = GsonBuilder()
-        .registerTypeAdapter(Description::class.java, JavaServerDescriptionDeserializer())
+        .registerTypeAdapter(Description::class.java, DescriptionDeserializer())
+        .registerTypeAdapter(Color::class.java, ColorTypeAdapter())
+        .registerTypeAdapter(MOTDTextComponent::class.java, MOTDTextComponentDeserializer())
         .create()
 
     private data class RawJavaStatus(

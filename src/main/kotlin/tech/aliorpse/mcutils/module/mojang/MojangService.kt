@@ -1,4 +1,4 @@
-package tech.aliorpse.mcutils.mojang
+package tech.aliorpse.mcutils.module.mojang
 
 import retrofit2.http.GET
 import retrofit2.http.Path
