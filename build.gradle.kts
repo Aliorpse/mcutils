@@ -35,6 +35,10 @@ val dokkaGeneratePublicationHtml by
     tasks.existing(DokkaGeneratePublicationTask::class)
 
 // dokka as javadoc
+tasks.withType<GenerateModuleMetadata>().configureEach {
+    dependsOn(dokkaGeneratePublicationHtml)
+}
+
 tasks.named<Jar>("javadocJar") {
     dependsOn(dokkaGeneratePublicationHtml)
     from(dokkaGeneratePublicationHtml.flatMap { it.outputDirectory })
