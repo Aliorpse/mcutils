@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "tech.aliorpse.mcutils"
-version = System.getenv("GITHUB_REF_NAME") ?: "0.0.1"
+version = System.getenv("GITHUB_REF_NAME")
 
 repositories {
     mavenCentral()
@@ -31,8 +31,16 @@ tasks.test {
     useJUnitPlatform()
 }
 
+val dokkaGeneratePublicationHtml by
+    tasks.existing(DokkaGeneratePublicationTask::class)
+
+tasks.named<Jar>("javadocJar") {
+    dependsOn(dokkaGeneratePublicationHtml)
+    from(dokkaGeneratePublicationHtml.flatMap { it.outputDirectory })
+}
+
 tasks.named<DokkaGeneratePublicationTask>("dokkaGeneratePublicationHtml") {
-    outputDirectory.set(layout.buildDirectory.dir("dokka"))
+    outputDirectory.set(layout.buildDirectory.dir("dokka/html"))
 }
 
 configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
