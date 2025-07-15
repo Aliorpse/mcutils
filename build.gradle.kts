@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "tech.aliorpse.mcutils"
-version = System.getenv("GITHUB_REF_NAME")
+version = System.getenv("GITHUB_REF_NAME") ?: "0.0.1"
 
 repositories {
     mavenCentral()
@@ -22,18 +22,17 @@ dependencies {
     testImplementation(kotlin("test"))
 }
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 tasks.test {
     useJUnitPlatform()
 }
 
 tasks.named<DokkaGeneratePublicationTask>("dokkaGeneratePublicationHtml") {
     outputDirectory.set(layout.buildDirectory.dir("dokka"))
-}
-
-@Suppress("unused")
-val sourcesJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("sources")
-    from(sourceSets["main"].allSource)
 }
 
 configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
