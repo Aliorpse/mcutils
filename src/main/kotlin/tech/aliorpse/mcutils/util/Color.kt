@@ -32,6 +32,9 @@ sealed interface Color {
         companion object {
             private val NAME_MAP = entries.associateBy { it.name.lowercase() }
 
+            /**
+             * Return a Color based on the inputted name
+             */
             fun fromName(name: String): Named? = NAME_MAP[name.lowercase()]
         }
     }

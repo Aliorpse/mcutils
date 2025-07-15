@@ -196,7 +196,7 @@ class MOTDTextComponentDeserializer : JsonDeserializer<MOTDTextComponent> {
 
         val obj = json.asJsonObject
         val text = obj.get("text")?.asString ?: ""
-        val color = Color.fromString(obj.get("color")?.asString)
+        val color = Color.fromString(obj.get("color")?.asString ?: "WHITE")
         val bold = obj.get("bold")?.asBoolean ?: false
         val italic = obj.get("italic")?.asBoolean ?: false
         val underlined = obj.get("underlined")?.asBoolean ?: false

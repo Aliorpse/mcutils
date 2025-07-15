@@ -3,36 +3,56 @@ package tech.aliorpse.mcutils.util
 import tech.aliorpse.mcutils.model.status.MOTDTextComponent
 
 /**
- * Utility functions for MOTD analyzing. By GPT.
+ * Utility functions for MOTD analyzing.
  */
 object MOTDParser {
     /**
      * [MOTDTextComponent] to § format.
+     * The format output will obey the Java edition's rule.
+     * Hex colors will be converted to like §#FF0000.
+     *
+     * @param component The TextComponent needed to be converted.
      */
     fun objectToSectionFormat(component: MOTDTextComponent): String {
         val sb = StringBuilder()
 
+        // Process different kinds of color
         val colorCode = when (val c = component.color) {
             is Color.Named -> colorToOriginalCode[c]
-            is Color.Custom -> null
+            is Color.Custom -> c.hex
             else -> null
         }
 
-        if (colorCode != null) sb.append('§').append(colorCode)
+        // when text is meaningful
+        if (component.text.isNotEmpty()) {
+            // `colorCode = null` means inherit
+            // skip adding color for blanks
+            if (colorCode != null && component.text.isNotBlank()) {
+                sb.append("§$colorCode")
+            }
 
-        if (component.bold) sb.append("§l")
-        if (component.italic) sb.append("§o")
-        if (component.underlined) sb.append("§n")
-        if (component.strikethrough) sb.append("§m")
-        if (component.obfuscated) sb.append("§k")
+            // styles
+            if (component.bold) sb.append("§l")
+            if (component.italic) sb.append("§o")
+            if (component.underlined) sb.append("§n")
+            if (component.strikethrough) sb.append("§m")
+            if (component.obfuscated) sb.append("§k")
 
-        sb.append(component.text)
+            // plain text
+            sb.append(component.text)
 
+            val isStyled = component.bold || component.italic || component.underlined ||
+                    component.strikethrough || component.obfuscated
+            // when no color but styled then needs a reset
+            if (colorCode == null && isStyled) {
+                sb.append("§r")
+            }
+        }
+
+        // rescue
         for (extra in component.extra.orEmpty()) {
             sb.append(objectToSectionFormat(extra))
         }
-
-        sb.append('§').append('r')
 
         return sb.toString()
     }
@@ -122,9 +142,8 @@ object MOTDParser {
 
         return MOTDTextComponent(
             text = "",
-            color = Color.Named.WHITE,
+            color = null,
             extra = components
         )
     }
-
 }
