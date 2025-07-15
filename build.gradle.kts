@@ -34,13 +34,15 @@ tasks.test {
 val dokkaGeneratePublicationHtml by
     tasks.existing(DokkaGeneratePublicationTask::class)
 
+// dokka as javadoc
 tasks.named<Jar>("javadocJar") {
     dependsOn(dokkaGeneratePublicationHtml)
     from(dokkaGeneratePublicationHtml.flatMap { it.outputDirectory })
 }
 
+// github pages
 tasks.named<DokkaGeneratePublicationTask>("dokkaGeneratePublicationHtml") {
-    outputDirectory.set(layout.buildDirectory.dir("dokka/html"))
+    outputDirectory.set(layout.buildDirectory.dir("dokka"))
 }
 
 configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
