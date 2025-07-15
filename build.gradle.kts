@@ -22,31 +22,28 @@ dependencies {
     testImplementation(kotlin("test"))
 }
 
-java {
-    withSourcesJar()
-    withJavadocJar()
-}
-
 tasks.test {
     useJUnitPlatform()
 }
 
-val dokkaGeneratePublicationHtml by
-    tasks.existing(DokkaGeneratePublicationTask::class)
-
-// dokka as javadoc
-tasks.withType<GenerateModuleMetadata>().configureEach {
-    dependsOn(dokkaGeneratePublicationHtml)
-}
-
-tasks.named<Jar>("javadocJar") {
-    dependsOn(dokkaGeneratePublicationHtml)
-    from(dokkaGeneratePublicationHtml.flatMap { it.outputDirectory })
-}
-
-// github pages
 tasks.named<DokkaGeneratePublicationTask>("dokkaGeneratePublicationHtml") {
     outputDirectory.set(layout.buildDirectory.dir("dokka"))
+}
+
+val dokkaHtml: Provider<DokkaGeneratePublicationTask> =
+    tasks.named<DokkaGeneratePublicationTask>("dokkaGeneratePublicationHtml")
+
+@Suppress("unused")
+val javadocJar by tasks.registering(Jar::class) {
+    dependsOn(dokkaHtml)
+    archiveClassifier.set("javadoc")
+    from(dokkaHtml.flatMap { it.outputDirectory })
+}
+
+@Suppress("unused")
+val sourcesJar by tasks.registering(Jar::class) {
+    archiveClassifier.set("sources")
+    from(sourceSets["main"].allSource)
 }
 
 configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
