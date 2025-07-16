@@ -1,5 +1,3 @@
-import org.jetbrains.dokka.gradle.tasks.DokkaGeneratePublicationTask
-
 plugins {
     kotlin("jvm") version "2.1.21"
     id("org.jetbrains.dokka") version "2.0.0"
@@ -7,10 +5,11 @@ plugins {
 }
 
 group = "tech.aliorpse.mcutils"
-version = System.getenv("GITHUB_REF_NAME")
+version = System.getenv("GITHUB_REF_NAME") ?: "local"
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
@@ -24,26 +23,6 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
-}
-
-tasks.named<DokkaGeneratePublicationTask>("dokkaGeneratePublicationHtml") {
-    outputDirectory.set(layout.buildDirectory.dir("dokka"))
-}
-
-val dokkaHtml: Provider<DokkaGeneratePublicationTask> =
-    tasks.named<DokkaGeneratePublicationTask>("dokkaGeneratePublicationHtml")
-
-@Suppress("unused")
-val javadocJar by tasks.registering(Jar::class) {
-    dependsOn(dokkaHtml)
-    archiveClassifier.set("javadoc")
-    from(dokkaHtml.flatMap { it.outputDirectory })
-}
-
-@Suppress("unused")
-val sourcesJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("sources")
-    from(sourceSets["main"].allSource)
 }
 
 configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
