@@ -105,7 +105,7 @@ object JavaPing {
                 version = parsed.version,
                 ping = ping,
                 enforcesSecureChat = parsed.enforcesSecureChat ?: false,
-                favicon = parsed.favicon ?: ""
+                favicon = parsed.favicon
             )
         }
     }
