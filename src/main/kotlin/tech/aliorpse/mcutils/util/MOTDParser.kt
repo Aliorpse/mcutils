@@ -1,6 +1,8 @@
 package tech.aliorpse.mcutils.util
 
+import tech.aliorpse.mcutils.model.status.Color
 import tech.aliorpse.mcutils.model.status.MOTDTextComponent
+import tech.aliorpse.mcutils.model.status.colorToOriginalCode
 
 /**
  * Utility functions for MOTD analyzing.
@@ -13,7 +15,7 @@ object MOTDParser {
      *
      * @param component The TextComponent needed to be converted.
      */
-    fun objectToSectionFormat(component: MOTDTextComponent): String {
+    fun objToSection(component: MOTDTextComponent): String {
         val sb = StringBuilder()
 
         // Process different kinds of color
@@ -51,7 +53,7 @@ object MOTDParser {
 
         // rescue
         for (extra in component.extra.orEmpty()) {
-            sb.append(objectToSectionFormat(extra))
+            sb.append(objToSection(extra))
         }
 
         return sb.toString()
@@ -60,33 +62,14 @@ object MOTDParser {
     /**
      * § format to [MOTDTextComponent].
      */
-    @Suppress("AssignedValueIsNeverRead")
-    fun sectionFormatToObject(text: String): MOTDTextComponent {
+    fun sectionToObj(text: String): MOTDTextComponent {
         val components = mutableListOf<MOTDTextComponent>()
-
+        val style = StyleState()
         var currentText = StringBuilder()
 
-        var currentColor: Color? = Color.Named.WHITE
-        var bold = false
-        var italic = false
-        var underlined = false
-        var strikethrough = false
-        var obfuscated = false
-
-        fun flushComponent() {
+        fun flush() {
             if (currentText.isEmpty()) return
-            components.add(
-                MOTDTextComponent(
-                    text = currentText.toString(),
-                    color = currentColor,
-                    bold = bold,
-                    italic = italic,
-                    underlined = underlined,
-                    strikethrough = strikethrough,
-                    obfuscated = obfuscated,
-                    extra = emptyList()
-                )
-            )
+            components.add(style.toComponent(currentText.toString()))
             currentText = StringBuilder()
         }
 
@@ -94,57 +77,55 @@ object MOTDParser {
         while (i < text.length) {
             val c = text[i]
             if (c == '§' && i + 1 < text.length) {
-                flushComponent()
-
-                val code = text[i + 1].lowercaseChar()
-                when (code) {
-                    in '0'..'9' -> currentColor = Color.Named.entries.toTypedArray()[code - '0']
-                    'a' -> currentColor = Color.Named.GREEN
-                    'b' -> currentColor = Color.Named.AQUA
-                    'c' -> currentColor = Color.Named.RED
-                    'd' -> currentColor = Color.Named.LIGHT_PURPLE
-                    'e' -> currentColor = Color.Named.YELLOW
-                    'f' -> currentColor = Color.Named.WHITE
-                    '1' -> currentColor = Color.Named.DARK_BLUE
-                    '2' -> currentColor = Color.Named.DARK_GREEN
-                    '3' -> currentColor = Color.Named.DARK_AQUA
-                    '4' -> currentColor = Color.Named.DARK_RED
-                    '5' -> currentColor = Color.Named.DARK_PURPLE
-                    '6' -> currentColor = Color.Named.GOLD
-                    '7' -> currentColor = Color.Named.GRAY
-                    '8' -> currentColor = Color.Named.DARK_GRAY
-                    '9' -> currentColor = Color.Named.BLUE
-                    '0' -> currentColor = Color.Named.BLACK
-
-                    'l' -> bold = true
-                    'o' -> italic = true
-                    'n' -> underlined = true
-                    'm' -> strikethrough = true
-                    'k' -> obfuscated = true
-
-                    'r' -> {
-                        currentColor = Color.Named.WHITE
-                        bold = false
-                        italic = false
-                        underlined = false
-                        strikethrough = false
-                        obfuscated = false
-                    }
-                }
+                flush()
+                style.updateWithCode(text[i + 1])
                 i += 2
-                continue
+            } else {
+                currentText.append(c)
+                i++
             }
-
-            currentText.append(c)
-            i++
         }
 
-        flushComponent()
+        flush()
+        return MOTDTextComponent(text = "", color = null, extra = components)
+    }
+}
 
-        return MOTDTextComponent(
-            text = "",
-            color = null,
-            extra = components
-        )
+private class StyleState {
+    var color: Color? = Color.Named.WHITE
+    var bold = false
+    var italic = false
+    var underlined = false
+    var strikethrough = false
+    var obfuscated = false
+
+    fun toComponent(text: String) = MOTDTextComponent(
+        text = text,
+        color = color,
+        bold = bold,
+        italic = italic,
+        underlined = underlined,
+        strikethrough = strikethrough,
+        obfuscated = obfuscated,
+        extra = emptyList()
+    )
+
+    fun updateWithCode(code: Char) {
+        when (code.lowercaseChar()) {
+            in '0'..'9', in 'a'..'f' -> color = Color.Named.fromCode(code)
+            'l' -> bold = true
+            'o' -> italic = true
+            'n' -> underlined = true
+            'm' -> strikethrough = true
+            'k' -> obfuscated = true
+            'r' -> {
+                color = Color.Named.WHITE
+                bold = false
+                italic = false
+                underlined = false
+                strikethrough = false
+                obfuscated = false
+            }
+        }
     }
 }

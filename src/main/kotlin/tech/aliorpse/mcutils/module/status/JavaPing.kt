@@ -13,7 +13,7 @@ import tech.aliorpse.mcutils.model.status.MOTDTextComponent
 import tech.aliorpse.mcutils.model.status.MOTDTextComponentAdapter
 import tech.aliorpse.mcutils.model.status.Players
 import tech.aliorpse.mcutils.model.status.Version
-import tech.aliorpse.mcutils.util.Color
+import tech.aliorpse.mcutils.model.status.Color
 import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
 import java.io.DataOutputStream
@@ -35,7 +35,7 @@ import javax.naming.directory.InitialDirContext
  * Internal constants and helper methods handle Minecraft's communication protocol, including
  * packet construction and parsing.
  */
-@Suppress("MagicNumber")
+@Suppress("MagicNumber", "TooManyFunctions")
 object JavaPing {
     private const val HANDSHAKE_PACKET_ID = 0x00
     private const val STATUS_REQUEST_PACKET_ID = 0x00

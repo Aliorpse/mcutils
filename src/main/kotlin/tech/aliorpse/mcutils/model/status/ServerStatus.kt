@@ -1,7 +1,6 @@
 package tech.aliorpse.mcutils.model.status
 
 import com.squareup.moshi.JsonClass
-import tech.aliorpse.mcutils.util.Color
 
 /**
  * Represents the status of a server.

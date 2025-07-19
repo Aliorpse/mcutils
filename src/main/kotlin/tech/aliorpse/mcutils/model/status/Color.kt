@@ -1,4 +1,4 @@
-package tech.aliorpse.mcutils.util
+package tech.aliorpse.mcutils.model.status
 
 /**
  * Represents a color in Minecraft.
@@ -30,6 +30,30 @@ sealed interface Color {
         WHITE("#FFFFFF");
 
         companion object {
+            private val codeToColor = mapOf(
+                '0' to BLACK,
+                '1' to DARK_BLUE,
+                '2' to DARK_GREEN,
+                '3' to DARK_AQUA,
+                '4' to DARK_RED,
+                '5' to DARK_PURPLE,
+                '6' to GOLD,
+                '7' to GRAY,
+                '8' to DARK_GRAY,
+                '9' to BLUE,
+                'a' to GREEN,
+                'b' to AQUA,
+                'c' to RED,
+                'd' to LIGHT_PURPLE,
+                'e' to YELLOW,
+                'f' to WHITE
+            )
+
+            /**
+             * Get a [Color.Named] from Minecraft format code (e.g. 'a', 'c').
+             */
+            fun fromCode(code: Char): Named? = codeToColor[code.lowercaseChar()]
+
             private val NAME_MAP = entries.associateBy { it.name.lowercase() }
 
             /**

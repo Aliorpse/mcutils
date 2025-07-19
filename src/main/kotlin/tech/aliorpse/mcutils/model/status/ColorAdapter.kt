@@ -4,7 +4,6 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter
-import tech.aliorpse.mcutils.util.Color
 
 
 class ColorAdapter : JsonAdapter<Color>() {
