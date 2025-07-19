@@ -1,17 +1,7 @@
 package tech.aliorpse.mcutils.model.status
 
-import com.google.gson.JsonDeserializationContext
-import com.google.gson.JsonDeserializer
-import com.google.gson.JsonElement
-import com.google.gson.JsonParseException
-import com.google.gson.JsonPrimitive
-import com.google.gson.JsonSerializationContext
-import com.google.gson.JsonSerializer
-import tech.aliorpse.mcutils.util.MOTDParser.objectToSectionFormat
-import tech.aliorpse.mcutils.util.MOTDParser.sectionFormatToObject
+import com.squareup.moshi.JsonClass
 import tech.aliorpse.mcutils.util.Color
-import java.lang.reflect.Type
-import java.util.Locale
 
 /**
  * Represents the status of a server.
@@ -41,6 +31,7 @@ sealed class ServerStatus {
  * @property enforcesSecureChat Indicates whether the server enforces secure chat.
  * @property favicon An optional base64-encoded string representing the server's favicon.
  */
+@JsonClass(generateAdapter = true)
 data class JavaServerStatus(
     override val description: Description,
     override val players: Players,
@@ -61,6 +52,7 @@ data class JavaServerStatus(
  * @property gameMode The current game mode of the server, such as SURVIVAL or CREATIVE.
  * @property serverUniqueID The unique identifier of the server instance.
  */
+@JsonClass(generateAdapter = true)
 data class BedrockServerStatus(
     override val description: Description,
     override val players: Players,
@@ -76,6 +68,7 @@ data class BedrockServerStatus(
  *
  * @property sample A sample list of online players (not work on bedrock servers).
  */
+@JsonClass(generateAdapter = true)
 data class Players(
     val max: Int,
     val online: Int,
@@ -88,6 +81,7 @@ data class Players(
  * @property name The version name.
  * @property protocol The protocol version number.
  */
+@JsonClass(generateAdapter = true)
 data class Version(
     val name: String,
     val protocol: Int
@@ -96,6 +90,7 @@ data class Version(
 /**
  * Server description structure, typically the MOTD text.
  */
+@JsonClass(generateAdapter = true)
 data class Description(
     val text: String,
     val obj: MOTDTextComponent
@@ -104,6 +99,7 @@ data class Description(
 /**
  * Sample player information representing some online players.
  */
+@JsonClass(generateAdapter = true)
 data class Sample(
     val id: String,
     val name: String
@@ -127,6 +123,7 @@ enum class GameMode {
  * @property color The color of the text, Defaults to [Color.Named.WHITE].
  * @property extra Rescue. Please check wiki for this.
  */
+@JsonClass(generateAdapter = true)
 data class MOTDTextComponent(
     val text: String,
 
@@ -139,94 +136,3 @@ data class MOTDTextComponent(
 
     val extra: List<MOTDTextComponent>? = emptyList(),
 )
-
-/**
- * Deserializer used for adapt different [Description] formats sent by server.
- */
-class DescriptionDeserializer : JsonDeserializer<Description> {
-    override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): Description {
-        return when {
-            json.isJsonPrimitive -> {
-                Description(
-                    json.asString,
-                    sectionFormatToObject(json.asString)
-                )
-            }
-            json.isJsonObject -> {
-                val motdComponent = context.deserialize<MOTDTextComponent>(json, MOTDTextComponent::class.java)
-                Description(
-                    objectToSectionFormat(motdComponent),
-                    motdComponent
-                )
-            }
-            else -> {
-                Description("", MOTDTextComponent(""))
-            }
-        }
-    }
-}
-
-/**
- * Deserializer used for adapt different color types.
- */
-class ColorTypeAdapter : JsonDeserializer<Color>, JsonSerializer<Color> {
-    override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): Color {
-        return Color.fromString(json.asString)
-            ?: throw JsonParseException("Invalid color: ${json.asString}")
-    }
-
-    override fun serialize(src: Color, typeOfSrc: Type, context: JsonSerializationContext): JsonElement {
-        return JsonPrimitive(
-            when (src) {
-                is Color.Named -> src.name.lowercase(Locale.ROOT)
-                is Color.Custom -> src.hex
-            }
-        )
-    }
-}
-
-/**
- * Someone just didn't follow the rules sending the MOTD text. Fuck them.
- */
-class MOTDTextComponentDeserializer : JsonDeserializer<MOTDTextComponent> {
-    override fun deserialize(json: JsonElement, typeOfT: Type, context: JsonDeserializationContext): MOTDTextComponent {
-        if (json.isJsonPrimitive) {
-            return MOTDTextComponent(text = json.asString)
-        }
-
-        val obj = json.asJsonObject
-        val text = obj.get("text")?.asString ?: ""
-        val color = Color.fromString(obj.get("color")?.asString ?: "WHITE")
-        val bold = obj.get("bold")?.asBoolean ?: false
-        val italic = obj.get("italic")?.asBoolean ?: false
-        val underlined = obj.get("underlined")?.asBoolean ?: false
-        val strikethrough = obj.get("strikethrough")?.asBoolean ?: false
-        val obfuscated = obj.get("obfuscated")?.asBoolean ?: false
-
-        val extraList = buildList {
-            val extraArray = obj.getAsJsonArray("extra")
-            if (extraArray != null) {
-                for (el in extraArray) {
-                    add(
-                        when {
-                            el.isJsonPrimitive -> MOTDTextComponent(el.asString)
-                            el.isJsonObject -> context.deserialize(el, MOTDTextComponent::class.java)
-                            else -> MOTDTextComponent("")
-                        }
-                    )
-                }
-            }
-        }
-
-        return MOTDTextComponent(
-            text = text,
-            color = color,
-            bold = bold,
-            italic = italic,
-            underlined = underlined,
-            strikethrough = strikethrough,
-            obfuscated = obfuscated,
-            extra = extraList
-        )
-    }
-}

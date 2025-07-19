@@ -1,15 +1,16 @@
 package tech.aliorpse.mcutils.module.status
 
-import com.google.gson.GsonBuilder
+import com.squareup.moshi.JsonClass
+import com.squareup.moshi.Moshi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import tech.aliorpse.mcutils.model.status.ColorTypeAdapter
+import tech.aliorpse.mcutils.model.status.ColorAdapter
 import tech.aliorpse.mcutils.model.status.Description
-import tech.aliorpse.mcutils.model.status.DescriptionDeserializer
+import tech.aliorpse.mcutils.model.status.DescriptionAdapter
 import tech.aliorpse.mcutils.model.status.JavaServerStatus
 import tech.aliorpse.mcutils.model.status.MOTDTextComponent
-import tech.aliorpse.mcutils.model.status.MOTDTextComponentDeserializer
+import tech.aliorpse.mcutils.model.status.MOTDTextComponentAdapter
 import tech.aliorpse.mcutils.model.status.Players
 import tech.aliorpse.mcutils.model.status.Version
 import tech.aliorpse.mcutils.util.Color
@@ -43,13 +44,14 @@ object JavaPing {
     private const val PROTOCOL_VERSION = -1
     private const val NEXT_STATE_STATUS = 1
 
-    private val gson = GsonBuilder()
-        .registerTypeAdapter(Description::class.java, DescriptionDeserializer())
-        .registerTypeAdapter(Color::class.java, ColorTypeAdapter())
-        .registerTypeAdapter(MOTDTextComponent::class.java, MOTDTextComponentDeserializer())
-        .create()
+    val moshi: Moshi = Moshi.Builder()
+        .add(Color::class.java, ColorAdapter())
+        .add(MOTDTextComponent::class.java, MOTDTextComponentAdapter(ColorAdapter()))
+        .add(Description::class.java, DescriptionAdapter(MOTDTextComponentAdapter(ColorAdapter())))
+        .build()
 
-    private data class RawJavaStatus(
+    @JsonClass(generateAdapter = true)
+    internal data class RawJavaStatus(
         val description: Description,
         val players: Players,
         val version: Version,
@@ -91,8 +93,8 @@ object JavaPing {
             sendHandshake(out, asciiHost, resolvedPort)
             sendStatusRequest(out)
 
-            val json = readStatusResponse(input)
-            val parsed = gson.fromJson(json, RawJavaStatus::class.java)
+            val jsonStr = readStatusResponse(input)
+            val parsed = moshi.adapter(RawJavaStatus::class.java).fromJson(jsonStr)!!
 
             val pingStart = System.currentTimeMillis()
             sendPing(out, pingStart)

@@ -114,6 +114,7 @@ object MOTDParser {
                     '7' -> currentColor = Color.Named.GRAY
                     '8' -> currentColor = Color.Named.DARK_GRAY
                     '9' -> currentColor = Color.Named.BLUE
+                    '0' -> currentColor = Color.Named.BLACK
 
                     'l' -> bold = true
                     'o' -> italic = true

@@ -34,10 +34,6 @@ dependencies {
     api("com.squareup.moshi:moshi-kotlin:1.15.2")
     ksp("com.squareup.moshi:moshi-kotlin-codegen:1.15.2")
 
-    // to be deprecated
-    api("com.google.code.gson:gson:2.13.1")
-    api("com.squareup.retrofit2:converter-gson:3.0.0")
-
     testImplementation(kotlin("test"))
 }
 

@@ -39,6 +39,9 @@ enum class SkinModel {
     }
 }
 
+/**
+ * The JSON Element that to be processed.
+ */
 @JsonClass(generateAdapter = true)
 data class RawPlayerProfile(
     val id: String,
@@ -46,10 +49,17 @@ data class RawPlayerProfile(
     val legacy: Boolean = false,
     val properties: List<Property>
 ) {
+    /**
+     * @property name Always 'texture'.
+     * @property value Base64 string containing [DecodedTextures].
+     */
     @JsonClass(generateAdapter = true)
     data class Property(val name: String, val value: String)
 }
 
+/**
+ * Texture element decoded from [RawPlayerProfile.Property.value].
+ */
 @JsonClass(generateAdapter = true)
 data class DecodedTextures(
     val timestamp: Long,
@@ -58,11 +68,17 @@ data class DecodedTextures(
     val textures: Map<String, Texture>
 )
 
+/**
+ * Data of the texture.
+ */
 @JsonClass(generateAdapter = true)
 data class Texture(
     val url: String,
     val metadata: Metadata?
 )
 
+/**
+ * @property model SLIM or CLASSIC.
+ */
 @JsonClass(generateAdapter = true)
 data class Metadata(val model: String?)
