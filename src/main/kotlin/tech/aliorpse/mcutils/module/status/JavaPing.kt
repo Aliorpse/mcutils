@@ -214,7 +214,7 @@ object JavaPing {
         var bytesRead = 0
         while (true) {
             val byte = input.readByte().toInt()
-            result = result or ((byte and 0x7F) shl (7 * bytesRead))
+            result = result or ((byte and 0x7F) shl 7 * bytesRead)
             bytesRead++
             if (bytesRead > 5) throw IOException("VarInt too big")
             if (byte and 0x80 == 0) break
