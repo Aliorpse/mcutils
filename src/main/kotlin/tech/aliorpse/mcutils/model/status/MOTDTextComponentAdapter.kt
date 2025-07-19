@@ -1,13 +1,18 @@
 package tech.aliorpse.mcutils.model.status
 
-import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter
+import com.squareup.moshi.ToJson
+import tech.aliorpse.mcutils.module.status.JavaPing.moshi
 
 class MOTDTextComponentAdapter(
     private val colorAdapter: ColorAdapter
-) : JsonAdapter<MOTDTextComponent>() {
-    override fun fromJson(reader: JsonReader): MOTDTextComponent? {
+) {
+    private val defaultAdapter by lazy { moshi.adapter(MOTDTextComponent::class.java) }
+
+    @FromJson
+    fun fromJson(reader: JsonReader): MOTDTextComponent? {
         return when (reader.peek()) {
             JsonReader.Token.STRING -> MOTDTextComponent(text = reader.nextString())
             JsonReader.Token.BEGIN_OBJECT -> readComponentObject(reader)
@@ -18,27 +23,9 @@ class MOTDTextComponentAdapter(
         }
     }
 
-    override fun toJson(writer: JsonWriter, value: MOTDTextComponent?) {
-        if (value == null) {
-            writer.nullValue()
-            return
-        }
-        writer.beginObject()
-        writer.name("text").value(value.text)
-        writer.name("color")
-        colorAdapter.toJson(writer, value.color)
-        writer.name("bold").value(value.bold)
-        writer.name("italic").value(value.italic)
-        writer.name("underlined").value(value.underlined)
-        writer.name("strikethrough").value(value.strikethrough)
-        writer.name("obfuscated").value(value.obfuscated)
-        if (!value.extra.isNullOrEmpty()) {
-            writer.name("extra")
-            writer.beginArray()
-            value.extra.forEach { toJson(writer, it) }
-            writer.endArray()
-        }
-        writer.endObject()
+    @ToJson
+    fun toJson(writer: JsonWriter, value: MOTDTextComponent?) {
+        defaultAdapter.toJson(writer, value)
     }
 
     private fun readComponentObject(reader: JsonReader): MOTDTextComponent {

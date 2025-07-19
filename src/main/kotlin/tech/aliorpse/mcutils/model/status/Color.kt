@@ -67,22 +67,6 @@ sealed interface Color {
      * Custom colors using hex strings.
      */
     data class Custom(override val hex: String) : Color
-
-    companion object {
-        /**
-         * Returns a Color based on the input value, can be named or just hex string.
-         */
-        fun fromString(value: String?): Color? {
-            if (value == null) return null
-            Named.fromName(value)?.let { return it }
-
-            if (value.matches(Regex("^#[0-9a-fA-F]{6}$"))) {
-                return Custom(value.lowercase())
-            }
-
-            return null
-        }
-    }
 }
 
 /**

@@ -10,11 +10,9 @@ import tech.aliorpse.mcutils.model.status.ColorAdapter
 import tech.aliorpse.mcutils.model.status.Description
 import tech.aliorpse.mcutils.model.status.DescriptionAdapter
 import tech.aliorpse.mcutils.model.status.JavaServerStatus
-import tech.aliorpse.mcutils.model.status.MOTDTextComponent
 import tech.aliorpse.mcutils.model.status.MOTDTextComponentAdapter
 import tech.aliorpse.mcutils.model.status.Players
 import tech.aliorpse.mcutils.model.status.Version
-import tech.aliorpse.mcutils.model.status.Color
 import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
 import java.io.DataOutputStream
@@ -46,13 +44,13 @@ object JavaPing {
     private const val NEXT_STATE_STATUS = 1
 
     private val colorAdapter = ColorAdapter()
-    private val motdAdapter  = MOTDTextComponentAdapter(colorAdapter)
-    private val descAdapter  = DescriptionAdapter(motdAdapter)
+    private val motdAdapter = MOTDTextComponentAdapter(colorAdapter)
+    private val descAdapter = DescriptionAdapter(motdAdapter)
 
     val moshi: Moshi = Moshi.Builder()
-        .add(Color::class.java, colorAdapter)
-        .add(MOTDTextComponent::class.java, motdAdapter)
-        .add(Description::class.java, descAdapter)
+        .add(colorAdapter)
+        .add(motdAdapter)
+        .add(descAdapter)
         .add(KotlinJsonAdapterFactory())
         .build()
 

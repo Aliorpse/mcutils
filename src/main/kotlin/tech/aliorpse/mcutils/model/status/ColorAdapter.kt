@@ -1,27 +1,27 @@
 package tech.aliorpse.mcutils.model.status
 
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.JsonDataException
+import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter
+import com.squareup.moshi.ToJson
+import tech.aliorpse.mcutils.model.status.Color.Custom
+import tech.aliorpse.mcutils.model.status.Color.Named
+import tech.aliorpse.mcutils.module.status.JavaPing.moshi
 
 
-class ColorAdapter : JsonAdapter<Color?>() {
-    override fun fromJson(reader: JsonReader): Color? {
+class ColorAdapter {
+    private val defaultAdapter by lazy { moshi.adapter(Color::class.java) }
+
+    @FromJson
+    fun fromJson(reader: JsonReader): Color? {
         val str = reader.nextString()
-        return Color.fromString(str)
-            ?: throw JsonDataException("Invalid color: $str")
+        return Named.fromName(str)
+            ?: if (str.matches(Regex("^#[0-9a-fA-F]{6}$"))) Custom(str.lowercase())
+            else null
     }
 
-    override fun toJson(writer: JsonWriter, value: Color?) {
-        if (value == null) {
-            writer.nullValue()
-            return
-        }
-        val out = when (value) {
-            is Color.Named -> value.name
-            is Color.Custom -> value.hex
-        }
-        writer.value(out)
+    @ToJson
+    fun toJson(writer: JsonWriter, value: Color?) {
+        defaultAdapter.toJson(writer, value)
     }
 }
