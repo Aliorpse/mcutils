@@ -90,8 +90,6 @@ $dokka.location:tech.aliorpse.mcutils.model.status/BedrockServerStatusJsonAdapte
 $dokka.location:tech.aliorpse.mcutils.model.status/BedrockServerStatusJsonAdapter/fromJson/#com.squareup.moshi.JsonReader/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.status/-bedrock-server-status-json-adapter/from-json.html
 $dokka.location:tech.aliorpse.mcutils.model.status/BedrockServerStatusJsonAdapter/toJson/#com.squareup.moshi.JsonWriter#tech.aliorpse.mcutils.model.status.BedrockServerStatus?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.status/-bedrock-server-status-json-adapter/to-json.html
 $dokka.location:tech.aliorpse.mcutils.model.status/BedrockServerStatusJsonAdapter/toString/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.status/-bedrock-server-status-json-adapter/to-string.html
-$dokka.location:tech.aliorpse.mcutils.model.status/Color.Companion///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.status/-color/-companion/index.html
-$dokka.location:tech.aliorpse.mcutils.model.status/Color.Companion/fromString/#kotlin.String?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.status/-color/-companion/from-string.html
 $dokka.location:tech.aliorpse.mcutils.model.status/Color.Custom///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.status/-color/-custom/index.html
 $dokka.location:tech.aliorpse.mcutils.model.status/Color.Custom/Custom/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.status/-color/-custom/-custom.html
 $dokka.location:tech.aliorpse.mcutils.model.status/Color.Custom/hex/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.status/-color/-custom/hex.html
@@ -130,7 +128,7 @@ $dokka.location:tech.aliorpse.mcutils.model.status/Description/Description/#kotl
 $dokka.location:tech.aliorpse.mcutils.model.status/Description/obj/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.status/-description/obj.html
 $dokka.location:tech.aliorpse.mcutils.model.status/Description/text/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.status/-description/text.html
 $dokka.location:tech.aliorpse.mcutils.model.status/DescriptionAdapter///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.status/-description-adapter/index.html
-$dokka.location:tech.aliorpse.mcutils.model.status/DescriptionAdapter/DescriptionAdapter/#com.squareup.moshi.JsonAdapter[tech.aliorpse.mcutils.model.status.MOTDTextComponent]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.status/-description-adapter/-description-adapter.html
+$dokka.location:tech.aliorpse.mcutils.model.status/DescriptionAdapter/DescriptionAdapter/#tech.aliorpse.mcutils.model.status.MOTDTextComponentAdapter/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.status/-description-adapter/-description-adapter.html
 $dokka.location:tech.aliorpse.mcutils.model.status/DescriptionAdapter/fromJson/#com.squareup.moshi.JsonReader/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.status/-description-adapter/from-json.html
 $dokka.location:tech.aliorpse.mcutils.model.status/DescriptionAdapter/toJson/#com.squareup.moshi.JsonWriter#tech.aliorpse.mcutils.model.status.Description?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.status/-description-adapter/to-json.html
 $dokka.location:tech.aliorpse.mcutils.model.status/GameMode.ADVENTURE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.status/-game-mode/-a-d-v-e-n-t-u-r-e/index.html
