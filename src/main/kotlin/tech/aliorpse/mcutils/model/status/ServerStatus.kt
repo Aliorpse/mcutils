@@ -89,7 +89,6 @@ data class Version(
 /**
  * Server description structure, typically the MOTD text.
  */
-@JsonClass(generateAdapter = true)
 data class Description(
     val text: String,
     val obj: MOTDTextComponent
@@ -120,9 +119,8 @@ enum class GameMode {
  *
  * @property text The textual content of this MOTD component.
  * @property color The color of the text, Defaults to [Color.Named.WHITE].
- * @property extra Rescue. Please check wiki for this.
+ * @property extra Rescue. Please check the wiki for this.
  */
-@JsonClass(generateAdapter = true)
 data class MOTDTextComponent(
     val text: String,
 

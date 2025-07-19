@@ -2,6 +2,7 @@ package tech.aliorpse.mcutils.module.status
 
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -44,10 +45,15 @@ object JavaPing {
     private const val PROTOCOL_VERSION = -1
     private const val NEXT_STATE_STATUS = 1
 
+    private val colorAdapter = ColorAdapter()
+    private val motdAdapter  = MOTDTextComponentAdapter(colorAdapter)
+    private val descAdapter  = DescriptionAdapter(motdAdapter)
+
     val moshi: Moshi = Moshi.Builder()
-        .add(Color::class.java, ColorAdapter())
-        .add(MOTDTextComponent::class.java, MOTDTextComponentAdapter(ColorAdapter()))
-        .add(Description::class.java, DescriptionAdapter(MOTDTextComponentAdapter(ColorAdapter())))
+        .add(Color::class.java, colorAdapter)
+        .add(MOTDTextComponent::class.java, motdAdapter)
+        .add(Description::class.java, descAdapter)
+        .add(KotlinJsonAdapterFactory())
         .build()
 
     @JsonClass(generateAdapter = true)

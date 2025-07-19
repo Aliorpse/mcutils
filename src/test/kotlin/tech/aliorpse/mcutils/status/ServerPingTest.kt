@@ -7,7 +7,7 @@ import kotlin.test.Test
 class ServerPingTest {
     @Test
     fun javaGetStatusTest() {
-        val result = JavaPing.getStatusBlocking("mc.hypixel.net")
+        val result = JavaPing.getStatusBlocking("bedrock.mineseed.org")
         println(result)
         assert(result.ping > 0)
     }

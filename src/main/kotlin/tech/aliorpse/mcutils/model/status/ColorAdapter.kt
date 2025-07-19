@@ -6,7 +6,7 @@ import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter
 
 
-class ColorAdapter : JsonAdapter<Color>() {
+class ColorAdapter : JsonAdapter<Color?>() {
     override fun fromJson(reader: JsonReader): Color? {
         val str = reader.nextString()
         return Color.fromString(str)

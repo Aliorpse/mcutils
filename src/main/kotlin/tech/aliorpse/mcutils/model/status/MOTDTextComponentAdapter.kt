@@ -5,7 +5,7 @@ import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter
 
 class MOTDTextComponentAdapter(
-    private val colorAdapter: JsonAdapter<Color>
+    private val colorAdapter: ColorAdapter
 ) : JsonAdapter<MOTDTextComponent>() {
     override fun fromJson(reader: JsonReader): MOTDTextComponent? {
         return when (reader.peek()) {
