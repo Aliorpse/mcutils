@@ -1,5 +1,6 @@
 plugins {
-    kotlin("jvm") version "2.1.21"
+    kotlin("jvm") version "2.2.0"
+    id("com.google.devtools.ksp") version "2.2.0-2.0.2"
     id("org.jetbrains.dokka") version "2.0.0"
     id("com.vanniktech.maven.publish") version "0.33.0"
 }
@@ -7,15 +8,34 @@ plugins {
 group = "tech.aliorpse.mcutils"
 version = System.getenv("GITHUB_REF_NAME") ?: "local"
 
+kotlin {
+    jvmToolchain(21)
+
+    compilerOptions {
+        freeCompilerArgs.add("-Xjvm-default=all")
+    }
+}
+
 repositories {
     mavenCentral()
     mavenLocal()
 }
 
 dependencies {
+    // kotlinx
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
-    api("com.google.code.gson:gson:2.13.1")
+
+    // retrofit
     api("com.squareup.retrofit2:retrofit:3.0.0")
+    api("com.squareup.retrofit2:converter-moshi:3.0.0")
+
+    // moshi
+    api("com.squareup.moshi:moshi:1.15.2")
+    api("com.squareup.moshi:moshi-kotlin:1.15.2")
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.15.2")
+
+    // to be deprecated
+    api("com.google.code.gson:gson:2.13.1")
     api("com.squareup.retrofit2:converter-gson:3.0.0")
 
     testImplementation(kotlin("test"))
