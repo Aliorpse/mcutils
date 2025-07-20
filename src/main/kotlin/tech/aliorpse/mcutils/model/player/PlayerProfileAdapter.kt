@@ -1,4 +1,4 @@
-package tech.aliorpse.mcutils.model.mojang
+package tech.aliorpse.mcutils.model.player
 
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.Moshi

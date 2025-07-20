@@ -1,11 +1,14 @@
-package tech.aliorpse.mcutils.model.status
+package tech.aliorpse.mcutils.model.server
 
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter
 import com.squareup.moshi.ToJson
-import tech.aliorpse.mcutils.module.status.JavaPing.moshi
+import tech.aliorpse.mcutils.modules.server.JavaServer.moshi
 
+/**
+ * 有些傻逼服务器喜欢往 [MOTDTextComponent.text] 里面加§. mcutils不支持这种写法. §不会做处理.
+ */
 class MOTDTextComponentAdapter(
     private val colorAdapter: ColorAdapter
 ) {

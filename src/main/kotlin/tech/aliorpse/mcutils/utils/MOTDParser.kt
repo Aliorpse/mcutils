@@ -1,8 +1,8 @@
-package tech.aliorpse.mcutils.util
+package tech.aliorpse.mcutils.utils
 
-import tech.aliorpse.mcutils.model.status.Color
-import tech.aliorpse.mcutils.model.status.MOTDTextComponent
-import tech.aliorpse.mcutils.model.status.colorToOriginalCode
+import tech.aliorpse.mcutils.model.server.Color
+import tech.aliorpse.mcutils.model.server.MOTDTextComponent
+import tech.aliorpse.mcutils.model.server.colorToOriginalCode
 
 /**
  * Utility functions for MOTD analyzing.

@@ -1,4 +1,4 @@
-package tech.aliorpse.mcutils.model.mojang
+package tech.aliorpse.mcutils.model.player
 
 /**
  * This data class should not be used in your app. Only for internal use.

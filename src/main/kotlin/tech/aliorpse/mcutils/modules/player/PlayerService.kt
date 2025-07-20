@@ -1,14 +1,11 @@
-package tech.aliorpse.mcutils.module.mojang
+package tech.aliorpse.mcutils.modules.player
 
 import retrofit2.http.GET
 import retrofit2.http.Path
-import tech.aliorpse.mcutils.model.mojang.PlayerProfile
-import tech.aliorpse.mcutils.model.mojang.PlayerUUIDProfile
+import tech.aliorpse.mcutils.model.player.PlayerProfile
+import tech.aliorpse.mcutils.model.player.PlayerUUIDProfile
 
-/**
- * Defines the MojangService interface for interacting with Mojang's web APIs.
- */
-interface MojangService {
+interface PlayerService {
     /**
      * Retrieves the player's profile from the Mojang session server using their UUID.
      *

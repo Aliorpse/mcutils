@@ -1,13 +1,16 @@
-package tech.aliorpse.mcutils.model.status
+package tech.aliorpse.mcutils.model.server
 
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter
 import com.squareup.moshi.ToJson
-import tech.aliorpse.mcutils.module.status.JavaPing.moshi
-import tech.aliorpse.mcutils.util.MOTDParser.objToSection
-import tech.aliorpse.mcutils.util.MOTDParser.sectionToObj
+import tech.aliorpse.mcutils.modules.server.JavaServer.moshi
+import tech.aliorpse.mcutils.utils.MOTDParser.objToSection
+import tech.aliorpse.mcutils.utils.MOTDParser.sectionToObj
 
+/**
+ * Adapt different kinds of Description server sent. String or TextComponent.
+ */
 class DescriptionAdapter(
     private val motdAdapter: MOTDTextComponentAdapter
 ) {

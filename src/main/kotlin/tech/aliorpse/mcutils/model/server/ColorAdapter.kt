@@ -1,14 +1,16 @@
-package tech.aliorpse.mcutils.model.status
+package tech.aliorpse.mcutils.model.server
 
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter
 import com.squareup.moshi.ToJson
-import tech.aliorpse.mcutils.model.status.Color.Custom
-import tech.aliorpse.mcutils.model.status.Color.Named
-import tech.aliorpse.mcutils.module.status.JavaPing.moshi
+import tech.aliorpse.mcutils.model.server.Color.Custom
+import tech.aliorpse.mcutils.model.server.Color.Named
+import tech.aliorpse.mcutils.modules.server.JavaServer.moshi
 
-
+/**
+ * § codes or Hex strings Adapter.
+ */
 class ColorAdapter {
     private val defaultAdapter by lazy { moshi.adapter(Color::class.java) }
 

@@ -1,4 +1,4 @@
-package tech.aliorpse.mcutils.model.status
+package tech.aliorpse.mcutils.model.server
 
 import com.squareup.moshi.JsonClass
 
@@ -104,7 +104,7 @@ data class Sample(
 )
 
 /**
- * Represents the various game modes. For [tech.aliorpse.mcutils.module.status.BedrockPing.getStatus].
+ * Represents the various game modes. For [tech.aliorpse.mcutils.modules.server.BedrockServer.getStatus].
  */
 enum class GameMode {
     SURVIVAL,

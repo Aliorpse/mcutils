@@ -1,16 +1,16 @@
-package tech.aliorpse.mcutils.mojang
+package tech.aliorpse.mcutils.player
 
 import kotlinx.coroutines.runBlocking
-import tech.aliorpse.mcutils.module.mojang.MojangAPI
+import tech.aliorpse.mcutils.modules.player.Player
 import kotlin.test.Test
 
-class MojangAPITest {
+class PlayerProfileTest {
     /**
      * Simple test for getting player's profile.
      */
     @Test
     fun getProfileTest() = runBlocking {
-        val result = MojangAPI.getProfileByName("Aliorpse")
+        val result = Player.getProfileByName("Aliorpse")
         println(result)
         assert(result.name.isNotEmpty())
     }

@@ -1,4 +1,4 @@
-package tech.aliorpse.mcutils.module.status
+package tech.aliorpse.mcutils.modules.server
 
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
@@ -6,13 +6,13 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import tech.aliorpse.mcutils.model.status.ColorAdapter
-import tech.aliorpse.mcutils.model.status.Description
-import tech.aliorpse.mcutils.model.status.DescriptionAdapter
-import tech.aliorpse.mcutils.model.status.JavaServerStatus
-import tech.aliorpse.mcutils.model.status.MOTDTextComponentAdapter
-import tech.aliorpse.mcutils.model.status.Players
-import tech.aliorpse.mcutils.model.status.Version
+import tech.aliorpse.mcutils.model.server.ColorAdapter
+import tech.aliorpse.mcutils.model.server.Description
+import tech.aliorpse.mcutils.model.server.DescriptionAdapter
+import tech.aliorpse.mcutils.model.server.JavaServerStatus
+import tech.aliorpse.mcutils.model.server.MOTDTextComponentAdapter
+import tech.aliorpse.mcutils.model.server.Players
+import tech.aliorpse.mcutils.model.server.Version
 import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
 import java.io.DataOutputStream
@@ -35,7 +35,7 @@ import javax.naming.directory.InitialDirContext
  * packet construction and parsing.
  */
 @Suppress("MagicNumber", "TooManyFunctions")
-object JavaPing {
+object JavaServer {
     private const val HANDSHAKE_PACKET_ID = 0x00
     private const val STATUS_REQUEST_PACKET_ID = 0x00
     private const val STATUS_RESPONSE_PACKET_ID = 0x00

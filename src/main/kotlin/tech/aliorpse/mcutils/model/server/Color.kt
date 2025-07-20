@@ -1,4 +1,4 @@
-package tech.aliorpse.mcutils.model.status
+package tech.aliorpse.mcutils.model.server
 
 /**
  * Represents a color in Minecraft.

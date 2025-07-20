@@ -1,14 +1,14 @@
-package tech.aliorpse.mcutils.module.status
+package tech.aliorpse.mcutils.modules.server
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import tech.aliorpse.mcutils.model.status.BedrockServerStatus
-import tech.aliorpse.mcutils.model.status.Description
-import tech.aliorpse.mcutils.model.status.GameMode
-import tech.aliorpse.mcutils.model.status.Players
-import tech.aliorpse.mcutils.model.status.Version
-import tech.aliorpse.mcutils.util.MOTDParser.sectionToObj
+import tech.aliorpse.mcutils.model.server.BedrockServerStatus
+import tech.aliorpse.mcutils.model.server.Description
+import tech.aliorpse.mcutils.model.server.GameMode
+import tech.aliorpse.mcutils.model.server.Players
+import tech.aliorpse.mcutils.model.server.Version
+import tech.aliorpse.mcutils.utils.MOTDParser.sectionToObj
 import java.io.IOException
 import java.net.DatagramPacket
 import java.net.DatagramSocket
@@ -22,7 +22,7 @@ import java.nio.charset.StandardCharsets
  * Provides functionality to fetch and parse the status of a Bedrock Minecraft server.
  */
 @Suppress("MagicNumber")
-object BedrockPing {
+object BedrockServer {
     private val MAGIC_BYTES = byteArrayOf(
         0x00, 0xFF.toByte(), 0xFF.toByte(), 0x00,
         0xFE.toByte(), 0xFE.toByte(), 0xFE.toByte(), 0xFE.toByte(),
