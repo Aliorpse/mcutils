@@ -6,6 +6,12 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import org.xbill.DNS.AAAARecord
+import org.xbill.DNS.ARecord
+import org.xbill.DNS.CNAMERecord
+import org.xbill.DNS.Lookup
+import org.xbill.DNS.SRVRecord
+import org.xbill.DNS.Type
 import tech.aliorpse.mcutils.model.server.ColorAdapter
 import tech.aliorpse.mcutils.model.server.Description
 import tech.aliorpse.mcutils.model.server.DescriptionAdapter
@@ -22,7 +28,6 @@ import java.net.IDN
 import java.net.InetSocketAddress
 import java.net.Socket
 import java.nio.charset.StandardCharsets
-import javax.naming.directory.InitialDirContext
 
 /**
  * Provides functionality to fetch and parse the status of a Java Minecraft server.
@@ -81,20 +86,22 @@ object JavaServer {
     ): JavaServerStatus = withContext(Dispatchers.IO) {
         val asciiHost = IDN.toASCII(host)
 
-        val (resolvedHost, resolvedPort) = if (enableSrv) {
+        val (srvTarget, srvPort) = if (enableSrv) {
             resolveSrvRecord(asciiHost) ?: (asciiHost to port)
         } else {
             asciiHost to port
         }
 
+        val resolvedHost = resolveToIpOrHost(srvTarget) ?: srvTarget
+
         Socket().use { socket ->
             socket.soTimeout = timeout
-            socket.connect(InetSocketAddress(resolvedHost, resolvedPort), timeout)
+            socket.connect(InetSocketAddress(resolvedHost, srvPort), timeout)
 
             val out = DataOutputStream(socket.getOutputStream())
             val input = DataInputStream(socket.getInputStream())
 
-            sendHandshake(out, asciiHost, resolvedPort)
+            sendHandshake(out, asciiHost, srvPort)
             sendStatusRequest(out)
 
             val jsonStr = readStatusResponse(input)
@@ -129,21 +136,63 @@ object JavaServer {
         getStatus(host, port, timeout, enableSrv)
     }
 
-    private fun resolveSrvRecord(host: String): Pair<String, Int>? {
-        return try {
-            val dnsContext = InitialDirContext()
-            val records = dnsContext.getAttributes(
-                "_minecraft._tcp.$host",
-                arrayOf("SRV")
-            ).get("SRV")?.toString()?.lines()?.firstOrNull()
+    @Suppress("ReturnCount")
+    fun resolveToIpOrHost(host: String, depth: Int = 5): String? {
+        if (depth <= 0) return null
 
-            records?.let {
-                val parts = it.trim().split("\\s+".toRegex())
-                if (parts.size == 4) {
-                    val target = parts[3].removeSuffix(".")
-                    val port = parts[2].toInt()
+        try {
+            // A
+            val lookupA = Lookup(host, Type.A)
+            lookupA.run()
+            val aRecords = lookupA.result.takeIf { lookupA.result == Lookup.SUCCESSFUL }
+                ?.let { lookupA.answers.filterIsInstance<ARecord>() }
+
+            if (!aRecords.isNullOrEmpty()) {
+                return aRecords[0].address.hostAddress
+            }
+
+            // AAAA
+            val lookupAAAA = Lookup(host, Type.AAAA)
+            lookupAAAA.run()
+            val aaaaRecords = lookupAAAA.result.takeIf { lookupAAAA.result == Lookup.SUCCESSFUL }
+                ?.let { lookupAAAA.answers.filterIsInstance<AAAARecord>() }
+
+            if (!aaaaRecords.isNullOrEmpty()) {
+                return aaaaRecords[0].address.hostAddress
+            }
+
+            // CNAME
+            val lookupCNAME = Lookup(host, Type.CNAME)
+            lookupCNAME.run()
+            val cnameRecords = lookupCNAME.result.takeIf { lookupCNAME.result == Lookup.SUCCESSFUL }
+                ?.let { lookupCNAME.answers.filterIsInstance<CNAMERecord>() }
+
+            if (!cnameRecords.isNullOrEmpty()) {
+                val cnameTarget = cnameRecords[0].target.toString(true)
+                if (cnameTarget != host) {
+                    return resolveToIpOrHost(cnameTarget, depth - 1)
+                }
+            }
+
+        } catch (_: Exception) {
+            return null
+        }
+        return null
+    }
+
+    fun resolveSrvRecord(host: String): Pair<String, Int>? {
+        return try {
+            val lookup = Lookup("_minecraft._tcp.$host", Type.SRV)
+            lookup.run()
+            if (lookup.result == Lookup.SUCCESSFUL && lookup.answers.isNotEmpty()) {
+                val srv = lookup.answers.filterIsInstance<SRVRecord>().minByOrNull { it.priority }
+                srv?.let {
+                    val target = it.target.toString(true).removeSuffix(".")
+                    val port = it.port
                     target to port
-                } else null
+                }
+            } else {
+                null
             }
         } catch (_: Exception) {
             null

@@ -34,6 +34,10 @@ dependencies {
     api("com.squareup.moshi:moshi-kotlin:1.15.2")
     ksp("com.squareup.moshi:moshi-kotlin-codegen:1.15.2")
 
+    // DNSJava
+    api("dnsjava:dnsjava:3.6.3")
+    implementation("org.slf4j:slf4j-nop:2.0.17")
+
     testImplementation(kotlin("test"))
 }
 
