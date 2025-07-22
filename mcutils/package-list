@@ -168,7 +168,7 @@ $dokka.location:tech.aliorpse.mcutils.model.server/MOTDTextComponentAdapter/MOTD
 $dokka.location:tech.aliorpse.mcutils.model.server/MOTDTextComponentAdapter/fromJson/#com.squareup.moshi.JsonReader/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-m-o-t-d-text-component-adapter/from-json.html
 $dokka.location:tech.aliorpse.mcutils.model.server/MOTDTextComponentAdapter/toJson/#com.squareup.moshi.JsonWriter#tech.aliorpse.mcutils.model.server.MOTDTextComponent?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-m-o-t-d-text-component-adapter/to-json.html
 $dokka.location:tech.aliorpse.mcutils.model.server/Players///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-players/index.html
-$dokka.location:tech.aliorpse.mcutils.model.server/Players/Players/#kotlin.Int#kotlin.Int#kotlin.collections.List[tech.aliorpse.mcutils.model.server.Sample]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-players/-players.html
+$dokka.location:tech.aliorpse.mcutils.model.server/Players/Players/#kotlin.Int#kotlin.Int#kotlin.collections.List[tech.aliorpse.mcutils.model.server.Sample]?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-players/-players.html
 $dokka.location:tech.aliorpse.mcutils.model.server/Players/max/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-players/max.html
 $dokka.location:tech.aliorpse.mcutils.model.server/Players/online/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-players/online.html
 $dokka.location:tech.aliorpse.mcutils.model.server/Players/sample/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-players/sample.html
