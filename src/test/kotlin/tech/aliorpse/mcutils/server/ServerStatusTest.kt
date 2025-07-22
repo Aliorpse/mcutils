@@ -7,7 +7,7 @@ import kotlin.test.Test
 class ServerStatusTest {
     @Test
     fun javaGetStatusTest() {
-        val result = JavaServer.getStatusBlocking("mc.hypixel.net")
+        val result = JavaServer.getStatusBlocking("ltw.pcl-community.top")
 
         println(result)
         assert(result.ping > 0)

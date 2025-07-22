@@ -71,7 +71,7 @@ data class BedrockServerStatus(
 data class Players(
     val max: Int,
     val online: Int,
-    val sample: List<Sample>
+    val sample: List<Sample>? = emptyList()
 )
 
 /**
