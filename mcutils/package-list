@@ -215,6 +215,8 @@ $dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer///PointingToDecl
 $dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/getStatus/#kotlin.String#kotlin.Int#kotlin.Int#kotlin.Boolean/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/get-status.html
 $dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/getStatusBlocking/#kotlin.String#kotlin.Int#kotlin.Int#kotlin.Boolean/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/get-status-blocking.html
 $dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/moshi/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/moshi.html
+$dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/resolveSrvRecord/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/resolve-srv-record.html
+$dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/resolveToIpOrHost/#kotlin.String#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/resolve-to-ip-or-host.html
 $dokka.location:tech.aliorpse.mcutils.utils////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/index.html
 $dokka.location:tech.aliorpse.mcutils.utils/MOTDParser///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-m-o-t-d-parser/index.html
 $dokka.location:tech.aliorpse.mcutils.utils/MOTDParser/objToSection/#tech.aliorpse.mcutils.model.server.MOTDTextComponent/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-m-o-t-d-parser/obj-to-section.html
