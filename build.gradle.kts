@@ -36,7 +36,6 @@ dependencies {
 
     // DNSJava
     api("dnsjava:dnsjava:3.6.3")
-    implementation("org.slf4j:slf4j-nop:2.0.17")
 
     testImplementation(kotlin("test"))
 }
