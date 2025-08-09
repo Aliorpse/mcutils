@@ -19,26 +19,30 @@ dependencies {
 ### Server Status
 
 ```kotlin
-var status
-status = JavaServer.getStatus("mc.hypixel.net")
-status = JavaServer.getStatus(
-    host = "wdsj.net",
-    port = 25565,
-    enableSrv = true
-)
-status = BedrockServer.getStatus("play.easecation.net")
+runBlocking {
+    var status
+    status = JavaServer.getStatus("mc.hypixel.net")
+    status = JavaServer.getStatus(
+        host = "wdsj.net",
+        port = 25565,
+        enableSrv = true
+    )
+    status = BedrockServer.getStatus("play.easecation.net")
 
-println(status)
+    println(status)
+}
 ```
 
 ### Player Profile (Java Edition Only)
 
 ```kotlin
-var pl
-pl = Player.getProfileByName("Aliorpse")
-pl = Player.getProfile("ec042e1200ac4a249cc83eb1fab0bd88")
+runBlocking {
+    var pl
+    pl = Player.getProfileByName("Aliorpse")
+    pl = Player.getProfile("ec042e1200ac4a249cc83eb1fab0bd88")
 
-println(pl)
+    println(pl)
+}
 ```
 
 ## Java Usage
