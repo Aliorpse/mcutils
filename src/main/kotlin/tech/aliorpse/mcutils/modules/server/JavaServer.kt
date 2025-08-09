@@ -107,10 +107,15 @@ object JavaServer {
             val jsonStr = readStatusResponse(input)
             val parsed = moshi.adapter(RawJavaStatus::class.java).fromJson(jsonStr)!!
 
-            val pingStart = System.currentTimeMillis()
-            sendPing(out, pingStart)
-            readPong(input, pingStart)
-            val ping = System.currentTimeMillis() - pingStart
+            var ping: Long?
+            try {
+                val pingStart = System.currentTimeMillis()
+                sendPing(out, pingStart)
+                readPong(input, pingStart)
+                ping = System.currentTimeMillis() - pingStart
+            } catch (_: Exception) {
+                ping = null
+            }
 
             JavaServerStatus(
                 description = parsed.description,
@@ -234,6 +239,9 @@ object JavaServer {
         val jsonLength = readVarInt(input)
         val jsonData = ByteArray(jsonLength)
         input.readFully(jsonData)
+
+        println("Raw status JSON: " + String(jsonData, StandardCharsets.UTF_8))
+
         return String(jsonData, StandardCharsets.UTF_8)
     }
 

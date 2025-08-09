@@ -92,7 +92,7 @@ object BedrockServer {
                 throw IOException("Malformed response: expected at least $MIN_EXPECTED_PARTS parts, got ${parts.size}")
             }
 
-            val protocol = parts[2].toIntOrNull() ?: 0
+            val protocol = parts[2].toLongOrNull() ?: 0
             val online = parts[4].toIntOrNull() ?: 0
             val max = parts[5].toIntOrNull() ?: 0
             val gameMode = runCatching { GameMode.valueOf(parts[8].uppercase()) }.getOrDefault(GameMode.UNKNOWN)

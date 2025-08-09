@@ -1,5 +1,6 @@
 package tech.aliorpse.mcutils.modules.player
 
+import kotlinx.coroutines.runBlocking
 import tech.aliorpse.mcutils.model.player.PlayerProfile
 
 object Player {
@@ -13,6 +14,13 @@ object Player {
         PlayerClient.sessionService.getProfile(uuid)
 
     /**
+     * Blocking method of [getProfile].
+     */
+    fun getProfileBlocking(uuid: String): PlayerProfile = runBlocking {
+        PlayerClient.sessionService.getProfile(uuid)
+    }
+
+    /**
      * Another version of [getProfile].
      *
      * @param username The player's username.
@@ -21,5 +29,12 @@ object Player {
     suspend fun getProfileByName(username: String): PlayerProfile {
         val uuid = PlayerClient.profileService.getUUID(username).id
         return PlayerClient.sessionService.getProfile(uuid)
+    }
+
+    /**
+     * Blocking method of [getProfileByName]
+     */
+    fun getProfileByNameBlocking(username: String): PlayerProfile = runBlocking {
+        getProfileByName(username)
     }
 }

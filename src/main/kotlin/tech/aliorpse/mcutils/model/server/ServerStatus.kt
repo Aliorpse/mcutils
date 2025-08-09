@@ -17,7 +17,7 @@ sealed class ServerStatus {
     abstract val description: Description
     abstract val players: Players
     abstract val version: Version
-    abstract val ping: Long
+    abstract val ping: Long?
 }
 
 /**
@@ -29,13 +29,14 @@ sealed class ServerStatus {
  *
  * @property enforcesSecureChat Indicates whether the server enforces secure chat.
  * @property favicon An optional base64-encoded string representing the server's favicon.
+ * @property ping Will be null when remote doesn't support.
  */
 @JsonClass(generateAdapter = true)
 data class JavaServerStatus(
     override val description: Description,
     override val players: Players,
     override val version: Version,
-    override val ping: Long,
+    override val ping: Long?,
     val enforcesSecureChat: Boolean = false,
     val favicon: String?
 ) : ServerStatus()
@@ -83,7 +84,7 @@ data class Players(
 @JsonClass(generateAdapter = true)
 data class Version(
     val name: String,
-    val protocol: Int
+    val protocol: Long
 )
 
 /**

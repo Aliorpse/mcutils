@@ -7,10 +7,10 @@ import kotlin.test.Test
 class ServerStatusTest {
     @Test
     fun javaGetStatusTest() {
-        val result = JavaServer.getStatusBlocking("ltw.pcl-community.top")
+        val result = JavaServer.getStatusBlocking("pumpkin.kralverde.dev")
 
         println(result)
-        assert(result.ping > 0)
+        assert(result.version.protocol > 0)
     }
 
     @Test
