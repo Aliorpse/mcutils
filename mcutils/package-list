@@ -141,7 +141,7 @@ $dokka.location:tech.aliorpse.mcutils.model.server/GameMode/entries/#/PointingTo
 $dokka.location:tech.aliorpse.mcutils.model.server/GameMode/valueOf/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-game-mode/value-of.html
 $dokka.location:tech.aliorpse.mcutils.model.server/GameMode/values/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-game-mode/values.html
 $dokka.location:tech.aliorpse.mcutils.model.server/JavaServerStatus///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-java-server-status/index.html
-$dokka.location:tech.aliorpse.mcutils.model.server/JavaServerStatus/JavaServerStatus/#tech.aliorpse.mcutils.model.server.Description#tech.aliorpse.mcutils.model.server.Players#tech.aliorpse.mcutils.model.server.Version#kotlin.Long#kotlin.Boolean#kotlin.String?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-java-server-status/-java-server-status.html
+$dokka.location:tech.aliorpse.mcutils.model.server/JavaServerStatus/JavaServerStatus/#tech.aliorpse.mcutils.model.server.Description#tech.aliorpse.mcutils.model.server.Players#tech.aliorpse.mcutils.model.server.Version#kotlin.Long?#kotlin.Boolean#kotlin.String?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-java-server-status/-java-server-status.html
 $dokka.location:tech.aliorpse.mcutils.model.server/JavaServerStatus/description/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-java-server-status/description.html
 $dokka.location:tech.aliorpse.mcutils.model.server/JavaServerStatus/enforcesSecureChat/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-java-server-status/enforces-secure-chat.html
 $dokka.location:tech.aliorpse.mcutils.model.server/JavaServerStatus/favicon/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-java-server-status/favicon.html
@@ -192,7 +192,7 @@ $dokka.location:tech.aliorpse.mcutils.model.server/ServerStatus/ping/#/PointingT
 $dokka.location:tech.aliorpse.mcutils.model.server/ServerStatus/players/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-server-status/players.html
 $dokka.location:tech.aliorpse.mcutils.model.server/ServerStatus/version/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-server-status/version.html
 $dokka.location:tech.aliorpse.mcutils.model.server/Version///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-version/index.html
-$dokka.location:tech.aliorpse.mcutils.model.server/Version/Version/#kotlin.String#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-version/-version.html
+$dokka.location:tech.aliorpse.mcutils.model.server/Version/Version/#kotlin.String#kotlin.Long/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-version/-version.html
 $dokka.location:tech.aliorpse.mcutils.model.server/Version/name/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-version/name.html
 $dokka.location:tech.aliorpse.mcutils.model.server/Version/protocol/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-version/protocol.html
 $dokka.location:tech.aliorpse.mcutils.model.server/VersionJsonAdapter///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-version-json-adapter/index.html
@@ -203,7 +203,9 @@ $dokka.location:tech.aliorpse.mcutils.model.server/VersionJsonAdapter/toString/#
 $dokka.location:tech.aliorpse.mcutils.modules.player////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.player/Player///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.player/Player/getProfile/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player/get-profile.html
+$dokka.location:tech.aliorpse.mcutils.modules.player/Player/getProfileBlocking/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player/get-profile-blocking.html
 $dokka.location:tech.aliorpse.mcutils.modules.player/Player/getProfileByName/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player/get-profile-by-name.html
+$dokka.location:tech.aliorpse.mcutils.modules.player/Player/getProfileByNameBlocking/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player/get-profile-by-name-blocking.html
 $dokka.location:tech.aliorpse.mcutils.modules.player/PlayerService///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player-service/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.player/PlayerService/getProfile/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player-service/get-profile.html
 $dokka.location:tech.aliorpse.mcutils.modules.player/PlayerService/getUUID/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player-service/get-u-u-i-d.html
