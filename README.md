@@ -8,39 +8,44 @@ A Kotlin-based Minecraft request library provides utility functions related to M
 
 ## Installation
 
-### Gradle
-
 ```kotlin
 dependencies {
     implementation("tech.aliorpse:mcutils:$version")
 }
 ```
 
-### Maven
+## Features
 
-```xml
-<dependency>
-    <groupId>tech.aliorpse</groupId>
-    <artifactId>mcutils</artifactId>
-    <version><!-- version --></version>
-</dependency>
+### Server Status
+```kotlin
+var status
+status = JavaServer.getStatus("mc.hypixel.net")
+status = JavaServer.getStatus(
+    host = "wdsj.net",
+    port = 25565,
+    enableSrv = true
+)
+status = BedrockServer.getStatus("play.easecation.net")
+
+println(status)
 ```
 
-## Basic examples
+### Player Profile (Java Only)
 
 ```kotlin
-fun main() = runBlocking {
-    var status
-    status = JavaServer.getStatus("mc.hypixel.net")
-    status = JavaServer.getStatus(
-        host = "wdsj.net",
-        port = 25565,
-        enableSrv = true
-    )
-    status = BedrockServer.getStatus("play.easecation.net")
-    
-    var playerInfo
-    playerInfo = Player.getProfile("ec042e1200ac4a249cc83eb1fab0bd88")
-    playerInfo = Player.getProfileByName("Aliorpse")
-}
+var pl
+
+pl = Player.getProfileByName("Aliorpse")
+pl = Player.getProfile("ec042e1200ac4a249cc83eb1fab0bd88")
+
+println(pl)
+```
+
+## Java Usage
+
+All asynchronous methods also provide a blocking variant (running on `Dispatchers.IO`),  
+allowing you to call them directly from Java without dealing with coroutines.
+
+```java
+JavaServerStatus status = JavaServer.getStatusBlocking("mc.hypixel.net");
 ```

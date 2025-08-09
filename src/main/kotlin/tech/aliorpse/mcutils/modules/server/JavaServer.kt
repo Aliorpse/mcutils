@@ -137,7 +137,7 @@ object JavaServer {
         port: Int = 25565,
         timeout: Int = 2000,
         enableSrv: Boolean = true
-    ) = runBlocking {
+    ) = runBlocking(Dispatchers.IO) {
         getStatus(host, port, timeout, enableSrv)
     }
 
