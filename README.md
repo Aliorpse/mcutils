@@ -30,11 +30,10 @@ status = BedrockServer.getStatus("play.easecation.net")
 println(status)
 ```
 
-### Player Profile (Java Only)
+### Player Profile (Java Edition Only)
 
 ```kotlin
 var pl
-
 pl = Player.getProfileByName("Aliorpse")
 pl = Player.getProfile("ec042e1200ac4a249cc83eb1fab0bd88")
 
