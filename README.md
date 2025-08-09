@@ -17,6 +17,7 @@ dependencies {
 ## Features
 
 ### Server Status
+
 ```kotlin
 var status
 status = JavaServer.getStatus("mc.hypixel.net")
