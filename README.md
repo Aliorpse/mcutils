@@ -22,11 +22,15 @@ dependencies {
 runBlocking {
     var status
     status = JavaServer.getStatus("mc.hypixel.net")
+    
+    // More options
     status = JavaServer.getStatus(
         host = "wdsj.net",
         port = 25565,
         enableSrv = true
     )
+    
+    // Bedrock servers
     status = BedrockServer.getStatus("play.easecation.net")
 
     println(status)
@@ -38,8 +42,8 @@ runBlocking {
 ```kotlin
 runBlocking {
     var pl
-    pl = Player.getProfileByName("Aliorpse")
-    pl = Player.getProfile("ec042e1200ac4a249cc83eb1fab0bd88")
+    pl = Player.getProfile("Aliorpse", Player.IDType.NAME)
+    pl = Player.getProfile("ec042e1200ac4a249cc83eb1fab0bd88", Player.IDType.UUID)
 
     println(pl)
 }
@@ -47,7 +51,7 @@ runBlocking {
 
 ## Java Usage
 
-All asynchronous methods also provide a blocking variant (running on `Dispatchers.IO`),  
+All asynchronous methods also provide a blocking variant,  
 allowing you to call them directly from Java without dealing with coroutines.
 
 ```java

@@ -31,13 +31,6 @@ import java.nio.charset.StandardCharsets
 
 /**
  * Provides functionality to fetch and parse the status of a Java Minecraft server.
- *
- * The object supports asynchronous and blocking methods to retrieve server details such as
- * server description, version, players, and ping latency. It also includes support for SRV record
- * resolution and Unicode domains.
- *
- * Internal constants and helper methods handle Minecraft's communication protocol, including
- * packet construction and parsing.
  */
 @Suppress("MagicNumber", "TooManyFunctions")
 object JavaServer {
@@ -52,7 +45,7 @@ object JavaServer {
     private val motdAdapter = MOTDTextComponentAdapter(colorAdapter)
     private val descAdapter = DescriptionAdapter(motdAdapter)
 
-    val moshi: Moshi = Moshi.Builder()
+    internal val moshi: Moshi = Moshi.Builder()
         .add(colorAdapter)
         .add(motdAdapter)
         .add(descAdapter)
@@ -74,7 +67,6 @@ object JavaServer {
      * @param host Host
      * @param port Port (25565)
      * @param timeout Timeout (2000ms)
-     * @param enableSrv Srv (true)
      *
      * @throws IOException
      */
@@ -82,15 +74,10 @@ object JavaServer {
         host: String,
         port: Int = 25565,
         timeout: Int = 2000,
-        enableSrv: Boolean = true
     ): JavaServerStatus = withContext(Dispatchers.IO) {
         val asciiHost = IDN.toASCII(host)
 
-        val (srvTarget, srvPort) = if (enableSrv) {
-            resolveSrvRecord(asciiHost) ?: (asciiHost to port)
-        } else {
-            asciiHost to port
-        }
+        val (srvTarget, srvPort) = resolveSrvRecord(asciiHost) ?: (asciiHost to port)
 
         val resolvedHost = resolveToIpOrHost(srvTarget) ?: srvTarget
 
@@ -136,9 +123,8 @@ object JavaServer {
         host: String,
         port: Int = 25565,
         timeout: Int = 2000,
-        enableSrv: Boolean = true
-    ) = runBlocking(Dispatchers.IO) {
-        getStatus(host, port, timeout, enableSrv)
+    ) = runBlocking {
+        getStatus(host, port, timeout)
     }
 
     @Suppress("ReturnCount")

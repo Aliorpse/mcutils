@@ -117,7 +117,7 @@ object BedrockServer {
         host: String,
         port: Int = 19132,
         timeout: Int = 2000
-    ) = runBlocking(Dispatchers.IO) {
+    ) = runBlocking {
         getStatus(host, port, timeout)
     }
 }

@@ -1,43 +1,38 @@
 package tech.aliorpse.mcutils.modules.player
 
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import tech.aliorpse.mcutils.model.player.PlayerProfile
 
 object Player {
     /**
-     * Retrieves the player's profile from the Mojang session server based on the provided UUID.
+     * UUID or NAME.
+     */
+    enum class IDType {
+        UUID, NAME
+    }
+
+    /**
+     * Retrieves the player's profile from the Mojang session server.
      *
-     * @param uuid The player's uuid.
+     * @param id Either UUID or name.
      * @return `PlayerProfile` containing detailed player information including id, name, skin, cape, and model type.
      */
-    suspend fun getProfile(uuid: String): PlayerProfile =
-        PlayerClient.sessionService.getProfile(uuid)
+    suspend fun getProfile(id: String, type: IDType): PlayerProfile {
+        return when (type) {
+            IDType.UUID -> PlayerClient.sessionService.getProfile(id)
+
+            IDType.NAME -> {
+                val id = PlayerClient.profileService.getUUID(id).id
+                PlayerClient.sessionService.getProfile(id)
+            }
+        }
+    }
 
     /**
      * Blocking method of [getProfile].
      */
     @JvmStatic
-    fun getProfileBlocking(uuid: String): PlayerProfile = runBlocking(Dispatchers.IO) {
-        PlayerClient.sessionService.getProfile(uuid)
-    }
-
-    /**
-     * Another version of [getProfile].
-     *
-     * @param username The player's username.
-     * @return `PlayerProfile` containing detailed player information including id, name, skin, cape, and model type.
-     */
-    suspend fun getProfileByName(username: String): PlayerProfile {
-        val uuid = PlayerClient.profileService.getUUID(username).id
-        return PlayerClient.sessionService.getProfile(uuid)
-    }
-
-    /**
-     * Blocking method of [getProfileByName]
-     */
-    @JvmStatic
-    fun getProfileByNameBlocking(username: String): PlayerProfile = runBlocking(Dispatchers.IO) {
-        getProfileByName(username)
+    fun getProfileBlocking(id: String, type: IDType): PlayerProfile = runBlocking {
+        getProfile(id, type)
     }
 }
