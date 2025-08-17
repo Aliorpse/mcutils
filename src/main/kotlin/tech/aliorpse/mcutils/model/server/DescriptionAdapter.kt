@@ -25,7 +25,11 @@ class DescriptionAdapter(
             }
             JsonReader.Token.BEGIN_OBJECT -> {
                 val motdComponent = motdAdapter.fromJson(reader) ?: MOTDTextComponent("")
-                Description(objToSection(motdComponent), motdComponent)
+                if (motdComponent.text.isNotBlank()) {
+                    Description(motdComponent.text, sectionToObj(motdComponent.text))
+                } else {
+                    Description(objToSection(motdComponent), motdComponent)
+                }
             }
             else -> {
                 reader.skipValue()
@@ -33,6 +37,7 @@ class DescriptionAdapter(
             }
         }
     }
+
 
     @ToJson
     fun toJson(writer: JsonWriter, value: Description?) {
