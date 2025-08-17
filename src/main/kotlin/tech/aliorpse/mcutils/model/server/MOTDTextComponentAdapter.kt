@@ -9,7 +9,7 @@ import tech.aliorpse.mcutils.modules.server.JavaServer.moshi
 /**
  * 有些傻逼服务器喜欢往 [MOTDTextComponent.text] 里面加§. mcutils不支持这种写法. §不会做处理.
  */
-class MOTDTextComponentAdapter(
+internal class MOTDTextComponentAdapter(
     private val colorAdapter: ColorAdapter
 ) {
     private val defaultAdapter by lazy { moshi.adapter(MOTDTextComponent::class.java) }

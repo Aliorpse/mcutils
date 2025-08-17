@@ -11,7 +11,7 @@ import tech.aliorpse.mcutils.modules.server.JavaServer.moshi
 /**
  * § codes or Hex strings Adapter.
  */
-class ColorAdapter {
+internal class ColorAdapter {
     private val defaultAdapter by lazy { moshi.adapter(Color::class.java) }
 
     @FromJson

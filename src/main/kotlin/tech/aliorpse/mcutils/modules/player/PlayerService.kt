@@ -5,7 +5,7 @@ import retrofit2.http.Path
 import tech.aliorpse.mcutils.model.player.PlayerProfile
 import tech.aliorpse.mcutils.model.player.PlayerUUIDProfile
 
-interface PlayerService {
+internal interface PlayerService {
     /**
      * Retrieves the player's profile from the Mojang session server using their UUID.
      *

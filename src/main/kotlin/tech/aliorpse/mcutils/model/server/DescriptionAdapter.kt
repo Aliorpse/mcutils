@@ -11,7 +11,7 @@ import tech.aliorpse.mcutils.utils.MOTDParser.sectionToObj
 /**
  * Adapt different kinds of Description server sent. String or TextComponent.
  */
-class DescriptionAdapter(
+internal class DescriptionAdapter(
     private val motdAdapter: MOTDTextComponentAdapter
 ) {
     private val defaultAdapter by lazy { moshi.adapter(Description::class.java) }
@@ -37,7 +37,6 @@ class DescriptionAdapter(
             }
         }
     }
-
 
     @ToJson
     fun toJson(writer: JsonWriter, value: Description?) {

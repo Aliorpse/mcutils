@@ -8,7 +8,7 @@ import okio.ByteString.Companion.decodeBase64
  * Custom adapter for converting RawPlayerProfile into a `PlayerProfile` object.
  */
 @Suppress("unused")
-class PlayerProfileAdapter {
+internal class PlayerProfileAdapter {
     private val moshi = Moshi.Builder().build()
 
     @FromJson
