@@ -226,8 +226,6 @@ object JavaServer {
         val jsonData = ByteArray(jsonLength)
         input.readFully(jsonData)
 
-        println("Raw status JSON: " + String(jsonData, StandardCharsets.UTF_8))
-
         return String(jsonData, StandardCharsets.UTF_8)
     }
 
