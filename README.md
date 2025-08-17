@@ -18,6 +18,8 @@ dependencies {
 
 ### Server Status
 
+#### [Demo API Endpoint](https://api.aliorpse.tech/minecraft/server/status/java/hypixel.net)
+
 ```kotlin
 runBlocking {
     var status
@@ -38,6 +40,8 @@ runBlocking {
 ```
 
 ### Player Profile (Java Edition Only)
+
+#### [Demo API Endpoint](https://api.aliorpse.tech/minecraft/player/profile/name/Aliorpse)
 
 ```kotlin
 runBlocking {
