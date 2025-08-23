@@ -18,7 +18,7 @@ dependencies {
 
 ### Server Status
 
-#### [Demo API Endpoint](https://api.aliorpse.tech/minecraft/server/status/java/hypixel.net)
+#### [Demo API Endpoint](https://api.aliorpse.tech/minecraft/server/status/hypixel.net:25565?type=java)
 
 ```kotlin
 runBlocking {
@@ -41,13 +41,14 @@ runBlocking {
 
 ### Player Profile (Java Edition Only)
 
-#### [Demo API Endpoint](https://api.aliorpse.tech/minecraft/player/profile/name/Aliorpse)
+#### [Demo API Endpoint](https://api.aliorpse.tech/minecraft/player/profile/Aliorpse)
 
 ```kotlin
 runBlocking {
     var pl
-    pl = Player.getProfile("Aliorpse", Player.IDType.NAME)
-    pl = Player.getProfile("ec042e1200ac4a249cc83eb1fab0bd88", Player.IDType.UUID)
+    pl = Player.getProfile("Aliorpse")
+    pl = Player.getProfile("ec042e1200ac4a249cc83eb1fab0bd88")
+    pl = Player.getProfile("ec042e12-00ac-4a24-9cc8-3eb1fab0bd88")
 
     println(pl)
 }

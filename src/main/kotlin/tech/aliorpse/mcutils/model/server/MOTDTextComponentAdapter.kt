@@ -7,7 +7,7 @@ import com.squareup.moshi.ToJson
 import tech.aliorpse.mcutils.modules.server.JavaServer.moshi
 
 /**
- * 有些傻逼服务器喜欢往 [MOTDTextComponent.text] 里面加§. mcutils不支持这种写法. §不会做处理.
+ * 有些傻逼服务器喜欢往 [MOTDTextComponent.text] 里面加§. mcutils不支持这种写法. 这里的§不会做处理.
  */
 internal class MOTDTextComponentAdapter(
     private val colorAdapter: ColorAdapter

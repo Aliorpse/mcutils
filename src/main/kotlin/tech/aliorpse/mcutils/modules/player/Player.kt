@@ -4,27 +4,34 @@ import kotlinx.coroutines.runBlocking
 import tech.aliorpse.mcutils.model.player.PlayerProfile
 
 object Player {
-    /**
-     * UUID or NAME.
-     */
-    enum class IDType {
-        UUID, NAME
-    }
+    const val UUID_LENGTH = 32
+    val nameRegex = Regex("^[A-Za-z0-9_]{3,16}$")
 
     /**
-     * Retrieves the player's profile from the Mojang session server.
+     * Fetches a player's profile from Mojang's session server.
      *
-     * @param id Either UUID or name.
-     * @return `PlayerProfile` containing detailed player information including id, name, skin, cape, and model type.
+     * The input can be either:
+     * - A UUID (with or without dashes, 32–36 characters), or
+     * - A valid Minecraft username (3–16 characters, letters, digits, and underscores).
+     *
+     * @param player The player's UUID or username.
+     * @return A [PlayerProfile] containing the player's UUID, username, skin, cape, and model type.
+     * @throws IllegalArgumentException if the input is neither a valid UUID nor a valid username.
      */
-    suspend fun getProfile(id: String, type: IDType): PlayerProfile {
-        return when (type) {
-            IDType.UUID -> PlayerClient.sessionService.getProfile(id)
+    suspend fun getProfile(player: String): PlayerProfile {
+        val pl = player.replace("-", "")
 
-            IDType.NAME -> {
-                val id = PlayerClient.profileService.getUUID(id).id
-                PlayerClient.sessionService.getProfile(id)
+        return when {
+            pl.length == UUID_LENGTH -> {
+                PlayerClient.profileService.getProfile(pl)
             }
+
+            nameRegex.matches(pl) -> {
+                val uuid = PlayerClient.sessionService.getUUID(pl).id
+                PlayerClient.sessionService.getProfile(uuid)
+            }
+
+            else -> throw IllegalArgumentException("Invalid identifier: $pl")
         }
     }
 
@@ -32,7 +39,7 @@ object Player {
      * Blocking method of [getProfile].
      */
     @JvmStatic
-    fun getProfileBlocking(id: String, type: IDType): PlayerProfile = runBlocking {
-        getProfile(id, type)
+    fun getProfileBlocking(player: String): PlayerProfile = runBlocking {
+        getProfile(player)
     }
 }
