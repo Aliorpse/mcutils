@@ -27,7 +27,7 @@ object Player {
             }
 
             nameRegex.matches(pl) -> {
-                val uuid = PlayerClient.sessionService.getUUID(pl).id
+                val uuid = PlayerClient.profileService.getUUID(pl).id
                 PlayerClient.sessionService.getProfile(uuid)
             }
 

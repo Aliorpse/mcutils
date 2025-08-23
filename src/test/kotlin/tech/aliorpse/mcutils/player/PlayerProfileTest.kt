@@ -9,7 +9,7 @@ class PlayerProfileTest {
      */
     @Test
     fun getProfileTest() {
-        val result = Player.getProfileBlocking("Aliorpse", Player.IDType.NAME)
+        val result = Player.getProfileBlocking("Aliorpse")
         println(result)
         assert(result.name.isNotEmpty())
     }
