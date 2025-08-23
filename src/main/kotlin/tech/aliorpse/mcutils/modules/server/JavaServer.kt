@@ -252,9 +252,7 @@ object JavaServer {
         }
     }
 
-    private fun writeVarInt(out: DataOutputStream, value: Int) {
-        writeVarInt(out as OutputStream, value)
-    }
+    private fun writeVarInt(out: DataOutputStream, value: Int) = writeVarInt(out as OutputStream, value)
 
     private fun readVarInt(input: DataInputStream): Int {
         var result = 0

@@ -27,7 +27,7 @@ object MOTDParser {
 
         // when text is meaningful
         if (component.text.isNotEmpty()) {
-            // `colorCode = null` means inherit
+            // `colorCode = null` means inherit from parent
             // skip adding color for blanks
             if (colorCode != null && component.text.isNotBlank()) {
                 sb.append("§$colorCode")
