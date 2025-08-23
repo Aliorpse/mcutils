@@ -16,6 +16,7 @@ class ServerStatusTest {
     @Test
     fun bedrockGetStatusTest() {
         val result = BedrockServer.getStatusBlocking("asia.easecation.net")
+
         println(result)
         assert(result.ping > 0)
     }

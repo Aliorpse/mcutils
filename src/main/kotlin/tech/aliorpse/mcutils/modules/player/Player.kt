@@ -22,9 +22,7 @@ object Player {
         val pl = player.replace("-", "")
 
         return when {
-            pl.length == UUID_LENGTH -> {
-                PlayerClient.profileService.getProfile(pl)
-            }
+            pl.length == UUID_LENGTH -> PlayerClient.sessionService.getProfile(pl)
 
             nameRegex.matches(pl) -> {
                 val uuid = PlayerClient.profileService.getUUID(pl).id
