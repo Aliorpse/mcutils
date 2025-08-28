@@ -112,17 +112,15 @@ $dokka.location:tech.aliorpse.mcutils.model.server/VersionJsonAdapter/toJson/#co
 $dokka.location:tech.aliorpse.mcutils.model.server/VersionJsonAdapter/toString/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-version-json-adapter/to-string.html
 $dokka.location:tech.aliorpse.mcutils.modules.player////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.player/Player///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player/index.html
-$dokka.location:tech.aliorpse.mcutils.modules.player/Player/UUID_LENGTH/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player/-u-u-i-d_-l-e-n-g-t-h.html
 $dokka.location:tech.aliorpse.mcutils.modules.player/Player/getProfile/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player/get-profile.html
-$dokka.location:tech.aliorpse.mcutils.modules.player/Player/getProfileBlocking/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player/get-profile-blocking.html
-$dokka.location:tech.aliorpse.mcutils.modules.player/Player/nameRegex/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player/name-regex.html
+$dokka.location:tech.aliorpse.mcutils.modules.player/Player/getProfileAsync/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player/get-profile-async.html
 $dokka.location:tech.aliorpse.mcutils.modules.server////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.server/BedrockServer///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-bedrock-server/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.server/BedrockServer/getStatus/#kotlin.String#kotlin.Int#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-bedrock-server/get-status.html
-$dokka.location:tech.aliorpse.mcutils.modules.server/BedrockServer/getStatusBlocking/#kotlin.String#kotlin.Int#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-bedrock-server/get-status-blocking.html
+$dokka.location:tech.aliorpse.mcutils.modules.server/BedrockServer/getStatusAsync/#kotlin.String#kotlin.Int#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-bedrock-server/get-status-async.html
 $dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/getStatus/#kotlin.String#kotlin.Int#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/get-status.html
-$dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/getStatusBlocking/#kotlin.String#kotlin.Int#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/get-status-blocking.html
+$dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/getStatusAsync/#kotlin.String#kotlin.Int#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/get-status-async.html
 tech.aliorpse.mcutils.model.player
 tech.aliorpse.mcutils.model.server
 tech.aliorpse.mcutils.modules.player
