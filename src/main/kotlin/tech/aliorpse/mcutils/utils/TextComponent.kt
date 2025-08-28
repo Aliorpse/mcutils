@@ -23,7 +23,7 @@ internal fun String.toTextComponent(): TextComponent {
                 components += TextComponent(
                     text = currentText.toString(),
                     color = currentColor,
-                    style = EnumSet.copyOf(currentStyles)
+                    styles = EnumSet.copyOf(currentStyles)
                 )
                 currentText = StringBuilder()
             }
@@ -47,7 +47,7 @@ internal fun String.toTextComponent(): TextComponent {
         components += TextComponent(
             text = currentText.toString(),
             color = currentColor,
-            style = EnumSet.copyOf(currentStyles)
+            styles = EnumSet.copyOf(currentStyles)
         )
     }
 
@@ -57,7 +57,7 @@ internal fun String.toTextComponent(): TextComponent {
         TextComponent(
             text = "",
             color = "",
-            style = EnumSet.noneOf(TextStyle::class.java),
+            styles = EnumSet.noneOf(TextStyle::class.java),
             extra = components
         )
     }

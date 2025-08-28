@@ -119,9 +119,9 @@ data class TextComponent(
     val text: String,
 
     val color: String = "",
-    val style: EnumSet<TextStyle> = EnumSet.noneOf(TextStyle::class.java),
+    val styles: EnumSet<TextStyle> = EnumSet.noneOf(TextStyle::class.java),
 
-    val extra: List<TextComponent>? = emptyList(),
+    val extra: List<TextComponent> = emptyList(),
 )
 
 /**

@@ -36,25 +36,21 @@ internal class TextComponentAdapter {
 
         reader.beginObject()
         while (reader.hasNext()) {
-            when (reader.nextName()) {
+            when (val name = reader.nextName()) {
                 "text" -> {
                     val rawText = reader.nextString()
                     val parsed = rawText.toTextComponent()
-                    // 如果解析后是单个组件，直接赋值
-                    if (parsed.extra.isNullOrEmpty()) {
-                        text = parsed.text
-                        color = parsed.color
-                        styles += parsed.style
-                    } else {
-                        text = parsed.text
-                        color = parsed.color
-                        styles += parsed.style
+                    text = parsed.text
+                    color = parsed.color
+                    styles += parsed.styles
+                    if (parsed.extra.isNotEmpty()) {
                         extra = parsed.extra
                     }
                 }
                 "color" -> color = reader.readColor()
                 "extra" -> extra = reader.readExtras()
-                else -> reader.readStyle()?.let { styles += it }
+                in stylesList -> reader.readStyle(name)?.let { styles += it }
+                else -> reader.skipValue()
             }
         }
         reader.endObject()
@@ -62,17 +58,13 @@ internal class TextComponentAdapter {
         return TextComponent(
             text = text,
             color = color,
-            style = styles,
+            styles = styles,
             extra = extra
         )
     }
 
-    private fun JsonReader.readStyle(): TextStyle? {
-        val style = styleMap[this.nextName()] ?: run {
-            this.skipValue()
-            return null
-        }
-        return if (this.nextBoolean()) style else null
+    private fun JsonReader.readStyle(name: String): TextStyle? {
+        return if (this.nextBoolean()) styleMap[name] else null
     }
 
     private fun JsonReader.readColor(): String {
@@ -97,6 +89,8 @@ internal class TextComponentAdapter {
         "strikethrough" to TextStyle.STRIKETHROUGH,
         "obfuscated" to TextStyle.OBFUSCATED,
     )
+
+    private val stylesList = listOf("bold", "italic", "underlined", "strikethrough", "obfuscated")
 
     private val colors = mapOf(
         "black" to "#000000",
