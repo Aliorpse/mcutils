@@ -1,6 +1,7 @@
 package tech.aliorpse.mcutils.model.server
 
 import com.squareup.moshi.JsonClass
+import java.util.EnumSet
 
 /**
  * Represents the status of a server.
@@ -14,7 +15,7 @@ import com.squareup.moshi.JsonClass
  * @property ping The time taken to ping the server, measured in milliseconds.
  */
 sealed class ServerStatus {
-    abstract val description: Description
+    abstract val description: TextComponent
     abstract val players: Players
     abstract val version: Version
     abstract val ping: Long?
@@ -33,7 +34,7 @@ sealed class ServerStatus {
  */
 @JsonClass(generateAdapter = true)
 data class JavaServerStatus(
-    override val description: Description,
+    override val description: TextComponent,
     override val players: Players,
     override val version: Version,
     override val ping: Long?,
@@ -54,7 +55,7 @@ data class JavaServerStatus(
  */
 @JsonClass(generateAdapter = true)
 data class BedrockServerStatus(
-    override val description: Description,
+    override val description: TextComponent,
     override val players: Players,
     override val version: Version,
     override val ping: Long,
@@ -88,14 +89,6 @@ data class Version(
 )
 
 /**
- * Server description structure, typically the MOTD text.
- */
-data class Description(
-    val text: String,
-    val obj: MOTDTextComponent
-)
-
-/**
  * Sample player information representing some online players.
  */
 @JsonClass(generateAdapter = true)
@@ -119,18 +112,25 @@ enum class GameMode {
  * Represents a component of the MOTD.
  *
  * @property text The textual content of this MOTD component.
- * @property color The color of the text, Defaults to [Color.Named.WHITE].
+ * @property color The color of the text. Hex codes.
  * @property extra Rescue. Please check the wiki for this.
  */
-data class MOTDTextComponent(
+data class TextComponent(
     val text: String,
 
-    val color: Color? = Color.Named.WHITE,
-    val bold: Boolean = false,
-    val italic: Boolean = false,
-    val underlined: Boolean = false,
-    val strikethrough: Boolean = false,
-    val obfuscated: Boolean = false,
+    val color: String = "",
+    val style: EnumSet<TextStyle> = EnumSet.noneOf(TextStyle::class.java),
 
-    val extra: List<MOTDTextComponent>? = emptyList(),
+    val extra: List<TextComponent>? = emptyList(),
 )
+
+/**
+ * Proper styles for the [TextComponent].
+ */
+enum class TextStyle {
+    BOLD,
+    ITALIC,
+    UNDERLINED,
+    STRIKETHROUGH,
+    OBFUSCATED,
+}

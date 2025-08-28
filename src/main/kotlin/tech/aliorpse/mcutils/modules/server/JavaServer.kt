@@ -12,12 +12,10 @@ import org.xbill.DNS.CNAMERecord
 import org.xbill.DNS.Lookup
 import org.xbill.DNS.SRVRecord
 import org.xbill.DNS.Type
-import tech.aliorpse.mcutils.model.server.ColorAdapter
-import tech.aliorpse.mcutils.model.server.Description
-import tech.aliorpse.mcutils.model.server.DescriptionAdapter
 import tech.aliorpse.mcutils.model.server.JavaServerStatus
-import tech.aliorpse.mcutils.model.server.MOTDTextComponentAdapter
+import tech.aliorpse.mcutils.model.server.TextComponentAdapter
 import tech.aliorpse.mcutils.model.server.Players
+import tech.aliorpse.mcutils.model.server.TextComponent
 import tech.aliorpse.mcutils.model.server.Version
 import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
@@ -41,20 +39,14 @@ object JavaServer {
     private const val PROTOCOL_VERSION = -1
     private const val NEXT_STATE_STATUS = 1
 
-    private val colorAdapter = ColorAdapter()
-    private val motdAdapter = MOTDTextComponentAdapter(colorAdapter)
-    private val descAdapter = DescriptionAdapter(motdAdapter)
-
     internal val moshi: Moshi = Moshi.Builder()
-        .add(colorAdapter)
-        .add(motdAdapter)
-        .add(descAdapter)
+        .add(TextComponentAdapter())
         .add(KotlinJsonAdapterFactory())
         .build()
 
     @JsonClass(generateAdapter = true)
     internal data class RawJavaStatus(
-        val description: Description,
+        val description: TextComponent,
         val players: Players,
         val version: Version,
         val favicon: String? = null,

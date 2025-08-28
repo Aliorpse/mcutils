@@ -4,11 +4,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import tech.aliorpse.mcutils.model.server.BedrockServerStatus
-import tech.aliorpse.mcutils.model.server.Description
 import tech.aliorpse.mcutils.model.server.GameMode
 import tech.aliorpse.mcutils.model.server.Players
 import tech.aliorpse.mcutils.model.server.Version
-import tech.aliorpse.mcutils.utils.MOTDParser.sectionToObj
+import tech.aliorpse.mcutils.utils.toTextComponent
 import java.io.IOException
 import java.net.DatagramPacket
 import java.net.DatagramSocket
@@ -24,9 +23,18 @@ import java.nio.charset.StandardCharsets
 @Suppress("MagicNumber")
 object BedrockServer {
     private val MAGIC_BYTES = byteArrayOf(
-        0x00, 0xFF.toByte(), 0xFF.toByte(), 0x00,
-        0xFE.toByte(), 0xFE.toByte(), 0xFE.toByte(), 0xFE.toByte(),
-        0xFD.toByte(), 0xFD.toByte(), 0xFD.toByte(), 0xFD.toByte()
+        0x00,
+        0xFF.toByte(),
+        0xFF.toByte(),
+        0x00,
+        0xFE.toByte(),
+        0xFE.toByte(),
+        0xFE.toByte(),
+        0xFE.toByte(),
+        0xFD.toByte(),
+        0xFD.toByte(),
+        0xFD.toByte(),
+        0xFD.toByte()
     )
 
     private val CLIENT_ID = byteArrayOf(0x12, 0x34, 0x56, 0x78, 0x00)
@@ -48,9 +56,7 @@ object BedrockServer {
      * @throws IOException
      */
     suspend fun getStatus(
-        host: String,
-        port: Int = 19132,
-        timeout: Int = 2000
+        host: String, port: Int = 19132, timeout: Int = 2000
     ): BedrockServerStatus = withContext(Dispatchers.IO) {
         val asciiHost = IDN.toASCII(host)
         val address = InetAddress.getByName(asciiHost)
@@ -98,7 +104,7 @@ object BedrockServer {
             val gameMode = runCatching { GameMode.valueOf(parts[8].uppercase()) }.getOrDefault(GameMode.UNKNOWN)
 
             return@withContext BedrockServerStatus(
-                description = Description(parts[1], sectionToObj(parts[1])),
+                description = parts[1].toTextComponent(),
                 players = Players(online = online, max = max, sample = emptyList()),
                 version = Version(name = parts[3], protocol = protocol),
                 ping = end - start,
@@ -114,9 +120,7 @@ object BedrockServer {
      */
     @JvmStatic
     fun getStatusBlocking(
-        host: String,
-        port: Int = 19132,
-        timeout: Int = 2000
+        host: String, port: Int = 19132, timeout: Int = 2000
     ) = runBlocking {
         getStatus(host, port, timeout)
     }
