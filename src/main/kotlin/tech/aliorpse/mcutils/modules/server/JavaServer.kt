@@ -3,8 +3,9 @@ package tech.aliorpse.mcutils.modules.server
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.future.future
 import kotlinx.coroutines.withContext
 import org.xbill.DNS.AAAARecord
 import org.xbill.DNS.ARecord
@@ -65,8 +66,8 @@ object JavaServer {
     suspend fun getStatus(
         host: String,
         port: Int = 25565,
-        timeout: Int = 2000,
-    ): JavaServerStatus = withContext(Dispatchers.IO) {
+        timeout: Int = 2000
+    ) = withContext(Dispatchers.IO) {
         val asciiHost = IDN.toASCII(host)
 
         val (srvTarget, srvPort) = resolveSrvRecord(asciiHost) ?: (asciiHost to port)
@@ -108,16 +109,14 @@ object JavaServer {
     }
 
     /**
-     * Blocking method for [getStatus].
+     * [java.util.concurrent.CompletableFuture] variant of [getStatus].
      */
     @JvmStatic
-    fun getStatusBlocking(
+    fun getStatusAsync(
         host: String,
         port: Int = 25565,
         timeout: Int = 2000,
-    ) = runBlocking {
-        getStatus(host, port, timeout)
-    }
+    ) = CoroutineScope(Dispatchers.IO).future { getStatus(host, port, timeout) }
 
     @Suppress("ReturnCount")
     private fun resolveToIpOrHost(host: String, depth: Int = 5): String? {

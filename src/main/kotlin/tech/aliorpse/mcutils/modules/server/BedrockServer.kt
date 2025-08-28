@@ -1,7 +1,8 @@
 package tech.aliorpse.mcutils.modules.server
 
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.future.future
 import kotlinx.coroutines.withContext
 import tech.aliorpse.mcutils.model.server.BedrockServerStatus
 import tech.aliorpse.mcutils.model.server.GameMode
@@ -56,8 +57,10 @@ object BedrockServer {
      * @throws IOException
      */
     suspend fun getStatus(
-        host: String, port: Int = 19132, timeout: Int = 2000
-    ): BedrockServerStatus = withContext(Dispatchers.IO) {
+        host: String,
+        port: Int = 19132,
+        timeout: Int = 2000
+    ) = withContext(Dispatchers.IO) {
         val asciiHost = IDN.toASCII(host)
         val address = InetAddress.getByName(asciiHost)
 
@@ -116,12 +119,10 @@ object BedrockServer {
     }
 
     /**
-     * Blocking method for [getStatus].
+     * [java.util.concurrent.CompletableFuture] variant of [getStatus].
      */
     @JvmStatic
-    fun getStatusBlocking(
+    fun getStatusAsync(
         host: String, port: Int = 19132, timeout: Int = 2000
-    ) = runBlocking {
-        getStatus(host, port, timeout)
-    }
+    ) = CoroutineScope(Dispatchers.IO).future { getStatus(host, port, timeout) }
 }

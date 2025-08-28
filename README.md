@@ -56,9 +56,9 @@ runBlocking {
 
 ## Java Usage
 
-All asynchronous methods also provide a blocking variant,  
+All suspend functions also provide a `CompletableFuture` variant,  
 allowing you to call them directly from Java without dealing with coroutines.
 
 ```java
-JavaServerStatus status = JavaServer.getStatusBlocking("mc.hypixel.net");
+CompletableFuture<JavaServerStatus> status = JavaServer.getStatusAsync("mc.hypixel.net");
 ```

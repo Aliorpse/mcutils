@@ -1,11 +1,14 @@
 package tech.aliorpse.mcutils.modules.player
 
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.future.future
+import kotlinx.coroutines.withContext
 import tech.aliorpse.mcutils.model.player.PlayerProfile
 
 object Player {
-    const val UUID_LENGTH = 32
-    val nameRegex = Regex("^[A-Za-z0-9_]{3,16}$")
+    private const val UUID_LENGTH = 32
+    private val nameRegex = Regex("^[A-Za-z0-9_]{3,16}$")
 
     /**
      * Fetches a player's profile from Mojang's session server.
@@ -18,10 +21,10 @@ object Player {
      * @return A [PlayerProfile] containing the player's UUID, username, skin, cape, and model type.
      * @throws IllegalArgumentException if the input is neither a valid UUID nor a valid username.
      */
-    suspend fun getProfile(player: String): PlayerProfile {
+    suspend fun getProfile(player: String): PlayerProfile = withContext(Dispatchers.IO) {
         val pl = player.replace("-", "")
 
-        return when {
+        return@withContext when {
             pl.length == UUID_LENGTH -> PlayerClient.sessionService.getProfile(pl)
 
             nameRegex.matches(pl) -> {
@@ -34,10 +37,8 @@ object Player {
     }
 
     /**
-     * Blocking method of [getProfile].
+     * [java.util.concurrent.CompletableFuture] variant of [getProfile].
      */
     @JvmStatic
-    fun getProfileBlocking(player: String): PlayerProfile = runBlocking {
-        getProfile(player)
-    }
+    fun getProfileAsync(player: String) = CoroutineScope(Dispatchers.IO).future { getProfile(player) }
 }
