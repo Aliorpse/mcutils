@@ -121,7 +121,11 @@ $dokka.location:tech.aliorpse.mcutils.modules.server/BedrockServer/getStatusAsyn
 $dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/getStatus/#kotlin.String#kotlin.Int#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/get-status.html
 $dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/getStatusAsync/#kotlin.String#kotlin.Int#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/get-status-async.html
+$dokka.location:tech.aliorpse.mcutils.utils////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/index.html
+$dokka.location:tech.aliorpse.mcutils.utils//toHtml/tech.aliorpse.mcutils.model.server.TextComponent#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/to-html.html
+$dokka.location:tech.aliorpse.mcutils.utils//toTextComponent/kotlin.String#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/to-text-component.html
 tech.aliorpse.mcutils.model.player
 tech.aliorpse.mcutils.model.server
 tech.aliorpse.mcutils.modules.player
 tech.aliorpse.mcutils.modules.server
+tech.aliorpse.mcutils.utils
