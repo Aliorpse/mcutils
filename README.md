@@ -25,14 +25,14 @@ runBlocking {
     var status
     status = JavaServer.getStatus("mc.hypixel.net")
     
-    // More options
+    // more options
     status = JavaServer.getStatus(
         host = "wdsj.net",
         port = 25565,
         enableSrv = true
     )
     
-    // Bedrock servers
+    // bedrock servers
     status = BedrockServer.getStatus("play.easecation.net")
 }
 ```
@@ -50,7 +50,7 @@ runBlocking {
 }
 ```
 
-### Search from [Modrinth](https://modrinth.com/)
+### [Modrinth](https://modrinth.com/) API
 
 ```kotlin
 runBlocking {
@@ -58,6 +58,8 @@ runBlocking {
         author = "Wudji"
         type = ProjectType.MODPACK
     }
+    
+    val result = Modrinth.getProject("2H1rLgy4")
 }
 ```
 

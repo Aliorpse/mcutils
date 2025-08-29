@@ -5,14 +5,23 @@ import tech.aliorpse.mcutils.model.modrinth.ProjectType
 import tech.aliorpse.mcutils.modules.modrinth.Modrinth
 import kotlin.test.Test
 
-class SearchTest {
+class Test {
     @Test
-    fun simpleSearchTest() {
+    fun searchTest() {
         val result = runBlocking {
             Modrinth.search("xplus") {
                 author = "Wudji"
                 type = ProjectType.MODPACK
             }
+        }
+
+        println(result)
+    }
+
+    @Test
+    fun getProjectTest() {
+        val result = runBlocking {
+            Modrinth.getProject("2H1rLgy4")
         }
 
         println(result)

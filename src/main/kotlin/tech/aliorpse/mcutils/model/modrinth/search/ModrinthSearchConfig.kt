@@ -1,4 +1,8 @@
-package tech.aliorpse.mcutils.model.modrinth
+package tech.aliorpse.mcutils.model.modrinth.search
+
+import tech.aliorpse.mcutils.model.modrinth.IndexMethod
+import tech.aliorpse.mcutils.model.modrinth.ProjectType
+import tech.aliorpse.mcutils.model.modrinth.SideSupport
 
 data class ModrinthSearchConfig(
     var categories: List<String>? = null,
@@ -35,25 +39,4 @@ data class ModrinthSearchConfig(
 
         return result
     }
-}
-
-enum class ProjectType(val value: String) {
-    MOD("mod"),
-    MODPACK("modpack"),
-    RESOURCEPACK("resourcepack"),
-    SHADER("shader")
-}
-
-enum class SideSupport(val value: String) {
-    REQUIRED("required"),
-    OPTIONAL("optional"),
-    UNSUPPORTED("unsupported")
-}
-
-enum class IndexMethod(val value: String) {
-    RELEVANCE("relevance"),
-    DOWNLOADS("downloads"),
-    FOLLOWS("follows"),
-    NEWEST("newest"),
-    UPDATED("updated"),
 }

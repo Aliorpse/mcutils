@@ -1,10 +1,10 @@
-package tech.aliorpse.mcutils.model.modrinth
+package tech.aliorpse.mcutils.model.modrinth.search
 
-import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class ModrinthProject(
+data class ModrinthSearchResult(
     val slug: String,
     val title: String,
     val description: String,

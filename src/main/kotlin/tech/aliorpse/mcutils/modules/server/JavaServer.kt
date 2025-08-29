@@ -42,7 +42,6 @@ object JavaServer {
 
     internal val moshi: Moshi = Moshi.Builder()
         .add(TextComponentAdapter())
-        .add(KotlinJsonAdapterFactory())
         .build()
 
     @JsonClass(generateAdapter = true)

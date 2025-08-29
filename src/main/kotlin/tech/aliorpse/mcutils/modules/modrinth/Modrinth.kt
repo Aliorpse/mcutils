@@ -6,7 +6,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.future.future
 import kotlinx.coroutines.withContext
-import tech.aliorpse.mcutils.model.modrinth.ModrinthSearchConfig
+import tech.aliorpse.mcutils.model.modrinth.search.ModrinthSearchConfig
 import tech.aliorpse.mcutils.utils.HttpClient
 
 object Modrinth {
@@ -20,7 +20,7 @@ object Modrinth {
     private val listAdapter = moshi.adapter<List<List<String>>>(listType)
 
     /**
-     * Search from modrinth.
+     * Search from Modrinth.
      */
     suspend fun search(
         query: String,
@@ -39,7 +39,7 @@ object Modrinth {
             limit = config.limit,
             offset = config.offset,
             index = config.index.value
-        ).hits
+        )
     }
 
     /**
@@ -49,4 +49,16 @@ object Modrinth {
         query: String,
         config: ModrinthSearchConfig.() -> Unit
     ) = CoroutineScope(Dispatchers.IO).future { search(query, config) }
+
+    /**
+     * Get a [tech.aliorpse.mcutils.model.modrinth.project.ModrinthProject] by its id/slug.
+     */
+    suspend fun getProject(project: String) = withContext(Dispatchers.IO) {
+        return@withContext HttpClient.modrinthService.getProject(project)
+    }
+
+    /**
+     * [java.util.concurrent.CompletableFuture] variant of [getProject].
+     */
+    fun getProjectAsync(project: String) = CoroutineScope(Dispatchers.IO).future { getProject(project) }
 }
