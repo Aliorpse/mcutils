@@ -21,6 +21,17 @@ repositories {
     mavenLocal()
 }
 
+dokka {
+    dokkaSourceSets {
+        named("main") {
+            perPackageOption {
+                matchingRegex = ".*Adapter$"
+                suppress = true
+            }
+        }
+    }
+}
+
 dependencies {
     // kotlinx
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")

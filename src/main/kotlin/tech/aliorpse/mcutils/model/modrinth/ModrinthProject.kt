@@ -4,7 +4,7 @@ import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Json
 
 @JsonClass(generateAdapter = true)
-data class ModrinthSearchResult(
+data class ModrinthProject(
     val slug: String,
     val title: String,
     val description: String,
