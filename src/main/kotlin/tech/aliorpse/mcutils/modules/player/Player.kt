@@ -5,6 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.future.future
 import kotlinx.coroutines.withContext
 import tech.aliorpse.mcutils.model.player.PlayerProfile
+import tech.aliorpse.mcutils.utils.HttpClient
 
 object Player {
     private const val UUID_LENGTH = 32
@@ -25,11 +26,11 @@ object Player {
         val pl = player.replace("-", "")
 
         return@withContext when {
-            pl.length == UUID_LENGTH -> PlayerClient.sessionService.getProfile(pl)
+            pl.length == UUID_LENGTH -> HttpClient.mojangSessionService.getProfile(pl)
 
             nameRegex.matches(pl) -> {
-                val uuid = PlayerClient.profileService.getUUID(pl).id
-                PlayerClient.sessionService.getProfile(uuid)
+                val uuid = HttpClient.mojangProfileService.getUUID(pl).id
+                HttpClient.mojangSessionService.getProfile(uuid)
             }
 
             else -> throw IllegalArgumentException("Invalid identifier: $pl")

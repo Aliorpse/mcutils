@@ -16,7 +16,7 @@ dependencies {
 
 ## Features
 
-### Server Status
+### Get Server Status
 
 #### [Demo API Endpoint](https://api.aliorpse.tech/minecraft/server/status/hypixel.net:25565?type=java)
 
@@ -34,12 +34,10 @@ runBlocking {
     
     // Bedrock servers
     status = BedrockServer.getStatus("play.easecation.net")
-
-    println(status)
 }
 ```
 
-### Player Profile (Java Edition Only)
+### Get Player Profile (Java Edition Only)
 
 #### [Demo API Endpoint](https://api.aliorpse.tech/minecraft/player/profile/Aliorpse)
 
@@ -49,8 +47,17 @@ runBlocking {
     pl = Player.getProfile("Aliorpse")
     pl = Player.getProfile("ec042e1200ac4a249cc83eb1fab0bd88")
     pl = Player.getProfile("ec042e12-00ac-4a24-9cc8-3eb1fab0bd88")
+}
+```
 
-    println(pl)
+### Search from [Modrinth](https://modrinth.com/)
+
+```kotlin
+runBlocking {
+    val result = Modrinth.search("xplus") {
+        author = "Wudji"
+        type = ProjectType.MODPACK
+    }
 }
 ```
 
