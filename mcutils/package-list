@@ -1,5 +1,79 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/IndexMethod.DOWNLOADS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.modrinth/-index-method/-d-o-w-n-l-o-a-d-s/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/IndexMethod.FOLLOWS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.modrinth/-index-method/-f-o-l-l-o-w-s/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/IndexMethod.NEWEST///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.modrinth/-index-method/-n-e-w-e-s-t/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/IndexMethod.RELEVANCE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.modrinth/-index-method/-r-e-l-e-v-a-n-c-e/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/IndexMethod.UPDATED///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.modrinth/-index-method/-u-p-d-a-t-e-d/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/IndexMethod///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-index-method/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/IndexMethod/entries/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-index-method/entries.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/IndexMethod/value/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-index-method/value.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/IndexMethod/valueOf/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-index-method/value-of.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/IndexMethod/values/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-index-method/values.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchConfig///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-config/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchConfig/ModrinthSearchConfig/#kotlin.collections.List[kotlin.String]?#kotlin.collections.List[kotlin.String]?#tech.aliorpse.mcutils.model.modrinth.ProjectType?#kotlin.String?#tech.aliorpse.mcutils.model.modrinth.SideSupport?#tech.aliorpse.mcutils.model.modrinth.SideSupport?#kotlin.Boolean?#kotlin.String?#kotlin.String?#kotlin.String?#kotlin.Int#kotlin.Int#tech.aliorpse.mcutils.model.modrinth.IndexMethod/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-config/-modrinth-search-config.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchConfig/author/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-config/author.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchConfig/buildFacets/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-config/build-facets.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchConfig/categories/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-config/categories.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchConfig/clientSide/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-config/client-side.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchConfig/color/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-config/color.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchConfig/index/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-config/--index--.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchConfig/license/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-config/license.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchConfig/limit/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-config/limit.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchConfig/offset/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-config/offset.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchConfig/openSource/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-config/open-source.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchConfig/projectId/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-config/project-id.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchConfig/serverSide/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-config/server-side.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchConfig/type/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-config/type.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchConfig/versions/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-config/versions.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/ModrinthSearchResult/#kotlin.String#kotlin.String#kotlin.String#kotlin.collections.List[kotlin.String]#kotlin.String#kotlin.String#kotlin.String#kotlin.Int#kotlin.String?#kotlin.Int?#kotlin.String?#kotlin.String?#kotlin.String#kotlin.String#kotlin.collections.List[kotlin.String]?#kotlin.collections.List[kotlin.String]#kotlin.Int#kotlin.String#kotlin.String#kotlin.String?#kotlin.String#kotlin.collections.List[kotlin.String]?#kotlin.String?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/-modrinth-search-result.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/author/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/author.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/categories/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/categories.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/clientSide/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/client-side.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/color/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/color.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/dateCreated/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/date-created.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/dateModified/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/date-modified.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/description/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/description.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/displayCategories/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/display-categories.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/downloads/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/downloads.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/featuredGallery/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/featured-gallery.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/follows/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/follows.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/gallery/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/gallery.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/iconUrl/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/icon-url.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/latestVersion/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/latest-version.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/license/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/license.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/monetizationStatus/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/monetization-status.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/projectId/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/project-id.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/projectType/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/project-type.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/serverSide/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/server-side.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/slug/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/slug.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/threadId/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/thread-id.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/title/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/title.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResult/versions/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result/versions.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResultJsonAdapter///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result-json-adapter/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResultJsonAdapter/ModrinthSearchResultJsonAdapter/#com.squareup.moshi.Moshi/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result-json-adapter/-modrinth-search-result-json-adapter.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResultJsonAdapter/fromJson/#com.squareup.moshi.JsonReader/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result-json-adapter/from-json.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResultJsonAdapter/toJson/#com.squareup.moshi.JsonWriter#tech.aliorpse.mcutils.model.modrinth.ModrinthSearchResult?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result-json-adapter/to-json.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ModrinthSearchResultJsonAdapter/toString/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-modrinth-search-result-json-adapter/to-string.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ProjectType.MOD///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.modrinth/-project-type/-m-o-d/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ProjectType.MODPACK///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.modrinth/-project-type/-m-o-d-p-a-c-k/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ProjectType.RESOURCEPACK///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.modrinth/-project-type/-r-e-s-o-u-r-c-e-p-a-c-k/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ProjectType.SHADER///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.modrinth/-project-type/-s-h-a-d-e-r/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ProjectType///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-project-type/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ProjectType/entries/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-project-type/entries.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ProjectType/value/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-project-type/value.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ProjectType/valueOf/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-project-type/value-of.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/ProjectType/values/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-project-type/values.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/SideSupport.OPTIONAL///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.modrinth/-side-support/-o-p-t-i-o-n-a-l/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/SideSupport.REQUIRED///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.modrinth/-side-support/-r-e-q-u-i-r-e-d/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/SideSupport.UNSUPPORTED///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.modrinth/-side-support/-u-n-s-u-p-p-o-r-t-e-d/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/SideSupport///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-side-support/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/SideSupport/entries/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-side-support/entries.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/SideSupport/value/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-side-support/value.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/SideSupport/valueOf/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-side-support/value-of.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/SideSupport/values/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-side-support/values.html
 $dokka.location:tech.aliorpse.mcutils.model.player////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/index.html
 $dokka.location:tech.aliorpse.mcutils.model.player/Metadata///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-metadata/index.html
 $dokka.location:tech.aliorpse.mcutils.model.player/Metadata/Metadata/#kotlin.String?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-metadata/-metadata.html
@@ -110,6 +184,10 @@ $dokka.location:tech.aliorpse.mcutils.model.server/VersionJsonAdapter/VersionJso
 $dokka.location:tech.aliorpse.mcutils.model.server/VersionJsonAdapter/fromJson/#com.squareup.moshi.JsonReader/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-version-json-adapter/from-json.html
 $dokka.location:tech.aliorpse.mcutils.model.server/VersionJsonAdapter/toJson/#com.squareup.moshi.JsonWriter#tech.aliorpse.mcutils.model.server.Version?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-version-json-adapter/to-json.html
 $dokka.location:tech.aliorpse.mcutils.model.server/VersionJsonAdapter/toString/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-version-json-adapter/to-string.html
+$dokka.location:tech.aliorpse.mcutils.modules.modrinth////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/index.html
+$dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/index.html
+$dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth/search/#kotlin.String#kotlin.Function1[tech.aliorpse.mcutils.model.modrinth.ModrinthSearchConfig,kotlin.Unit]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/search.html
+$dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth/searchAsync/#kotlin.String#kotlin.Function1[tech.aliorpse.mcutils.model.modrinth.ModrinthSearchConfig,kotlin.Unit]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/search-async.html
 $dokka.location:tech.aliorpse.mcutils.modules.player////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.player/Player///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.player/Player/getProfile/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player/get-profile.html
@@ -124,8 +202,10 @@ $dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/getStatusAsync/#
 $dokka.location:tech.aliorpse.mcutils.utils////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/index.html
 $dokka.location:tech.aliorpse.mcutils.utils//toHtml/tech.aliorpse.mcutils.model.server.TextComponent#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/to-html.html
 $dokka.location:tech.aliorpse.mcutils.utils//toTextComponent/kotlin.String#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/to-text-component.html
+tech.aliorpse.mcutils.model.modrinth
 tech.aliorpse.mcutils.model.player
 tech.aliorpse.mcutils.model.server
+tech.aliorpse.mcutils.modules.modrinth
 tech.aliorpse.mcutils.modules.player
 tech.aliorpse.mcutils.modules.server
 tech.aliorpse.mcutils.utils
