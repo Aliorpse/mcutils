@@ -1,18 +1,17 @@
 package tech.aliorpse.mcutils.server
 
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import tech.aliorpse.mcutils.modules.server.BedrockServer
 import tech.aliorpse.mcutils.modules.server.JavaServer
+import tech.aliorpse.mcutils.utils.toHtml
 import kotlin.test.Test
 
 class ServerStatusTest {
     @Test
     fun javaGetStatusTest() {
-        val result = runBlocking { JavaServer.getStatus("wdsj.net") }
+        val result = runBlocking { JavaServer.getStatus("hypixel.net") }
 
-        println(result)
+        println(result.description.toHtml())
         assert(result.version.protocol > 0)
     }
 

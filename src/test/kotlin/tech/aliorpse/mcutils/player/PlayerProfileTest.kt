@@ -1,5 +1,6 @@
 package tech.aliorpse.mcutils.player
 
+import kotlinx.coroutines.runBlocking
 import tech.aliorpse.mcutils.modules.player.Player
 import kotlin.test.Test
 
@@ -9,7 +10,7 @@ class PlayerProfileTest {
      */
     @Test
     fun getProfileTest() {
-        val result = Player.getProfileBlocking("ec042e1200ac4a249cc83eb1fab0bd88")
+        val result = runBlocking { Player.getProfile("ec042e1200ac4a249cc83eb1fab0bd88") }
         println(result)
         assert(result.name.isNotEmpty())
     }

@@ -40,11 +40,11 @@ internal class TextComponentAdapter {
                 "text" -> {
                     val rawText = reader.nextString()
                     val parsed = rawText.toTextComponent()
-                    text = parsed.text
-                    color = parsed.color
-                    styles += parsed.styles
-                    if (parsed.extra.isNotEmpty()) {
-                        extra = parsed.extra
+
+                    text = rawText.takeIf { "§" !in rawText } ?: parsed.text.also {
+                        color = parsed.color
+                        styles += parsed.styles
+                        if (parsed.extra.isNotEmpty()) extra = parsed.extra
                     }
                 }
                 "color" -> color = reader.readColor()
@@ -64,21 +64,21 @@ internal class TextComponentAdapter {
     }
 
     private fun JsonReader.readStyle(name: String): TextStyle? {
-        return if (this.nextBoolean()) styleMap[name] else null
+        return if (nextBoolean()) styleMap[name] else null
     }
 
     private fun JsonReader.readColor(): String {
-        val colorString = this.nextString()
+        val colorString = nextString()
         return colors[colorString] ?: colorString
     }
 
     private fun JsonReader.readExtras(): List<TextComponent> {
         val list = mutableListOf<TextComponent>()
-        this.beginArray()
-        while (this.hasNext()) {
+        beginArray()
+        while (hasNext()) {
             fromJson(this)?.let { list.add(it) }
         }
-        this.endArray()
+        endArray()
         return list
     }
 
