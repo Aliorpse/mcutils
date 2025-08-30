@@ -1,7 +1,6 @@
 package tech.aliorpse.mcutils.utils
 
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import tech.aliorpse.mcutils.model.player.PlayerProfileAdapter
@@ -11,7 +10,6 @@ import tech.aliorpse.mcutils.modules.player.PlayerService
 internal object HttpClient {
     private val moshi = Moshi.Builder()
         .add(PlayerProfileAdapter())
-        .add(KotlinJsonAdapterFactory())
         .build()
 
     private val moshiFactory = MoshiConverterFactory.create(moshi)

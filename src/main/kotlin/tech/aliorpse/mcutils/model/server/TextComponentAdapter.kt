@@ -3,13 +3,13 @@ package tech.aliorpse.mcutils.model.server
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.JsonReader
 import com.squareup.moshi.JsonWriter
+import com.squareup.moshi.Moshi
 import com.squareup.moshi.ToJson
-import tech.aliorpse.mcutils.modules.server.JavaServer.moshi
 import tech.aliorpse.mcutils.utils.toTextComponent
 import java.util.EnumSet
 
 internal class TextComponentAdapter {
-    private val defaultAdapter by lazy { moshi.adapter(TextComponent::class.java) }
+    private val defaultAdapter by lazy { Moshi.Builder().build().adapter(TextComponent::class.java) }
 
     @FromJson
     fun fromJson(reader: JsonReader): TextComponent? {

@@ -1,5 +1,6 @@
 package tech.aliorpse.mcutils.model.server
 
+import com.squareup.moshi.JsonClass
 import java.util.EnumSet
 
 /**
@@ -66,6 +67,7 @@ data class BedrockServerStatus(
  *
  * @property sample A sample list of online players (not work on bedrock servers).
  */
+@JsonClass(generateAdapter = true)
 data class Players(
     val max: Int,
     val online: Int,
@@ -78,6 +80,7 @@ data class Players(
  * @property name The version name.
  * @property protocol The protocol version number.
  */
+@JsonClass(generateAdapter = true)
 data class Version(
     val name: String,
     val protocol: Long
@@ -86,6 +89,7 @@ data class Version(
 /**
  * Sample player information representing some online players.
  */
+@JsonClass(generateAdapter = true)
 data class Sample(
     val id: String,
     val name: String
@@ -99,7 +103,7 @@ enum class GameMode {
     CREATIVE,
     ADVENTURE,
     SPECTATOR,
-    UNKNOWN;
+    UNKNOWN
 }
 
 /**

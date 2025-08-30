@@ -1,5 +1,6 @@
 package tech.aliorpse.mcutils.modules.server
 
+import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,9 +13,9 @@ import org.xbill.DNS.Lookup
 import org.xbill.DNS.SRVRecord
 import org.xbill.DNS.Type
 import tech.aliorpse.mcutils.model.server.JavaServerStatus
-import tech.aliorpse.mcutils.model.server.TextComponentAdapter
 import tech.aliorpse.mcutils.model.server.Players
 import tech.aliorpse.mcutils.model.server.TextComponent
+import tech.aliorpse.mcutils.model.server.TextComponentAdapter
 import tech.aliorpse.mcutils.model.server.Version
 import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
@@ -38,10 +39,11 @@ object JavaServer {
     private const val PROTOCOL_VERSION = -1
     private const val NEXT_STATE_STATUS = 1
 
-    internal val moshi: Moshi = Moshi.Builder()
+    internal val moshi = Moshi.Builder()
         .add(TextComponentAdapter())
         .build()
 
+    @JsonClass(generateAdapter = true)
     internal data class RawJavaStatus(
         val description: TextComponent,
         val players: Players,
