@@ -1,14 +1,12 @@
 package tech.aliorpse.mcutils.model.modrinth.project
 
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 import tech.aliorpse.mcutils.model.modrinth.MonetizationStatus
 import tech.aliorpse.mcutils.model.modrinth.ProjectStatus
 import tech.aliorpse.mcutils.model.modrinth.ProjectType
 import tech.aliorpse.mcutils.model.modrinth.RequestedStatus
 import tech.aliorpse.mcutils.model.modrinth.SideSupport
 
-@JsonClass(generateAdapter = true)
 data class ModrinthProject(
     val slug: String,
     val title: String,
@@ -48,14 +46,12 @@ data class ModrinthProject(
     @field:Json(name = "featured_gallery") val featuredGallery: String?
 )
 
-@JsonClass(generateAdapter = true)
 data class DonationUrl(
     val id: String?,
     val platform: String?,
     val url: String
 )
 
-@JsonClass(generateAdapter = true)
 data class GalleryItem(
     val url: String,
     val featured: Boolean,
@@ -64,7 +60,6 @@ data class GalleryItem(
     val created: String
 )
 
-@JsonClass(generateAdapter = true)
 data class ProjectLicense(
     val id: String,
     val name: String?,

@@ -1,7 +1,5 @@
 package tech.aliorpse.mcutils.model.player
 
-import com.squareup.moshi.JsonClass
-
 /**
  * Represents a player's profile as retrieved from the Mojang session servers.
  *
@@ -42,7 +40,6 @@ enum class SkinModel {
 /**
  * The JSON Element that to be processed.
  */
-@JsonClass(generateAdapter = true)
 internal data class RawPlayerProfile(
     val id: String,
     val name: String,
@@ -53,14 +50,12 @@ internal data class RawPlayerProfile(
      * @property name Always 'texture'.
      * @property value Base64 string containing [DecodedTextures].
      */
-    @JsonClass(generateAdapter = true)
     internal data class Property(val name: String, val value: String)
 }
 
 /**
  * Texture element decoded from [RawPlayerProfile.Property.value].
  */
-@JsonClass(generateAdapter = true)
 internal data class DecodedTextures(
     val timestamp: Long,
     val profileId: String,
@@ -71,7 +66,6 @@ internal data class DecodedTextures(
 /**
  * Data of the texture.
  */
-@JsonClass(generateAdapter = true)
 internal data class Texture(
     val url: String,
     val metadata: Metadata?
@@ -80,5 +74,4 @@ internal data class Texture(
 /**
  * @property model SLIM or CLASSIC.
  */
-@JsonClass(generateAdapter = true)
 data class Metadata(val model: String?)

@@ -1,6 +1,5 @@
 package tech.aliorpse.mcutils.model.server
 
-import com.squareup.moshi.JsonClass
 import java.util.EnumSet
 
 /**
@@ -32,7 +31,6 @@ sealed class ServerStatus {
  * @property favicon An optional base64-encoded string representing the server's favicon.
  * @property ping Will be null when remote doesn't support.
  */
-@JsonClass(generateAdapter = true)
 data class JavaServerStatus(
     override val description: TextComponent,
     override val players: Players,
@@ -53,7 +51,6 @@ data class JavaServerStatus(
  * @property gameMode The current game mode of the server, such as SURVIVAL or CREATIVE.
  * @property serverUniqueID The unique identifier of the server instance.
  */
-@JsonClass(generateAdapter = true)
 data class BedrockServerStatus(
     override val description: TextComponent,
     override val players: Players,
@@ -69,7 +66,6 @@ data class BedrockServerStatus(
  *
  * @property sample A sample list of online players (not work on bedrock servers).
  */
-@JsonClass(generateAdapter = true)
 data class Players(
     val max: Int,
     val online: Int,
@@ -82,7 +78,6 @@ data class Players(
  * @property name The version name.
  * @property protocol The protocol version number.
  */
-@JsonClass(generateAdapter = true)
 data class Version(
     val name: String,
     val protocol: Long
@@ -91,7 +86,6 @@ data class Version(
 /**
  * Sample player information representing some online players.
  */
-@JsonClass(generateAdapter = true)
 data class Sample(
     val id: String,
     val name: String

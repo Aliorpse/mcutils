@@ -1,8 +1,6 @@
 package tech.aliorpse.mcutils.modules.server
 
-import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.future.future
@@ -44,7 +42,6 @@ object JavaServer {
         .add(TextComponentAdapter())
         .build()
 
-    @JsonClass(generateAdapter = true)
     internal data class RawJavaStatus(
         val description: TextComponent,
         val players: Players,
