@@ -1,5 +1,6 @@
 # mcutils
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Aliorpse_kotlin-mcutils&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Aliorpse_kotlin-mcutils)
 [![CodeFactor](https://www.codefactor.io/repository/github/aliorpse/kotlin-mcutils/badge/main)](https://www.codefactor.io/repository/github/aliorpse/kotlin-mcutils/overview/main)
 [![Maven Central](https://maven-badges.sml.io/sonatype-central/tech.aliorpse/mcutils/badge.svg)](https://central.sonatype.com/artifact/tech.aliorpse/mcutils)
 
@@ -53,12 +54,17 @@ runBlocking {
 
 ```kotlin
 runBlocking {
-    val result = Modrinth.search("xplus") {
+    var result
+    result = Modrinth.search("xplus") {
         author = "Wudji"
         type = ProjectType.MODPACK
     }
     
-    val result = Modrinth.getProject("2H1rLgy4")
+    result = Modrinth.getProject("2H1rLgy4")
+    
+    result = Modrinth.getProjects(listOf("2H1rLgy4"))
+    
+    result = Modrinth.getProjectsRandom(5)
 }
 ```
 
