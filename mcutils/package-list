@@ -249,6 +249,10 @@ $dokka.location:tech.aliorpse.mcutils.modules.modrinth////PointingToDeclaration/
 $dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth/getProject/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/get-project.html
 $dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth/getProjectAsync/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/get-project-async.html
+$dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth/getProjects/#kotlin.collections.List[kotlin.String]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/get-projects.html
+$dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth/getProjectsAsync/#kotlin.collections.List[kotlin.String]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/get-projects-async.html
+$dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth/getProjectsRandom/#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/get-projects-random.html
+$dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth/getProjectsRandomAsync/#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/get-projects-random-async.html
 $dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth/search/#kotlin.String#kotlin.Function1[tech.aliorpse.mcutils.model.modrinth.search.ModrinthSearchConfig,kotlin.Unit]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/search.html
 $dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth/searchAsync/#kotlin.String#kotlin.Function1[tech.aliorpse.mcutils.model.modrinth.search.ModrinthSearchConfig,kotlin.Unit]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/search-async.html
 $dokka.location:tech.aliorpse.mcutils.modules.player////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/index.html
