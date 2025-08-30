@@ -16,6 +16,14 @@ kotlin {
     }
 }
 
+dokka {
+    dokkaSourceSets {
+        named("main") {
+            sourceRoots.setFrom(file("src/main/kotlin"))
+        }
+    }
+}
+
 repositories {
     mavenCentral()
     mavenLocal()

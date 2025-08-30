@@ -1,7 +1,6 @@
 package tech.aliorpse.mcutils.model.modrinth
 
 import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
 
 /**
  * Project types.
