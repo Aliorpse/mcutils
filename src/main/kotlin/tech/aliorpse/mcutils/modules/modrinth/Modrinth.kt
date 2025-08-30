@@ -41,7 +41,6 @@ object Modrinth {
             index = config.index.value
         )
     }
-
     /**
      * [java.util.concurrent.CompletableFuture] variant of [search].
      */
@@ -50,15 +49,47 @@ object Modrinth {
         config: ModrinthSearchConfig.() -> Unit
     ) = CoroutineScope(Dispatchers.IO).future { search(query, config) }
 
-    /**
-     * Get a [tech.aliorpse.mcutils.model.modrinth.project.ModrinthProject] by its id/slug.
-     */
-    suspend fun getProject(project: String) = withContext(Dispatchers.IO) {
-        return@withContext HttpClient.modrinthService.getProject(project)
-    }
+
 
     /**
-     * [java.util.concurrent.CompletableFuture] variant of [getProject].
+     * Get a list of [tech.aliorpse.mcutils.model.modrinth.project.ModrinthProject] by their id/slug.
+     */
+    suspend fun getProjects(projects: List<String>) = withContext(Dispatchers.IO) {
+        return@withContext HttpClient.modrinthService.getProjects(
+            projects.joinToString(
+                prefix = "[", postfix = "]"
+            ) { "\"$it\"" }
+        )
+    }
+    /**
+     * [java.util.concurrent.CompletableFuture] variant of [getProjects].
+     */
+    fun getProjectsAsync(projects: List<String>) = CoroutineScope(Dispatchers.IO).future { getProjects(projects) }
+
+
+
+    /**
+     * Single-project variant of [getProjects]
+     */
+    suspend fun getProject(project: String) = withContext(Dispatchers.IO) {
+        return@withContext getProjects(listOf(project))[0]
+    }
+    /**
+     * [java.util.concurrent.CompletableFuture] variant of [getProject]
      */
     fun getProjectAsync(project: String) = CoroutineScope(Dispatchers.IO).future { getProject(project) }
+
+
+
+    /**
+     * Get a list of random [tech.aliorpse.mcutils.model.modrinth.project.ModrinthProject].
+     */
+    suspend fun getProjectsRandom(count: Int = 10) = withContext(Dispatchers.IO) {
+        require(count <= 100)
+        return@withContext HttpClient.modrinthService.getProjectsRandom(count)
+    }
+    /**
+     * java.util.concurrent.CompletableFuture] variant of [getProjectsRandom].
+     */
+    fun getProjectsRandomAsync(count: Int = 10) = CoroutineScope(Dispatchers.IO).future { getProjectsRandom(count) }
 }

@@ -1,7 +1,6 @@
 package tech.aliorpse.mcutils.modules.modrinth
 
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 import tech.aliorpse.mcutils.model.modrinth.project.ModrinthProject
 import tech.aliorpse.mcutils.model.modrinth.search.ModrinthSearchResponse
@@ -16,8 +15,13 @@ internal interface ModrinthService {
         @Query("index") index: String,
     ): ModrinthSearchResponse
 
-    @GET("/v2/project/{idOrSlug}")
-    suspend fun getProject(
-        @Path("idOrSlug") idOrSlug: String,
-    ): ModrinthProject
+    @GET("/v2/projects")
+    suspend fun getProjects(
+        @Query("ids") ids: String,
+    ): List<ModrinthProject>
+
+    @GET("/v2/projects_random")
+    suspend fun getProjectsRandom(
+        @Query("count") count: Int,
+    ): List<ModrinthProject>
 }
