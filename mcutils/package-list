@@ -159,6 +159,7 @@ $dokka.location:tech.aliorpse.mcutils.model.modrinth/RequestedStatus/valueOf/#ko
 $dokka.location:tech.aliorpse.mcutils.model.modrinth/RequestedStatus/values/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-requested-status/values.html
 $dokka.location:tech.aliorpse.mcutils.model.modrinth/SideSupport.OPTIONAL///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.modrinth/-side-support/-o-p-t-i-o-n-a-l/index.html
 $dokka.location:tech.aliorpse.mcutils.model.modrinth/SideSupport.REQUIRED///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.modrinth/-side-support/-r-e-q-u-i-r-e-d/index.html
+$dokka.location:tech.aliorpse.mcutils.model.modrinth/SideSupport.UNKNOWN///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.modrinth/-side-support/-u-n-k-n-o-w-n/index.html
 $dokka.location:tech.aliorpse.mcutils.model.modrinth/SideSupport.UNSUPPORTED///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.modrinth/-side-support/-u-n-s-u-p-p-o-r-t-e-d/index.html
 $dokka.location:tech.aliorpse.mcutils.model.modrinth/SideSupport///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-side-support/index.html
 $dokka.location:tech.aliorpse.mcutils.model.modrinth/SideSupport/entries/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-side-support/entries.html
@@ -269,6 +270,7 @@ $dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/getStatusAsync/#
 $dokka.location:tech.aliorpse.mcutils.utils////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/index.html
 $dokka.location:tech.aliorpse.mcutils.utils//toHtml/tech.aliorpse.mcutils.model.server.TextComponent#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/to-html.html
 $dokka.location:tech.aliorpse.mcutils.utils//toTextComponent/kotlin.String#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/to-text-component.html
+$dokka.location:tech.aliorpse.mcutils.utils//withDispatcherIO/#kotlin.coroutines.SuspendFunction0[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/with-dispatcher-i-o.html
 tech.aliorpse.mcutils.model.modrinth
 tech.aliorpse.mcutils.model.modrinth.project
 tech.aliorpse.mcutils.model.modrinth.search
