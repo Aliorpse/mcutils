@@ -74,5 +74,6 @@ All suspend functions also provide a `CompletableFuture` variant,
 allowing you to call them directly from Java without dealing with coroutines.
 
 ```java
-CompletableFuture<JavaServerStatus> status = JavaServer.getStatusAsync("mc.hypixel.net");
+CompletableFuture<JavaServerStatus> status =
+        JavaServer.getStatusAsync("mc.hypixel.net", 25565, 2000);
 ```
