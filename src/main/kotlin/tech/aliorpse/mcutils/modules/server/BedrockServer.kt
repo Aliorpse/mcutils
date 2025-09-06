@@ -3,12 +3,12 @@ package tech.aliorpse.mcutils.modules.server
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.future.future
-import kotlinx.coroutines.withContext
 import tech.aliorpse.mcutils.model.server.BedrockServerStatus
 import tech.aliorpse.mcutils.model.server.GameMode
 import tech.aliorpse.mcutils.model.server.Players
 import tech.aliorpse.mcutils.model.server.Version
 import tech.aliorpse.mcutils.utils.toTextComponent
+import tech.aliorpse.mcutils.utils.withDispatcherIO
 import java.io.IOException
 import java.net.DatagramPacket
 import java.net.DatagramSocket
@@ -60,7 +60,7 @@ object BedrockServer {
         host: String,
         port: Int = 19132,
         timeout: Int = 2000
-    ) = withContext(Dispatchers.IO) {
+    ) = withDispatcherIO {
         val asciiHost = IDN.toASCII(host)
         val address = InetAddress.getByName(asciiHost)
 
@@ -106,7 +106,7 @@ object BedrockServer {
             val max = parts[5].toIntOrNull() ?: 0
             val gameMode = runCatching { GameMode.valueOf(parts[8].uppercase()) }.getOrDefault(GameMode.UNKNOWN)
 
-            return@withContext BedrockServerStatus(
+            return@withDispatcherIO BedrockServerStatus(
                 description = parts[1].toTextComponent(),
                 players = Players(online = online, max = max, sample = emptyList()),
                 version = Version(name = parts[3], protocol = protocol),
@@ -121,8 +121,7 @@ object BedrockServer {
     /**
      * [java.util.concurrent.CompletableFuture] variant of [getStatus].
      */
-    @JvmStatic
-    fun getStatusAsync(
+    @JvmStatic fun getStatusAsync(
         host: String, port: Int = 19132, timeout: Int = 2000
     ) = CoroutineScope(Dispatchers.IO).future { getStatus(host, port, timeout) }
 }

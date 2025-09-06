@@ -5,7 +5,6 @@ import com.squareup.moshi.Moshi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.future.future
-import kotlinx.coroutines.withContext
 import org.xbill.DNS.AAAARecord
 import org.xbill.DNS.ARecord
 import org.xbill.DNS.CNAMERecord
@@ -17,6 +16,7 @@ import tech.aliorpse.mcutils.model.server.Players
 import tech.aliorpse.mcutils.model.server.TextComponent
 import tech.aliorpse.mcutils.model.server.TextComponentAdapter
 import tech.aliorpse.mcutils.model.server.Version
+import tech.aliorpse.mcutils.utils.withDispatcherIO
 import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
 import java.io.DataOutputStream
@@ -65,7 +65,7 @@ object JavaServer {
         host: String,
         port: Int = 25565,
         timeout: Int = 2000
-    ) = withContext(Dispatchers.IO) {
+    ) = withDispatcherIO {
         val asciiHost = IDN.toASCII(host)
 
         val (srvTarget, srvPort) = resolveSrvRecord(asciiHost) ?: (asciiHost to port)
@@ -109,8 +109,7 @@ object JavaServer {
     /**
      * [java.util.concurrent.CompletableFuture] variant of [getStatus].
      */
-    @JvmStatic
-    fun getStatusAsync(
+    @JvmStatic fun getStatusAsync(
         host: String,
         port: Int = 25565,
         timeout: Int = 2000,

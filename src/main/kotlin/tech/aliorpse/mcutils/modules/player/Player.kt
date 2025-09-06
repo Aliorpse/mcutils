@@ -3,9 +3,9 @@ package tech.aliorpse.mcutils.modules.player
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.future.future
-import kotlinx.coroutines.withContext
 import tech.aliorpse.mcutils.model.player.PlayerProfile
 import tech.aliorpse.mcutils.utils.HttpClient
+import tech.aliorpse.mcutils.utils.withDispatcherIO
 
 object Player {
     private const val UUID_LENGTH = 32
@@ -22,10 +22,10 @@ object Player {
      * @return A [PlayerProfile] containing the player's UUID, username, skin, cape, and model type.
      * @throws IllegalArgumentException if the input is neither a valid UUID nor a valid username.
      */
-    suspend fun getProfile(player: String): PlayerProfile = withContext(Dispatchers.IO) {
+    suspend fun getProfile(player: String): PlayerProfile = withDispatcherIO {
         val pl = player.replace("-", "")
 
-        return@withContext when {
+        return@withDispatcherIO when {
             pl.length == UUID_LENGTH -> HttpClient.mojangSessionService.getProfile(pl)
 
             nameRegex.matches(pl) -> {
@@ -40,6 +40,6 @@ object Player {
     /**
      * [java.util.concurrent.CompletableFuture] variant of [getProfile].
      */
-    @JvmStatic
-    fun getProfileAsync(player: String) = CoroutineScope(Dispatchers.IO).future { getProfile(player) }
+    @JvmStatic fun getProfileAsync(player: String) =
+        CoroutineScope(Dispatchers.IO).future { getProfile(player) }
 }

@@ -1,3 +1,4 @@
+@file:Suppress("unused")
 package tech.aliorpse.mcutils.model.modrinth
 
 import com.squareup.moshi.Json
@@ -18,7 +19,8 @@ enum class ProjectType(val value: String) {
 enum class SideSupport(val value: String) {
     @Json(name = "required") REQUIRED("required"),
     @Json(name = "optional") OPTIONAL("optional"),
-    @Json(name = "unsupported") UNSUPPORTED("unsupported")
+    @Json(name = "unsupported") UNSUPPORTED("unsupported"),
+    @Json(name = "unknown") UNKNOWN("unknown")
 }
 
 /**
