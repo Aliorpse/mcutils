@@ -7,35 +7,30 @@ import kotlinx.serialization.descriptors.element
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonDecoder
-import kotlinx.serialization.json.JsonEncoder
 import kotlinx.serialization.json.booleanOrNull
-import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import kotlinx.serialization.json.put
 
 internal object JavaServerStatusSerializer : KSerializer<JavaServerStatus> {
-    override val descriptor: SerialDescriptor by lazy {
+    override val descriptor: SerialDescriptor =
         buildClassSerialDescriptor("JavaServerStatus") {
-            element<String>("description")
+            element<TextComponent>("description")
             element<Players>("players")
             element<Version>("version")
-            element<String>("favicon", isOptional = true)
-            element<Boolean>("enforcesSecureChat", isOptional = true)
+            element<String?>("favicon", isOptional = true)
+            element<Boolean>("enforcesSecureChat")
         }
-    }
 
+    @Suppress("MagicNumber")
     override fun serialize(encoder: Encoder, value: JavaServerStatus) {
-        require(encoder is JsonEncoder)
-        val obj = buildJsonObject {
-            put("description", encoder.json.encodeToJsonElement(TextComponentSerializer, value.description))
-            put("players", encoder.json.encodeToJsonElement(Players.serializer(), value.players))
-            put("version", encoder.json.encodeToJsonElement(Version.serializer(), value.version))
-            value.favicon?.let { put("favicon", it) }
-            put("enforcesSecureChat", value.enforcesSecureChat)
-        }
-        encoder.encodeJsonElement(obj)
+        val composite = encoder.beginStructure(descriptor)
+        composite.encodeSerializableElement(descriptor, 0, TextComponentSerializer, value.description)
+        composite.encodeSerializableElement(descriptor, 1, Players.serializer(), value.players)
+        composite.encodeSerializableElement(descriptor, 2, Version.serializer(), value.version)
+        composite.encodeStringElement(descriptor, 3, value.favicon ?: "null")
+        composite.encodeBooleanElement(descriptor, 4, value.enforcesSecureChat)
+        composite.endStructure(descriptor)
     }
 
     override fun deserialize(decoder: Decoder): JavaServerStatus {

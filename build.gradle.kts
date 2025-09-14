@@ -34,17 +34,14 @@ repositories {
 }
 
 dependencies {
-    // kotlinx
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
     api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
 
-    // ktor
     api("io.ktor:ktor-client-core:3.3.0")
     api("io.ktor:ktor-client-content-negotiation:3.3.0")
     api("io.ktor:ktor-serialization-kotlinx-json:3.3.0")
     testImplementation("io.ktor:ktor-client-cio:3.3.0")
 
-    // DNSJava
     api("dnsjava:dnsjava:3.6.3")
 
     testImplementation(kotlin("test"))

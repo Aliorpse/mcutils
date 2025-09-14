@@ -7,6 +7,7 @@ import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.descriptors.element
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.encoding.encodeStructure
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonDecoder
 import kotlinx.serialization.json.booleanOrNull
@@ -20,12 +21,22 @@ public object PlayerProfileSerializer : KSerializer<PlayerProfile> {
             element<String>("id")
             element<String>("name")
             element<Boolean>("legacy")
-            element<String?>("skinUrl")
-            element<String?>("capeUrl")
+            element<String?>("skinUrl", isOptional = true)
+            element<String?>("capeUrl", isOptional = true)
             element<SkinModel>("skinModel")
         }
 
-    override fun serialize(encoder: Encoder, value: PlayerProfile) { error("Not implemented") }
+    @Suppress("MagicNumber")
+    override fun serialize(encoder: Encoder, value: PlayerProfile) {
+        encoder.encodeStructure(descriptor) {
+            encodeStringElement(descriptor, 0, value.id)
+            encodeStringElement(descriptor, 1, value.name)
+            encodeBooleanElement(descriptor, 2, value.legacy)
+            encodeStringElement(descriptor, 3, value.skinUrl ?: "null")
+            encodeStringElement(descriptor, 4, value.capeUrl ?: "null")
+            encodeSerializableElement(descriptor, 5, SkinModel.serializer(), value.skinModel)
+        }
+    }
 
     override fun deserialize(decoder: Decoder): PlayerProfile {
         require(decoder is JsonDecoder) { "This serializer only works with Json format" }

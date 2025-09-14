@@ -1,45 +1,40 @@
 package tech.aliorpse.mcutils.model.server
 
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonDecoder
-import kotlinx.serialization.json.JsonEncoder
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.booleanOrNull
-import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.put
 import tech.aliorpse.mcutils.utils.toTextComponent
 import java.util.EnumSet
 
 internal object TextComponentSerializer : KSerializer<TextComponent> {
-    override val descriptor: SerialDescriptor = buildClassSerialDescriptor("TextComponent")
+    @Serializable
+    private data class Surrogate(
+        val text: String,
+        val color: String = "",
+        val styles: Set<TextStyle> = emptySet(),
+        val extra: List<TextComponent> = emptyList()
+    )
+
+    private val defaultSerializer = Surrogate.serializer()
+
+    override val descriptor: SerialDescriptor = defaultSerializer.descriptor
 
     override fun serialize(encoder: Encoder, value: TextComponent) {
-        require(encoder is JsonEncoder)
-
-        val obj = buildJsonObject {
-            put("text", value.text)
-            if (value.color.isNotEmpty()) put("color", value.color)
-
-            styleMap.forEach { (name, style) ->
-                if (value.styles.contains(style)) put(name, true)
-            }
-
-            if (value.extra.isNotEmpty()) {
-                put(
-                    "extra",
-                    encoder.json.encodeToJsonElement(ListSerializer(TextComponentSerializer), value.extra)
-                )
-            }
-        }
-
-        encoder.encodeJsonElement(obj)
+        val surrogate = Surrogate(
+            text = value.text,
+            color = value.color,
+            styles = value.styles,
+            extra = value.extra
+        )
+        encoder.encodeSerializableValue(defaultSerializer, surrogate)
     }
 
     override fun deserialize(decoder: Decoder): TextComponent {
