@@ -167,9 +167,6 @@ $dokka.location:tech.aliorpse.mcutils.model.modrinth/SideSupport/value/#/Pointin
 $dokka.location:tech.aliorpse.mcutils.model.modrinth/SideSupport/valueOf/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-side-support/value-of.html
 $dokka.location:tech.aliorpse.mcutils.model.modrinth/SideSupport/values/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.modrinth/-side-support/values.html
 $dokka.location:tech.aliorpse.mcutils.model.player////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/index.html
-$dokka.location:tech.aliorpse.mcutils.model.player/Metadata///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-metadata/index.html
-$dokka.location:tech.aliorpse.mcutils.model.player/Metadata/Metadata/#kotlin.String?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-metadata/-metadata.html
-$dokka.location:tech.aliorpse.mcutils.model.player/Metadata/model/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-metadata/model.html
 $dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfile///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile/index.html
 $dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfile/PlayerProfile/#kotlin.String#kotlin.String#kotlin.Boolean#kotlin.String?#kotlin.String?#tech.aliorpse.mcutils.model.player.SkinModel/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile/-player-profile.html
 $dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfile/capeUrl/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile/cape-url.html
@@ -178,6 +175,10 @@ $dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfile/legacy/#/Pointi
 $dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfile/name/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile/name.html
 $dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfile/skinModel/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile/skin-model.html
 $dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfile/skinUrl/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile/skin-url.html
+$dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfileSerializer///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile-serializer/index.html
+$dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfileSerializer/descriptor/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile-serializer/descriptor.html
+$dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfileSerializer/deserialize/#kotlinx.serialization.encoding.Decoder/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile-serializer/deserialize.html
+$dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfileSerializer/serialize/#kotlinx.serialization.encoding.Encoder#tech.aliorpse.mcutils.model.player.PlayerProfile/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile-serializer/serialize.html
 $dokka.location:tech.aliorpse.mcutils.model.player/SkinModel.CLASSIC///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.player/-skin-model/-c-l-a-s-s-i-c/index.html
 $dokka.location:tech.aliorpse.mcutils.model.player/SkinModel.Companion///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-skin-model/-companion/index.html
 $dokka.location:tech.aliorpse.mcutils.model.player/SkinModel.Companion/from/#kotlin.String?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-skin-model/-companion/from.html
@@ -228,7 +229,7 @@ $dokka.location:tech.aliorpse.mcutils.model.server/ServerStatus/ping/#/PointingT
 $dokka.location:tech.aliorpse.mcutils.model.server/ServerStatus/players/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-server-status/players.html
 $dokka.location:tech.aliorpse.mcutils.model.server/ServerStatus/version/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-server-status/version.html
 $dokka.location:tech.aliorpse.mcutils.model.server/TextComponent///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-text-component/index.html
-$dokka.location:tech.aliorpse.mcutils.model.server/TextComponent/TextComponent/#kotlin.String#kotlin.String#java.util.EnumSet[tech.aliorpse.mcutils.model.server.TextStyle]#kotlin.collections.List[tech.aliorpse.mcutils.model.server.TextComponent]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-text-component/-text-component.html
+$dokka.location:tech.aliorpse.mcutils.model.server/TextComponent/TextComponent/#kotlin.String#kotlin.String#kotlin.collections.Set[tech.aliorpse.mcutils.model.server.TextStyle]#kotlin.collections.List[tech.aliorpse.mcutils.model.server.TextComponent]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-text-component/-text-component.html
 $dokka.location:tech.aliorpse.mcutils.model.server/TextComponent/color/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-text-component/color.html
 $dokka.location:tech.aliorpse.mcutils.model.server/TextComponent/extra/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-text-component/extra.html
 $dokka.location:tech.aliorpse.mcutils.model.server/TextComponent/styles/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.server/-text-component/styles.html
@@ -249,28 +250,22 @@ $dokka.location:tech.aliorpse.mcutils.model.server/Version/protocol/#/PointingTo
 $dokka.location:tech.aliorpse.mcutils.modules.modrinth////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth/getProject/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/get-project.html
-$dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth/getProjectAsync/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/get-project-async.html
 $dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth/getProjects/#kotlin.collections.List[kotlin.String]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/get-projects.html
-$dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth/getProjectsAsync/#kotlin.collections.List[kotlin.String]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/get-projects-async.html
 $dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth/getProjectsRandom/#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/get-projects-random.html
-$dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth/getProjectsRandomAsync/#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/get-projects-random-async.html
 $dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth/search/#kotlin.String#kotlin.Function1[tech.aliorpse.mcutils.model.modrinth.search.ModrinthSearchConfig,kotlin.Unit]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/search.html
-$dokka.location:tech.aliorpse.mcutils.modules.modrinth/Modrinth/searchAsync/#kotlin.String#kotlin.Function1[tech.aliorpse.mcutils.model.modrinth.search.ModrinthSearchConfig,kotlin.Unit]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.modrinth/-modrinth/search-async.html
 $dokka.location:tech.aliorpse.mcutils.modules.player////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.player/Player///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.player/Player/getProfile/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player/get-profile.html
-$dokka.location:tech.aliorpse.mcutils.modules.player/Player/getProfileAsync/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.player/-player/get-profile-async.html
 $dokka.location:tech.aliorpse.mcutils.modules.server////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.server/BedrockServer///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-bedrock-server/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.server/BedrockServer/getStatus/#kotlin.String#kotlin.Int#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-bedrock-server/get-status.html
-$dokka.location:tech.aliorpse.mcutils.modules.server/BedrockServer/getStatusAsync/#kotlin.String#kotlin.Int#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-bedrock-server/get-status-async.html
 $dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/getStatus/#kotlin.String#kotlin.Int#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/get-status.html
-$dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/getStatusAsync/#kotlin.String#kotlin.Int#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/get-status-async.html
 $dokka.location:tech.aliorpse.mcutils.utils////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/index.html
 $dokka.location:tech.aliorpse.mcutils.utils//toHtml/tech.aliorpse.mcutils.model.server.TextComponent#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/to-html.html
 $dokka.location:tech.aliorpse.mcutils.utils//toTextComponent/kotlin.String#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/to-text-component.html
-$dokka.location:tech.aliorpse.mcutils.utils//withDispatcherIO/#kotlin.coroutines.SuspendFunction0[TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/with-dispatcher-i-o.html
+$dokka.location:tech.aliorpse.mcutils.utils/McUtilsHttpClient///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-mc-utils-http-client/index.html
+$dokka.location:tech.aliorpse.mcutils.utils/McUtilsHttpClient/init/#io.ktor.client.engine.HttpClientEngineFactory[*]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-mc-utils-http-client/init.html
 tech.aliorpse.mcutils.model.modrinth
 tech.aliorpse.mcutils.model.modrinth.project
 tech.aliorpse.mcutils.model.modrinth.search
