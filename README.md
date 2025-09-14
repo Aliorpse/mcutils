@@ -14,6 +14,11 @@ dependencies {
 }
 ```
 
+## Initialization in project
+```kotlin
+McUtilsHttpClient.init(CIO) // Or the engine you want to use
+```
+
 ## Features
 
 ### Get Server Status

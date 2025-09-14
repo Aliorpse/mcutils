@@ -5,16 +5,15 @@ import kotlinx.coroutines.runBlocking
 import tech.aliorpse.mcutils.modules.server.BedrockServer
 import tech.aliorpse.mcutils.modules.server.JavaServer
 import tech.aliorpse.mcutils.utils.McUtilsHttpClient
-import tech.aliorpse.mcutils.utils.toHtml
 import kotlin.test.Test
 
 class ServerStatusTest {
     @Test
     fun javaGetStatusTest() {
         McUtilsHttpClient.init(CIO)
-        val result = runBlocking { JavaServer.getStatus("hypixel.net") }
+        val result = runBlocking { JavaServer.getStatus("wdsj.net") }
 
-        println(result.description.toHtml())
+        println(result)
         assert(result.version.protocol > 0)
     }
 

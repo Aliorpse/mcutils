@@ -1,9 +1,9 @@
 package tech.aliorpse.mcutils.model.server
 
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor
+import kotlinx.serialization.descriptors.element
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonDecoder
@@ -16,15 +16,15 @@ import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
 
 internal object JavaServerStatusSerializer : KSerializer<JavaServerStatus> {
-
-    override val descriptor: SerialDescriptor =
+    override val descriptor: SerialDescriptor by lazy {
         buildClassSerialDescriptor("JavaServerStatus") {
-            element("description", TextComponentSerializer.descriptor)
-            element("players", Players.serializer().descriptor)
-            element("version", Version.serializer().descriptor)
-            element("favicon", String.serializer().descriptor, isOptional = true)
-            element("enforcesSecureChat", Boolean.serializer().descriptor, isOptional = true)
+            element<String>("description")
+            element<Players>("players")
+            element<Version>("version")
+            element<String>("favicon", isOptional = true)
+            element<Boolean>("enforcesSecureChat", isOptional = true)
         }
+    }
 
     override fun serialize(encoder: Encoder, value: JavaServerStatus) {
         require(encoder is JsonEncoder)

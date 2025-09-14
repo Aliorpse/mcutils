@@ -25,7 +25,7 @@ class Test {
     fun getProjectsTest() {
         McUtilsHttpClient.init(CIO)
         val result = runBlocking {
-            Modrinth.getProject("2H1rLgy4")
+            Modrinth.getProjects(listOf("2H1rLgy4", "fabric-api"))
         }
 
         println(result)

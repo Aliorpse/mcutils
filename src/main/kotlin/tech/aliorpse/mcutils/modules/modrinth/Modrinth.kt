@@ -32,7 +32,11 @@ public object Modrinth {
         config: ModrinthSearchConfig.() -> Unit = {}
     ): ModrinthSearchResponse = withDispatchersIO {
         val cfg = ModrinthSearchConfig().apply(config)
-        val facetsStr = cfg.buildFacets().takeIf { it.isNotEmpty() }
+        val facetsStr = cfg.buildFacets()
+            .takeIf { it.isNotEmpty() }
+            ?.joinToString(prefix = "[", postfix = "]") { inner ->
+                inner.joinToString(prefix = "[", postfix = "]") { "\"$it\"" }
+            }
 
         McUtilsHttpClient.client.get("$API_BASE/v2/search") {
             parameter("query", query)
