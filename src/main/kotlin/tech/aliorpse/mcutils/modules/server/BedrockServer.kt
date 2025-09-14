@@ -43,6 +43,8 @@ public object BedrockServer {
      * @return A [BedrockServerStatus] containing the parsed server information.
      * @throws IOException If the server response is invalid or timed out.
      */
+    @JvmStatic
+    @JvmOverloads
     @JvmAsync
     @JvmBlocking
     public suspend fun getStatus(

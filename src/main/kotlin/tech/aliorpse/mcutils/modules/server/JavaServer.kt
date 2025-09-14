@@ -47,6 +47,7 @@ public object JavaServer {
      * @throws IOException If network or parsing fails.
      */
     @JvmStatic
+    @JvmOverloads
     @JvmAsync
     @JvmBlocking
     public suspend fun getStatus(

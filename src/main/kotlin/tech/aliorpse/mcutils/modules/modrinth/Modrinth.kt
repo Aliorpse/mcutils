@@ -25,6 +25,7 @@ public object Modrinth {
      * @return [ModrinthSearchResponse] containing the search results.
      */
     @JvmStatic
+    @JvmOverloads
     @JvmAsync
     @JvmBlocking
     public suspend fun search(

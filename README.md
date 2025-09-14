@@ -14,11 +14,6 @@ dependencies {
 }
 ```
 
-## Initialization in project
-```kotlin
-McUtilsHttpClient.init(CIO) // Or the engine you want to use
-```
-
 ## Features
 
 ### Get Server Status
@@ -48,6 +43,8 @@ runBlocking {
 
 ```kotlin
 runBlocking {
+    McUtilsHttpClient.init(CIO)
+    
     var pl
     pl = Player.getProfile("Aliorpse")
     pl = Player.getProfile("ec042e1200ac4a249cc83eb1fab0bd88")
@@ -59,6 +56,8 @@ runBlocking {
 
 ```kotlin
 runBlocking {
+    McUtilsHttpClient.init(CIO)
+    
     var result
     result = Modrinth.search("xplus") {
         author = "Wudji"
@@ -66,9 +65,7 @@ runBlocking {
     }
     
     result = Modrinth.getProject("2H1rLgy4")
-    
     result = Modrinth.getProjects(listOf("2H1rLgy4"))
-    
     result = Modrinth.getProjectsRandom(5)
 }
 ```

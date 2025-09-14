@@ -10,6 +10,7 @@ public object McUtilsHttpClient {
     internal lateinit var client: HttpClient
         private set
 
+    @JvmStatic
     public fun init(engine: HttpClientEngineFactory<*>) {
         if (::client.isInitialized) return
 
