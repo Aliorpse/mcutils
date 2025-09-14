@@ -1,5 +1,8 @@
 plugins {
     kotlin("jvm") version "2.2.0"
+    kotlin("plugin.serialization") version "2.2.0"
+
+    id("love.forte.plugin.suspend-transform") version "2.2.0-0.13.1"
     id("com.google.devtools.ksp") version "2.2.0-2.0.2"
     id("org.jetbrains.dokka") version "2.0.0"
     id("com.vanniktech.maven.publish") version "0.33.0"
@@ -14,6 +17,8 @@ kotlin {
     compilerOptions {
         freeCompilerArgs.add("-Xjvm-default=all")
     }
+
+    explicitApi()
 }
 
 dokka {
@@ -21,6 +26,13 @@ dokka {
         named("main") {
             sourceRoots.setFrom(file("src/main/kotlin"))
         }
+    }
+}
+
+suspendTransformPlugin {
+    transformers {
+        addJvmBlocking()
+        addJvmAsync()
     }
 }
 
@@ -32,15 +44,13 @@ repositories {
 dependencies {
     // kotlinx
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+    api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
 
-    // retrofit
-    api("com.squareup.retrofit2:retrofit:3.0.0")
-    api("com.squareup.retrofit2:converter-moshi:3.0.0")
-
-    // moshi
-    api("com.squareup.moshi:moshi:1.15.2")
-    api("com.squareup.moshi:moshi-kotlin:1.15.2")
-    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.15.2")
+    // ktor
+    api("io.ktor:ktor-client-core:3.3.0")
+    api("io.ktor:ktor-client-content-negotiation:3.3.0")
+    api("io.ktor:ktor-serialization-kotlinx-json:3.3.0")
+    testImplementation("io.ktor:ktor-client-cio:3.3.0")
 
     // DNSJava
     api("dnsjava:dnsjava:3.6.3")
@@ -58,30 +68,30 @@ configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
     coordinates("tech.aliorpse", "mcutils", version.toString())
 
     pom {
-        name.set("mcutils")
-        description.set("Kotlin library for Minecraft operations")
-        url.set("https://github.com/Aliorpse/kotlin-mcutils/")
-        inceptionYear.set("2025")
+        name = "mcutils"
+        description = "Kotlin library for Minecraft operations"
+        url = "https://github.com/Aliorpse/kotlin-mcutils/"
+        inceptionYear = "2025"
 
         licenses {
             license {
-                name.set("MIT")
-                url.set("https://opensource.org/licenses/MIT")
+                name = "MIT"
+                url = "https://opensource.org/licenses/MIT"
             }
         }
 
         developers {
             developer {
-                id.set("aliorpse")
-                name.set("Aliorpse")
-                url.set("https://github.com/Aliorpse/")
+                id = "aliorpse"
+                name = "Aliorpse"
+                url = "https://github.com/Aliorpse/"
             }
         }
 
         scm {
-            url.set("https://github.com/Aliorpse/kotlin-mcutils/")
-            connection.set("scm:git:git://github.com/Aliorpse/kotlin-mcutils.git")
-            developerConnection.set("scm:git:ssh://git@github.com/Aliorpse/kotlin-mcutils.git")
+            url = "https://github.com/Aliorpse/kotlin-mcutils/"
+            connection = "scm:git:git://github.com/Aliorpse/kotlin-mcutils.git"
+            developerConnection = "scm:git:ssh://git@github.com/Aliorpse/kotlin-mcutils.git"
         }
     }
 }

@@ -1,14 +1,13 @@
 package tech.aliorpse.mcutils.modules.server
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.future.future
+import love.forte.plugin.suspendtrans.annotation.JvmAsync
+import love.forte.plugin.suspendtrans.annotation.JvmBlocking
 import tech.aliorpse.mcutils.model.server.BedrockServerStatus
 import tech.aliorpse.mcutils.model.server.GameMode
 import tech.aliorpse.mcutils.model.server.Players
 import tech.aliorpse.mcutils.model.server.Version
 import tech.aliorpse.mcutils.utils.toTextComponent
-import tech.aliorpse.mcutils.utils.withDispatcherIO
+import tech.aliorpse.mcutils.utils.withDispatchersIO
 import java.io.IOException
 import java.net.DatagramPacket
 import java.net.DatagramSocket
@@ -18,24 +17,12 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.charset.StandardCharsets
 
-/**
- * Provides functionality to fetch and parse the status of a Bedrock Minecraft server.
- */
 @Suppress("MagicNumber")
-object BedrockServer {
+public object BedrockServer {
     private val MAGIC_BYTES = byteArrayOf(
-        0x00,
-        0xFF.toByte(),
-        0xFF.toByte(),
-        0x00,
-        0xFE.toByte(),
-        0xFE.toByte(),
-        0xFE.toByte(),
-        0xFE.toByte(),
-        0xFD.toByte(),
-        0xFD.toByte(),
-        0xFD.toByte(),
-        0xFD.toByte()
+        0x00, 0xFF.toByte(), 0xFF.toByte(), 0x00,
+        0xFE.toByte(), 0xFE.toByte(), 0xFE.toByte(), 0xFE.toByte(),
+        0xFD.toByte(), 0xFD.toByte(), 0xFD.toByte(), 0xFD.toByte()
     )
 
     private val CLIENT_ID = byteArrayOf(0x12, 0x34, 0x56, 0x78, 0x00)
@@ -48,19 +35,21 @@ object BedrockServer {
     private const val SERVER_INFO_OFFSET = 33
 
     /**
-     * Fetch Bedrock server status.
+     * Fetches the status of a Bedrock server.
      *
-     * @param host Host
-     * @param port Port (19132)
-     * @param timeout Timeout (2000ms)
-     *
-     * @throws IOException
+     * @param host The server hostname or IP.
+     * @param port The server port (default 19132).
+     * @param timeout Timeout in milliseconds (default 2000ms).
+     * @return A [BedrockServerStatus] containing the parsed server information.
+     * @throws IOException If the server response is invalid or timed out.
      */
-    suspend fun getStatus(
+    @JvmAsync
+    @JvmBlocking
+    public suspend fun getStatus(
         host: String,
         port: Int = 19132,
         timeout: Int = 2000
-    ) = withDispatcherIO {
+    ): BedrockServerStatus = withDispatchersIO {
         val asciiHost = IDN.toASCII(host)
         val address = InetAddress.getByName(asciiHost)
 
@@ -86,7 +75,7 @@ object BedrockServer {
 
             val data = receivePacket.data
             if (data.isEmpty() || data[0] != PACKET_ID_UNCONNECTED_PONG) {
-                throw IOException("Invalid response: expected packet ID 0x1C, got ${data[0]}")
+                throw IOException("Invalid response: expected packet ID 0x1C, got ${data.getOrNull(0)}")
             }
 
             if (receivePacket.length <= SERVER_INFO_OFFSET) {
@@ -106,7 +95,7 @@ object BedrockServer {
             val max = parts[5].toIntOrNull() ?: 0
             val gameMode = runCatching { GameMode.valueOf(parts[8].uppercase()) }.getOrDefault(GameMode.UNKNOWN)
 
-            return@withDispatcherIO BedrockServerStatus(
+            return@withDispatchersIO BedrockServerStatus(
                 description = parts[1].toTextComponent(),
                 players = Players(online = online, max = max, sample = emptyList()),
                 version = Version(name = parts[3], protocol = protocol),
@@ -117,11 +106,4 @@ object BedrockServer {
             )
         }
     }
-
-    /**
-     * [java.util.concurrent.CompletableFuture] variant of [getStatus].
-     */
-    @JvmStatic fun getStatusAsync(
-        host: String, port: Int = 19132, timeout: Int = 2000
-    ) = CoroutineScope(Dispatchers.IO).future { getStatus(host, port, timeout) }
 }

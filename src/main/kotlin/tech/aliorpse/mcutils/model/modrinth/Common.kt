@@ -1,71 +1,78 @@
 @file:Suppress("unused")
 package tech.aliorpse.mcutils.model.modrinth
 
-import com.squareup.moshi.Json
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  * Project types.
  */
-enum class ProjectType(val value: String) {
-    @Json(name = "mod") MOD("mod"),
-    @Json(name = "modpack") MODPACK("modpack"),
-    @Json(name = "resourcepack") RESOURCEPACK("resourcepack"),
-    @Json(name = "shader") SHADER("shader")
+@Serializable
+public enum class ProjectType(public val value: String) {
+    @SerialName("mod") MOD("mod"),
+    @SerialName("modpack") MODPACK("modpack"),
+    @SerialName("resourcepack") RESOURCEPACK("resourcepack"),
+    @SerialName("shader") SHADER("shader")
 }
 
 /**
  * Client/server side support.
  */
-enum class SideSupport(val value: String) {
-    @Json(name = "required") REQUIRED("required"),
-    @Json(name = "optional") OPTIONAL("optional"),
-    @Json(name = "unsupported") UNSUPPORTED("unsupported"),
-    @Json(name = "unknown") UNKNOWN("unknown")
+@Serializable
+public enum class SideSupport(public val value: String) {
+    @SerialName("required") REQUIRED("required"),
+    @SerialName("optional") OPTIONAL("optional"),
+    @SerialName("unsupported") UNSUPPORTED("unsupported"),
+    @SerialName("unknown") UNKNOWN("unknown")
 }
 
 /**
  * Index/sorting methods in search.
  */
-enum class IndexMethod(val value: String) {
-    @Json(name = "relevance") RELEVANCE("relevance"),
-    @Json(name = "downloads") DOWNLOADS("downloads"),
-    @Json(name = "follows") FOLLOWS("follows"),
-    @Json(name = "newest") NEWEST("newest"),
-    @Json(name = "updated") UPDATED("updated")
+@Serializable
+public enum class IndexMethod(public val value: String) {
+    @SerialName("relevance") RELEVANCE("relevance"),
+    @SerialName("downloads") DOWNLOADS("downloads"),
+    @SerialName("follows") FOLLOWS("follows"),
+    @SerialName("newest") NEWEST("newest"),
+    @SerialName("updated") UPDATED("updated")
 }
 
 /**
  * Status of a project.
  */
-enum class ProjectStatus(val value: String) {
-    @Json(name = "approved") APPROVED("approved"),
-    @Json(name = "archived") ARCHIVED("archived"),
-    @Json(name = "rejected") REJECTED("rejected"),
-    @Json(name = "draft") DRAFT("draft"),
-    @Json(name = "unlisted") UNLISTED("unlisted"),
-    @Json(name = "processing") PROCESSING("processing"),
-    @Json(name = "withheld") WITHHELD("withheld"),
-    @Json(name = "scheduled") SCHEDULED("scheduled"),
-    @Json(name = "private") PRIVATE("private"),
-    @Json(name = "unknown") UNKNOWN("unknown")
+@Serializable
+public enum class ProjectStatus(public val value: String) {
+    @SerialName("approved") APPROVED("approved"),
+    @SerialName("archived") ARCHIVED("archived"),
+    @SerialName("rejected") REJECTED("rejected"),
+    @SerialName("draft") DRAFT("draft"),
+    @SerialName("unlisted") UNLISTED("unlisted"),
+    @SerialName("processing") PROCESSING("processing"),
+    @SerialName("withheld") WITHHELD("withheld"),
+    @SerialName("scheduled") SCHEDULED("scheduled"),
+    @SerialName("private") PRIVATE("private"),
+    @SerialName("unknown") UNKNOWN("unknown")
 }
 
 /**
  * Requested status for review or release scheduling.
  */
-enum class RequestedStatus(val value: String) {
-    @Json(name = "approved") APPROVED("approved"),
-    @Json(name = "archived") ARCHIVED("archived"),
-    @Json(name = "unlisted") UNLISTED("unlisted"),
-    @Json(name = "private") PRIVATE("private"),
-    @Json(name = "draft") DRAFT("draft")
+@Serializable
+public enum class RequestedStatus(public val value: String) {
+    @SerialName("approved") APPROVED("approved"),
+    @SerialName("archived") ARCHIVED("archived"),
+    @SerialName("unlisted") UNLISTED("unlisted"),
+    @SerialName("private") PRIVATE("private"),
+    @SerialName("draft") DRAFT("draft")
 }
 
 /**
  * Monetization status.
  */
-enum class MonetizationStatus(val value: String) {
-    @Json(name = "monetized") MONETIZED("monetized"),
-    @Json(name = "demonetized") DEMONETIZED("demonetized"),
-    @Json(name = "force-demonetized") FORCE_DEMONETIZED("force-demonetized")
+@Serializable
+public enum class MonetizationStatus(public val value: String) {
+    @SerialName("monetized") MONETIZED("monetized"),
+    @SerialName("demonetized") DEMONETIZED("demonetized"),
+    @SerialName("force-demonetized") FORCE_DEMONETIZED("force-demonetized")
 }

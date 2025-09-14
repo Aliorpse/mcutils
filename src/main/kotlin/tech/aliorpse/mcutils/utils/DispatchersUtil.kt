@@ -4,7 +4,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.withContext
 
-suspend fun <T> withDispatcherIO(block: suspend () -> T): T {
+internal suspend fun <T> withDispatchersIO(block: suspend () -> T): T {
     val currentContext = currentCoroutineContext()
     return if (Dispatchers.IO.isDispatchNeeded(currentContext)) {
         withContext(Dispatchers.IO) { block() }

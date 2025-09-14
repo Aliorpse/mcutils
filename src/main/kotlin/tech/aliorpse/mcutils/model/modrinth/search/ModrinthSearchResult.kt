@@ -1,31 +1,31 @@
 package tech.aliorpse.mcutils.model.modrinth.search
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
-data class ModrinthSearchResult(
+@Serializable
+public data class ModrinthSearchResult(
     val slug: String,
     val title: String,
     val description: String,
     val categories: List<String>,
-    @field:Json(name = "client_side") val clientSide: String,
-    @field:Json(name = "server_side") val serverSide: String,
-    @field:Json(name = "project_type") val projectType: String,
+    @SerialName("client_side") val clientSide: String,
+    @SerialName("server_side") val serverSide: String,
+    @SerialName("project_type") val projectType: String,
     val downloads: Int,
-    @field:Json(name = "icon_url") val iconUrl: String?,
-    val color: Int?,
-    @field:Json(name = "thread_id") val threadId: String?,
-    @field:Json(name = "monetization_status") val monetizationStatus: String?,
-    @field:Json(name = "project_id") val projectId: String,
+    @SerialName("icon_url") val iconUrl: String? = null,
+    val color: Int? = null,
+    @SerialName("thread_id") val threadId: String? = null,
+    @SerialName("monetization_status") val monetizationStatus: String? = null,
+    @SerialName("project_id") val projectId: String,
     val author: String,
-    @field:Json(name = "display_categories") val displayCategories: List<String>?,
+    @SerialName("display_categories") val displayCategories: List<String>? = null,
     val versions: List<String>,
     val follows: Int,
-    @field:Json(name = "date_created") val dateCreated: String,
-    @field:Json(name = "date_modified") val dateModified: String,
-    @field:Json(name = "latest_version") val latestVersion: String?,
+    @SerialName("date_created") val dateCreated: String,
+    @SerialName("date_modified") val dateModified: String,
+    @SerialName("latest_version") val latestVersion: String? = null,
     val license: String,
-    val gallery: List<String>?,
-    @field:Json(name = "featured_gallery") val featuredGallery: String?
+    val gallery: List<String>? = null,
+    @SerialName("featured_gallery") val featuredGallery: String? = null
 )

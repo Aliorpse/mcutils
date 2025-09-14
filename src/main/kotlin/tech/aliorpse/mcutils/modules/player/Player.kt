@@ -1,15 +1,26 @@
 package tech.aliorpse.mcutils.modules.player
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.future.future
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import love.forte.plugin.suspendtrans.annotation.JvmAsync
+import love.forte.plugin.suspendtrans.annotation.JvmBlocking
 import tech.aliorpse.mcutils.model.player.PlayerProfile
-import tech.aliorpse.mcutils.utils.HttpClient
-import tech.aliorpse.mcutils.utils.withDispatcherIO
+import tech.aliorpse.mcutils.model.player.PlayerUUIDProfile
+import tech.aliorpse.mcutils.utils.McUtilsHttpClient
+import tech.aliorpse.mcutils.utils.withDispatchersIO
 
-object Player {
+/**
+ * Utility object for fetching Minecraft player profiles.
+ *
+ * Supports fetching by UUID or username, and automatically resolves
+ * UUIDs when given a username.
+ */
+public object Player {
     private const val UUID_LENGTH = 32
     private val nameRegex = Regex("^[A-Za-z0-9_]{3,16}$")
+
+    private const val MOJANG_PROFILE_BASE = "https://api.mojang.com"
+    private const val MOJANG_SESSION_BASE = "https://sessionserver.mojang.com"
 
     /**
      * Fetches a player's profile from Mojang's session server.
@@ -22,24 +33,24 @@ object Player {
      * @return A [PlayerProfile] containing the player's UUID, username, skin, cape, and model type.
      * @throws IllegalArgumentException if the input is neither a valid UUID nor a valid username.
      */
-    suspend fun getProfile(player: String): PlayerProfile = withDispatcherIO {
+    @JvmStatic
+    @JvmAsync
+    @JvmBlocking
+    public suspend fun getProfile(player: String): PlayerProfile = withDispatchersIO {
         val pl = player.replace("-", "")
 
-        return@withDispatcherIO when {
-            pl.length == UUID_LENGTH -> HttpClient.mojangSessionService.getProfile(pl)
+        when {
+            pl.length == UUID_LENGTH -> {
+                McUtilsHttpClient.client.get("$MOJANG_SESSION_BASE/session/minecraft/profile/$pl").body()
+            }
 
             nameRegex.matches(pl) -> {
-                val uuid = HttpClient.mojangProfileService.getUUID(pl).id
-                HttpClient.mojangSessionService.getProfile(uuid)
+                val uuidProfile: PlayerUUIDProfile =
+                    McUtilsHttpClient.client.get("$MOJANG_PROFILE_BASE/users/profiles/minecraft/$pl").body()
+                McUtilsHttpClient.client.get("$MOJANG_SESSION_BASE/session/minecraft/profile/${uuidProfile.id}").body()
             }
 
             else -> throw IllegalArgumentException("Invalid identifier: $pl")
         }
     }
-
-    /**
-     * [java.util.concurrent.CompletableFuture] variant of [getProfile].
-     */
-    @JvmStatic fun getProfileAsync(player: String) =
-        CoroutineScope(Dispatchers.IO).future { getProfile(player) }
 }

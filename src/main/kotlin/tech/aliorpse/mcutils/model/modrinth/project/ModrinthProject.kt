@@ -1,73 +1,72 @@
 package tech.aliorpse.mcutils.model.modrinth.project
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 import tech.aliorpse.mcutils.model.modrinth.MonetizationStatus
 import tech.aliorpse.mcutils.model.modrinth.ProjectStatus
 import tech.aliorpse.mcutils.model.modrinth.ProjectType
 import tech.aliorpse.mcutils.model.modrinth.RequestedStatus
 import tech.aliorpse.mcutils.model.modrinth.SideSupport
 
-@JsonClass(generateAdapter = true)
-data class ModrinthProject(
+@Serializable
+public data class ModrinthProject(
     val slug: String,
     val title: String,
     val description: String,
     val categories: List<String>,
-    @field:Json(name = "client_side") val clientSide: SideSupport,
-    @field:Json(name = "server_side") val serverSide: SideSupport,
-    @field:Json(name = "project_type") val projectType: ProjectType,
+    @SerialName("client_side") val clientSide: SideSupport,
+    @SerialName("server_side") val serverSide: SideSupport,
+    @SerialName("project_type") val projectType: ProjectType,
     val downloads: Int,
-    @field:Json(name = "icon_url") val iconUrl: String?,
-    val color: Int?,
-    @field:Json(name = "thread_id") val threadId: String?,
-    @field:Json(name = "monetization_status") val monetizationStatus: MonetizationStatus?,
-    @field:Json(name = "id") val projectId: String,
+    @SerialName("icon_url") val iconUrl: String? = null,
+    val color: Int? = null,
+    @SerialName("thread_id") val threadId: String? = null,
+    @SerialName("monetization_status") val monetizationStatus: MonetizationStatus? = null,
+    @SerialName("id") val projectId: String,
     val team: String,
-    val body: String?,
+    val body: String? = null,
     val status: ProjectStatus,
-    @field:Json(name = "requested_status") val requestedStatus: RequestedStatus?,
-    @field:Json(name = "additional_categories") val additionalCategories: List<String>?,
-    @field:Json(name = "issues_url") val issuesUrl: String?,
-    @field:Json(name = "source_url") val sourceUrl: String?,
-    @field:Json(name = "wiki_url") val wikiUrl: String?,
-    @field:Json(name = "discord_url") val discordUrl: String?,
-    @field:Json(name = "donation_urls") val donationUrls: List<DonationUrl>?,
-    @field:Json(name = "body_url") val bodyUrl: String?,
-    @field:Json(name = "moderator_message") val moderatorMessage: String?,
+    @SerialName("requested_status") val requestedStatus: RequestedStatus? = null,
+    @SerialName("additional_categories") val additionalCategories: List<String>? = null,
+    @SerialName("issues_url") val issuesUrl: String? = null,
+    @SerialName("source_url") val sourceUrl: String? = null,
+    @SerialName("wiki_url") val wikiUrl: String? = null,
+    @SerialName("discord_url") val discordUrl: String? = null,
+    @SerialName("donation_urls") val donationUrls: List<DonationUrl>? = null,
+    @SerialName("body_url") val bodyUrl: String? = null,
+    @SerialName("moderator_message") val moderatorMessage: String? = null,
     val published: String,
     val updated: String,
-    val approved: String?,
-    val queued: String?,
-    @field:Json(name = "followers") val followers: Int,
+    val approved: String? = null,
+    val queued: String? = null,
+    val followers: Int,
     val license: ProjectLicense,
     val versions: List<String>,
-    @field:Json(name = "game_versions") val gameVersions: List<String>,
+    @SerialName("game_versions") val gameVersions: List<String>,
     val loaders: List<String>,
-    val gallery: List<GalleryItem>?,
-    @field:Json(name = "featured_gallery") val featuredGallery: String?
+    val gallery: List<GalleryItem>? = null,
+    @SerialName("featured_gallery") val featuredGallery: String? = null
 )
 
-@JsonClass(generateAdapter = true)
-data class DonationUrl(
-    val id: String?,
-    val platform: String?,
+@Serializable
+public data class DonationUrl(
+    val id: String? = null,
+    val platform: String? = null,
     val url: String
 )
 
-@JsonClass(generateAdapter = true)
-data class GalleryItem(
+@Serializable
+public data class GalleryItem(
     val url: String,
     val featured: Boolean,
-    val title: String?,
-    val description: String?,
+    val title: String? = null,
+    val description: String? = null,
     val created: String
 )
 
-@JsonClass(generateAdapter = true)
-data class ProjectLicense(
+@Serializable
+public data class ProjectLicense(
     val id: String,
-    val name: String?,
-    val url: String?
+    val name: String? = null,
+    val url: String? = null
 )
-

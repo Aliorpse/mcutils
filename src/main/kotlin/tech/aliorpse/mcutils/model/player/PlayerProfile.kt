@@ -1,6 +1,6 @@
 package tech.aliorpse.mcutils.model.player
 
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.Serializable
 
 /**
  * Represents a player's profile as retrieved from the Mojang session servers.
@@ -12,56 +12,36 @@ import com.squareup.moshi.JsonClass
  * @property capeUrl The URL to the player's cape texture.
  * @property skinModel The model type of the player's skin, either CLASSIC (Steve) or SLIM (Alex).
  */
-@JsonClass(generateAdapter = true)
-data class PlayerProfile(
+@Serializable(with = PlayerProfileSerializer::class)
+public data class PlayerProfile(
     val id: String,
     val name: String,
     val legacy: Boolean = false,
-    val skinUrl: String?,
-    val capeUrl: String?,
+    val skinUrl: String? = null,
+    val capeUrl: String? = null,
     val skinModel: SkinModel
 )
 
 /**
  * Enum representing the model type of player's skin.
  *
- * The player's skin model can too be:
+ * The player's skin model can be:
  * - CLASSIC: The default model type, also known as "Steve".
  * - SLIM: A more slender model type, also known as "Alex".
  */
-enum class SkinModel {
+@Serializable
+public enum class SkinModel {
     CLASSIC, SLIM;
 
-    companion object {
-        fun from(name: String?): SkinModel = when (name?.lowercase()) {
+    public companion object {
+        public fun from(name: String?): SkinModel = when (name?.lowercase()) {
             "slim" -> SLIM
             else -> CLASSIC
         }
     }
 }
 
-/**
- * The JSON Element that to be processed.
- */
-@JsonClass(generateAdapter = true)
-internal data class RawPlayerProfile(
-    val id: String,
-    val name: String,
-    val legacy: Boolean = false,
-    val properties: List<Property>
-) {
-    /**
-     * @property name Always 'texture'.
-     * @property value Base64 string containing [DecodedTextures].
-     */
-    @JsonClass(generateAdapter = true)
-    internal data class Property(val name: String, val value: String)
-}
-
-/**
- * Texture element decoded from [RawPlayerProfile.Property.value].
- */
-@JsonClass(generateAdapter = true)
+@Serializable
 internal data class DecodedTextures(
     val timestamp: Long,
     val profileId: String,
@@ -72,14 +52,24 @@ internal data class DecodedTextures(
 /**
  * Data of the texture.
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 internal data class Texture(
     val url: String,
-    val metadata: Metadata?
+    val metadata: Metadata? = null
 )
 
 /**
  * @property model SLIM or CLASSIC.
  */
-@JsonClass(generateAdapter = true)
-data class Metadata(val model: String?)
+@Serializable
+internal data class Metadata(
+    val model: String? = null
+)
+
+@Serializable
+internal data class PlayerUUIDProfile(
+    val id: String,
+    val name: String,
+    val legacy: Boolean = false,
+    val demo: Boolean = false
+)

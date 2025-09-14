@@ -7,7 +7,7 @@ import java.util.EnumSet
 /**
  * Coverts string with "§" to a [TextComponent].
  */
-fun String.toTextComponent(): TextComponent {
+public fun String.toTextComponent(): TextComponent {
     val components = mutableListOf<TextComponent>()
     var currentText = StringBuilder()
     var currentColor = ""
@@ -86,7 +86,7 @@ private val originalStyleMap = mapOf(
 /**
  * Converts [TextComponent] to a HTML element.
  */
-fun TextComponent.toHtml(): String {
+public fun TextComponent.toHtml(): String {
     var html = escapeHtml(text).replace(" ", "&nbsp;").replace("\n", "<br />")
 
     if (extra.isNotEmpty()) {

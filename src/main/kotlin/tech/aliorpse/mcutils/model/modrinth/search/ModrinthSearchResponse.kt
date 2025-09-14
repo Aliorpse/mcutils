@@ -1,12 +1,12 @@
 package tech.aliorpse.mcutils.model.modrinth.search
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
-data class ModrinthSearchResponse(
+@Serializable
+public data class ModrinthSearchResponse(
     val hits: List<ModrinthSearchResult>,
-    @field:Json(name = "offset") val offset: Int,
-    @field:Json(name = "limit") val limit: Int,
-    @field:Json(name = "total_hits") val totalHits: Int
+    val offset: Int,
+    val limit: Int,
+    @SerialName("total_hits") val totalHits: Int
 )

@@ -1,7 +1,6 @@
 package tech.aliorpse.mcutils.model.server
 
-import com.squareup.moshi.JsonClass
-import java.util.EnumSet
+import kotlinx.serialization.Serializable
 
 /**
  * Represents the status of a server.
@@ -14,11 +13,11 @@ import java.util.EnumSet
  * @property version Information about the server's version, including name and protocol.
  * @property ping The time taken to ping the server, measured in milliseconds.
  */
-sealed class ServerStatus {
-    abstract val description: TextComponent
-    abstract val players: Players
-    abstract val version: Version
-    abstract val ping: Long?
+public interface ServerStatus {
+    public val description: TextComponent
+    public val players: Players
+    public val version: Version
+    public val ping: Long?
 }
 
 /**
@@ -32,14 +31,15 @@ sealed class ServerStatus {
  * @property favicon An optional base64-encoded string representing the server's favicon.
  * @property ping Will be null when remote doesn't support.
  */
-data class JavaServerStatus(
+@Serializable(with = JavaServerStatusSerializer::class)
+public data class JavaServerStatus(
     override val description: TextComponent,
     override val players: Players,
     override val version: Version,
     override val ping: Long?,
     val enforcesSecureChat: Boolean = false,
     val favicon: String?
-) : ServerStatus()
+) : ServerStatus
 
 /**
  * Represents the status of a Minecraft Bedrock server.
@@ -52,7 +52,7 @@ data class JavaServerStatus(
  * @property gameMode The current game mode of the server, such as SURVIVAL or CREATIVE.
  * @property serverUniqueID The unique identifier of the server instance.
  */
-data class BedrockServerStatus(
+public data class BedrockServerStatus(
     override val description: TextComponent,
     override val players: Players,
     override val version: Version,
@@ -60,15 +60,15 @@ data class BedrockServerStatus(
     val levelName: String,
     val gameMode: GameMode,
     val serverUniqueID: String,
-) : ServerStatus()
+) : ServerStatus
 
 /**
  * Players in server information.
  *
  * @property sample A sample list of online players (not work on bedrock servers).
  */
-@JsonClass(generateAdapter = true)
-data class Players(
+@Serializable
+public data class Players(
     val max: Int,
     val online: Int,
     val sample: List<Sample>? = emptyList()
@@ -80,8 +80,8 @@ data class Players(
  * @property name The version name.
  * @property protocol The protocol version number.
  */
-@JsonClass(generateAdapter = true)
-data class Version(
+@Serializable
+public data class Version(
     val name: String,
     val protocol: Long
 )
@@ -89,8 +89,8 @@ data class Version(
 /**
  * Sample player information representing some online players.
  */
-@JsonClass(generateAdapter = true)
-data class Sample(
+@Serializable
+public data class Sample(
     val id: String,
     val name: String
 )
@@ -98,7 +98,7 @@ data class Sample(
 /**
  * Represents the various game modes. For [tech.aliorpse.mcutils.modules.server.BedrockServer.getStatus].
  */
-enum class GameMode {
+public enum class GameMode {
     SURVIVAL,
     CREATIVE,
     ADVENTURE,
@@ -113,19 +113,19 @@ enum class GameMode {
  * @property color The color of the text. Hex codes.
  * @property extra Rescue. Please check the wiki for this.
  */
-data class TextComponent(
+@Serializable(with = TextComponentSerializer::class)
+public data class TextComponent(
     val text: String,
-
     val color: String = "",
-    val styles: EnumSet<TextStyle> = EnumSet.noneOf(TextStyle::class.java),
-
+    val styles: Set<TextStyle> = emptySet(),
     val extra: List<TextComponent> = emptyList(),
 )
 
 /**
  * Proper styles for the [TextComponent].
  */
-enum class TextStyle {
+@Serializable
+public enum class TextStyle {
     BOLD,
     ITALIC,
     UNDERLINED,

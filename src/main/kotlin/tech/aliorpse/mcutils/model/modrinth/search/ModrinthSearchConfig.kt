@@ -4,7 +4,7 @@ import tech.aliorpse.mcutils.model.modrinth.IndexMethod
 import tech.aliorpse.mcutils.model.modrinth.ProjectType
 import tech.aliorpse.mcutils.model.modrinth.SideSupport
 
-data class ModrinthSearchConfig(
+public data class ModrinthSearchConfig(
     var categories: List<String>? = null,
     var versions: List<String>? = null,
     var type: ProjectType? = null,
@@ -23,7 +23,7 @@ data class ModrinthSearchConfig(
         if (value != null) add(listOf("$key:$value"))
     }
 
-    fun buildFacets(): List<List<String>> {
+    public fun buildFacets(): List<List<String>> {
         val result = mutableListOf<List<String>>()
 
         categories?.let { result += it.map { c -> "categories:$c" } }

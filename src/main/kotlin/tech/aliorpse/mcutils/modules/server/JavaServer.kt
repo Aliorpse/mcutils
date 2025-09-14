@@ -1,10 +1,10 @@
 package tech.aliorpse.mcutils.modules.server
 
-import com.squareup.moshi.JsonClass
-import com.squareup.moshi.Moshi
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.future.future
+
+import kotlinx.serialization.json.Json
+import kotlinx.io.IOException
+import love.forte.plugin.suspendtrans.annotation.JvmAsync
+import love.forte.plugin.suspendtrans.annotation.JvmBlocking
 import org.xbill.DNS.AAAARecord
 import org.xbill.DNS.ARecord
 import org.xbill.DNS.CNAMERecord
@@ -12,26 +12,22 @@ import org.xbill.DNS.Lookup
 import org.xbill.DNS.SRVRecord
 import org.xbill.DNS.Type
 import tech.aliorpse.mcutils.model.server.JavaServerStatus
-import tech.aliorpse.mcutils.model.server.Players
-import tech.aliorpse.mcutils.model.server.TextComponent
-import tech.aliorpse.mcutils.model.server.TextComponentAdapter
-import tech.aliorpse.mcutils.model.server.Version
-import tech.aliorpse.mcutils.utils.withDispatcherIO
-import java.io.ByteArrayOutputStream
-import java.io.DataInputStream
-import java.io.DataOutputStream
-import java.io.IOException
-import java.io.OutputStream
+import tech.aliorpse.mcutils.utils.withDispatchersIO
 import java.net.IDN
 import java.net.InetSocketAddress
 import java.net.Socket
 import java.nio.charset.StandardCharsets
+import tech.aliorpse.mcutils.model.server.JavaServerStatusSerializer
+import java.io.ByteArrayOutputStream
+import java.io.DataInputStream
+import java.io.DataOutputStream
+import java.io.OutputStream
 
 /**
  * Provides functionality to fetch and parse the status of a Java Minecraft server.
  */
 @Suppress("MagicNumber", "TooManyFunctions")
-object JavaServer {
+public object JavaServer {
     private const val HANDSHAKE_PACKET_ID = 0x00
     private const val STATUS_REQUEST_PACKET_ID = 0x00
     private const val STATUS_RESPONSE_PACKET_ID = 0x00
@@ -39,37 +35,27 @@ object JavaServer {
     private const val PROTOCOL_VERSION = -1
     private const val NEXT_STATE_STATUS = 1
 
-    internal val moshi = Moshi.Builder()
-        .add(TextComponentAdapter())
-        .build()
-
-    @JsonClass(generateAdapter = true)
-    internal data class RawJavaStatus(
-        val description: TextComponent,
-        val players: Players,
-        val version: Version,
-        val favicon: String? = null,
-        val enforcesSecureChat: Boolean? = false
-    )
+    private val json = Json { ignoreUnknownKeys = true }
 
     /**
-     * Fetch Java server status.
+     * Fetch the Java server status.
      *
-     * @param host Host
-     * @param port Port (25565)
-     * @param timeout Timeout (2000ms)
-     *
-     * @throws IOException
+     * @param host The server host.
+     * @param port The server port (default 25565).
+     * @param timeout Timeout in milliseconds (default 2000ms).
+     * @return [JavaServerStatus] representing the server's status.
+     * @throws IOException If network or parsing fails.
      */
-    suspend fun getStatus(
+    @JvmStatic
+    @JvmAsync
+    @JvmBlocking
+    public suspend fun getStatus(
         host: String,
         port: Int = 25565,
         timeout: Int = 2000
-    ) = withDispatcherIO {
+    ): JavaServerStatus = withDispatchersIO {
         val asciiHost = IDN.toASCII(host)
-
         val (srvTarget, srvPort) = resolveSrvRecord(asciiHost) ?: (asciiHost to port)
-
         val resolvedHost = resolveToIpOrHost(srvTarget) ?: srvTarget
 
         Socket().use { socket ->
@@ -83,111 +69,71 @@ object JavaServer {
             sendStatusRequest(out)
 
             val jsonStr = readStatusResponse(input)
-            val parsed = moshi.adapter(RawJavaStatus::class.java).fromJson(jsonStr)!!
+            val parsed = json.decodeFromString(JavaServerStatusSerializer, jsonStr)
 
-            var ping: Long?
-            try {
+            val ping = runCatching {
                 val pingStart = System.currentTimeMillis()
                 sendPing(out, pingStart)
                 readPong(input, pingStart)
-                ping = System.currentTimeMillis() - pingStart
-            } catch (_: Exception) {
-                ping = null
-            }
+                System.currentTimeMillis() - pingStart
+            }.getOrNull()
 
             JavaServerStatus(
                 description = parsed.description,
                 players = parsed.players,
                 version = parsed.version,
                 ping = ping,
-                enforcesSecureChat = parsed.enforcesSecureChat ?: false,
+                enforcesSecureChat = parsed.enforcesSecureChat,
                 favicon = parsed.favicon
             )
         }
     }
 
-    /**
-     * [java.util.concurrent.CompletableFuture] variant of [getStatus].
-     */
-    @JvmStatic fun getStatusAsync(
-        host: String,
-        port: Int = 25565,
-        timeout: Int = 2000,
-    ) = CoroutineScope(Dispatchers.IO).future { getStatus(host, port, timeout) }
-
-    @Suppress("ReturnCount")
     private fun resolveToIpOrHost(host: String, depth: Int = 5): String? {
         if (depth <= 0) return null
-
         try {
-            // A
             val lookupA = Lookup(host, Type.A)
             lookupA.run()
             val aRecords = lookupA.result.takeIf { lookupA.result == Lookup.SUCCESSFUL }
                 ?.let { lookupA.answers.filterIsInstance<ARecord>() }
+            if (!aRecords.isNullOrEmpty()) return aRecords[0].address.hostAddress
 
-            if (!aRecords.isNullOrEmpty()) {
-                return aRecords[0].address.hostAddress
-            }
-
-            // AAAA
             val lookupAAAA = Lookup(host, Type.AAAA)
             lookupAAAA.run()
             val aaaaRecords = lookupAAAA.result.takeIf { lookupAAAA.result == Lookup.SUCCESSFUL }
                 ?.let { lookupAAAA.answers.filterIsInstance<AAAARecord>() }
+            if (!aaaaRecords.isNullOrEmpty()) return aaaaRecords[0].address.hostAddress
 
-            if (!aaaaRecords.isNullOrEmpty()) {
-                return aaaaRecords[0].address.hostAddress
-            }
-
-            // CNAME
             val lookupCNAME = Lookup(host, Type.CNAME)
             lookupCNAME.run()
             val cnameRecords = lookupCNAME.result.takeIf { lookupCNAME.result == Lookup.SUCCESSFUL }
                 ?.let { lookupCNAME.answers.filterIsInstance<CNAMERecord>() }
-
             if (!cnameRecords.isNullOrEmpty()) {
                 val cnameTarget = cnameRecords[0].target.toString(true)
-                if (cnameTarget != host) {
-                    return resolveToIpOrHost(cnameTarget, depth - 1)
-                }
+                if (cnameTarget != host) return resolveToIpOrHost(cnameTarget, depth - 1)
             }
-
-        } catch (_: Exception) {
-            return null
-        }
+        } catch (_: Exception) { return null }
         return null
     }
 
-    private fun resolveSrvRecord(host: String): Pair<String, Int>? {
-        return try {
-            val lookup = Lookup("_minecraft._tcp.$host", Type.SRV)
-            lookup.run()
-            if (lookup.result == Lookup.SUCCESSFUL && lookup.answers.isNotEmpty()) {
-                val srv = lookup.answers.filterIsInstance<SRVRecord>().minByOrNull { it.priority }
-                srv?.let {
-                    val target = it.target.toString(true).removeSuffix(".")
-                    val port = it.port
-                    target to port
-                }
-            } else {
-                null
-            }
-        } catch (_: Exception) {
-            null
-        }
-    }
+    private fun resolveSrvRecord(host: String): Pair<String, Int>? = try {
+        val lookup = Lookup("_minecraft._tcp.$host", Type.SRV)
+        lookup.run()
+        if (lookup.result == Lookup.SUCCESSFUL && lookup.answers.isNotEmpty()) {
+            val srv = lookup.answers.filterIsInstance<SRVRecord>().minByOrNull { it.priority }
+            srv?.let { it.target.toString(true).removeSuffix(".") to it.port }
+        } else null
+    } catch (_: Exception) { null }
 
     private fun sendHandshake(out: DataOutputStream, host: String, port: Int) {
-        val handshakePayload = ByteArrayOutputStream()
-        val handshakeData = DataOutputStream(handshakePayload)
+        val payload = ByteArrayOutputStream()
+        val data = DataOutputStream(payload)
+        writeVarInt(data, PROTOCOL_VERSION)
+        writeString(data, host)
+        data.writeShort(port)
+        writeVarInt(data, NEXT_STATE_STATUS)
 
-        writeVarInt(handshakeData, PROTOCOL_VERSION)
-        writeString(handshakeData, host)
-        handshakeData.writeShort(port)
-        writeVarInt(handshakeData, NEXT_STATE_STATUS)
-
-        val body = handshakePayload.toByteArray()
+        val body = payload.toByteArray()
         writeVarInt(out, body.size + 1)
         writeVarInt(out, HANDSHAKE_PACKET_ID)
         out.write(body)
@@ -207,26 +153,22 @@ object JavaServer {
     private fun readStatusResponse(input: DataInputStream): String {
         readVarInt(input)
         val packetId = readVarInt(input)
-        if (packetId != STATUS_RESPONSE_PACKET_ID) {
+        if (packetId != STATUS_RESPONSE_PACKET_ID)
             throw IOException("Unexpected status response packet ID: $packetId")
-        }
         val jsonLength = readVarInt(input)
         val jsonData = ByteArray(jsonLength)
         input.readFully(jsonData)
-
         return String(jsonData, StandardCharsets.UTF_8)
     }
 
     private fun readPong(input: DataInputStream, expectedPayload: Long) {
         readVarInt(input)
         val packetId = readVarInt(input)
-        if (packetId != PING_PACKET_ID) {
+        if (packetId != PING_PACKET_ID)
             throw IOException("Unexpected pong packet ID: $packetId")
-        }
         val payload = input.readLong()
-        if (payload != expectedPayload) {
+        if (payload != expectedPayload)
             throw IOException("Pong payload mismatch: expected $expectedPayload, got $payload")
-        }
     }
 
     private fun writeVarInt(out: OutputStream, value: Int) {
@@ -249,7 +191,7 @@ object JavaServer {
             val byte = input.readByte().toInt()
             result = result or ((byte and 0x7F) shl 7 * bytesRead)
             bytesRead++
-            if (bytesRead > 5) throw IOException("VarInt too big")
+            if (bytesRead > 5) throw kotlinx.io.IOException("VarInt too big")
             if (byte and 0x80 == 0) break
         }
         return result

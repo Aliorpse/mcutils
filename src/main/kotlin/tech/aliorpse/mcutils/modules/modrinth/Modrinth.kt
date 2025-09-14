@@ -1,98 +1,83 @@
 package tech.aliorpse.mcutils.modules.modrinth
 
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.future.future
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import io.ktor.client.request.parameter
+import love.forte.plugin.suspendtrans.annotation.JvmAsync
+import love.forte.plugin.suspendtrans.annotation.JvmBlocking
+import tech.aliorpse.mcutils.model.modrinth.project.ModrinthProject
 import tech.aliorpse.mcutils.model.modrinth.search.ModrinthSearchConfig
-import tech.aliorpse.mcutils.utils.HttpClient
-import tech.aliorpse.mcutils.utils.withDispatcherIO
+import tech.aliorpse.mcutils.model.modrinth.search.ModrinthSearchResponse
+import tech.aliorpse.mcutils.utils.McUtilsHttpClient
+import tech.aliorpse.mcutils.utils.withDispatchersIO
 
-object Modrinth {
-    private val moshi = Moshi.Builder().build()
-
-    private val listType = Types.newParameterizedType(
-        List::class.java,
-        Types.newParameterizedType(List::class.java, String::class.java)
-    )
-
-    private val listAdapter = moshi.adapter<List<List<String>>>(listType)
+/**
+ * Provides convenient methods to interact with the Modrinth API.
+ */
+public object Modrinth {
+    private const val API_BASE = "https://api.modrinth.com"
 
     /**
-     * Search from Modrinth.
+     * Search for Modrinth projects.
+     *
+     * @param query Search query.
+     * @param config Optional configuration for search parameters.
+     * @return [ModrinthSearchResponse] containing the search results.
      */
-    suspend fun search(
+    @JvmStatic
+    @JvmAsync
+    @JvmBlocking
+    public suspend fun search(
         query: String,
         config: ModrinthSearchConfig.() -> Unit = {}
-    ) = withDispatcherIO {
-        val config = ModrinthSearchConfig().apply(config)
-        val facets = config.buildFacets()
+    ): ModrinthSearchResponse = withDispatchersIO {
+        val cfg = ModrinthSearchConfig().apply(config)
+        val facetsStr = cfg.buildFacets().takeIf { it.isNotEmpty() }
 
-        val facetsStr = if (facets.isNotEmpty()) {
-            listAdapter.toJson(facets)
-        } else null
-
-        return@withDispatcherIO HttpClient.modrinthService.search(
-            query = query,
-            facets = facetsStr,
-            limit = config.limit,
-            offset = config.offset,
-            index = config.index.value
-        )
+        McUtilsHttpClient.client.get("$API_BASE/v2/search") {
+            parameter("query", query)
+            parameter("facets", facetsStr)
+            parameter("limit", cfg.limit)
+            parameter("offset", cfg.offset)
+            parameter("index", cfg.index.value)
+        }.body()
     }
-    /**
-     * [java.util.concurrent.CompletableFuture] variant of [search].
-     */
-    @JvmStatic fun searchAsync(
-        query: String,
-        config: ModrinthSearchConfig.() -> Unit
-    ) = CoroutineScope(Dispatchers.IO).future { search(query, config) }
-
-
 
     /**
-     * Get a list of [tech.aliorpse.mcutils.model.modrinth.project.ModrinthProject] by their id/slug.
+     * Get multiple Modrinth projects by ID or slug.
      */
-    suspend fun getProjects(projects: List<String>) = withDispatcherIO {
-        return@withDispatcherIO HttpClient.modrinthService.getProjects(
-            projects.joinToString(
-                prefix = "[", postfix = "]"
-            ) { "\"$it\"" }
-        )
+    @JvmStatic
+    @JvmAsync
+    @JvmBlocking
+    public suspend fun getProjects(ids: List<String>): List<ModrinthProject> = withDispatchersIO {
+        val idsStr = ids.joinToString(",", "[", "]") { "\"$it\"" }
+        McUtilsHttpClient.client.get("$API_BASE/v2/projects") {
+            parameter("ids", idsStr)
+        }.body()
     }
-    /**
-     * [java.util.concurrent.CompletableFuture] variant of [getProjects].
-     */
-    @JvmStatic fun getProjectsAsync(projects: List<String>) =
-        CoroutineScope(Dispatchers.IO).future { getProjects(projects) }
-
-
 
     /**
-     * Single-project variant of [getProjects]
+     * Get a single Modrinth project by ID or slug.
      */
-    suspend fun getProject(project: String) = withDispatcherIO {
-        return@withDispatcherIO getProjects(listOf(project))[0]
+    @JvmStatic
+    @JvmAsync
+    @JvmBlocking
+    public suspend fun getProject(id: String): ModrinthProject = withDispatchersIO {
+        getProjects(listOf(id))[0]
     }
-    /**
-     * [java.util.concurrent.CompletableFuture] variant of [getProject]
-     */
-    @JvmStatic fun getProjectAsync(project: String) =
-        CoroutineScope(Dispatchers.IO).future { getProject(project) }
-
-
 
     /**
-     * Get a list of random [tech.aliorpse.mcutils.model.modrinth.project.ModrinthProject].
+     * Get a random list of Modrinth projects.
+     *
+     * @param count Number of random projects to fetch (max 100).
      */
-    suspend fun getProjectsRandom(count: Int = 10) = withDispatcherIO {
+    @JvmStatic
+    @JvmAsync
+    @JvmBlocking
+    public suspend fun getProjectsRandom(count: Int = 10): List<ModrinthProject> = withDispatchersIO {
         require(count <= 100)
-        return@withDispatcherIO HttpClient.modrinthService.getProjectsRandom(count)
+        McUtilsHttpClient.client.get("$API_BASE/v2/projects_random") {
+            parameter("count", count)
+        }.body()
     }
-    /**
-     * java.util.concurrent.CompletableFuture] variant of [getProjectsRandom].
-     */
-    @JvmStatic fun getProjectsRandomAsync(count: Int = 10) =
-        CoroutineScope(Dispatchers.IO).future { getProjectsRandom(count) }
 }
