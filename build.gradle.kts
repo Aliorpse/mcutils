@@ -21,14 +21,6 @@ kotlin {
     explicitApi()
 }
 
-dokka {
-    dokkaSourceSets {
-        named("main") {
-            sourceRoots.setFrom(file("src/main/kotlin"))
-        }
-    }
-}
-
 suspendTransformPlugin {
     transformers {
         addJvmBlocking()
