@@ -75,8 +75,9 @@ runBlocking {
 
 ## Java Usage
 
-All suspend functions also provide a `CompletableFuture` variant,  
-allowing you to call them directly from Java without dealing with coroutines.
+The project uses [kotlin-suspend-transform-compiler-plugin](https://github.com/ForteScarlet/kotlin-suspend-transform-compiler-plugin) to generate varints automatically.
+
+For every suspending API, both **async** and **blocking** variants are available.
 
 ```java
 CompletableFuture<JavaServerStatus> status =
