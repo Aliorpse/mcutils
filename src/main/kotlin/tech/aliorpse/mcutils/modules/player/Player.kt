@@ -1,12 +1,12 @@
 package tech.aliorpse.mcutils.modules.player
 
-import io.ktor.client.call.body
-import io.ktor.client.request.get
+import io.ktor.client.call.*
+import io.ktor.client.request.*
 import love.forte.plugin.suspendtrans.annotation.JvmAsync
 import love.forte.plugin.suspendtrans.annotation.JvmBlocking
 import tech.aliorpse.mcutils.model.player.PlayerProfile
 import tech.aliorpse.mcutils.model.player.PlayerUUIDProfile
-import tech.aliorpse.mcutils.utils.McUtilsHttpClient
+import tech.aliorpse.mcutils.utils.McUtilsHttpClientProvider
 import tech.aliorpse.mcutils.utils.withDispatchersIO
 
 /**
@@ -41,13 +41,13 @@ public object Player {
 
         when {
             pl.length == UUID_LENGTH -> {
-                McUtilsHttpClient.client.get("$MOJANG_SESSION_BASE/session/minecraft/profile/$pl").body()
+                McUtilsHttpClientProvider.client.get("$MOJANG_SESSION_BASE/session/minecraft/profile/$pl").body()
             }
 
             nameRegex.matches(pl) -> {
                 val uuidProfile: PlayerUUIDProfile =
-                    McUtilsHttpClient.client.get("$MOJANG_PROFILE_BASE/users/profiles/minecraft/$pl").body()
-                McUtilsHttpClient.client.get("$MOJANG_SESSION_BASE/session/minecraft/profile/${uuidProfile.id}").body()
+                    McUtilsHttpClientProvider.client.get("$MOJANG_PROFILE_BASE/users/profiles/minecraft/$pl").body()
+                McUtilsHttpClientProvider.client.get("$MOJANG_SESSION_BASE/session/minecraft/profile/${uuidProfile.id}").body()
             }
 
             else -> throw IllegalArgumentException("Invalid identifier: $pl")

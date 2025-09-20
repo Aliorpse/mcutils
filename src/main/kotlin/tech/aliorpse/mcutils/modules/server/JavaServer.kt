@@ -1,27 +1,22 @@
 package tech.aliorpse.mcutils.modules.server
 
 
-import kotlinx.serialization.json.Json
 import kotlinx.io.IOException
+import kotlinx.serialization.json.Json
 import love.forte.plugin.suspendtrans.annotation.JvmAsync
 import love.forte.plugin.suspendtrans.annotation.JvmBlocking
-import org.xbill.DNS.AAAARecord
-import org.xbill.DNS.ARecord
-import org.xbill.DNS.CNAMERecord
-import org.xbill.DNS.Lookup
-import org.xbill.DNS.SRVRecord
-import org.xbill.DNS.Type
+import org.xbill.DNS.*
 import tech.aliorpse.mcutils.model.server.JavaServerStatus
-import tech.aliorpse.mcutils.utils.withDispatchersIO
-import java.net.IDN
-import java.net.InetSocketAddress
-import java.net.Socket
-import java.nio.charset.StandardCharsets
 import tech.aliorpse.mcutils.model.server.JavaServerStatusSerializer
+import tech.aliorpse.mcutils.utils.withDispatchersIO
 import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.io.OutputStream
+import java.net.IDN
+import java.net.InetSocketAddress
+import java.net.Socket
+import java.nio.charset.StandardCharsets
 
 /**
  * Provides functionality to fetch and parse the status of a Java Minecraft server.

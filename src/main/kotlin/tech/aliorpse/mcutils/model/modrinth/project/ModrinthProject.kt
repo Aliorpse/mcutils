@@ -2,11 +2,7 @@ package tech.aliorpse.mcutils.model.modrinth.project
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import tech.aliorpse.mcutils.model.modrinth.MonetizationStatus
-import tech.aliorpse.mcutils.model.modrinth.ProjectStatus
-import tech.aliorpse.mcutils.model.modrinth.ProjectType
-import tech.aliorpse.mcutils.model.modrinth.RequestedStatus
-import tech.aliorpse.mcutils.model.modrinth.SideSupport
+import tech.aliorpse.mcutils.model.modrinth.*
 
 @Serializable
 public data class ModrinthProject(

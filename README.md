@@ -11,6 +11,7 @@ A Kotlin-based Minecraft request library provides utility functions related to M
 ```kotlin
 dependencies {
     implementation("tech.aliorpse:mcutils:$version")
+    implementation("io.ktor:ktor-client-cio:$version") //or the client you want
 }
 ```
 
@@ -43,8 +44,6 @@ runBlocking {
 
 ```kotlin
 runBlocking {
-    McUtilsHttpClient.init(CIO)
-    
     var pl
     pl = Player.getProfile("Aliorpse")
     pl = Player.getProfile("ec042e1200ac4a249cc83eb1fab0bd88")
@@ -56,8 +55,6 @@ runBlocking {
 
 ```kotlin
 runBlocking {
-    McUtilsHttpClient.init(CIO)
-    
     var result
     result = Modrinth.search("xplus") {
         author = "Wudji"

@@ -1,14 +1,13 @@
 package tech.aliorpse.mcutils.modules.modrinth
 
-import io.ktor.client.call.body
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
+import io.ktor.client.call.*
+import io.ktor.client.request.*
 import love.forte.plugin.suspendtrans.annotation.JvmAsync
 import love.forte.plugin.suspendtrans.annotation.JvmBlocking
 import tech.aliorpse.mcutils.model.modrinth.project.ModrinthProject
 import tech.aliorpse.mcutils.model.modrinth.search.ModrinthSearchConfig
 import tech.aliorpse.mcutils.model.modrinth.search.ModrinthSearchResponse
-import tech.aliorpse.mcutils.utils.McUtilsHttpClient
+import tech.aliorpse.mcutils.utils.McUtilsHttpClientProvider
 import tech.aliorpse.mcutils.utils.withDispatchersIO
 
 /**
@@ -39,7 +38,7 @@ public object Modrinth {
                 inner.joinToString(prefix = "[", postfix = "]") { "\"$it\"" }
             }
 
-        McUtilsHttpClient.client.get("$API_BASE/v2/search") {
+        McUtilsHttpClientProvider.client.get("$API_BASE/v2/search") {
             parameter("query", query)
             parameter("facets", facetsStr)
             parameter("limit", cfg.limit)
@@ -56,7 +55,7 @@ public object Modrinth {
     @JvmBlocking
     public suspend fun getProjects(ids: List<String>): List<ModrinthProject> = withDispatchersIO {
         val idsStr = ids.joinToString(",", "[", "]") { "\"$it\"" }
-        McUtilsHttpClient.client.get("$API_BASE/v2/projects") {
+        McUtilsHttpClientProvider.client.get("$API_BASE/v2/projects") {
             parameter("ids", idsStr)
         }.body()
     }
@@ -81,7 +80,7 @@ public object Modrinth {
     @JvmBlocking
     public suspend fun getProjectsRandom(count: Int = 10): List<ModrinthProject> = withDispatchersIO {
         require(count <= 100)
-        McUtilsHttpClient.client.get("$API_BASE/v2/projects_random") {
+        McUtilsHttpClientProvider.client.get("$API_BASE/v2/projects_random") {
             parameter("count", count)
         }.body()
     }

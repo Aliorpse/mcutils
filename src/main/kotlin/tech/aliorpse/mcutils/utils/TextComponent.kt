@@ -2,7 +2,7 @@ package tech.aliorpse.mcutils.utils
 
 import tech.aliorpse.mcutils.model.server.TextComponent
 import tech.aliorpse.mcutils.model.server.TextStyle
-import java.util.EnumSet
+import java.util.*
 
 /**
  * Coverts string with "§" to a [TextComponent].

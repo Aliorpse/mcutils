@@ -6,13 +6,9 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonDecoder
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.booleanOrNull
+import kotlinx.serialization.json.*
 import tech.aliorpse.mcutils.utils.toTextComponent
-import java.util.EnumSet
+import java.util.*
 
 internal object TextComponentSerializer : KSerializer<TextComponent> {
     @Serializable
