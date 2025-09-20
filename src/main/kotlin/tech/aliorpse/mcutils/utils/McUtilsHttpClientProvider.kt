@@ -5,7 +5,7 @@ import io.ktor.client.engine.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
-import tech.aliorpse.mcutils.utils.McUtilsHttpClientProvider.client
+import tech.aliorpse.mcutils.utils.McUtilsHttpClientProvider.httpClient
 import kotlin.reflect.KProperty
 
 /**
@@ -31,7 +31,7 @@ import kotlin.reflect.KProperty
 public object McUtilsHttpClientProvider {
     private val delegate = HttpClientDelegate()
 
-    internal val client: HttpClient by delegate
+    internal val httpClient: HttpClient by delegate
 
     private fun makeClient(engine: HttpClientEngineFactory<*>): HttpClient =
         HttpClient(engine) {
@@ -84,8 +84,10 @@ public object McUtilsHttpClientProvider {
     /**
      * Overrides the default [HttpClient] with a custom engine.
      *
-     * Must be called **before** the first access of [client], or you will get a [IllegalStateException],
-     * and it should be only called **once**.
+     * Must be called **before** the first access of [httpClient] (calling of http-related functions).
+     * It should be only called **once**.
+     *
+     * @throws IllegalStateException If called after the first access of [httpClient].
      */
     public fun use(engine: HttpClientEngineFactory<*>): Unit = delegate.setClient(makeClient(engine))
 }

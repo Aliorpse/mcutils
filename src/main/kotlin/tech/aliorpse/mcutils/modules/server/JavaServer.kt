@@ -8,11 +8,13 @@ import love.forte.plugin.suspendtrans.annotation.JvmBlocking
 import org.xbill.DNS.*
 import tech.aliorpse.mcutils.model.server.JavaServerStatus
 import tech.aliorpse.mcutils.model.server.JavaServerStatusSerializer
+import tech.aliorpse.mcutils.utils.HostPort
 import tech.aliorpse.mcutils.utils.withDispatchersIO
 import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.io.OutputStream
+import java.lang.IllegalArgumentException
 import java.net.IDN
 import java.net.InetSocketAddress
 import java.net.Socket
@@ -33,13 +35,11 @@ public object JavaServer {
     private val json = Json { ignoreUnknownKeys = true }
 
     /**
-     * Fetch the Java server status.
+     * Fetches the Java server status.
      *
      * @param host The server host.
      * @param port The server port (default 25565).
      * @param timeout Timeout in milliseconds (default 2000ms).
-     * @return [JavaServerStatus] representing the server's status.
-     * @throws IOException If network or parsing fails.
      */
     @JvmStatic
     @JvmOverloads
@@ -84,6 +84,27 @@ public object JavaServer {
             )
         }
     }
+
+    /**
+     * Fetches the Java server status.
+     *
+     * @param hostPort As it named.
+     * @param timeout Timeout in milliseconds (default 2000ms).
+     * @return [JavaServerStatus] representing the server's status.
+     * @throws IllegalArgumentException If host is null.
+     */
+    @JvmStatic
+    @JvmOverloads
+    @JvmAsync
+    @JvmBlocking
+    public suspend fun getStatus(
+        hostPort: HostPort,
+        timeout: Int = 2000
+    ): JavaServerStatus = getStatus(
+        hostPort.host ?: throw IllegalArgumentException("The host is null."),
+        hostPort.port ?: 25565,
+        timeout
+    )
 
     private fun resolveToIpOrHost(host: String, depth: Int = 5): String? {
         if (depth <= 0) return null

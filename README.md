@@ -12,7 +12,7 @@ A Kotlin-based Minecraft request library provides utility functions related to M
 ```kotlin
 dependencies {
     implementation("tech.aliorpse:mcutils:$version")
-    implementation("io.ktor:ktor-client-cio:$version") //or the client you want
+    implementation("io.ktor:ktor-client-cio:$version") // or the client you want
 }
 ```
 

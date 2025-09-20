@@ -6,6 +6,7 @@ import tech.aliorpse.mcutils.model.server.BedrockServerStatus
 import tech.aliorpse.mcutils.model.server.GameMode
 import tech.aliorpse.mcutils.model.server.Players
 import tech.aliorpse.mcutils.model.server.Version
+import tech.aliorpse.mcutils.utils.HostPort
 import tech.aliorpse.mcutils.utils.toTextComponent
 import tech.aliorpse.mcutils.utils.withDispatchersIO
 import java.io.IOException
@@ -35,13 +36,11 @@ public object BedrockServer {
     private const val SERVER_INFO_OFFSET = 33
 
     /**
-     * Fetches the status of a Bedrock server.
+     * Fetches the Bedrock server status.
      *
-     * @param host The server hostname or IP.
+     * @param host The server host.
      * @param port The server port (default 19132).
      * @param timeout Timeout in milliseconds (default 2000ms).
-     * @return A [BedrockServerStatus] containing the parsed server information.
-     * @throws IOException If the server response is invalid or timed out.
      */
     @JvmStatic
     @JvmOverloads
@@ -108,4 +107,24 @@ public object BedrockServer {
             )
         }
     }
+
+    /**
+     * Fetches the Bedrock server status.
+     *
+     * @param hostPort As it named.
+     * @param timeout Timeout in milliseconds (default 2000ms).
+     * @throws IllegalArgumentException If host is null.
+     */
+    @JvmStatic
+    @JvmOverloads
+    @JvmAsync
+    @JvmBlocking
+    public suspend fun getStatus(
+        hostPort: HostPort,
+        timeout: Int = 2000
+    ): BedrockServerStatus = getStatus(
+        hostPort.host ?: throw IllegalArgumentException("The host is null."),
+        hostPort.port ?: 19132,
+        timeout
+    )
 }

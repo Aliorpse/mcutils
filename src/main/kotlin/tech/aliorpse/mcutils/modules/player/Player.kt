@@ -6,7 +6,7 @@ import love.forte.plugin.suspendtrans.annotation.JvmAsync
 import love.forte.plugin.suspendtrans.annotation.JvmBlocking
 import tech.aliorpse.mcutils.model.player.PlayerProfile
 import tech.aliorpse.mcutils.model.player.PlayerUUIDProfile
-import tech.aliorpse.mcutils.utils.McUtilsHttpClientProvider
+import tech.aliorpse.mcutils.utils.McUtilsHttpClientProvider.httpClient
 import tech.aliorpse.mcutils.utils.withDispatchersIO
 
 /**
@@ -30,7 +30,6 @@ public object Player {
      * - A valid Minecraft username (3–16 characters, letters, digits, and underscores).
      *
      * @param player The player's UUID or username.
-     * @return A [PlayerProfile] containing the player's UUID, username, skin, cape, and model type.
      * @throws IllegalArgumentException if the input is neither a valid UUID nor a valid username.
      */
     @JvmStatic
@@ -41,13 +40,13 @@ public object Player {
 
         when {
             pl.length == UUID_LENGTH -> {
-                McUtilsHttpClientProvider.client.get("$MOJANG_SESSION_BASE/session/minecraft/profile/$pl").body()
+                httpClient.get("$MOJANG_SESSION_BASE/session/minecraft/profile/$pl").body()
             }
 
             nameRegex.matches(pl) -> {
                 val uuidProfile: PlayerUUIDProfile =
-                    McUtilsHttpClientProvider.client.get("$MOJANG_PROFILE_BASE/users/profiles/minecraft/$pl").body()
-                McUtilsHttpClientProvider.client.get("$MOJANG_SESSION_BASE/session/minecraft/profile/${uuidProfile.id}").body()
+                    httpClient.get("$MOJANG_PROFILE_BASE/users/profiles/minecraft/$pl").body()
+                httpClient.get("$MOJANG_SESSION_BASE/session/minecraft/profile/${uuidProfile.id}").body()
             }
 
             else -> throw IllegalArgumentException("Invalid identifier: $pl")

@@ -23,8 +23,7 @@ kotlin {
 
 suspendTransformPlugin {
     transformers {
-        addJvmBlocking()
-        addJvmAsync()
+        useJvmDefault()
     }
 }
 

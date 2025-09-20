@@ -7,7 +7,7 @@ import love.forte.plugin.suspendtrans.annotation.JvmBlocking
 import tech.aliorpse.mcutils.model.modrinth.project.ModrinthProject
 import tech.aliorpse.mcutils.model.modrinth.search.ModrinthSearchConfig
 import tech.aliorpse.mcutils.model.modrinth.search.ModrinthSearchResponse
-import tech.aliorpse.mcutils.utils.McUtilsHttpClientProvider
+import tech.aliorpse.mcutils.utils.McUtilsHttpClientProvider.httpClient
 import tech.aliorpse.mcutils.utils.withDispatchersIO
 
 /**
@@ -21,7 +21,6 @@ public object Modrinth {
      *
      * @param query Search query.
      * @param config Optional configuration for search parameters.
-     * @return [ModrinthSearchResponse] containing the search results.
      */
     @JvmStatic
     @JvmOverloads
@@ -38,7 +37,7 @@ public object Modrinth {
                 inner.joinToString(prefix = "[", postfix = "]") { "\"$it\"" }
             }
 
-        McUtilsHttpClientProvider.client.get("$API_BASE/v2/search") {
+        httpClient.get("$API_BASE/v2/search") {
             parameter("query", query)
             parameter("facets", facetsStr)
             parameter("limit", cfg.limit)
@@ -55,7 +54,7 @@ public object Modrinth {
     @JvmBlocking
     public suspend fun getProjects(ids: List<String>): List<ModrinthProject> = withDispatchersIO {
         val idsStr = ids.joinToString(",", "[", "]") { "\"$it\"" }
-        McUtilsHttpClientProvider.client.get("$API_BASE/v2/projects") {
+        httpClient.get("$API_BASE/v2/projects") {
             parameter("ids", idsStr)
         }.body()
     }
@@ -80,7 +79,7 @@ public object Modrinth {
     @JvmBlocking
     public suspend fun getProjectsRandom(count: Int = 10): List<ModrinthProject> = withDispatchersIO {
         require(count <= 100)
-        McUtilsHttpClientProvider.client.get("$API_BASE/v2/projects_random") {
+        httpClient.get("$API_BASE/v2/projects_random") {
             parameter("count", count)
         }.body()
     }
