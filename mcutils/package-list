@@ -264,8 +264,8 @@ $dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/getStatus/#kotli
 $dokka.location:tech.aliorpse.mcutils.utils////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/index.html
 $dokka.location:tech.aliorpse.mcutils.utils//toHtml/tech.aliorpse.mcutils.model.server.TextComponent#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/to-html.html
 $dokka.location:tech.aliorpse.mcutils.utils//toTextComponent/kotlin.String#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/to-text-component.html
-$dokka.location:tech.aliorpse.mcutils.utils/McUtilsHttpClient///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-mc-utils-http-client/index.html
-$dokka.location:tech.aliorpse.mcutils.utils/McUtilsHttpClient/init/#io.ktor.client.engine.HttpClientEngineFactory[*]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-mc-utils-http-client/init.html
+$dokka.location:tech.aliorpse.mcutils.utils/McUtilsHttpClientProvider///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-mc-utils-http-client-provider/index.html
+$dokka.location:tech.aliorpse.mcutils.utils/McUtilsHttpClientProvider/use/#io.ktor.client.engine.HttpClientEngineFactory[*]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-mc-utils-http-client-provider/use.html
 tech.aliorpse.mcutils.model.modrinth
 tech.aliorpse.mcutils.model.modrinth.project
 tech.aliorpse.mcutils.model.modrinth.search
