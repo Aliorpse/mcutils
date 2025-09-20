@@ -3,7 +3,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Aliorpse_kotlin-mcutils&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Aliorpse_kotlin-mcutils)
 [![CodeFactor](https://www.codefactor.io/repository/github/aliorpse/kotlin-mcutils/badge/main)](https://www.codefactor.io/repository/github/aliorpse/kotlin-mcutils/overview/main)
 [![Maven Central](https://maven-badges.sml.io/sonatype-central/tech.aliorpse/mcutils/badge.svg)](https://central.sonatype.com/artifact/tech.aliorpse/mcutils)
-[![View on DeepWiki](https://deepwiki.com/badge.svg)](https://app.devin.ai/wiki/Aliorpse/kotlin-mcutils)
+[![View on DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Aliorpse/kotlin-mcutils)
 
 A Kotlin-based Minecraft request library provides utility functions related to Minecraft queries.
 
