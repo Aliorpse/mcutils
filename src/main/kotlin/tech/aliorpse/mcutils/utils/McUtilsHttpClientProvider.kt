@@ -6,7 +6,6 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 import tech.aliorpse.mcutils.utils.McUtilsHttpClientProvider.client
-import tech.aliorpse.mcutils.utils.McUtilsHttpClientProvider.use
 import kotlin.reflect.KProperty
 
 /**
