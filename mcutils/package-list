@@ -259,11 +259,18 @@ $dokka.location:tech.aliorpse.mcutils.modules.player/Player/getProfile/#kotlin.S
 $dokka.location:tech.aliorpse.mcutils.modules.server////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.server/BedrockServer///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-bedrock-server/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.server/BedrockServer/getStatus/#kotlin.String#kotlin.Int#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-bedrock-server/get-status.html
+$dokka.location:tech.aliorpse.mcutils.modules.server/BedrockServer/getStatus/#tech.aliorpse.mcutils.utils.HostPort#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-bedrock-server/get-status.html
 $dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/getStatus/#kotlin.String#kotlin.Int#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/get-status.html
+$dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/getStatus/#tech.aliorpse.mcutils.utils.HostPort#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/get-status.html
 $dokka.location:tech.aliorpse.mcutils.utils////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/index.html
+$dokka.location:tech.aliorpse.mcutils.utils//hostPortOf/#kotlin.String?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/host-port-of.html
 $dokka.location:tech.aliorpse.mcutils.utils//toHtml/tech.aliorpse.mcutils.model.server.TextComponent#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/to-html.html
 $dokka.location:tech.aliorpse.mcutils.utils//toTextComponent/kotlin.String#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/to-text-component.html
+$dokka.location:tech.aliorpse.mcutils.utils/HostPort///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-host-port/index.html
+$dokka.location:tech.aliorpse.mcutils.utils/HostPort/HostPort/#kotlin.String?#kotlin.Int?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-host-port/-host-port.html
+$dokka.location:tech.aliorpse.mcutils.utils/HostPort/host/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-host-port/host.html
+$dokka.location:tech.aliorpse.mcutils.utils/HostPort/port/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-host-port/port.html
 $dokka.location:tech.aliorpse.mcutils.utils/McUtilsHttpClientProvider///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-mc-utils-http-client-provider/index.html
 $dokka.location:tech.aliorpse.mcutils.utils/McUtilsHttpClientProvider/use/#io.ktor.client.engine.HttpClientEngineFactory[*]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-mc-utils-http-client-provider/use.html
 tech.aliorpse.mcutils.model.modrinth
