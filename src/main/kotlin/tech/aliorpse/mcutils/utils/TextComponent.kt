@@ -51,7 +51,10 @@ public fun String.toTextComponent(): TextComponent {
         components[0]
     } else {
         TextComponent(
-            text = "", color = "", styles = EnumSet.noneOf(TextStyle::class.java), extra = components
+            text = "",
+            color = "",
+            styles = EnumSet.noneOf(TextStyle::class.java),
+            extra = components
         )
     }
 }
