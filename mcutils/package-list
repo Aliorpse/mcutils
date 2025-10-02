@@ -267,6 +267,7 @@ $dokka.location:tech.aliorpse.mcutils.utils////PointingToDeclaration/mcutils/te
 $dokka.location:tech.aliorpse.mcutils.utils//hostPortOf/#kotlin.String?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/host-port-of.html
 $dokka.location:tech.aliorpse.mcutils.utils//toHtml/tech.aliorpse.mcutils.model.server.TextComponent#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/to-html.html
 $dokka.location:tech.aliorpse.mcutils.utils//toTextComponent/kotlin.String#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/to-text-component.html
+$dokka.location:tech.aliorpse.mcutils.utils//toTextComponents/kotlin.collections.List[tech.aliorpse.mcutils.model.server.Sample]#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/to-text-components.html
 $dokka.location:tech.aliorpse.mcutils.utils/HostPort///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-host-port/index.html
 $dokka.location:tech.aliorpse.mcutils.utils/HostPort/HostPort/#kotlin.String?#kotlin.Int?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-host-port/-host-port.html
 $dokka.location:tech.aliorpse.mcutils.utils/HostPort/host/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-host-port/host.html
