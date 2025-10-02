@@ -1,5 +1,6 @@
 package tech.aliorpse.mcutils.utils
 
+import tech.aliorpse.mcutils.model.server.Sample
 import tech.aliorpse.mcutils.model.server.TextComponent
 import tech.aliorpse.mcutils.model.server.TextStyle
 import java.util.*
@@ -107,6 +108,10 @@ public fun TextComponent.toHtml(): String {
     } else {
         html
     }
+}
+
+public fun List<Sample>.toTextComponents(): List<TextComponent> {
+    return map { it.name.toTextComponent() }
 }
 
 private fun escapeHtml(text: String): String = buildString {
