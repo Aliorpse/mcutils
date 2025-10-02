@@ -1,10 +1,10 @@
 package tech.aliorpse.mcutils.modules.server
 
 
-import kotlinx.io.IOException
 import kotlinx.serialization.json.Json
 import love.forte.plugin.suspendtrans.annotation.JvmAsync
 import love.forte.plugin.suspendtrans.annotation.JvmBlocking
+import tech.aliorpse.mcutils.exceptions.ServerStatusException
 import tech.aliorpse.mcutils.model.server.JavaServerStatus
 import tech.aliorpse.mcutils.model.server.JavaServerStatusSerializer
 import tech.aliorpse.mcutils.utils.HostPort
@@ -134,7 +134,7 @@ public object JavaServer {
         readVarInt(input)
         val packetId = readVarInt(input)
         if (packetId != STATUS_RESPONSE_PACKET_ID)
-            throw IOException("Unexpected status response packet ID: $packetId")
+            throw ServerStatusException("Unexpected status response packet ID: $packetId")
         val jsonLength = readVarInt(input)
         val jsonData = ByteArray(jsonLength)
         input.readFully(jsonData)
@@ -145,10 +145,10 @@ public object JavaServer {
         readVarInt(input)
         val packetId = readVarInt(input)
         if (packetId != PING_PACKET_ID)
-            throw IOException("Unexpected pong packet ID: $packetId")
+            throw ServerStatusException("Unexpected pong packet ID: $packetId")
         val payload = input.readLong()
         if (payload != expectedPayload)
-            throw IOException("Pong payload mismatch: expected $expectedPayload, got $payload")
+            throw ServerStatusException("Pong payload mismatch: expected $expectedPayload, got $payload")
     }
 
     private fun writeVarInt(out: OutputStream, value: Int) {
@@ -171,7 +171,7 @@ public object JavaServer {
             val byte = input.readByte().toInt()
             result = result or ((byte and 0x7F) shl 7 * bytesRead)
             bytesRead++
-            if (bytesRead > 5) throw IOException("VarInt too big")
+            if (bytesRead > 5) throw ServerStatusException("VarInt too big")
             if (byte and 0x80 == 0) break
         }
         return result

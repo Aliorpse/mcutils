@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
  *
  * @property id The UUID of the player.
  * @property name The username of the player.
- * @property legacy Uh, I don't want to explain this, check wiki, please.
+ * @property legacy True when it is a legacy account.
  * @property skinUrl The URL to the player's skin texture.
  * @property capeUrl The URL to the player's cape texture.
  * @property skinModel The model type of the player's skin, either CLASSIC (Steve) or SLIM (Alex).

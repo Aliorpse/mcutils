@@ -2,6 +2,7 @@ package tech.aliorpse.mcutils.modules.server
 
 import love.forte.plugin.suspendtrans.annotation.JvmAsync
 import love.forte.plugin.suspendtrans.annotation.JvmBlocking
+import tech.aliorpse.mcutils.exceptions.ServerStatusException
 import tech.aliorpse.mcutils.model.server.BedrockServerStatus
 import tech.aliorpse.mcutils.model.server.GameMode
 import tech.aliorpse.mcutils.model.server.Players
@@ -9,7 +10,6 @@ import tech.aliorpse.mcutils.model.server.Version
 import tech.aliorpse.mcutils.utils.HostPort
 import tech.aliorpse.mcutils.utils.toTextComponent
 import tech.aliorpse.mcutils.utils.withDispatchersIO
-import java.io.IOException
 import java.net.DatagramPacket
 import java.net.DatagramSocket
 import java.net.IDN
@@ -76,11 +76,11 @@ public object BedrockServer {
 
             val data = receivePacket.data
             if (data.isEmpty() || data[0] != PACKET_ID_UNCONNECTED_PONG) {
-                throw IOException("Invalid response: expected packet ID 0x1C, got ${data.getOrNull(0)}")
+                throw ServerStatusException("Invalid response: expected packet ID 0x1C, got ${data.getOrNull(0)}")
             }
 
             if (receivePacket.length <= SERVER_INFO_OFFSET) {
-                throw IOException("Received packet too short to contain server info")
+                throw ServerStatusException("Received packet too short to contain server info")
             }
 
             val infoRaw = data.copyOfRange(SERVER_INFO_OFFSET, receivePacket.length)
@@ -88,7 +88,9 @@ public object BedrockServer {
 
             val parts = infoStr.split(";")
             if (parts.size < MIN_EXPECTED_PARTS) {
-                throw IOException("Malformed response: expected at least $MIN_EXPECTED_PARTS parts, got ${parts.size}")
+                throw ServerStatusException(
+                    "Malformed response: expected at least $MIN_EXPECTED_PARTS parts, got ${parts.size}"
+                )
             }
 
             val protocol = parts[2].toLongOrNull() ?: 0
