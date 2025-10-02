@@ -5,14 +5,17 @@
 [![Maven Central](https://maven-badges.sml.io/sonatype-central/tech.aliorpse/mcutils/badge.svg)](https://central.sonatype.com/artifact/tech.aliorpse/mcutils)
 [![View on DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Aliorpse/mcutils)
 
-A Kotlin-based Minecraft request library provides utility functions related to Minecraft queries.
+A Kotlin-based library that provides utility functions for Minecraft-related queries.
+
+This project has not been widely tested, so use it at your own risk in production environments. Contributions to improve it are welcome.
 
 ## Installation
 
 ```kotlin
 dependencies {
     implementation("tech.aliorpse:mcutils:$version")
-    implementation("io.ktor:ktor-client-cio:$version") // or the client you want
+    // Add the HTTP client you prefer
+    implementation("io.ktor:ktor-client-cio:$version")
 }
 ```
 
@@ -27,14 +30,12 @@ runBlocking {
     var status
     status = JavaServer.getStatus("mc.hypixel.net")
     
-    // more options
     status = JavaServer.getStatus(
         host = "wdsj.net",
         port = 25565,
         enableSrv = true
     )
     
-    // bedrock servers
     status = BedrockServer.getStatus("play.easecation.net")
 }
 ```
@@ -68,13 +69,15 @@ runBlocking {
 }
 ```
 
+Check out the project's [dokka](https://aliorpse.github.io/mcutils/) for the full API reference. There may be some extension functions you’ll find useful.
+
 ## Java Usage
 
-The project uses [kotlin-suspend-transform-compiler-plugin](https://github.com/ForteScarlet/kotlin-suspend-transform-compiler-plugin) to generate varints automatically.
+The project uses [kotlin-suspend-transform-compiler-plugin](https://github.com/ForteScarlet/kotlin-suspend-transform-compiler-plugin) to generate variants automatically.
 
 For every suspending API, both **async** and **blocking** variants are available.
 
 ```java
 CompletableFuture<JavaServerStatus> status =
-        JavaServer.getStatusAsync("mc.hypixel.net", 25565, 2000);
+        JavaServer.getStatusAsync("mc.hypixel.net");
 ```
