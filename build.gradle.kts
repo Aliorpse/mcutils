@@ -58,7 +58,7 @@ configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
     pom {
         name = "mcutils"
         description = "Kotlin library for Minecraft operations"
-        url = "https://github.com/Aliorpse/kotlin-mcutils/"
+        url = "https://github.com/Aliorpse/mcutils/"
         inceptionYear = "2025"
 
         licenses {
@@ -77,9 +77,9 @@ configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
         }
 
         scm {
-            url = "https://github.com/Aliorpse/kotlin-mcutils/"
-            connection = "scm:git:git://github.com/Aliorpse/kotlin-mcutils.git"
-            developerConnection = "scm:git:ssh://git@github.com/Aliorpse/kotlin-mcutils.git"
+            url = "https://github.com/Aliorpse/mcutils/"
+            connection = "scm:git:git://github.com/Aliorpse/mcutils.git"
+            developerConnection = "scm:git:ssh://git@github.com/Aliorpse/mcutils.git"
         }
     }
 }
