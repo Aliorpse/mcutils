@@ -2,10 +2,15 @@ package tech.aliorpse.mcutils.modules.player
 
 import io.ktor.client.call.*
 import io.ktor.client.request.*
+import io.ktor.util.decodeBase64Bytes
+import kotlinx.serialization.json.Json
 import love.forte.plugin.suspendtrans.annotation.JvmAsync
 import love.forte.plugin.suspendtrans.annotation.JvmBlocking
 import tech.aliorpse.mcutils.model.player.PlayerProfile
-import tech.aliorpse.mcutils.model.player.PlayerUUIDProfile
+import tech.aliorpse.mcutils.model.player.SkinModel
+import tech.aliorpse.mcutils.model.player.internal.DecodedTextures
+import tech.aliorpse.mcutils.model.player.internal.PlayerUUIDProfile
+import tech.aliorpse.mcutils.model.player.internal.RawPlayerProfile
 import tech.aliorpse.mcutils.utils.McUtilsHttpClientProvider.httpClient
 import tech.aliorpse.mcutils.utils.withDispatchersIO
 
@@ -16,6 +21,7 @@ import tech.aliorpse.mcutils.utils.withDispatchersIO
  * UUIDs when given a username.
  */
 public object Player {
+    private val json = Json { ignoreUnknownKeys = true }
     private const val UUID_LENGTH = 32
     private val nameRegex = Regex("^[A-Za-z0-9_]{3,16}$")
 
@@ -38,7 +44,7 @@ public object Player {
     public suspend fun getProfile(player: String): PlayerProfile = withDispatchersIO {
         val pl = player.replace("-", "")
 
-        when {
+        val raw: RawPlayerProfile = when {
             pl.length == UUID_LENGTH -> {
                 httpClient.get("$MOJANG_SESSION_BASE/session/minecraft/profile/$pl").body()
             }
@@ -51,5 +57,18 @@ public object Player {
 
             else -> throw IllegalArgumentException("Invalid identifier: $pl")
         }
+
+        val decoded = json.decodeFromString<DecodedTextures>(
+            String(raw.properties.first().value.decodeBase64Bytes())
+        )
+
+        PlayerProfile(
+            raw.id,
+            raw.name,
+            raw.legacy,
+            decoded.textures["SKIN"]?.url,
+            decoded.textures["CAPE"]?.url,
+            SkinModel.from(decoded.textures["SKIN"]?.metadata?.model)
+        )
     }
 }

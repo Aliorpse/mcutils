@@ -12,7 +12,6 @@ import kotlinx.serialization.Serializable
  * @property capeUrl The URL to the player's cape texture.
  * @property skinModel The model type of the player's skin, either CLASSIC (Steve) or SLIM (Alex).
  */
-@Serializable(with = PlayerProfileSerializer::class)
 public data class PlayerProfile(
     val id: String,
     val name: String,
@@ -29,7 +28,6 @@ public data class PlayerProfile(
  * - CLASSIC: The default model type, also known as "Steve".
  * - SLIM: A more slender model type, also known as "Alex".
  */
-@Serializable
 public enum class SkinModel {
     CLASSIC, SLIM;
 
@@ -40,36 +38,3 @@ public enum class SkinModel {
         }
     }
 }
-
-@Serializable
-internal data class DecodedTextures(
-    val timestamp: Long,
-    val profileId: String,
-    val profileName: String,
-    val textures: Map<String, Texture>
-)
-
-/**
- * Data of the texture.
- */
-@Serializable
-internal data class Texture(
-    val url: String,
-    val metadata: Metadata? = null
-)
-
-/**
- * @property model SLIM or CLASSIC.
- */
-@Serializable
-internal data class Metadata(
-    val model: String? = null
-)
-
-@Serializable
-internal data class PlayerUUIDProfile(
-    val id: String,
-    val name: String,
-    val legacy: Boolean = false,
-    val demo: Boolean = false
-)

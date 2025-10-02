@@ -20,9 +20,6 @@ import java.net.InetSocketAddress
 import java.net.Socket
 import java.nio.charset.StandardCharsets
 
-/**
- * Provides functionality to fetch and parse the status of a Java Minecraft server.
- */
 @Suppress("MagicNumber", "TooManyFunctions")
 public object JavaServer {
     private const val HANDSHAKE_PACKET_ID = 0x00
