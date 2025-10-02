@@ -53,22 +53,6 @@ runBlocking {
 }
 ```
 
-### [Modrinth](https://modrinth.com/) API
-
-```kotlin
-runBlocking {
-    var result
-    result = Modrinth.search("xplus") {
-        author = "Wudji"
-        type = ProjectType.MODPACK
-    }
-    
-    result = Modrinth.getProject("2H1rLgy4")
-    result = Modrinth.getProjects(listOf("2H1rLgy4"))
-    result = Modrinth.getProjectsRandom(5)
-}
-```
-
 Check out the project's [dokka](https://aliorpse.github.io/mcutils/) for the full API reference. There may be some extension functions you’ll find useful.
 
 ## Java Usage
