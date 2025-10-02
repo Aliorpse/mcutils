@@ -1,5 +1,10 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
+$dokka.location:tech.aliorpse.mcutils.exceptions////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.exceptions/index.html
+$dokka.location:tech.aliorpse.mcutils.exceptions/McUtilsException///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.exceptions/-mc-utils-exception/index.html
+$dokka.location:tech.aliorpse.mcutils.exceptions/McUtilsException/McUtilsException/#kotlin.String?#kotlin.Throwable?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.exceptions/-mc-utils-exception/-mc-utils-exception.html
+$dokka.location:tech.aliorpse.mcutils.exceptions/ServerStatusException///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.exceptions/-server-status-exception/index.html
+$dokka.location:tech.aliorpse.mcutils.exceptions/ServerStatusException/ServerStatusException/#kotlin.String?#kotlin.Throwable?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.exceptions/-server-status-exception/-server-status-exception.html
 $dokka.location:tech.aliorpse.mcutils.model.player////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/index.html
 $dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfile///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile/index.html
 $dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfile/PlayerProfile/#kotlin.String#kotlin.String#kotlin.Boolean#kotlin.String?#kotlin.String?#tech.aliorpse.mcutils.model.player.SkinModel/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile/-player-profile.html
@@ -102,6 +107,7 @@ $dokka.location:tech.aliorpse.mcutils.utils/HostPort/host/#/PointingToDeclaratio
 $dokka.location:tech.aliorpse.mcutils.utils/HostPort/port/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-host-port/port.html
 $dokka.location:tech.aliorpse.mcutils.utils/McUtilsHttpClientProvider///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-mc-utils-http-client-provider/index.html
 $dokka.location:tech.aliorpse.mcutils.utils/McUtilsHttpClientProvider/use/#io.ktor.client.engine.HttpClientEngineFactory[*]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-mc-utils-http-client-provider/use.html
+tech.aliorpse.mcutils.exceptions
 tech.aliorpse.mcutils.model.player
 tech.aliorpse.mcutils.model.server
 tech.aliorpse.mcutils.modules.player
