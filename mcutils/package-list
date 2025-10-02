@@ -14,10 +14,6 @@ $dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfile/legacy/#/Pointi
 $dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfile/name/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile/name.html
 $dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfile/skinModel/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile/skin-model.html
 $dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfile/skinUrl/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile/skin-url.html
-$dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfileSerializer///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile-serializer/index.html
-$dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfileSerializer/descriptor/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile-serializer/descriptor.html
-$dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfileSerializer/deserialize/#kotlinx.serialization.encoding.Decoder/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile-serializer/deserialize.html
-$dokka.location:tech.aliorpse.mcutils.model.player/PlayerProfileSerializer/serialize/#kotlinx.serialization.encoding.Encoder#tech.aliorpse.mcutils.model.player.PlayerProfile/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-player-profile-serializer/serialize.html
 $dokka.location:tech.aliorpse.mcutils.model.player/SkinModel.CLASSIC///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}mcutils/tech.aliorpse.mcutils.model.player/-skin-model/-c-l-a-s-s-i-c/index.html
 $dokka.location:tech.aliorpse.mcutils.model.player/SkinModel.Companion///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-skin-model/-companion/index.html
 $dokka.location:tech.aliorpse.mcutils.model.player/SkinModel.Companion/from/#kotlin.String?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.model.player/-skin-model/-companion/from.html
