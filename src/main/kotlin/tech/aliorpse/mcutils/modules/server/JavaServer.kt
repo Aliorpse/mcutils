@@ -5,10 +5,10 @@ import kotlinx.io.IOException
 import kotlinx.serialization.json.Json
 import love.forte.plugin.suspendtrans.annotation.JvmAsync
 import love.forte.plugin.suspendtrans.annotation.JvmBlocking
-import org.xbill.DNS.*
 import tech.aliorpse.mcutils.model.server.JavaServerStatus
 import tech.aliorpse.mcutils.model.server.JavaServerStatusSerializer
 import tech.aliorpse.mcutils.utils.HostPort
+import tech.aliorpse.mcutils.utils.resolveSrvRecord
 import tech.aliorpse.mcutils.utils.withDispatchersIO
 import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
@@ -52,11 +52,10 @@ public object JavaServer {
     ): JavaServerStatus = withDispatchersIO {
         val asciiHost = IDN.toASCII(host)
         val (srvTarget, srvPort) = resolveSrvRecord(asciiHost) ?: (asciiHost to port)
-        val resolvedHost = resolveToIpOrHost(srvTarget) ?: srvTarget
 
         Socket().use { socket ->
             socket.soTimeout = timeout
-            socket.connect(InetSocketAddress(resolvedHost, srvPort), timeout)
+            socket.connect(InetSocketAddress(srvTarget, srvPort), timeout)
 
             val out = DataOutputStream(socket.getOutputStream())
             val input = DataInputStream(socket.getInputStream())
@@ -105,42 +104,6 @@ public object JavaServer {
         hostPort.port ?: 25565,
         timeout
     )
-
-    private fun resolveToIpOrHost(host: String, depth: Int = 5): String? {
-        if (depth <= 0) return null
-        try {
-            val lookupA = Lookup(host, Type.A)
-            lookupA.run()
-            val aRecords = lookupA.result.takeIf { lookupA.result == Lookup.SUCCESSFUL }
-                ?.let { lookupA.answers.filterIsInstance<ARecord>() }
-            if (!aRecords.isNullOrEmpty()) return aRecords[0].address.hostAddress
-
-            val lookupAAAA = Lookup(host, Type.AAAA)
-            lookupAAAA.run()
-            val aaaaRecords = lookupAAAA.result.takeIf { lookupAAAA.result == Lookup.SUCCESSFUL }
-                ?.let { lookupAAAA.answers.filterIsInstance<AAAARecord>() }
-            if (!aaaaRecords.isNullOrEmpty()) return aaaaRecords[0].address.hostAddress
-
-            val lookupCNAME = Lookup(host, Type.CNAME)
-            lookupCNAME.run()
-            val cnameRecords = lookupCNAME.result.takeIf { lookupCNAME.result == Lookup.SUCCESSFUL }
-                ?.let { lookupCNAME.answers.filterIsInstance<CNAMERecord>() }
-            if (!cnameRecords.isNullOrEmpty()) {
-                val cnameTarget = cnameRecords[0].target.toString(true)
-                if (cnameTarget != host) return resolveToIpOrHost(cnameTarget, depth - 1)
-            }
-        } catch (_: Exception) { return null }
-        return null
-    }
-
-    private fun resolveSrvRecord(host: String): Pair<String, Int>? = try {
-        val lookup = Lookup("_minecraft._tcp.$host", Type.SRV)
-        lookup.run()
-        if (lookup.result == Lookup.SUCCESSFUL && lookup.answers.isNotEmpty()) {
-            val srv = lookup.answers.filterIsInstance<SRVRecord>().minByOrNull { it.priority }
-            srv?.let { it.target.toString(true).removeSuffix(".") to it.port }
-        } else null
-    } catch (_: Exception) { null }
 
     private fun sendHandshake(out: DataOutputStream, host: String, port: Int) {
         val payload = ByteArrayOutputStream()
@@ -208,7 +171,7 @@ public object JavaServer {
             val byte = input.readByte().toInt()
             result = result or ((byte and 0x7F) shl 7 * bytesRead)
             bytesRead++
-            if (bytesRead > 5) throw kotlinx.io.IOException("VarInt too big")
+            if (bytesRead > 5) throw IOException("VarInt too big")
             if (byte and 0x80 == 0) break
         }
         return result
