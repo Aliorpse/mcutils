@@ -57,7 +57,7 @@ configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
 
     pom {
         name = "mcutils"
-        description = "Kotlin library for Minecraft operations"
+        description = "A Kotlin-based library that provides utility functions for Minecraft-related queries."
         url = "https://github.com/Aliorpse/mcutils/"
         inceptionYear = "2025"
 
