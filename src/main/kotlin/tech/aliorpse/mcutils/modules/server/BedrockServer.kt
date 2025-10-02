@@ -41,6 +41,7 @@ public object BedrockServer {
      * @param host The server host.
      * @param port The server port (default 19132).
      * @param timeout Timeout in milliseconds (default 2000ms).
+     * @throws ServerStatusException When response is malformed or does not meet expectations.
      */
     @JvmStatic
     @JvmOverloads

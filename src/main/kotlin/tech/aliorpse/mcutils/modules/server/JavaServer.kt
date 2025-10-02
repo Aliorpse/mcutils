@@ -40,6 +40,7 @@ public object JavaServer {
      * @param host The server host.
      * @param port The server port (default 25565).
      * @param timeout Timeout in milliseconds (default 2000ms).
+     * @throws ServerStatusException When response is malformed or does not meet expectations.
      */
     @JvmStatic
     @JvmOverloads
@@ -91,6 +92,7 @@ public object JavaServer {
      * @param timeout Timeout in milliseconds (default 2000ms).
      * @return [JavaServerStatus] representing the server's status.
      * @throws IllegalArgumentException If host is null.
+     * @throws ServerStatusException When response is malformed or does not meet expectations.
      */
     @JvmStatic
     @JvmOverloads
