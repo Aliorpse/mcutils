@@ -110,6 +110,11 @@ public fun TextComponent.toHtml(): String {
     }
 }
 
+/**
+ * Converts sample player list to a List of [TextComponent].
+ *
+ * Useful when [Sample.name] are customized, e.g., to include colors or other formatting.
+ */
 public fun List<Sample>.toTextComponents(): List<TextComponent> {
     return map { it.name.toTextComponent() }
 }
