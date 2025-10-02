@@ -8,7 +8,7 @@ plugins {
     id("com.vanniktech.maven.publish") version "0.33.0"
 }
 
-group = "tech.aliorpse.mcutils"
+group = "tech.aliorpse"
 version = System.getenv("GITHUB_REF_NAME") ?: "local"
 
 kotlin {
@@ -28,8 +28,8 @@ suspendTransformPlugin {
 }
 
 repositories {
-    mavenCentral()
     mavenLocal()
+    mavenCentral()
 }
 
 dependencies {
@@ -42,8 +42,6 @@ dependencies {
     api("io.ktor:ktor-client-content-negotiation:3.3.0")
     api("io.ktor:ktor-serialization-kotlinx-json:3.3.0")
     testImplementation("io.ktor:ktor-client-cio:3.3.0")
-
-    api("dnsjava:dnsjava:3.6.3")
 
     testImplementation(kotlin("test"))
 }

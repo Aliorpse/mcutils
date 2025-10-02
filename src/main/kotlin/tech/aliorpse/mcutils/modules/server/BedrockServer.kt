@@ -65,7 +65,7 @@ public object BedrockServer {
             requestBuffer.put(CLIENT_ID)
             requestBuffer.put(CLIENT_GUID)
 
-            val sendPacket = DatagramPacket(requestBuffer.array(), requestBuffer.position(), address, port)
+            val sendPacket = DatagramPacket(requestBuffer.array(), requestBuffer.array().size, address, port)
             val receiveBuffer = ByteArray(BUFFER_SIZE)
             val receivePacket = DatagramPacket(receiveBuffer, BUFFER_SIZE)
 
