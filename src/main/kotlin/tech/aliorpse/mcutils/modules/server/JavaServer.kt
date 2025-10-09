@@ -29,6 +29,9 @@ public object JavaServer {
     private const val PROTOCOL_VERSION = -1
     private const val NEXT_STATE_STATUS = 1
 
+    private const val DEFAULT_CONNECTION_TIMEOUT = 10000
+    private const val DEFAULT_READ_TIMEOUT = 4000
+
     private val json = Json { ignoreUnknownKeys = true }
 
     /**
@@ -36,7 +39,8 @@ public object JavaServer {
      *
      * @param host The server host.
      * @param port The server port (default 25565).
-     * @param timeout Timeout in milliseconds (default 2000ms).
+     * @param connectionTimeout Connection timeout in milliseconds for establishing the socket (default [DEFAULT_CONNECTION_TIMEOUT]).
+     * @param readTimeout Read timeout in milliseconds applied to socket SO_TIMEOUT for response reads (default [DEFAULT_READ_TIMEOUT]).
      * @throws ServerStatusException When response is malformed or does not meet expectations.
      */
     @JvmStatic
@@ -46,14 +50,15 @@ public object JavaServer {
     public suspend fun getStatus(
         host: String,
         port: Int = 25565,
-        timeout: Int = 2000
+        connectionTimeout: Int = DEFAULT_CONNECTION_TIMEOUT,
+        readTimeout: Int = DEFAULT_READ_TIMEOUT
     ): JavaServerStatus = withDispatchersIO {
         val asciiHost = IDN.toASCII(host)
         val (srvTarget, srvPort) = resolveSrvRecord(asciiHost) ?: (asciiHost to port)
 
         Socket().use { socket ->
-            socket.soTimeout = timeout
-            socket.connect(InetSocketAddress(srvTarget, srvPort), timeout)
+            socket.soTimeout = readTimeout
+            socket.connect(InetSocketAddress(srvTarget, srvPort), connectionTimeout)
 
             val out = DataOutputStream(socket.getOutputStream())
             val input = DataInputStream(socket.getInputStream())
@@ -77,7 +82,7 @@ public object JavaServer {
                 version = parsed.version,
                 ping = ping,
                 enforcesSecureChat = parsed.enforcesSecureChat,
-                favicon = parsed.favicon
+                favicon = parsed.favicon,
             )
         }
     }
@@ -86,7 +91,8 @@ public object JavaServer {
      * Fetches the Java server status.
      *
      * @param hostPort As it named.
-     * @param timeout Timeout in milliseconds (default 2000ms).
+     * @param connectionTimeout Connection timeout in milliseconds for establishing the socket (default [DEFAULT_CONNECTION_TIMEOUT]).
+     * @param readTimeout Read timeout in milliseconds applied to socket SO_TIMEOUT for response reads (default [DEFAULT_READ_TIMEOUT]).
      * @return [JavaServerStatus] representing the server's status.
      * @throws IllegalArgumentException If host is null.
      * @throws ServerStatusException When response is malformed or does not meet expectations.
@@ -97,11 +103,13 @@ public object JavaServer {
     @JvmBlocking
     public suspend fun getStatus(
         hostPort: HostPort,
-        timeout: Int = 2000
+        connectionTimeout: Int = DEFAULT_CONNECTION_TIMEOUT,
+        readTimeout: Int = DEFAULT_READ_TIMEOUT
     ): JavaServerStatus = getStatus(
         hostPort.host ?: throw IllegalArgumentException("The host is null."),
         hostPort.port ?: 25565,
-        timeout
+        connectionTimeout,
+        readTimeout,
     )
 
     private fun sendHandshake(out: DataOutputStream, host: String, port: Int) {
