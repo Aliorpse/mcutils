@@ -90,8 +90,8 @@ $dokka.location:tech.aliorpse.mcutils.modules.server/BedrockServer///PointingToD
 $dokka.location:tech.aliorpse.mcutils.modules.server/BedrockServer/getStatus/#kotlin.String#kotlin.Int#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-bedrock-server/get-status.html
 $dokka.location:tech.aliorpse.mcutils.modules.server/BedrockServer/getStatus/#tech.aliorpse.mcutils.utils.HostPort#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-bedrock-server/get-status.html
 $dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/index.html
-$dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/getStatus/#kotlin.String#kotlin.Int#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/get-status.html
-$dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/getStatus/#tech.aliorpse.mcutils.utils.HostPort#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/get-status.html
+$dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/getStatus/#kotlin.String#kotlin.Int#kotlin.Int#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/get-status.html
+$dokka.location:tech.aliorpse.mcutils.modules.server/JavaServer/getStatus/#tech.aliorpse.mcutils.utils.HostPort#kotlin.Int#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server/-java-server/get-status.html
 $dokka.location:tech.aliorpse.mcutils.utils////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/index.html
 $dokka.location:tech.aliorpse.mcutils.utils//hostPortOf/#kotlin.String?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/host-port-of.html
 $dokka.location:tech.aliorpse.mcutils.utils//toHtml/tech.aliorpse.mcutils.model.server.TextComponent#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/to-html.html
