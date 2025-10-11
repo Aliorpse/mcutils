@@ -1,7 +1,5 @@
 package tech.aliorpse.mcutils.model.player
 
-import kotlinx.serialization.Serializable
-
 /**
  * Represents a player's profile as retrieved from the Mojang session servers.
  *

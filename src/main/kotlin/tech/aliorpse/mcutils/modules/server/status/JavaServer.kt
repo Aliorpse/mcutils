@@ -1,12 +1,11 @@
-package tech.aliorpse.mcutils.modules.server
-
+package tech.aliorpse.mcutils.modules.server.status
 
 import kotlinx.serialization.json.Json
 import love.forte.plugin.suspendtrans.annotation.JvmAsync
 import love.forte.plugin.suspendtrans.annotation.JvmBlocking
 import tech.aliorpse.mcutils.exceptions.ServerStatusException
-import tech.aliorpse.mcutils.model.server.JavaServerStatus
-import tech.aliorpse.mcutils.model.server.JavaServerStatusSerializer
+import tech.aliorpse.mcutils.model.server.status.JavaServerStatus
+import tech.aliorpse.mcutils.model.server.status.JavaServerStatusSerializer
 import tech.aliorpse.mcutils.utils.HostPort
 import tech.aliorpse.mcutils.utils.resolveSrvRecord
 import tech.aliorpse.mcutils.utils.withDispatchersIO
@@ -14,7 +13,6 @@ import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.io.OutputStream
-import java.lang.IllegalArgumentException
 import java.net.IDN
 import java.net.InetSocketAddress
 import java.net.Socket
@@ -29,9 +27,6 @@ public object JavaServer {
     private const val PROTOCOL_VERSION = -1
     private const val NEXT_STATE_STATUS = 1
 
-    private const val DEFAULT_CONNECTION_TIMEOUT = 10000
-    private const val DEFAULT_READ_TIMEOUT = 4000
-
     private val json = Json { ignoreUnknownKeys = true }
 
     /**
@@ -39,8 +34,8 @@ public object JavaServer {
      *
      * @param host The server host.
      * @param port The server port (default 25565).
-     * @param connectionTimeout Connection timeout in milliseconds for establishing the socket (default [DEFAULT_CONNECTION_TIMEOUT]).
-     * @param readTimeout Read timeout in milliseconds applied to socket SO_TIMEOUT for response reads (default [DEFAULT_READ_TIMEOUT]).
+     * @param connectionTimeout Connection timeout for establishing the socket (default 2000ms).
+     * @param readTimeout Read timeout applied to socket SO_TIMEOUT for response reads (default 4000ms).
      * @throws ServerStatusException When response is malformed or does not meet expectations.
      */
     @JvmStatic
@@ -50,8 +45,8 @@ public object JavaServer {
     public suspend fun getStatus(
         host: String,
         port: Int = 25565,
-        connectionTimeout: Int = DEFAULT_CONNECTION_TIMEOUT,
-        readTimeout: Int = DEFAULT_READ_TIMEOUT
+        connectionTimeout: Int = 2000,
+        readTimeout: Int = 4000
     ): JavaServerStatus = withDispatchersIO {
         val asciiHost = IDN.toASCII(host)
         val (srvTarget, srvPort) = resolveSrvRecord(asciiHost) ?: (asciiHost to port)
@@ -82,7 +77,7 @@ public object JavaServer {
                 version = parsed.version,
                 ping = ping,
                 enforcesSecureChat = parsed.enforcesSecureChat,
-                favicon = parsed.favicon,
+                favicon = parsed.favicon
             )
         }
     }
@@ -91,8 +86,8 @@ public object JavaServer {
      * Fetches the Java server status.
      *
      * @param hostPort As it named.
-     * @param connectionTimeout Connection timeout in milliseconds for establishing the socket (default [DEFAULT_CONNECTION_TIMEOUT]).
-     * @param readTimeout Read timeout in milliseconds applied to socket SO_TIMEOUT for response reads (default [DEFAULT_READ_TIMEOUT]).
+     * @param connectionTimeout Connection timeout for establishing the socket (default 2000ms).
+     * @param readTimeout Read timeout applied to socket SO_TIMEOUT for response reads (default 4000ms)
      * @return [JavaServerStatus] representing the server's status.
      * @throws IllegalArgumentException If host is null.
      * @throws ServerStatusException When response is malformed or does not meet expectations.
@@ -103,8 +98,8 @@ public object JavaServer {
     @JvmBlocking
     public suspend fun getStatus(
         hostPort: HostPort,
-        connectionTimeout: Int = DEFAULT_CONNECTION_TIMEOUT,
-        readTimeout: Int = DEFAULT_READ_TIMEOUT
+        connectionTimeout: Int = 2000,
+        readTimeout: Int = 4000
     ): JavaServerStatus = getStatus(
         hostPort.host ?: throw IllegalArgumentException("The host is null."),
         hostPort.port ?: 25565,

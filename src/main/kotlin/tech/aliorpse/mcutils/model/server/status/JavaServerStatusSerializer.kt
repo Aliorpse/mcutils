@@ -1,4 +1,4 @@
-package tech.aliorpse.mcutils.model.server
+package tech.aliorpse.mcutils.model.server.status
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor

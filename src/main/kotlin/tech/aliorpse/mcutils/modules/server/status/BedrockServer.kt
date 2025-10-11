@@ -1,12 +1,12 @@
-package tech.aliorpse.mcutils.modules.server
+package tech.aliorpse.mcutils.modules.server.status
 
 import love.forte.plugin.suspendtrans.annotation.JvmAsync
 import love.forte.plugin.suspendtrans.annotation.JvmBlocking
 import tech.aliorpse.mcutils.exceptions.ServerStatusException
-import tech.aliorpse.mcutils.model.server.BedrockServerStatus
-import tech.aliorpse.mcutils.model.server.GameMode
-import tech.aliorpse.mcutils.model.server.Players
-import tech.aliorpse.mcutils.model.server.Version
+import tech.aliorpse.mcutils.model.server.status.BedrockServerStatus
+import tech.aliorpse.mcutils.model.server.status.GameMode
+import tech.aliorpse.mcutils.model.server.status.Players
+import tech.aliorpse.mcutils.model.server.status.Version
 import tech.aliorpse.mcutils.utils.HostPort
 import tech.aliorpse.mcutils.utils.toTextComponent
 import tech.aliorpse.mcutils.utils.withDispatchersIO

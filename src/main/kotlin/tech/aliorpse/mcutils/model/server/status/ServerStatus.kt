@@ -1,4 +1,4 @@
-package tech.aliorpse.mcutils.model.server
+package tech.aliorpse.mcutils.model.server.status
 
 import kotlinx.serialization.Serializable
 
@@ -96,7 +96,7 @@ public data class Sample(
 )
 
 /**
- * Represents the various game modes. For [tech.aliorpse.mcutils.modules.server.BedrockServer.getStatus].
+ * Represents the various game modes. For [tech.aliorpse.mcutils.modules.server.status.BedrockServer.getStatus].
  */
 public enum class GameMode {
     SURVIVAL,

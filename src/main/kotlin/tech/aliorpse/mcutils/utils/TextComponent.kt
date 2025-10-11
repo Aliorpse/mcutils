@@ -1,8 +1,8 @@
 package tech.aliorpse.mcutils.utils
 
-import tech.aliorpse.mcutils.model.server.Sample
-import tech.aliorpse.mcutils.model.server.TextComponent
-import tech.aliorpse.mcutils.model.server.TextStyle
+import tech.aliorpse.mcutils.model.server.status.Sample
+import tech.aliorpse.mcutils.model.server.status.TextComponent
+import tech.aliorpse.mcutils.model.server.status.TextStyle
 import java.util.*
 
 /**

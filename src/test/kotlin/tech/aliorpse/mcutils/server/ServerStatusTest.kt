@@ -1,8 +1,8 @@
 package tech.aliorpse.mcutils.server
 
 import kotlinx.coroutines.runBlocking
-import tech.aliorpse.mcutils.modules.server.BedrockServer
-import tech.aliorpse.mcutils.modules.server.JavaServer
+import tech.aliorpse.mcutils.modules.server.status.BedrockServer
+import tech.aliorpse.mcutils.modules.server.status.JavaServer
 import tech.aliorpse.mcutils.utils.hostPortOf
 import kotlin.test.Test
 

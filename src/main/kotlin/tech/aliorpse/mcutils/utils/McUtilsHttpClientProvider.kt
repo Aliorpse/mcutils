@@ -3,9 +3,11 @@ package tech.aliorpse.mcutils.utils
 import io.ktor.client.*
 import io.ktor.client.engine.*
 import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.plugins.websocket.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 import tech.aliorpse.mcutils.utils.McUtilsHttpClientProvider.httpClient
+import tech.aliorpse.mcutils.utils.McUtilsHttpClientProvider.use
 import kotlin.reflect.KProperty
 
 /**
@@ -41,6 +43,8 @@ public object McUtilsHttpClientProvider {
                     isLenient = true
                 })
             }
+
+            install(WebSockets)
         }
 
     private class HttpClientDelegate {
