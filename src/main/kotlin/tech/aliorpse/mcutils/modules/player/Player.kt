@@ -9,7 +9,7 @@ import love.forte.plugin.suspendtrans.annotation.JvmBlocking
 import tech.aliorpse.mcutils.model.player.PlayerProfile
 import tech.aliorpse.mcutils.model.player.SkinModel
 import tech.aliorpse.mcutils.model.player.internal.DecodedTextures
-import tech.aliorpse.mcutils.model.player.internal.PlayerUUIDProfile
+import tech.aliorpse.mcutils.model.player.internal.PlayerWithUuid
 import tech.aliorpse.mcutils.model.player.internal.RawPlayerProfile
 import tech.aliorpse.mcutils.utils.McUtilsHttpClientProvider.httpClient
 import tech.aliorpse.mcutils.utils.withDispatchersIO
@@ -50,7 +50,7 @@ public object Player {
             }
 
             nameRegex.matches(pl) -> {
-                val uuidProfile: PlayerUUIDProfile =
+                val uuidProfile: PlayerWithUuid =
                     httpClient.get("$MOJANG_PROFILE_BASE/users/profiles/minecraft/$pl").body()
                 httpClient.get("$MOJANG_SESSION_BASE/session/minecraft/profile/${uuidProfile.id}").body()
             }
@@ -70,5 +70,18 @@ public object Player {
             decoded.textures["CAPE"]?.url,
             SkinModel.from(decoded.textures["SKIN"]?.metadata?.model)
         )
+    }
+
+    /**
+     * Returns the player's UUID.
+     *
+     * @param player The player name.
+     */
+    @JvmStatic
+    @JvmAsync
+    @JvmBlocking
+    public suspend fun getUuid(player: String): String {
+        val profile: PlayerWithUuid = httpClient.get("$MOJANG_PROFILE_BASE/users/profiles/minecraft/$player").body()
+        return profile.id
     }
 }
