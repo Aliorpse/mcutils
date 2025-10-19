@@ -7,7 +7,7 @@
 
 A Kotlin-based library that provides utility functions for Minecraft-related queries.
 
-This project has not been widely tested, so use it at your own risk in production environments. Contributions to improve it are welcome.
+This project hasn't been extensively tested, so use it at your own risk in production environments. Contributions to improve it are welcome.
 
 ## Installation
 
@@ -19,13 +19,13 @@ dependencies {
 }
 ```
 
-You can use `McUtilsConfig.httpClient.use()` to explicitly control what client to be used.
+You can use `McUtilsConfig.httpClient.use()` to explicitly specify which client to use.
 
 ## Features
 
 ### Get Server Status
 
-#### [Demo API Endpoint](https://api.aliorpse.tech/minecraft/server/status/hypixel.net:25565?type=java)
+#### [Example API Endpoint](https://api.aliorpse.tech/minecraft/server/status/hypixel.net:25565?type=java)
 
 ```kotlin
 runBlocking {
@@ -42,11 +42,11 @@ runBlocking {
 }
 ```
 
-To reduce package size, in some regions (e.g. China), default SRV resolve implementation may be unavailable. You can change `McUtilsConfig.dns.srvResolver`.
+To reduce package size and avoid using libraries that may cause issues, in some regions (e.g. China), default SRV resolve implementation may be unavailable. Change `McUtilsConfig.dns.srvResolver` to override.
 
 ### Get Player Profile (Java Edition Only)
 
-#### [Demo API Endpoint](https://api.aliorpse.tech/minecraft/player/profile/Aliorpse)
+#### [Example API Endpoint](https://api.aliorpse.tech/minecraft/player/profile/Aliorpse)
 
 ```kotlin
 runBlocking {
@@ -57,11 +57,31 @@ runBlocking {
 }
 ```
 
+### Server Management Protocol (WIP)
+
+```kotlin
+runBlocking {
+    val client = MsmpClient("ws://<port>:<port>", "your token here")
+    
+    client.withConnection {
+        allowlist.clear()
+        println(allowlist.add("Aliorpse", "MosCro"))
+        println(allowlist.set("MosCro", "Technoblade", "Aliorpse"))
+        println(allowlist.remove("MosCro", "Technoblade"))
+        println(allowlist.get())
+    }
+    
+    val connection = client.connect() // or just use the MsmpClient.connect(host, token)
+    connection.allowlist.add("Aliorpse")
+    connection.close() // must execute this to release the object and prevent the server from throwing an error
+}
+```
+
 Check out the project's [dokka](https://aliorpse.github.io/mcutils/) for the full API reference. There may be some extension functions you’ll find useful.
 
 ## Java Usage
 
-The project uses [kotlin-suspend-transform-compiler-plugin](https://github.com/ForteScarlet/kotlin-suspend-transform-compiler-plugin) to generate variants automatically.
+The project uses [kotlin-suspend-transform-compiler-plugin](https://github.com/ForteScarlet/kotlin-suspend-transform-compiler-plugin) to automatically generate variants.
 
 For every suspending API, both **async** and **blocking** variants are available.
 
