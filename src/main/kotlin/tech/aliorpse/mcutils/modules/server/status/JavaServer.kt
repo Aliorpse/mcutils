@@ -3,11 +3,11 @@ package tech.aliorpse.mcutils.modules.server.status
 import kotlinx.serialization.json.Json
 import love.forte.plugin.suspendtrans.annotation.JvmAsync
 import love.forte.plugin.suspendtrans.annotation.JvmBlocking
+import tech.aliorpse.mcutils.config.McUtilsConfig
 import tech.aliorpse.mcutils.exceptions.ServerStatusException
 import tech.aliorpse.mcutils.model.server.status.JavaServerStatus
 import tech.aliorpse.mcutils.model.server.status.JavaServerStatusSerializer
 import tech.aliorpse.mcutils.utils.HostPort
-import tech.aliorpse.mcutils.utils.resolveSrvRecord
 import tech.aliorpse.mcutils.utils.withDispatchersIO
 import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
@@ -49,7 +49,7 @@ public object JavaServer {
         readTimeout: Int = 4000
     ): JavaServerStatus = withDispatchersIO {
         val asciiHost = IDN.toASCII(host)
-        val (srvTarget, srvPort) = resolveSrvRecord(asciiHost) ?: (asciiHost to port)
+        val (srvTarget, srvPort) = McUtilsConfig.dns.srvResolver(asciiHost) ?: (asciiHost to port)
 
         Socket().use { socket ->
             socket.soTimeout = readTimeout

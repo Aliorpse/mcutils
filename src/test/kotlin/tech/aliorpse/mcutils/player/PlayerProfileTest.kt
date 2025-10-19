@@ -12,6 +12,7 @@ class PlayerProfileTest {
     fun getProfileTest() {
         val result = runBlocking { Player.getProfile("Aliorpse") }
         println(result)
+
         assert(result.name.isNotEmpty())
     }
 }

@@ -36,8 +36,6 @@ dependencies {
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
     api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
 
-    api(kotlin("reflect"))
-
     api("io.ktor:ktor-client-core:3.3.0")
     api("io.ktor:ktor-client-content-negotiation:3.3.0")
     api("io.ktor:ktor-serialization-kotlinx-json:3.3.0")
