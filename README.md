@@ -42,7 +42,7 @@ runBlocking {
 }
 ```
 
-To reduce package size, in some regions (e.g. China), default SRV reslove implementation may be unavailable. You can change `McUtilsConfig.dns.srvResolver`.
+To reduce package size, in some regions (e.g. China), default SRV resolve implementation may be unavailable. You can change `McUtilsConfig.dns.srvResolver`.
 
 ### Get Player Profile (Java Edition Only)
 
