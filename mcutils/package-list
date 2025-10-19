@@ -160,11 +160,11 @@ $dokka.location:tech.aliorpse.mcutils.modules.player/Player/getUuid/#kotlin.Stri
 $dokka.location:tech.aliorpse.mcutils.modules.server.msmp.api////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server.msmp.api/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.server.msmp.api/AllowlistModule///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server.msmp.api/-allowlist-module/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.server.msmp.api/AllowlistModule/AllowlistModule/#tech.aliorpse.mcutils.modules.server.msmp.MsmpConnection/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server.msmp.api/-allowlist-module/-allowlist-module.html
-$dokka.location:tech.aliorpse.mcutils.modules.server.msmp.api/AllowlistModule/add/#kotlin.Array[kotlin.String]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server.msmp.api/-allowlist-module/add.html
+$dokka.location:tech.aliorpse.mcutils.modules.server.msmp.api/AllowlistModule/add/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server.msmp.api/-allowlist-module/add.html
 $dokka.location:tech.aliorpse.mcutils.modules.server.msmp.api/AllowlistModule/clear/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server.msmp.api/-allowlist-module/clear.html
 $dokka.location:tech.aliorpse.mcutils.modules.server.msmp.api/AllowlistModule/get/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server.msmp.api/-allowlist-module/get.html
-$dokka.location:tech.aliorpse.mcutils.modules.server.msmp.api/AllowlistModule/remove/#kotlin.Array[kotlin.String]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server.msmp.api/-allowlist-module/remove.html
-$dokka.location:tech.aliorpse.mcutils.modules.server.msmp.api/AllowlistModule/set/#kotlin.Array[kotlin.String]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server.msmp.api/-allowlist-module/set.html
+$dokka.location:tech.aliorpse.mcutils.modules.server.msmp.api/AllowlistModule/remove/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server.msmp.api/-allowlist-module/remove.html
+$dokka.location:tech.aliorpse.mcutils.modules.server.msmp.api/AllowlistModule/set/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server.msmp.api/-allowlist-module/set.html
 $dokka.location:tech.aliorpse.mcutils.modules.server.msmp////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server.msmp/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.server.msmp/MsmpClient.Companion///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server.msmp/-msmp-client/-companion/index.html
 $dokka.location:tech.aliorpse.mcutils.modules.server.msmp/MsmpClient.Companion/connect/#kotlin.String#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.modules.server.msmp/-msmp-client/-companion/connect.html
