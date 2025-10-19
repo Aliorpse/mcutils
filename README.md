@@ -19,6 +19,8 @@ dependencies {
 }
 ```
 
+You can use `McUtilsConfig.httpClient.use()` to explicitly control what client to be used.
+
 ## Features
 
 ### Get Server Status
@@ -39,6 +41,8 @@ runBlocking {
     status = BedrockServer.getStatus("play.easecation.net")
 }
 ```
+
+In some regions (e.g. China), default DNS lookup implementation may be unavailable. You can change `McUtilsConfig.dns.srvResolver`.
 
 ### Get Player Profile (Java Edition Only)
 
