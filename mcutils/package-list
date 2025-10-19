@@ -2,6 +2,14 @@ $dokka.format:html-v1
 $dokka.linkExtension:html
 $dokka.location:tech.aliorpse.mcutils.annotations////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.annotations/index.html
 $dokka.location:tech.aliorpse.mcutils.annotations/InternalMcUtilsApi///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.annotations/-internal-mc-utils-api/index.html
+$dokka.location:tech.aliorpse.mcutils.config////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.config/index.html
+$dokka.location:tech.aliorpse.mcutils.config/McUtilsConfig///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.config/-mc-utils-config/index.html
+$dokka.location:tech.aliorpse.mcutils.config/McUtilsConfig/dns/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.config/-mc-utils-config/dns.html
+$dokka.location:tech.aliorpse.mcutils.config/McUtilsConfig/httpClient/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.config/-mc-utils-config/http-client.html
+$dokka.location:tech.aliorpse.mcutils.config/McUtilsDnsConfig///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.config/-mc-utils-dns-config/index.html
+$dokka.location:tech.aliorpse.mcutils.config/McUtilsDnsConfig/srvResolver/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.config/-mc-utils-dns-config/srv-resolver.html
+$dokka.location:tech.aliorpse.mcutils.config/McUtilsHttpClientConfig///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.config/-mc-utils-http-client-config/index.html
+$dokka.location:tech.aliorpse.mcutils.config/McUtilsHttpClientConfig/use/#io.ktor.client.engine.HttpClientEngineFactory[*]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.config/-mc-utils-http-client-config/use.html
 $dokka.location:tech.aliorpse.mcutils.exceptions////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.exceptions/index.html
 $dokka.location:tech.aliorpse.mcutils.exceptions/McUtilsException///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.exceptions/-mc-utils-exception/index.html
 $dokka.location:tech.aliorpse.mcutils.exceptions/McUtilsException/McUtilsException/#kotlin.String?#kotlin.Throwable?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.exceptions/-mc-utils-exception/-mc-utils-exception.html
@@ -184,9 +192,8 @@ $dokka.location:tech.aliorpse.mcutils.utils/HostPort///PointingToDeclaration/mc
 $dokka.location:tech.aliorpse.mcutils.utils/HostPort/HostPort/#kotlin.String?#kotlin.Int?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-host-port/-host-port.html
 $dokka.location:tech.aliorpse.mcutils.utils/HostPort/host/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-host-port/host.html
 $dokka.location:tech.aliorpse.mcutils.utils/HostPort/port/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-host-port/port.html
-$dokka.location:tech.aliorpse.mcutils.utils/McUtilsHttpClientProvider///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-mc-utils-http-client-provider/index.html
-$dokka.location:tech.aliorpse.mcutils.utils/McUtilsHttpClientProvider/use/#io.ktor.client.engine.HttpClientEngineFactory[*]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.utils/-mc-utils-http-client-provider/use.html
 tech.aliorpse.mcutils.annotations
+tech.aliorpse.mcutils.config
 tech.aliorpse.mcutils.exceptions
 tech.aliorpse.mcutils.model.player
 tech.aliorpse.mcutils.model.server.msmp.common
