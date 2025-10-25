@@ -12,7 +12,7 @@ import tech.aliorpse.mcutils.annotations.InternalMcUtilsApi
 import tech.aliorpse.mcutils.exceptions.MsmpResponseException
 import tech.aliorpse.mcutils.model.server.msmp.jsonrpc.JsonRpcError
 import tech.aliorpse.mcutils.model.server.msmp.jsonrpc.JsonRpcRequest
-import tech.aliorpse.mcutils.modules.server.msmp.api.AllowlistModule
+import tech.aliorpse.mcutils.modules.server.msmp.api.AllowlistApi
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.coroutines.cancellation.CancellationException
@@ -21,7 +21,7 @@ public class MsmpConnection internal constructor(
     internal val session: DefaultClientWebSocketSession,
     internal val token: String
 ) {
-    public val allowlist: AllowlistModule = AllowlistModule(this)
+    public val allowlist: Lazy<AllowlistApi> = lazy { AllowlistApi(this) }
 
     private val json = Json { ignoreUnknownKeys = true }
     private val pending = ConcurrentHashMap<Int, CompletableDeferred<JsonElement>>()

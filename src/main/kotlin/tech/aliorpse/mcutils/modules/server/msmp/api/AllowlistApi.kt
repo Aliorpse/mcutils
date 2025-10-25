@@ -1,11 +1,15 @@
 package tech.aliorpse.mcutils.modules.server.msmp.api
 
+import love.forte.plugin.suspendtrans.annotation.JvmAsync
+import love.forte.plugin.suspendtrans.annotation.JvmBlocking
 import tech.aliorpse.mcutils.annotations.InternalMcUtilsApi
 import tech.aliorpse.mcutils.model.server.msmp.common.PlayerDto
 import tech.aliorpse.mcutils.modules.server.msmp.MsmpConnection
 
+@JvmAsync
+@JvmBlocking
 @OptIn(InternalMcUtilsApi::class)
-public class AllowlistModule(private val client: MsmpConnection) {
+public class AllowlistApi(private val client: MsmpConnection) {
     public suspend fun get(): List<PlayerDto> = client.call(
         PlayerDto.serializer(),
         "allowlist"
