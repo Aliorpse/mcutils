@@ -2,11 +2,10 @@ package tech.aliorpse.mcutils.modules.server.msmp
 
 import io.ktor.client.plugins.websocket.*
 import io.ktor.client.request.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import love.forte.plugin.suspendtrans.annotation.JvmAsync
 import love.forte.plugin.suspendtrans.annotation.JvmBlocking
 import tech.aliorpse.mcutils.utils.McUtilsHttpClientProvider.httpClient
+import tech.aliorpse.mcutils.utils.withDispatchersIO
 
 /**
  * @param url e.g. "ws://localhost:25585"
@@ -21,7 +20,7 @@ public class MsmpClient(
      */
     @JvmAsync
     @JvmBlocking
-    public suspend fun connect(): MsmpConnection = withContext(Dispatchers.IO) {
+    public suspend fun connect(): MsmpConnection = withDispatchersIO {
         val client = httpClient
         val session = client.webSocketSession {
             url(this@MsmpClient.url)

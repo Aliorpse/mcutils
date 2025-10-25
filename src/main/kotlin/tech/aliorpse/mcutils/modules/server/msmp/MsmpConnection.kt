@@ -97,9 +97,15 @@ public class MsmpConnection internal constructor(
         val root = raw.jsonObject
 
         return when {
-            "result" in root -> json.decodeFromJsonElement(ListSerializer(serializer), root["result"]!!)
+            "result" in root -> json.decodeFromJsonElement(
+                ListSerializer(serializer),
+                root["result"] ?: error("Missing 'result' in JSON-RPC response")
+            )
             "error" in root -> {
-                val error = json.decodeFromJsonElement(JsonRpcError.serializer(), root["error"]!!)
+                val error = json.decodeFromJsonElement(
+                    JsonRpcError.serializer(),
+                    root["error"] ?: error("Missing 'error' in JSON-RPC response")
+                )
                 throw MsmpResponseException(error, root["id"]?.jsonPrimitive?.intOrNull)
             }
             else -> error("Invalid JSON-RPC response: no result or error field")

@@ -70,9 +70,9 @@ internal object TextComponentSerializer : KSerializer<TextComponent> {
                         }
 
                         "extra" -> {
-                            if (value is JsonArray) {
+                            (value as? JsonArray)?.let {
                                 extra = decoder.json.decodeFromJsonElement(
-                                    ListSerializer(TextComponentSerializer), value
+                                    ListSerializer(TextComponentSerializer), it
                                 )
                             }
                         }
@@ -82,8 +82,6 @@ internal object TextComponentSerializer : KSerializer<TextComponent> {
                                 styles += styleMap.getValue(name)
                             }
                         }
-
-                        else -> {}
                     }
                 }
                 TextComponent(text, color, styles, extra)
