@@ -52,6 +52,7 @@ public object JavaServer {
         val (srvTarget, srvPort) = McUtilsConfig.dns.srvResolver(asciiHost) ?: (asciiHost to port)
 
         Socket().use { socket ->
+            socket.tcpNoDelay = true
             socket.soTimeout = readTimeout
             socket.connect(InetSocketAddress(srvTarget, srvPort), connectionTimeout)
 
@@ -65,10 +66,12 @@ public object JavaServer {
             val parsed = json.decodeFromString(JavaServerStatusSerializer, jsonStr)
 
             val ping = runCatching {
-                val pingStart = System.currentTimeMillis()
+                val pingStart = System.nanoTime()
+
                 sendPing(out, pingStart)
                 readPong(input, pingStart)
-                System.currentTimeMillis() - pingStart
+
+                (System.nanoTime() - pingStart) / 1_000_000
             }.getOrNull()
 
             JavaServerStatus(
@@ -130,6 +133,7 @@ public object JavaServer {
         writeVarInt(out, 9)
         writeVarInt(out, PING_PACKET_ID)
         out.writeLong(payload)
+        out.flush()
     }
 
     private fun readStatusResponse(input: DataInputStream): String {

@@ -21,7 +21,7 @@ public class MsmpConnection internal constructor(
     internal val session: DefaultClientWebSocketSession,
     internal val token: String
 ) {
-    public val allowlist: Lazy<AllowlistApi> = lazy { AllowlistApi(this) }
+    public val allowlist: AllowlistApi by lazy { AllowlistApi(this) }
 
     private val json = Json { ignoreUnknownKeys = true }
     private val pending = ConcurrentHashMap<Int, CompletableDeferred<JsonElement>>()
