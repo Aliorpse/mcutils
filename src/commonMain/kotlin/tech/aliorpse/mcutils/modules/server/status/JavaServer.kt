@@ -17,6 +17,10 @@ import java.net.IDN
 import java.net.InetSocketAddress
 import java.net.Socket
 import java.nio.charset.StandardCharsets
+import kotlin.jvm.JvmOverloads
+import kotlin.jvm.JvmStatic
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 @Suppress("MagicNumber", "TooManyFunctions")
 public object JavaServer {
@@ -38,6 +42,7 @@ public object JavaServer {
      * @param readTimeout Read timeout applied to socket SO_TIMEOUT for response reads (default 4000ms).
      * @throws ServerStatusException When response is malformed or does not meet expectations.
      */
+    @OptIn(ExperimentalTime::class)
     @JvmStatic
     @JvmOverloads
     @JvmAsync
@@ -66,12 +71,12 @@ public object JavaServer {
             val parsed = json.decodeFromString(JavaServerStatusSerializer, jsonStr)
 
             val ping = runCatching {
-                val pingStart = System.nanoTime()
+                val pingStart = Clock.System.now().toEpochMilliseconds()
 
                 sendPing(out, pingStart)
                 readPong(input, pingStart)
 
-                (System.nanoTime() - pingStart) / 1_000_000
+                Clock.System.now().toEpochMilliseconds() - pingStart
             }.getOrNull()
 
             JavaServerStatus(
