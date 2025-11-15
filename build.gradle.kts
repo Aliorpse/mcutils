@@ -3,7 +3,7 @@ plugins {
     kotlin("plugin.serialization") version "2.2.20"
 
     id("love.forte.plugin.suspend-transform") version "2.2.20-0.13.2"
-    id("com.google.devtools.ksp") version "2.2.20-2.0.4"
+    id("com.google.devtools.ksp") version "2.3.2"
     id("org.jetbrains.dokka") version "2.1.0"
     id("com.vanniktech.maven.publish") version "0.34.0"
 }
