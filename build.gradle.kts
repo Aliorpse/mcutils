@@ -1,11 +1,11 @@
 plugins {
-    kotlin("jvm") version "2.2.20"
+    kotlin("jvm") version "2.2.21"
     kotlin("plugin.serialization") version "2.2.20"
 
     id("love.forte.plugin.suspend-transform") version "2.2.20-0.13.2"
-    id("com.google.devtools.ksp") version "2.2.20-2.0.4"
+    id("com.google.devtools.ksp") version "2.3.2"
     id("org.jetbrains.dokka") version "2.1.0"
-    id("com.vanniktech.maven.publish") version "0.34.0"
+    id("com.vanniktech.maven.publish") version "0.35.0"
 }
 
 group = "tech.aliorpse"
@@ -36,10 +36,10 @@ dependencies {
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
     api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
 
-    api("io.ktor:ktor-client-core:3.3.1")
-    api("io.ktor:ktor-client-content-negotiation:3.3.1")
-    api("io.ktor:ktor-serialization-kotlinx-json:3.3.1")
-    testImplementation("io.ktor:ktor-client-cio:3.3.1")
+    api("io.ktor:ktor-client-core:3.3.2")
+    api("io.ktor:ktor-client-content-negotiation:3.3.2")
+    api("io.ktor:ktor-serialization-kotlinx-json:3.3.2")
+    testImplementation("io.ktor:ktor-client-cio:3.3.2")
 
     testImplementation(kotlin("test"))
 }
