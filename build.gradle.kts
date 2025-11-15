@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.2.20"
+    kotlin("jvm") version "2.2.21"
     kotlin("plugin.serialization") version "2.2.20"
 
     id("love.forte.plugin.suspend-transform") version "2.2.20-0.13.2"
