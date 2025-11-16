@@ -71,16 +71,16 @@ internal object Punycode {
         var d = if (firstTime) delta / DAMP else delta / 2
         d += d / numPoints
         var k = 0
-        val limit = ((BASE - T_MIN) * T_MAX) / 2
+        val limit = (BASE - T_MIN) * T_MAX / 2
         while (d > limit) {
-            d /= (BASE - T_MIN)
+            d /= BASE - T_MIN
             k += BASE
         }
         return k + ((BASE - T_MIN + 1) * d / (d + SKEW)).toInt()
     }
 
     private fun encodeDigit(d: Int): Char =
-        if (d < 26) (('a'.code + d).toChar()) else (('0'.code + (d - 26)).toChar())
+        if (d < 26) ('a'.code + d).toChar() else ('0'.code + (d - 26)).toChar()
 
     private fun String.toCodePoints(): List<Int> {
         val list = mutableListOf<Int>()
@@ -92,7 +92,7 @@ internal object Punycode {
                 if (c2 in '\uDC00'..'\uDFFF') {
                     val high = c1.code
                     val low = c2.code
-                    val codePoint = ((high - 0xD800) shl 10) + (low - 0xDC00) + 0x10000
+                    val codePoint = (high - 0xD800 shl 10) + (low - 0xDC00) + 0x10000
                     list.add(codePoint)
                     i += 2
                     continue

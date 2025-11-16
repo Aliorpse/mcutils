@@ -74,6 +74,6 @@ internal object BedrockServerStatusImpl {
     }
 
     private fun Long.toByteArray(): ByteArray = ByteArray(8) { i ->
-        ((this shr ((7 - i) * 8)) and 0xFF).toByte()
+        ((this shr (7 - i) * 8) and 0xFF).toByte()
     }
 }

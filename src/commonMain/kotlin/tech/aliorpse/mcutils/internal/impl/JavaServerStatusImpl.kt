@@ -126,7 +126,7 @@ internal object JavaServerStatusImpl {
     suspend fun ByteWriteChannel.writeVarInt(value: Int) {
         var v = value
         while (true) {
-            if ((v and 0x7F.inv()) == 0) {
+            if (v and 0x7F.inv() == 0) {
                 writeByte(v.toByte())
                 return
             }
@@ -138,7 +138,7 @@ internal object JavaServerStatusImpl {
     fun Sink.writeVarInt(value: Int) {
         var v = value
         while (true) {
-            if ((v and 0x7F.inv()) == 0) {
+            if (v and 0x7F.inv() == 0) {
                 write(ByteArray(1) { v.toByte() })
                 flush()
                 return
@@ -155,10 +155,10 @@ internal object JavaServerStatusImpl {
         do {
             read = readByte().toInt()
             val value = read and 0b01111111
-            result = result or (value shl (7 * numRead))
+            result = result or (value shl 7 * numRead)
             numRead++
             if (numRead > 5) error("VarInt too big")
-        } while ((read and 0b10000000) != 0)
+        } while (read and 0b10000000 != 0)
         return result
     }
 
