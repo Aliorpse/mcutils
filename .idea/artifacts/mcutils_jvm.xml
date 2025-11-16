@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="mcutils-jvm">
+    <output-path>$PROJECT_DIR$/build/libs</output-path>
+    <root id="archive" name="mcutils-jvm.jar">
+      <element id="module-output" name="mcutils.jvmMain" />
+    </root>
+  </artifact>
+</component>
