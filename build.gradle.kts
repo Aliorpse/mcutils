@@ -1,29 +1,63 @@
 plugins {
-    kotlin("jvm") version "2.2.21"
-    kotlin("plugin.serialization") version "2.2.20"
-
-    id("love.forte.plugin.suspend-transform") version "2.2.20-0.13.2"
-    id("com.google.devtools.ksp") version "2.3.2"
-    id("org.jetbrains.dokka") version "2.1.0"
-    id("com.vanniktech.maven.publish") version "0.35.0"
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.suspend.transform)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.maven.publish)
+    alias(libs.plugins.kotlinx.rpc)
 }
 
-group = "tech.aliorpse"
+group = project.property("group") as String
 version = System.getenv("GITHUB_REF_NAME") ?: "local"
 
 kotlin {
-    jvmToolchain(21)
+    iosArm64()
+    iosSimulatorArm64()
+    iosX64()
+    js(IR) {
+        browser()
+        nodejs()
+    }
+    jvm()
+    linuxArm64()
+    linuxX64()
+    macosArm64()
+    macosX64()
+    mingwX64()
 
+    sourceSets {
+        commonMain.dependencies {
+            api(libs.kotlinx.coroutines.core)
+            api(libs.kotlinx.serialization.json)
+            api(libs.kotlinx.collections.immutable)
+
+            api(libs.ktor.client.core)
+            api(libs.ktor.network)
+            api(libs.ktor.client.content.negotiation)
+            api(libs.ktor.serialization.kotlinx.json)
+
+            api(libs.kotlinx.rpc.client)
+            api(libs.kotlinx.rpc.serialization.json)
+            api(libs.kotlinx.rpc.ktor.client)
+        }
+
+        jvmTest.dependencies {
+            implementation(libs.ktor.client.cio)
+            implementation(kotlin("test"))
+        }
+    }
+
+    jvmToolchain(21)
+    explicitApi()
     compilerOptions {
         freeCompilerArgs.add("-Xjvm-default=all")
     }
-
-    explicitApi()
 }
 
 suspendTransformPlugin {
     transformers {
-        useJvmDefault()
+        useDefault()
     }
 }
 
@@ -32,36 +66,20 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
-    api("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
-
-    api("io.ktor:ktor-client-core:3.3.2")
-    api("io.ktor:ktor-client-content-negotiation:3.3.2")
-    api("io.ktor:ktor-serialization-kotlinx-json:3.3.2")
-    testImplementation("io.ktor:ktor-client-cio:3.3.2")
-
-    testImplementation(kotlin("test"))
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-
 configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
     publishToMavenCentral()
     signAllPublications()
-    coordinates("tech.aliorpse", "mcutils", version.toString())
+    coordinates(group.toString(), rootProject.name, version.toString())
 
     pom {
-        name = "mcutils"
-        description = "A Kotlin-based library that provides utility functions for Minecraft-related queries."
+        name = rootProject.name
+        description = "A Kotlin multiplatform library provides utility functions for Minecraft-related queries."
         url = "https://github.com/Aliorpse/mcutils/"
         inceptionYear = "2025"
 
         licenses {
             license {
-                name = "MIT"
+                name = "MIT License"
                 url = "https://opensource.org/licenses/MIT"
             }
         }
