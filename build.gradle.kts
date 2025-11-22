@@ -8,7 +8,7 @@ plugins {
 }
 
 group = project.property("group") as String
-version = System.getenv("GITHUB_REF_NAME") ?: "local"
+version = project.property("version") as String
 
 kotlin {
     iosArm64()
