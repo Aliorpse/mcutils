@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.dokka)
     alias(libs.plugins.maven.publish)
-    alias(libs.plugins.kotlinx.rpc)
 }
 
 group = project.property("group") as String
@@ -36,10 +35,6 @@ kotlin {
             api(libs.ktor.network)
             api(libs.ktor.client.content.negotiation)
             api(libs.ktor.serialization.kotlinx.json)
-
-            api(libs.kotlinx.rpc.client)
-            api(libs.kotlinx.rpc.serialization.json)
-            api(libs.kotlinx.rpc.ktor.client)
         }
 
         jvmTest.dependencies {
