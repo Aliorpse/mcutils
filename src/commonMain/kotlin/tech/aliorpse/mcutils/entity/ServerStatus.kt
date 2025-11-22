@@ -1,49 +1,26 @@
 package tech.aliorpse.mcutils.entity
 
 import kotlinx.serialization.Serializable
+import tech.aliorpse.mcutils.api.MinecraftServer.getStatus
 import tech.aliorpse.mcutils.internal.serializer.TextComponentSerializer
 
-public interface ServerStatus {
-    public val description: TextComponent
-    public val players: Players
-    public val version: Version
-    public val ping: Long
-}
-
 /**
- * Java Edition server status.
+ * Minecraft server status by [getStatus]
  *
  * @property secureChatEnforced Whether secure chat is required.
  * @property favicon Base64-encoded favicon, if present.
  * @property ping Ping in milliseconds, null if unsupported.
  * @property srvRecord  e.g. int-p-as-1.wdsj.net:55581
  */
-public data class JavaServerStatus(
-    override val description: TextComponent,
-    override val players: Players,
-    override val version: Version,
-    override val ping: Long,
+public data class ServerStatus(
+    val description: TextComponent,
+    val players: Players,
+    val version: Version,
+    val ping: Long,
     val secureChatEnforced: Boolean,
     val favicon: String?,
     val srvRecord: String?
-) : ServerStatus
-
-/**
- * Bedrock Edition server status.
- *
- * @property levelName Loaded level name.
- * @property gameMode Current game mode.
- * @property serverUniqueID Unique server ID.
- */
-public data class BedrockServerStatus(
-    override val description: TextComponent,
-    override val players: Players,
-    override val version: Version,
-    override val ping: Long,
-    val levelName: String,
-    val gameMode: GameMode,
-    val serverUniqueID: String,
-) : ServerStatus
+)
 
 /**
  * Player info.
@@ -77,17 +54,6 @@ public data class Sample(
     val id: String,
     val name: String
 )
-
-/**
- * Game modes.
- */
-public enum class GameMode {
-    SURVIVAL,
-    CREATIVE,
-    ADVENTURE,
-    SPECTATOR,
-    UNKNOWN
-}
 
 /**
  * MOTD text component.

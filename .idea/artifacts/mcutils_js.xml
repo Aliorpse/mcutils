@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="mcutils-js">
-    <output-path>$PROJECT_DIR$/build/libs</output-path>
-    <root id="archive" name="mcutils-js.jar">
-      <element id="module-output" name="mcutils.jsMain" />
-    </root>
-  </artifact>
-</component>

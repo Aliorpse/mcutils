@@ -21,21 +21,19 @@ implementation("tech.aliorpse:mcutils:$version")
 ```kotlin
 runBlocking {
     var status
-    status = MCServer.getJavaStatus("mc.hypixel.net")
+    status = MCServer.getStatus("mc.hypixel.net")
     
-    status = MCServer.getJavaStatus(
+    status = MCServer.getStatus(
         host = "wdsj.net",
         port = 25565,
         enableSrv = false
     )
-    
-    status = MCServer.getBedrockStatus("play.easecation.net")
 }
 ```
 
 To reduce package size and avoid using libraries that may cause issues, in some regions (e.g. China), default SRV resolve implementation may be unavailable.
 
-### Get Player Profile (Java Edition Only)
+### Get Player Profile
 
 ```kotlin
 runBlocking {
@@ -54,6 +52,6 @@ Check out the project's [dokka](https://aliorpse.github.io/mcutils/) for the ful
 The project uses [kotlin-suspend-transform-compiler-plugin](https://github.com/ForteScarlet/kotlin-suspend-transform-compiler-plugin) to automatically generate variants.
 
 ```java
-CompletableFuture<JavaServerStatus> status =
-        JavaServer.getStatusAsync("mc.hypixel.net");
+CompletableFuture<ServerStatus> status =
+        MinecraftServer.getStatusAsync("mc.hypixel.net");
 ```
