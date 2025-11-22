@@ -20,6 +20,9 @@ out/
 ### Kotlin ###
 .kotlin
 
+### kotlin-js-store ###
+/kotlin-js-store/node_modules/
+
 ### Eclipse ###
 .apt_generated
 .classpath
