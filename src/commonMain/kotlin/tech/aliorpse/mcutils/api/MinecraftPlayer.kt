@@ -7,6 +7,8 @@ import tech.aliorpse.mcutils.entity.PlayerProfile
 import tech.aliorpse.mcutils.internal.impl.PlayerInfoImpl
 import kotlin.jvm.JvmStatic
 
+public typealias MCPlayer = MinecraftPlayer
+
 public object MinecraftPlayer {
     /**
      * Retrieves a player's profile by name or UUID.
