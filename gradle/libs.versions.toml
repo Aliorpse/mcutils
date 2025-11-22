@@ -6,7 +6,7 @@ kotlinx-collections-immutable = "0.4.0"
 kotlinx-rpc = "0.10.1"
 ktor = "3.3.2"
 suspend-transform = "2.2.21-0.13.2"
-ksp = "2.3.2"
+ksp = "2.3.3"
 dokka = "2.1.0"
 maven-publish = "0.35.0"
 
