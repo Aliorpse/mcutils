@@ -4,7 +4,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.withContext
 
-// to be implemented
+// To be implemented
 internal val DispatchersIO = Dispatchers.Default
 
 internal suspend fun <T> withDispatchersIO(block: suspend () -> T): T {
