@@ -18,7 +18,11 @@ kotlin {
         browser()
         nodejs()
     }
-    jvm()
+    jvm {
+        compilerOptions {
+            freeCompilerArgs.add("-Xjvm-default=all")
+        }
+    }
     linuxArm64()
     linuxX64()
     macosArm64()
@@ -45,9 +49,6 @@ kotlin {
 
     jvmToolchain(21)
     explicitApi()
-    compilerOptions {
-        freeCompilerArgs.add("-Xjvm-default=all")
-    }
 }
 
 suspendTransformPlugin {
