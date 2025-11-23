@@ -2,8 +2,7 @@
   "packages": {
     ".": {
       "package-name": "mcutils",
-      "release-type": "simple",
-      "tag-prefix": ""
+      "release-type": "simple"
     }
   },
   "changelog-path": "CHANGELOG.md"
