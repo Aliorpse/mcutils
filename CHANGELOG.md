@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.0](https://github.com/Aliorpse/mcutils/compare/v2.1.3...v2.2.0) (2025-11-23)
+
+
+### Features
+
+* **protocol:** extract Minecraft protocol functions to `MinecraftProtocol` and make them public ([da65d78](https://github.com/Aliorpse/mcutils/commit/da65d78288193fa50d26a2a0644751c2a544415d))
+* **protocol:** extract Minecraft protocol functions to `MinecraftProtocol` and make them public ([2af4d7d](https://github.com/Aliorpse/mcutils/commit/2af4d7d3ed28b51f0b4a95ed18e6e6c9b6b6fbcb))
+
 ## [2.1.3](https://github.com/Aliorpse/mcutils/compare/v2.1.2...v2.1.3) (2025-11-23)
 
 
