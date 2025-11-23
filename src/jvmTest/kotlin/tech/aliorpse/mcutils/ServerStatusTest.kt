@@ -7,7 +7,7 @@ import kotlin.test.Test
 class ServerStatusTest {
     @Test
     fun `fetch java server status`() = runBlocking {
-        val result = MCServer.getStatus("demo.mcstatus.io")
+        val result = MCServer.getStatus("wdsj.net")
 
         assert(result.ping > 0)
         println(result)
