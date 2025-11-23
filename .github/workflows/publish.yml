@@ -35,7 +35,10 @@ jobs:
 
       - name: Publish and release to Maven Central
         if: ${{ steps.release.outputs.release_created }}
-        run: ./gradlew publishAndReleaseToMavenCentral -Pversion=${{ steps.release.outputs.tag_name }} --no-configuration-cache
+        run: |
+          version="${{ steps.release.outputs.tag_name }}"
+          version="${version#v}"
+          ./gradlew publishAndReleaseToMavenCentral -Pversion=$version --no-configuration-cache
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
