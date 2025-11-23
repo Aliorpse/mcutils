@@ -12,6 +12,9 @@ import io.ktor.utils.io.readFully
 import io.ktor.utils.io.writeByte
 import io.ktor.utils.io.writePacket
 import kotlinx.io.Sink
+import love.forte.plugin.suspendtrans.annotation.JsPromise
+import love.forte.plugin.suspendtrans.annotation.JvmAsync
+import love.forte.plugin.suspendtrans.annotation.JvmBlocking
 import tech.aliorpse.mcutils.annotation.ExperimentalMCUtilsApi
 import tech.aliorpse.mcutils.internal.impl.ServerStatusImpl
 
@@ -20,6 +23,9 @@ import tech.aliorpse.mcutils.internal.impl.ServerStatusImpl
  */
 @Suppress("MagicNumber")
 @ExperimentalMCUtilsApi
+@JsPromise
+@JvmAsync
+@JvmBlocking
 public object MinecraftProtocol {
     public suspend fun ByteWriteChannel.sendMCPacket(packetId: Int, buildPacketBlock: Sink.() -> Unit) {
         val packet = buildPacket(buildPacketBlock)
