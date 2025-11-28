@@ -1,7 +1,7 @@
 package tech.aliorpse.mcutils.annotation
 
 @RequiresOptIn(
-    "This API is unstable and may change at any time, without a major version bump.",
+    "This API is for internal use and may change at any time, without a major version bump.",
     RequiresOptIn.Level.WARNING
 )
 @Target(
@@ -9,4 +9,4 @@ package tech.aliorpse.mcutils.annotation
     AnnotationTarget.FUNCTION,
     AnnotationTarget.PROPERTY,
 )
-public annotation class ExperimentalMCUtilsApi
+public annotation class InternalMCUtilsApi
