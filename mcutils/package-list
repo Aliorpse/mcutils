@@ -2,6 +2,7 @@ $dokka.format:html-v1
 $dokka.linkExtension:html
 $dokka.location:tech.aliorpse.mcutils.annotation////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.annotation/index.html
 $dokka.location:tech.aliorpse.mcutils.annotation/ExperimentalMCUtilsApi///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.annotation/-experimental-m-c-utils-api/index.html
+$dokka.location:tech.aliorpse.mcutils.annotation/InternalMCUtilsApi///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.annotation/-internal-m-c-utils-api/index.html
 $dokka.location:tech.aliorpse.mcutils.api////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.api/index.html
 $dokka.location:tech.aliorpse.mcutils.api/MCPlayer///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.api/-m-c-player/index.html
 $dokka.location:tech.aliorpse.mcutils.api/MCServer///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.api/-m-c-server/index.html
