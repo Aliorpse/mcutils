@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.1](https://github.com/Aliorpse/mcutils/compare/v2.2.0...v2.2.1) (2025-11-28)
+
+
+### Bug Fixes
+
+* **js/security:** bump glob to 10.5.0 ([e07d41d](https://github.com/Aliorpse/mcutils/commit/e07d41d01ba7ad42512e8ac35275d2f0cb074b87))
+* **variant:** add variants for `MinecraftProtocol` ([6418498](https://github.com/Aliorpse/mcutils/commit/641849885dfc50335b23c42ac4188a0196ec4822))
+
 ## [2.2.0](https://github.com/Aliorpse/mcutils/compare/v2.1.3...v2.2.0) (2025-11-23)
 
 
