@@ -41,6 +41,10 @@ kotlin {
             api(libs.ktor.serialization.kotlinx.json)
         }
 
+        jsMain.dependencies {
+            api(npm("glob", "10.5.0"))
+        }
+
         jvmTest.dependencies {
             implementation(libs.ktor.client.cio)
             implementation(kotlin("test"))
