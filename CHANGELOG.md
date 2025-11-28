@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/Aliorpse/mcutils/compare/v2.2.1...v2.3.0) (2025-11-28)
+
+
+### Features
+
+* **annotation:** add `InternalMCUtilsApi` and add some descriptions to `ExperimentalMCUtilsApi` ([f14e6bb](https://github.com/Aliorpse/mcutils/commit/f14e6bbf806fd5b5783335db97d575e95c8919e4))
+
 ## [2.2.1](https://github.com/Aliorpse/mcutils/compare/v2.2.0...v2.2.1) (2025-11-28)
 
 
