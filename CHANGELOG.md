@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.1](https://github.com/Aliorpse/mcutils/compare/v2.4.0...v2.4.1) (2025-11-29)
+
+
+### Performance Improvements
+
+* implement DispatchersIO for different platforms ([9f1a6d7](https://github.com/Aliorpse/mcutils/commit/9f1a6d70e996592c677fe529150894582eef9e8e))
+
 ## [2.4.0](https://github.com/Aliorpse/mcutils/compare/v2.3.0...v2.4.0) (2025-11-29)
 
 
