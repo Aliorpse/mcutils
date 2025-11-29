@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.kotlinx.atomicfu)
     alias(libs.plugins.suspend.transform)
     alias(libs.plugins.ksp)
     alias(libs.plugins.dokka)
