@@ -9,4 +9,5 @@ package tech.aliorpse.mcutils.annotation
     AnnotationTarget.FUNCTION,
     AnnotationTarget.PROPERTY,
 )
+@MustBeDocumented
 public annotation class ExperimentalMCUtilsApi
