@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
-    <title>readMCString</title>
+    <title>execute</title>
     <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">
         <script>var pathToRoot = "../../../";</script>
     <script>document.documentElement.classList.replace("no-js", "js");</script>
@@ -104,12 +104,12 @@
         </nav>
         <div id="resizer" class="resizer" data-item-type="BAR"></div>
         <div id="main" data-item-type="SECTION" role="main">
-<div class="main-content" data-page-type="member" id="content" pageIds="mcutils::tech.aliorpse.mcutils.util/MinecraftProtocol/readMCString/io.ktor.utils.io.ByteReadChannel#/PointingToDeclaration//1558683979">
-  <div class="breadcrumbs"><a href="../../../index.html">mcutils</a><span class="delimiter">/</span><a href="../index.html">tech.aliorpse.mcutils.util</a><span class="delimiter">/</span><a href="index.html">MinecraftProtocol</a><span class="delimiter">/</span><span class="current">readMCString</span></div>
+<div class="main-content" data-page-type="member" id="content" pageIds="mcutils::tech.aliorpse.mcutils.api/RconConnection/execute/#kotlin.String/PointingToDeclaration//1558683979">
+  <div class="breadcrumbs"><a href="../../../index.html">mcutils</a><span class="delimiter">/</span><a href="../index.html">tech.aliorpse.mcutils.api</a><span class="delimiter">/</span><a href="index.html">RconConnection</a><span class="delimiter">/</span><span class="current">execute</span></div>
   <div class="cover ">
-    <h1 class="cover"><span>read</span><wbr></wbr><span><span>MCString</span></span></h1>
+    <h1 class="cover"><span><span>execute</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><span data-unresolved-link="io.ktor.utils.io/ByteReadChannel///PointingToDeclaration/">ByteReadChannel</span><span class="token punctuation">.</span><a href="read-m-c-string.html"><span class="token function">readMCString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":/commonMain"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="love.forte.plugin.suspendtrans.annotation/JsPromise///PointingToDeclaration/"><span class="token annotation builtin">JsPromise</span></span></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="love.forte.plugin.suspendtrans.annotation/JvmAsync///PointingToDeclaration/"><span class="token annotation builtin">JvmAsync</span></span></div><div class="block"><span class="token annotation builtin">@</span><span data-unresolved-link="love.forte.plugin.suspendtrans.annotation/JvmBlocking///PointingToDeclaration/"><span class="token annotation builtin">JvmBlocking</span></span></div></div><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="execute.html"><span class="token function">execute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">command<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><p class="paragraph">Execute the given command.</p><ul><li><p class="paragraph">Commands run sequentially; concurrent calls are queued until the previous one finishes.</p></li><li><p class="paragraph">The command <strong>must not</strong> start with a leading &quot;/&quot;.</p></li><li><p class="paragraph">The command size must be <strong>less than</strong> 1447 bytes.</p></li><li><p class="paragraph">On server-side failure, the response will be: &quot;Error executing: <p class="paragraph">$command ($</p>message)&quot;.</p></li></ul></div></div>
 </div>
     <div class="footer">
         <div class="footer--container">

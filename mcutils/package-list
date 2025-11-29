@@ -10,7 +10,11 @@ $dokka.location:tech.aliorpse.mcutils.api/MinecraftPlayer///PointingToDeclaratio
 $dokka.location:tech.aliorpse.mcutils.api/MinecraftPlayer/getProfile/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.api/-minecraft-player/get-profile.html
 $dokka.location:tech.aliorpse.mcutils.api/MinecraftPlayer/getUuid/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.api/-minecraft-player/get-uuid.html
 $dokka.location:tech.aliorpse.mcutils.api/MinecraftServer///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.api/-minecraft-server/index.html
+$dokka.location:tech.aliorpse.mcutils.api/MinecraftServer/createRconConnection/#kotlin.String#kotlin.Int#kotlin.String#kotlin.Long/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.api/-minecraft-server/create-rcon-connection.html
 $dokka.location:tech.aliorpse.mcutils.api/MinecraftServer/getStatus/#kotlin.String#kotlin.Int#kotlin.Long#kotlin.Boolean/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.api/-minecraft-server/get-status.html
+$dokka.location:tech.aliorpse.mcutils.api/RconConnection///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.api/-rcon-connection/index.html
+$dokka.location:tech.aliorpse.mcutils.api/RconConnection/close/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.api/-rcon-connection/close.html
+$dokka.location:tech.aliorpse.mcutils.api/RconConnection/execute/#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.api/-rcon-connection/execute.html
 $dokka.location:tech.aliorpse.mcutils.entity////PointingToDeclaration/mcutils/tech.aliorpse.mcutils.entity/index.html
 $dokka.location:tech.aliorpse.mcutils.entity/PlayerProfile///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.entity/-player-profile/index.html
 $dokka.location:tech.aliorpse.mcutils.entity/PlayerProfile/PlayerProfile/#kotlin.String#kotlin.String#kotlin.Boolean#kotlin.String?#kotlin.String?#tech.aliorpse.mcutils.entity.SkinModel/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.entity/-player-profile/-player-profile.html
@@ -75,14 +79,6 @@ $dokka.location:tech.aliorpse.mcutils.util/HostPort///PointingToDeclaration/mcu
 $dokka.location:tech.aliorpse.mcutils.util/HostPort/HostPort/#kotlin.String?#kotlin.Int?/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.util/-host-port/-host-port.html
 $dokka.location:tech.aliorpse.mcutils.util/HostPort/host/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.util/-host-port/host.html
 $dokka.location:tech.aliorpse.mcutils.util/HostPort/port/#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.util/-host-port/port.html
-$dokka.location:tech.aliorpse.mcutils.util/MinecraftProtocol///PointingToDeclaration/mcutils/tech.aliorpse.mcutils.util/-minecraft-protocol/index.html
-$dokka.location:tech.aliorpse.mcutils.util/MinecraftProtocol/readMCPacket/io.ktor.utils.io.ByteReadChannel#kotlin.Int#kotlin.coroutines.SuspendFunction1[io.ktor.utils.io.ByteReadChannel,TypeParam(bounds=[kotlin.Any?])]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.util/-minecraft-protocol/read-m-c-packet.html
-$dokka.location:tech.aliorpse.mcutils.util/MinecraftProtocol/readMCString/io.ktor.utils.io.ByteReadChannel#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.util/-minecraft-protocol/read-m-c-string.html
-$dokka.location:tech.aliorpse.mcutils.util/MinecraftProtocol/readVarInt/io.ktor.utils.io.ByteReadChannel#/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.util/-minecraft-protocol/read-var-int.html
-$dokka.location:tech.aliorpse.mcutils.util/MinecraftProtocol/sendMCPacket/io.ktor.utils.io.ByteWriteChannel#kotlin.Int#kotlin.Function1[kotlinx.io.Sink,kotlin.Unit]/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.util/-minecraft-protocol/send-m-c-packet.html
-$dokka.location:tech.aliorpse.mcutils.util/MinecraftProtocol/writeMCString/kotlinx.io.Sink#kotlin.String/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.util/-minecraft-protocol/write-m-c-string.html
-$dokka.location:tech.aliorpse.mcutils.util/MinecraftProtocol/writeVarInt/io.ktor.utils.io.ByteWriteChannel#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.util/-minecraft-protocol/write-var-int.html
-$dokka.location:tech.aliorpse.mcutils.util/MinecraftProtocol/writeVarInt/kotlinx.io.Sink#kotlin.Int/PointingToDeclaration/mcutils/tech.aliorpse.mcutils.util/-minecraft-protocol/write-var-int.html
 tech.aliorpse.mcutils.annotation
 tech.aliorpse.mcutils.api
 tech.aliorpse.mcutils.entity
