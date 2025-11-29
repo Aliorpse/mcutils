@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/Aliorpse/mcutils/compare/v2.3.0...v2.4.0) (2025-11-29)
+
+
+### Features
+
+* **rcon:** support RCON protocol ([ab061ad](https://github.com/Aliorpse/mcutils/commit/ab061ad36a1fa38d01d1a8b06e0aefcc948f7d4c))
+
 ## [2.3.0](https://github.com/Aliorpse/mcutils/compare/v2.2.1...v2.3.0) (2025-11-28)
 
 
