@@ -1,12 +1,11 @@
 package tech.aliorpse.mcutils.internal.util
 
 import io.ktor.network.selector.SelectorManager
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.withContext
 
-// To be implemented
-internal val DispatchersIO = Dispatchers.Default
+internal expect val DispatchersIO: CoroutineDispatcher
 
 internal val globalSelectorIO = SelectorManager(DispatchersIO)
 
