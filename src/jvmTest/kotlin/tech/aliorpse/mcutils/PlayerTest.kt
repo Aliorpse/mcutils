@@ -5,7 +5,7 @@ import kotlinx.coroutines.runBlocking
 import tech.aliorpse.mcutils.api.MCPlayer
 import kotlin.test.Test
 
-class PlayerInfoTest {
+class PlayerTest {
     @Test
     fun `get player uuid by name`() = runBlocking {
         val id = MCPlayer.getUuid("Aliorpse")

@@ -45,6 +45,14 @@ runBlocking {
 }
 ```
 
+### Remote Console
+```kotlin
+runBlocking {
+    val connection = MCServer.createRconConnection("localhost", password = "mcutilsTest")
+    connection.use { println(it.execute("help")) }
+}
+```
+
 Check out the project's [dokka](https://aliorpse.github.io/mcutils/) for the full API reference. There may be some extension functions you’ll find useful.
 
 ## Java Usage
