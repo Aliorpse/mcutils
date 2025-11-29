@@ -14,12 +14,15 @@ import tech.aliorpse.mcutils.internal.entity.PlayerProfileResponse
 import tech.aliorpse.mcutils.internal.util.HttpClientProvider.httpClient
 import tech.aliorpse.mcutils.internal.util.withDispatchersIO
 
-internal object PlayerInfoImpl {
+internal class PlayerInfoImpl {
+    private companion object {
+        const val UUID_LENGTH = 32
+        const val MOJANG_PROFILE_BASE = "https://api.mojang.com"
+        const val MOJANG_SESSION_BASE = "https://sessionserver.mojang.com"
+    }
+
     private val json = Json { ignoreUnknownKeys = true }
     private val nameRegex = Regex("^[A-Za-z0-9_]{3,16}$")
-    private const val UUID_LENGTH = 32
-    private const val MOJANG_PROFILE_BASE = "https://api.mojang.com"
-    private const val MOJANG_SESSION_BASE = "https://sessionserver.mojang.com"
 
     suspend fun getProfile(player: String) = withDispatchersIO {
         val player = player.replace("-", "")

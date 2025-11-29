@@ -12,6 +12,8 @@ import kotlin.jvm.JvmStatic
 public typealias MCServer = MinecraftServer
 
 public object MinecraftServer {
+    private val statusService by lazy { ServerStatusImpl() }
+
     /**
      * Fetch server status by [Server List Ping](https://minecraft.wiki/w/Java_Edition_protocol/Server_List_Ping).
      *
@@ -27,5 +29,5 @@ public object MinecraftServer {
         port: Int = 25565,
         timeout: Long = 3000L,
         enableSrv: Boolean = true,
-    ): ServerStatus = ServerStatusImpl.getStatus(host, port, timeout, enableSrv)
+    ): ServerStatus = statusService.getStatus(host, port, timeout, enableSrv)
 }

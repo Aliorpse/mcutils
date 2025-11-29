@@ -10,6 +10,8 @@ import kotlin.jvm.JvmStatic
 public typealias MCPlayer = MinecraftPlayer
 
 public object MinecraftPlayer {
+    private val profileService by lazy { PlayerInfoImpl() }
+
     /**
      * Retrieves a player's profile by name or UUID.
      *
@@ -21,7 +23,7 @@ public object MinecraftPlayer {
     @JvmAsync
     @JvmBlocking
     @JvmStatic
-    public suspend fun getProfile(player: String): PlayerProfile = PlayerInfoImpl.getProfile(player)
+    public suspend fun getProfile(player: String): PlayerProfile = profileService.getProfile(player)
 
     @JsPromise
     @JvmAsync
@@ -32,5 +34,5 @@ public object MinecraftPlayer {
      *
      * Returns the UUID without dashes.
      */
-    public suspend fun getUuid(playerName: String): String = PlayerInfoImpl.getUuid(playerName)
+    public suspend fun getUuid(playerName: String): String = profileService.getUuid(playerName)
 }
