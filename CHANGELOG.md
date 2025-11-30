@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/Aliorpse/mcutils/compare/v2.4.1...v2.5.0) (2025-11-30)
+
+
+### Features
+
+* **query:** implement Query protocol ([897b0b8](https://github.com/Aliorpse/mcutils/commit/897b0b8ca8d494fd2aef8fb4195695e3d9e3297d))
+
 ## [2.4.1](https://github.com/Aliorpse/mcutils/compare/v2.4.0...v2.4.1) (2025-11-29)
 
 
