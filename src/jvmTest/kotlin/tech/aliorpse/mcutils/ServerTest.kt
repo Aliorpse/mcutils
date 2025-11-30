@@ -7,10 +7,16 @@ import kotlin.test.Test
 
 class ServerTest {
     @Test
-    fun `fetch java server status`() = runBlocking {
+    fun `fetch java server status by slp`() = runBlocking {
         val result = MCServer.getStatus("wdsj.net")
 
         assert(result.ping > 0)
+        println(result)
+    }
+
+    @OptIn(ExperimentalMCUtilsApi::class)
+    fun `fetch java server status by query`() = runBlocking {
+        val result = MCServer.getQueryFull("wdsj.net")
         println(result)
     }
 

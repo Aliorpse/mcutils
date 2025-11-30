@@ -5,7 +5,10 @@ import love.forte.plugin.suspendtrans.annotation.JsPromise
 import love.forte.plugin.suspendtrans.annotation.JvmAsync
 import love.forte.plugin.suspendtrans.annotation.JvmBlocking
 import tech.aliorpse.mcutils.annotation.ExperimentalMCUtilsApi
+import tech.aliorpse.mcutils.entity.QueryStatusBasic
+import tech.aliorpse.mcutils.entity.QueryStatusFull
 import tech.aliorpse.mcutils.entity.ServerStatus
+import tech.aliorpse.mcutils.internal.impl.QueryImpl
 import tech.aliorpse.mcutils.internal.impl.RconConnectionImpl
 import tech.aliorpse.mcutils.internal.impl.ServerListPingImpl
 import tech.aliorpse.mcutils.internal.util.Punycode
@@ -17,7 +20,8 @@ import kotlin.jvm.JvmStatic
 public typealias MCServer = MinecraftServer
 
 public object MinecraftServer {
-    private val statusService by lazy { ServerListPingImpl() }
+    private val statusImpl by lazy { ServerListPingImpl() }
+    private val queryImpl by lazy { QueryImpl() }
 
     /**
      * Fetch server status by [Server List Ping](https://minecraft.wiki/w/Java_Edition_protocol/Server_List_Ping).
@@ -34,7 +38,7 @@ public object MinecraftServer {
         port: Int = 25565,
         timeout: Long = 3000L,
         enableSrv: Boolean = true,
-    ): ServerStatus = statusService.getStatus(host, port, timeout, enableSrv)
+    ): ServerStatus = statusImpl.getStatus(host, port, timeout, enableSrv)
 
     /**
      * Create a RCON connection to a Minecraft server.
@@ -60,6 +64,33 @@ public object MinecraftServer {
         impl.authenticate(password)
         return RconConnection(impl)
     }
+
+    /**
+     * Fetch server status by [Query](https://minecraft.wiki/w/Query)
+     */
+    @JsPromise
+    @JvmAsync
+    @JvmBlocking
+    @JvmStatic
+    @JvmOverloads
+    @ExperimentalMCUtilsApi
+    public suspend fun getQueryBasic(
+        host: String,
+        port: Int = 25565,
+        timeout: Long = 3000L,
+    ): QueryStatusBasic = queryImpl.getQuery(host, port, timeout, false) as QueryStatusBasic
+
+    @JsPromise
+    @JvmAsync
+    @JvmBlocking
+    @JvmStatic
+    @JvmOverloads
+    @ExperimentalMCUtilsApi
+    public suspend fun getQueryFull(
+        host: String,
+        port: Int = 25565,
+        timeout: Long = 3000L,
+    ): QueryStatusFull = queryImpl.getQuery(host, port, timeout, true) as QueryStatusFull
 }
 
 public class RconConnection internal constructor(
