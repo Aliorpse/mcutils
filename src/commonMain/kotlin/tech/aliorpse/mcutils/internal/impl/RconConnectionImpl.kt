@@ -93,8 +93,8 @@ private suspend fun ByteReadChannel.readRconPacket(packetId: Int, packetType: In
     val payloadResp = payloadBytes.takeWhile { it.toInt() != 0 }.toByteArray().decodeToString()
 
     if (packetIdResp == -1 && packetTypeResp == 2) error("RCON Authentication failed")
-    require(packetIdResp == packetId) { "Received packet id $packetIdResp, but expected $packetId" }
-    require(packetTypeResp == packetType) { "Received response type $packetTypeResp, but expected $packetType" }
+    require(packetIdResp == packetId) { "Packet id mismatch: expected $packetId, got $packetIdResp" }
+    require(packetTypeResp == packetType) { "Packet type mismatch: expected $packetType, got $packetTypeResp" }
 
     return RconPacket(packetTypeResp, payloadResp)
 }

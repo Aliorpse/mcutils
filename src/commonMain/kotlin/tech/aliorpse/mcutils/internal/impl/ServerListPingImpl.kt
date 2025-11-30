@@ -33,7 +33,6 @@ import tech.aliorpse.mcutils.internal.serializer.TextComponentSerializer
 import tech.aliorpse.mcutils.internal.util.Punycode
 import tech.aliorpse.mcutils.internal.util.SrvResolver
 import tech.aliorpse.mcutils.internal.util.globalSelectorIO
-import tech.aliorpse.mcutils.internal.util.withDispatchersIO
 import tech.aliorpse.mcutils.util.toTextComponent
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
@@ -47,7 +46,7 @@ internal class ServerListPingImpl {
         port: Int,
         timeout: Long,
         enableSrv: Boolean,
-    ) = withDispatchersIO {
+    ): ServerStatus {
         val asciiRawHost = Punycode.from(host)
         val srvRecord = if (enableSrv) SrvResolver.resolve("_minecraft._tcp.$asciiRawHost") else null
 
@@ -86,7 +85,7 @@ internal class ServerListPingImpl {
             input.readMCPacket(0x01) { readLong() }
             val latency = Clock.System.now().toEpochMilliseconds() - pingStart
 
-            ServerStatus(
+            return ServerStatus(
                 description = when (val desc = jsonElement.jsonObject["description"]) {
                     is JsonPrimitive -> desc.content.toTextComponent()
                     is JsonObject -> json.decodeFromString(TextComponentSerializer, desc.toString())
@@ -107,28 +106,28 @@ internal class ServerListPingImpl {
             )
         }
     }
+}
 
-    suspend fun ByteWriteChannel.sendMCPacket(packetId: Int, buildPacketBlock: Sink.() -> Unit) {
-        val packet = buildPacket(buildPacketBlock)
+private suspend fun ByteWriteChannel.sendMCPacket(packetId: Int, buildPacketBlock: Sink.() -> Unit) {
+    val packet = buildPacket(buildPacketBlock)
 
-        writeVarInt(packet.remaining.toInt() + 1)
-        writeVarInt(packetId)
-        writePacket(packet)
-        flush()
-    }
+    writeVarInt(packet.remaining.toInt() + 1)
+    writeVarInt(packetId)
+    writePacket(packet)
+    flush()
+}
 
-    suspend fun <T> ByteReadChannel.readMCPacket(
-        packetId: Int,
-        readPacketBlock: suspend ByteReadChannel.() -> T
-    ): T {
-        val packetLength = readVarInt()
-        val packetBytes = ByteArray(packetLength)
-        readFully(packetBytes)
-        val buffer = ByteReadChannel(packetBytes)
-        val packetIdResp = buffer.readVarInt()
-        require(packetId == packetIdResp) { "Received packet id $packetIdResp, but expected $packetId" }
-        return buffer.readPacketBlock()
-    }
+private suspend fun <T> ByteReadChannel.readMCPacket(
+    packetId: Int,
+    readPacketBlock: suspend ByteReadChannel.() -> T
+): T {
+    val packetLength = readVarInt()
+    val packetBytes = ByteArray(packetLength)
+    readFully(packetBytes)
+    val buffer = ByteReadChannel(packetBytes)
+    val packetIdResp = buffer.readVarInt()
+    require(packetId == packetIdResp) { "Packet id mismatch: excepted $packetId, got $packetIdResp" }
+    return buffer.readPacketBlock()
 }
 
 private suspend fun ByteWriteChannel.writeVarInt(value: Int) {
