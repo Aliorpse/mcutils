@@ -13,23 +13,26 @@ import io.ktor.utils.io.readByte
 import io.ktor.utils.io.readFully
 import io.ktor.utils.io.writeByte
 import io.ktor.utils.io.writePacket
-import kotlinx.atomicfu.atomic
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.io.Sink
 import kotlinx.io.writeString
+import kotlin.concurrent.atomics.AtomicInt
+import kotlin.concurrent.atomics.ExperimentalAtomicApi
+import kotlin.concurrent.atomics.fetchAndIncrement
 
+@OptIn(ExperimentalAtomicApi::class)
 internal class RconConnectionImpl(
     internal val connection: Socket
 ) {
-    private val idCounter = atomic(1)
+    private val idCounter = AtomicInt(1)
     private val mutex = Mutex()
 
     private val output = connection.openWriteChannel()
     private val input = connection.openReadChannel()
 
     suspend fun execute(command: String): String = mutex.withLock {
-        val roundId = idCounter.getAndIncrement()
+        val roundId = idCounter.fetchAndIncrement()
         output.sendRconPacket(roundId, 2) { writeString(command) }
         return input.readRconResponse(roundId, 0)
     }
