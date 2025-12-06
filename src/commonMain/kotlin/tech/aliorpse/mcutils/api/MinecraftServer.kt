@@ -50,7 +50,6 @@ public object MinecraftServer {
     @JvmBlocking
     @JvmStatic
     @JvmOverloads
-    @ExperimentalMCUtilsApi
     public suspend fun createRconConnection(
         host: String,
         port: Int = 25575,
@@ -80,6 +79,9 @@ public object MinecraftServer {
         timeout: Long = 3000L,
     ): QueryStatusBasic = queryImpl.getQuery(host, port, timeout, false) as QueryStatusBasic
 
+    /**
+     * Fetch server status by [Query](https://minecraft.wiki/w/Query)
+     */
     @JsPromise
     @JvmAsync
     @JvmBlocking
@@ -108,12 +110,10 @@ public class RconConnection internal constructor(
     @JsPromise
     @JvmAsync
     @JvmBlocking
-    @ExperimentalMCUtilsApi
     public suspend fun execute(command: String): String = impl.execute(command)
 
     @JsPromise
     @JvmAsync
     @JvmBlocking
-    @ExperimentalMCUtilsApi
     override fun close(): Unit = impl.connection.close()
 }

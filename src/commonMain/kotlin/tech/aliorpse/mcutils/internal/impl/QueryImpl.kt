@@ -6,15 +6,14 @@ import io.ktor.network.sockets.ConnectedDatagramSocket
 import io.ktor.network.sockets.Datagram
 import io.ktor.network.sockets.InetSocketAddress
 import io.ktor.network.sockets.aSocket
-import io.ktor.utils.io.ByteReadChannel
 import io.ktor.utils.io.core.buildPacket
+import io.ktor.utils.io.core.discard
+import io.ktor.utils.io.core.readShortLittleEndian
 import io.ktor.utils.io.core.writeFully
-import io.ktor.utils.io.readByte
-import io.ktor.utils.io.readFully
 import kotlinx.coroutines.withTimeout
 import kotlinx.coroutines.withTimeoutOrNull
 import kotlinx.io.Sink
-import kotlinx.io.readByteArray
+import kotlinx.io.Source
 import tech.aliorpse.mcutils.entity.Players
 import tech.aliorpse.mcutils.entity.QueryStatus
 import tech.aliorpse.mcutils.entity.QueryStatusBasic
@@ -45,8 +44,8 @@ internal class QueryImpl {
             return withTimeoutOrNull(timeout) {
                 socket.getQueryStatus(token, isFull)
             } ?: run {
-                val token = withTimeout(timeout) { socket.queryHandshake() }
-                withTimeout(timeout) { socket.getQueryStatus(token, isFull) }
+                val newToken = withTimeout(timeout) { socket.queryHandshake() }
+                withTimeout(timeout) { socket.getQueryStatus(newToken, isFull) }
             }
         }
     }
@@ -54,10 +53,12 @@ internal class QueryImpl {
 
 private suspend fun ConnectedDatagramSocket.getQueryStatus(token: Int, isFull: Boolean): QueryStatus {
     sendQueryPacket(0x00) {
-        writeBigEndianInt(token)
+        writeInt(token)
         if (isFull) writeFully(byteArrayOf(0, 0, 0, 0))
     }
-    return readQueryStatus(isFull)
+    return readQueryPacket(0x00) {
+        if (isFull) readStatsFull() else readStatsBasic()
+    }
 }
 
 private suspend fun ConnectedDatagramSocket.queryHandshake(): Int {
@@ -65,62 +66,64 @@ private suspend fun ConnectedDatagramSocket.queryHandshake(): Int {
     return readQueryPacket(0x09) { readNullTerminatedString() }.toInt()
 }
 
-private suspend fun ConnectedDatagramSocket.readQueryStatus(isFull: Boolean): QueryStatus {
-    return readQueryPacket(0x00) {
-        if (isFull) {
-            readFully(ByteArray(11)) // Meaningless padding
+private fun Source.readStatsFull(): QueryStatusFull {
+    discard(11)
 
-            val kv = mutableMapOf<String, String>()
-            while (true) {
-                val key = readNullTerminatedString()
-                if (key.isEmpty()) break
-                val value = readNullTerminatedString()
-                kv[key] = value
-            }
+    val kv = readKVPairs()
 
-            readFully(ByteArray(10)) // Meaningless padding
+    discard(10)
 
-            val players = mutableSetOf<Sample>()
-            while (true) {
-                val playerName = readNullTerminatedString()
-                if (playerName.isEmpty()) break
-                players += Sample("", playerName)
-            }
+    val players = readPlayerList()
+    val plugins = parsePlugins(kv["plugins"])
 
-            val rawPlugins = kv["plugins"] ?: ""
-            val plugins = run {
-                if (rawPlugins.isEmpty()) {
-                    emptySet()
-                } else {
-                    val parts = rawPlugins.split(":", limit = 2)
-                    val pluginPart = if (parts.size == 2) parts[1] else parts[0]
-                    pluginPart.split(";").map { it.trim() }.filter { it.isNotEmpty() }.toSet()
-                }
-            }
+    return QueryStatusFull(
+        description = kv["hostname"].orEmpty(),
+        map = kv["map"].orEmpty(),
+        players = Players(
+            max = kv["maxplayers"]?.toIntOrNull() ?: 0,
+            online = kv["numplayers"]?.toIntOrNull() ?: 0,
+            sample = players
+        ),
+        version = kv["version"].orEmpty(),
+        plugins = plugins
+    )
+}
 
-            QueryStatusFull(
-                kv["hostname"] ?: "",
-                kv["map"] ?: "",
-                Players(
-                    kv["maxplayers"]?.toIntOrNull() ?: 0,
-                    kv["numplayers"]?.toIntOrNull() ?: 0,
-                    players.toSet()
-                ),
-                kv["version"] ?: "",
-                plugins
-            )
-        } else {
-            val motd = readNullTerminatedString()
-            readNullTerminatedString() // GameType == "SMP"
-            val map = readNullTerminatedString()
-            val numPlayers = readNullTerminatedString().toInt()
-            val maxPlayers = readNullTerminatedString().toInt()
-            readLittleEndianUShort() // Port
-            readNullTerminatedString() // IP
-
-            QueryStatusBasic(motd, map, Players(maxPlayers, numPlayers))
-        }
+private fun Source.readKVPairs(): Map<String, String> = buildMap {
+    while (true) {
+        val key = readNullTerminatedString()
+        if (key.isEmpty()) break
+        val value = readNullTerminatedString()
+        put(key, value)
     }
+}
+
+private fun Source.readPlayerList(): Set<Sample> = buildSet {
+    while (true) {
+        val name = readNullTerminatedString()
+        if (name.isEmpty()) break
+        add(Sample("", name))
+    }
+}
+
+private fun parsePlugins(raw: String?): Set<String> =
+    raw?.takeIf { it.isNotBlank() }
+        ?.substringAfter(':', raw)
+        ?.splitToSequence(';')
+        ?.mapNotNull { it.trim().takeIf { it1 -> it1.isNotEmpty() } }
+        ?.toSet()
+        ?: emptySet()
+
+private fun Source.readStatsBasic(): QueryStatusBasic {
+    val motd = readNullTerminatedString()
+    readNullTerminatedString() // GameType (SMP)
+    val map = readNullTerminatedString()
+    val numPlayers = readNullTerminatedString().toIntOrNull() ?: 0
+    val maxPlayers = readNullTerminatedString().toIntOrNull() ?: 0
+    readShortLittleEndian() // Port
+    readNullTerminatedString() // IP
+
+    return QueryStatusBasic(motd, map, Players(maxPlayers, numPlayers))
 }
 
 private suspend fun ConnectedDatagramSocket.sendQueryPacket(
@@ -130,7 +133,7 @@ private suspend fun ConnectedDatagramSocket.sendQueryPacket(
     val packet = buildPacket {
         writeFully(byteArrayOf(0xFE.toByte(), 0xFD.toByte())) // Magic short 0xFEFD
         writeByte(packetType)
-        writeBigEndianInt(QUERY_SESSION_ID)
+        writeInt(QUERY_SESSION_ID)
         payloadBuilder()
     }
     send(Datagram(packet, remoteAddress))
@@ -138,63 +141,36 @@ private suspend fun ConnectedDatagramSocket.sendQueryPacket(
 
 private suspend fun <T> ConnectedDatagramSocket.readQueryPacket(
     packetType: Byte,
-    readPayload: suspend ByteReadChannel.() -> T
+    readPayload: Source.() -> T
 ): T {
     val datagram = receive()
-    val buffer = ByteReadChannel(datagram.packet.readByteArray())
+    val packet = datagram.packet
 
-    val packetTypeResp = buffer.readByte()
-    if (packetTypeResp != packetType) error("Packet type mismatch: expected $packetType, got $packetTypeResp")
+    try {
+        val packetTypeResp = packet.readByte()
+        require(packetTypeResp == packetType) { "Packet type mismatch: expected $packetType, got $packetTypeResp" }
 
-    val session = buffer.readBigEndianInt()
-    if ((session and QUERY_SESSION_MASK) != (QUERY_SESSION_ID and QUERY_SESSION_MASK)) {
-        error("Session ID mismatch")
+        val session = packet.readInt()
+        require((session and QUERY_SESSION_MASK) == (QUERY_SESSION_ID)) {
+            "Session ID mismatch: expected ${QUERY_SESSION_ID}, got ${session and QUERY_SESSION_MASK}"
+        }
+
+        return packet.readPayload()
+    } finally {
+        packet.close()
     }
-
-    return buffer.readPayload()
 }
 
-private fun Sink.writeBigEndianInt(value: Int) {
-    val b = byteArrayOf(
-        ((value ushr 24) and 0xFF).toByte(),
-        ((value ushr 16) and 0xFF).toByte(),
-        ((value ushr 8) and 0xFF).toByte(),
-        (value and 0xFF).toByte(),
-    )
-    writeFully(b)
-}
-
-private fun Sink.writeLittleEndianUShort(value: UShort) {
-    val v = value.toInt() and 0xFFFF
-    val b = byteArrayOf(
-        (v and 0xFF).toByte(),
-        ((v ushr 8) and 0xFF).toByte(),
-    )
-    writeFully(b)
-}
-
-private suspend fun ByteReadChannel.readBigEndianInt(): Int {
-    val b = ByteArray(4)
-    readFully(b)
-    return ((b[0].toInt() and 0xFF) shl 24) or
-        ((b[1].toInt() and 0xFF) shl 16) or
-        ((b[2].toInt() and 0xFF) shl 8) or
-        (b[3].toInt() and 0xFF)
-}
-
-private suspend fun ByteReadChannel.readLittleEndianUShort(): UShort {
-    val b = ByteArray(2)
-    readFully(b)
-    val v = (b[0].toInt() and 0xFF) or ((b[1].toInt() and 0xFF) shl 8)
-    return v.toUShort()
-}
-
-private suspend fun ByteReadChannel.readNullTerminatedString(): String {
-    val bytes = mutableListOf<Byte>()
+private fun Source.readNullTerminatedString(): String {
+    var buffer = ByteArray(64)
+    var count = 0
     while (true) {
         val b = readByte()
         if (b == 0.toByte()) break
-        bytes += b
+        if (count == buffer.size) {
+            buffer = buffer.copyOf(buffer.size * 2)
+        }
+        buffer[count++] = b
     }
-    return bytes.toByteArray().decodeToString()
+    return buffer.decodeToString(endIndex = count)
 }
