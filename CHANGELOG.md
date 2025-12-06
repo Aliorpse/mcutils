@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.1](https://github.com/Aliorpse/mcutils/compare/v2.5.0...v2.5.1) (2025-12-06)
+
+
+### Performance Improvements
+
+* improve implementation of `QueryImpl.kt` ([05b2844](https://github.com/Aliorpse/mcutils/commit/05b2844f0b725f072010c1fa4c99e4409bf5acf7))
+
 ## [2.5.0](https://github.com/Aliorpse/mcutils/compare/v2.4.1...v2.5.0) (2025-11-30)
 
 
