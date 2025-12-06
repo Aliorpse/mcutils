@@ -16,7 +16,7 @@ implementation("tech.aliorpse:mcutils:$version")
 
 ## Features
 
-### Get Server Status
+### Server List Ping
 
 ```kotlin
 runBlocking {
@@ -31,9 +31,25 @@ runBlocking {
 }
 ```
 
-To reduce package size and avoid using libraries that may cause issues, in some regions (e.g. China), default SRV resolve implementation may be unavailable.
+### Remote Console
 
-### Get Player Profile
+```kotlin
+runBlocking {
+    val connection = MCServer.createRconConnection("localhost", password = "mcutilsTest")
+    connection.use { println(it.execute("help")) }
+}
+```
+
+### Query
+
+```kotlin
+runBlocking {
+    val result = MCServer.getQueryFull("wdsj.net")
+    println(result)
+}
+```
+
+### Player Profile
 
 ```kotlin
 runBlocking {
@@ -42,14 +58,6 @@ runBlocking {
     pl = MCPlayer.getProfile("Aliorpse")
     pl = MCPlayer.getProfile("ec042e1200ac4a249cc83eb1fab0bd88")
     pl = MCPlayer.getProfile("ec042e12-00ac-4a24-9cc8-3eb1fab0bd88")
-}
-```
-
-### Remote Console
-```kotlin
-runBlocking {
-    val connection = MCServer.createRconConnection("localhost", password = "mcutilsTest")
-    connection.use { println(it.execute("help")) }
 }
 ```
 

@@ -125,8 +125,8 @@ private suspend fun <T> ByteReadChannel.readMCPacket(
     val packetBytes = ByteArray(packetLength)
     readFully(packetBytes)
     val buffer = ByteReadChannel(packetBytes)
-    val packetIdResp = buffer.readVarInt()
-    require(packetId == packetIdResp) { "Packet id mismatch: excepted $packetId, got $packetIdResp" }
+    val packetIdResp = buffer.readByte().toInt()
+    require(packetId == packetIdResp) { "Packet id mismatch: expected $packetId, got $packetIdResp" }
     return buffer.readPacketBlock()
 }
 
