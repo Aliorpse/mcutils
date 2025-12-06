@@ -59,8 +59,7 @@
   "packages": {
     ".": {
       "package-name": "mcutils",
-      "release-type": "default"
+      "release-type": "simple"
     }
-  },
-  "changelog-path": "CHANGELOG.md"
+  }
 }
