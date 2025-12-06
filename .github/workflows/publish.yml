@@ -23,7 +23,7 @@ jobs:
         with:
           release-type: simple
           config-file: .github/release-please/release-please-config.json
-          manifest-file: .github/release-please/manifest.json
+          manifest-file: .github/release-please/release-please-manifest.json
 
       - name: Set up JDK
         if: ${{ steps.release.outputs.release_created }}
