@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.2](https://github.com/Aliorpse/mcutils/compare/v2.5.1...v2.5.2) (2025-12-07)
+
+
+### Bug Fixes
+
+* **build:** no more browser target ([7a87ea6](https://github.com/Aliorpse/mcutils/commit/7a87ea696ce8f16475b3e2b66452cc52a66639e4))
+
 ## [2.5.1](https://github.com/Aliorpse/mcutils/compare/v2.5.0...v2.5.1) (2025-12-06)
 
 
