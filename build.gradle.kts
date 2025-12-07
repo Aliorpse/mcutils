@@ -18,10 +18,7 @@ kotlin {
     macosArm64()
     macosX64()
     mingwX64()
-    js(IR) {
-        browser()
-        nodejs()
-    }
+    js(IR) { nodejs() }
     jvm {
         compilerOptions {
             freeCompilerArgs.add("-Xjvm-default=all")
