@@ -4,8 +4,10 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.http.isSuccess
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import tech.aliorpse.mcutils.internal.entity.CachedResult
+import tech.aliorpse.mcutils.internal.entity.DohAnswer
+import tech.aliorpse.mcutils.internal.entity.GoogleDohResponse
+import tech.aliorpse.mcutils.internal.entity.SrvRecord
 import tech.aliorpse.mcutils.internal.util.HttpClientProvider.httpClient
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
@@ -97,27 +99,4 @@ internal object SrvResolver {
             if (it.next().value.expireAt <= now) it.remove()
         }
     }
-
-    private data class CachedResult(
-        val expireAt: Long,
-        val records: List<SrvRecord>
-    )
-
-    @Serializable
-    private data class GoogleDohResponse(
-        @SerialName("Answer") val answer: List<DohAnswer>? = null
-    )
-
-    @Serializable
-    private data class DohAnswer(
-        val data: String,
-        @SerialName("TTL") val ttl: Int? = null
-    )
-
-    data class SrvRecord(
-        val target: String,
-        val port: Int,
-        val priority: Int,
-        val weight: Int,
-    )
 }
