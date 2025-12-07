@@ -3,7 +3,6 @@ package tech.aliorpse.mcutils.internal.entity
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 internal data class SrvRecord(
     val target: String,
     val port: Int,
