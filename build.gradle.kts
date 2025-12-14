@@ -1,11 +1,12 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.maven.publish) apply false
+    alias(libs.plugins.dokka)
 }
 
 allprojects {
-    group = "tech.aliorpse.mcutils"
-    version = System.getenv("version")
+    group = project.property("group") as String
+    version = project.property("version") as String
 
     repositories {
         mavenCentral()
@@ -83,4 +84,12 @@ subprojects {
             }
         }
     }
+}
+
+dependencies {
+    dokka(project(":color"))
+    dokka(project(":core"))
+    dokka(project(":player"))
+    dokka(project(":rcon"))
+    dokka(project(":server-status"))
 }
