@@ -151,7 +151,7 @@ private suspend fun <T> ConnectedDatagramSocket.readQueryPacket(
         require(packetTypeResp == packetType) { "Packet type mismatch: expected $packetType, got $packetTypeResp" }
 
         val session = packet.readInt()
-        require((session and QUERY_SESSION_MASK) == (QUERY_SESSION_ID)) {
+        require(session and QUERY_SESSION_MASK == QUERY_SESSION_ID) {
             "Session ID mismatch: expected ${QUERY_SESSION_ID}, got ${session and QUERY_SESSION_MASK}"
         }
 
