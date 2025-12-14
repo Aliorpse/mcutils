@@ -4,12 +4,12 @@ kotlinx-coroutines = "1.10.2"
 kotlinx-serialization-json = "1.9.0"
 kotlinx-collections-immutable = "0.4.0"
 ktor = "3.3.3"
-suspend-transform = "2.2.21-0.13.2"
-ksp = "2.3.3"
 dokka = "2.1.0"
 maven-publish = "0.35.0"
+minidns = "1.0.5"
 
 [libraries]
+minidns-hla = { module = "org.minidns:minidns-hla", version.ref = "minidns" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinx-collections-immutable" }
@@ -23,7 +23,5 @@ ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-suspend-transform = { id = "love.forte.plugin.suspend-transform", version.ref = "suspend-transform" }
-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }

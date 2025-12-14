@@ -6,32 +6,25 @@
 
 A Kotlin multiplatform library provides utility functions for Minecraft-related queries.
 
-## Installation
+## Modules
 
-```kotlin
-implementation("tech.aliorpse:mcutils:$version")
-```
-> [!tip]
-> Make sure to include a Ktor client engine, such as `ktor-client-cio`.
+### Server Status
 
-## Features
-
-### Server List Ping
+`tech.aliorpse.mcutils:mcutils-server-status:$version`
 
 ```kotlin
 runBlocking {
-    var status
-    status = MCServer.getStatus("mc.hypixel.net")
-    
-    status = MCServer.getStatus(
-        host = "wdsj.net",
-        port = 25565,
-        enableSrv = false
-    )
+    val status1 = MCServer.getStatus("mc.hypixel.net")
+    val status2 = MCServer.getStatus(host = "wdsj.net", port = 25565, enableSrv = false)
+
+    val queryFull = MCServer.getQueryFull("mc.hypixel.net")
+    val queryBasic = MCServer.getQueryBasic("mc.hypixel.net")
 }
 ```
 
 ### Remote Console
+
+`tech.aliorpse.mcutils:mcutils-rcon:$version`
 
 ```kotlin
 runBlocking {
@@ -40,16 +33,12 @@ runBlocking {
 }
 ```
 
-### Query
-
-```kotlin
-runBlocking {
-    val result = MCServer.getQueryFull("wdsj.net")
-    println(result)
-}
-```
-
 ### Player Profile
+
+`tech.aliorpse.mcutils:mcutils-player:$version`
+
+> [!tip]
+> This module requires a Ktor client engine, e.g., `ktor-client-cio`.
 
 ```kotlin
 runBlocking {
@@ -62,12 +51,3 @@ runBlocking {
 ```
 
 Check out the project's [dokka](https://aliorpse.github.io/mcutils/) for the full API reference. There may be some extension functions you’ll find useful.
-
-## Java Usage
-
-The project uses [kotlin-suspend-transform-compiler-plugin](https://github.com/ForteScarlet/kotlin-suspend-transform-compiler-plugin) to automatically generate variants.
-
-```java
-CompletableFuture<ServerStatus> status =
-        MinecraftServer.getStatusAsync("mc.hypixel.net");
-```
