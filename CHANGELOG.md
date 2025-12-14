@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/Aliorpse/mcutils/compare/v2.5.2...v3.0.0) (2025-12-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* make the library multi-module
+
+### Code Refactoring
+
+* make the library multi-module ([8d70866](https://github.com/Aliorpse/mcutils/commit/8d70866debfbf400e9af4ea276ebf4818a14ce54))
+
 ## [2.5.2](https://github.com/Aliorpse/mcutils/compare/v2.5.1...v2.5.2) (2025-12-07)
 
 
