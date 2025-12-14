@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/Aliorpse/mcutils/compare/v3.0.0...v3.0.1) (2025-12-14)
+
+
+### Bug Fixes
+
+* publish and docs ([947107b](https://github.com/Aliorpse/mcutils/commit/947107bb293d2aab20df2febc726b00226b4137a))
+
 ## [3.0.0](https://github.com/Aliorpse/mcutils/compare/v2.5.2...v3.0.0) (2025-12-14)
 
 
