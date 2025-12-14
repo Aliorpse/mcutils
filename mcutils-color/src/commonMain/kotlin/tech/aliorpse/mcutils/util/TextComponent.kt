@@ -116,7 +116,6 @@ public fun TextComponent.toPlainText(): String {
     return text + extraText
 }
 
-
 private fun escapeHtml(text: String): String = buildString {
     for (c in text) {
         when (c) {
