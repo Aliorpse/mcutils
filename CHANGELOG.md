@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.0](https://github.com/Aliorpse/mcutils/compare/v3.0.1...v3.1.0) (2025-12-15)
+
+
+### Features
+
+* add iosSimulatorArm64 ([74eb2bf](https://github.com/Aliorpse/mcutils/commit/74eb2bf31ff2698b0fbfe23ab77866f5b86fd31f))
+
 ## [3.0.1](https://github.com/Aliorpse/mcutils/compare/v3.0.0...v3.0.1) (2025-12-14)
 
 
