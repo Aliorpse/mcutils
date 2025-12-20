@@ -3,7 +3,6 @@ $dokka.linkExtension:html
 
 module:color
 tech.aliorpse.mcutils.entity
-tech.aliorpse.mcutils.internal.serializer
 tech.aliorpse.mcutils.util
 module:core
 tech.aliorpse.mcutils.annotation
@@ -14,9 +13,6 @@ tech.aliorpse.mcutils.api
 tech.aliorpse.mcutils.entity
 module:rcon
 tech.aliorpse.mcutils.api
-tech.aliorpse.mcutils.internal.util
 module:server-status
 tech.aliorpse.mcutils.api
 tech.aliorpse.mcutils.entity
-tech.aliorpse.mcutils.internal.util
-tech.aliorpse.mcutils.util
