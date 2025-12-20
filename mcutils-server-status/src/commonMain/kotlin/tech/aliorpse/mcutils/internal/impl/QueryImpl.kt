@@ -25,7 +25,7 @@ import tech.aliorpse.mcutils.internal.util.globalSelectorIO
 private const val QUERY_SESSION_ID: Int = 0x00070201 // Ciallo ～ (∠·ω< )⌒★
 private const val QUERY_SESSION_MASK = 0x0F0F0F0F
 
-internal class QueryImpl {
+internal object QueryImpl {
     suspend fun getQuery(
         host: String,
         port: Int,
