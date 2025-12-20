@@ -70,9 +70,7 @@ subprojects {
             macosX64()
             mingwX64()
 
-            js(IR) {
-                nodejs()
-            }
+            js(IR) { nodejs() }
 
             jvm {
                 compilations.configureEach {

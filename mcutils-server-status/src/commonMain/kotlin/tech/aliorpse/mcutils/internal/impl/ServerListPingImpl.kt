@@ -24,23 +24,20 @@ import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import tech.aliorpse.mcutils.annotation.ExperimentalMCUtilsApi
 import tech.aliorpse.mcutils.entity.Players
 import tech.aliorpse.mcutils.entity.ServerStatus
 import tech.aliorpse.mcutils.entity.TextComponent
 import tech.aliorpse.mcutils.entity.Version
-import tech.aliorpse.mcutils.internal.serializer.TextComponentSerializer
 import tech.aliorpse.mcutils.internal.util.Punycode
 import tech.aliorpse.mcutils.internal.util.SrvResolver
 import tech.aliorpse.mcutils.internal.util.globalSelectorIO
-import tech.aliorpse.mcutils.util.toTextComponent
+import tech.aliorpse.mcutils.util.fromJson
+import tech.aliorpse.mcutils.util.fromString
 import kotlin.time.Clock
-import kotlin.time.ExperimentalTime
 
-internal class ServerListPingImpl {
+internal object ServerListPingImpl {
     private val json = Json { ignoreUnknownKeys = true }
 
-    @OptIn(ExperimentalTime::class, ExperimentalMCUtilsApi::class)
     suspend fun getStatus(
         host: String,
         port: Int,
@@ -87,8 +84,8 @@ internal class ServerListPingImpl {
 
             return ServerStatus(
                 description = when (val desc = jsonElement.jsonObject["description"]) {
-                    is JsonPrimitive -> desc.content.toTextComponent()
-                    is JsonObject -> json.decodeFromString(TextComponentSerializer, desc.toString())
+                    is JsonPrimitive -> TextComponent.fromString(desc.content)
+                    is JsonObject -> TextComponent.fromJson(desc)
                     else -> TextComponent(text = "")
                 },
                 players = json.decodeFromString(

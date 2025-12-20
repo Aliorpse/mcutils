@@ -12,6 +12,9 @@ A Kotlin multiplatform library provides utility functions for Minecraft-related 
 
 `tech.aliorpse.mcutils:mcutils-server-status:$version`
 
+> [!warning]
+> Native targets do not yet support an SRV record implementation. Setting `enableSrv = true` won't have any effect.
+
 ```kotlin
 runBlocking {
     val status1 = MCServer.getStatus("mc.hypixel.net")

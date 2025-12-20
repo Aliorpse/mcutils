@@ -37,6 +37,11 @@ public data class QueryStatusBasic(
     override val players: Players,
 ) : QueryStatus
 
+/**
+ * Query full status.
+ *
+ * @property map Name of the current map.
+ */
 public data class QueryStatusFull(
     override val description: String,
     override val map: String,
