@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.1](https://github.com/Aliorpse/mcutils/compare/v3.1.0...v3.1.1) (2025-12-20)
+
+
+### Bug Fixes
+
+* fix issues migrating to multi-module project ([605d8ab](https://github.com/Aliorpse/mcutils/commit/605d8ab3fb6ddbf5152f46a32bc59334d0edbc70))
+
 ## [3.1.0](https://github.com/Aliorpse/mcutils/compare/v3.0.1...v3.1.0) (2025-12-15)
 
 
