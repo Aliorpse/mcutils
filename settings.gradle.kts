@@ -20,3 +20,6 @@ project(":server-status").projectDir = file("mcutils-server-status")
 
 include(":util")
 project(":util").projectDir = file("mcutils-util")
+
+include("msmp")
+project(":msmp").projectDir = file("mcutils-msmp")

@@ -11,7 +11,7 @@ kotlin {
             api(project(":core"))
             implementation(project(":util"))
             api(project(":color"))
-            api(libs.ktor.network)
+            implementation(libs.ktor.network)
         }
         jvmMain.dependencies {
             implementation(libs.minidns.hla)
