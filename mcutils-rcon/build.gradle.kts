@@ -9,7 +9,7 @@ kotlin {
         commonMain.dependencies {
             api(project(":core"))
             implementation(project(":util"))
-            api(libs.ktor.network)
+            implementation(libs.ktor.network)
         }
         jvmTest.dependencies {
             implementation(kotlin("test"))

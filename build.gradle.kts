@@ -76,7 +76,17 @@ subprojects {
                 compilations.configureEach {
                     compileTaskProvider.configure {
                         compilerOptions {
-                            freeCompilerArgs.add("-Xjvm-default=all")
+                            freeCompilerArgs.add("-jvm-default=enable")
+                        }
+                    }
+                }
+            }
+
+            targets.all {
+                compilations.all {
+                    compileTaskProvider.configure {
+                        compilerOptions {
+                            freeCompilerArgs.add("-Xexplicit-backing-fields")
                         }
                     }
                 }

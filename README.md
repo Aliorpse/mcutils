@@ -25,6 +25,25 @@ runBlocking {
 }
 ```
 
+### Server Management Protocol (Ver. 2.0.0)
+
+tech.aliorpse.mcutils:mcutils-msmp:$version`
+
+> [!warning]
+> This module is still under development.
+
+```kotlin
+runBlocking {
+    val connection = MCServer.createMsmpConnection("localhost","xxx")
+    
+    connection.on<PLayerJoinedEvent> {
+        println(eventCtx.name)
+    }
+    
+    while(isActive) delay(1000) // Keep alive
+}
+```
+
 ### Remote Console
 
 `tech.aliorpse.mcutils:mcutils-rcon:$version`
