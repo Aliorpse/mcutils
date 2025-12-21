@@ -27,7 +27,7 @@ runBlocking {
 
 ### Server Management Protocol (Ver. 2.0.0)
 
-tech.aliorpse.mcutils:mcutils-msmp:$version`
+`tech.aliorpse.mcutils:mcutils-msmp:$version`
 
 > [!warning]
 > This module is still under development.
@@ -36,7 +36,7 @@ tech.aliorpse.mcutils:mcutils-msmp:$version`
 runBlocking {
     val connection = MCServer.createMsmpConnection("localhost","xxx")
     
-    connection.on<PLayerJoinedEvent> {
+    connection.on<PlayerJoinedEvent> {
         println(eventCtx.name)
     }
     
