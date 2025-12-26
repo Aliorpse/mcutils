@@ -12,30 +12,30 @@ internal sealed class EventProvider {
 }
 
 internal val eventMap: Map<String, EventProvider> = mapOf(
-    "players/joined" to EventProvider.Data(PlayerJoinedEvent.serializer()),
-    "players/left" to EventProvider.Data(PlayerLeftEvent.serializer()),
+    "minecraft:notification/players/joined" to EventProvider.Data(PlayerJoinedEvent.serializer()),
+    "minecraft:notification/players/left" to EventProvider.Data(PlayerLeftEvent.serializer()),
 
-    "operators/added" to EventProvider.Data(OperatorAddedEvent.serializer()),
-    "operators/removed" to EventProvider.Data(OperatorRemovedEvent.serializer()),
+    "minecraft:notification/operators/added" to EventProvider.Data(OperatorAddedEvent.serializer()),
+    "minecraft:notification/operators/removed" to EventProvider.Data(OperatorRemovedEvent.serializer()),
 
-    "allowlist/added" to EventProvider.Data(AllowlistAddedEvent.serializer()),
-    "allowlist/removed" to EventProvider.Data(AllowlistRemovedEvent.serializer()),
+    "minecraft:notification/allowlist/added" to EventProvider.Data(AllowlistAddedEvent.serializer()),
+    "minecraft:notification/allowlist/removed" to EventProvider.Data(AllowlistRemovedEvent.serializer()),
 
-    "ip_bans/added" to EventProvider.Data(IpBanAddedEvent.serializer()),
-    "ip_bans/removed" to EventProvider.Custom { p ->
+    "minecraft:notification/ip_bans/added" to EventProvider.Data(IpBanAddedEvent.serializer()),
+    "minecraft:notification/ip_bans/removed" to EventProvider.Custom { p ->
         IpBanRemovedEvent(p?.jsonPrimitive?.content ?: "")
     },
-    "bans/added" to EventProvider.Data(UserBanAddedEvent.serializer()),
-    "bans/removed" to EventProvider.Data(UserBanRemovedEvent.serializer()),
+    "minecraft:notification/bans/added" to EventProvider.Data(UserBanAddedEvent.serializer()),
+    "minecraft:notification/bans/removed" to EventProvider.Data(UserBanRemovedEvent.serializer()),
 
-    "server/started" to EventProvider.Singleton(ServerStartedEvent),
-    "server/stopping" to EventProvider.Singleton(ServerStoppingEvent),
-    "server/activity" to EventProvider.Singleton(ServerActivityEvent),
-    "server/saving" to EventProvider.Singleton(ServerSavingEvent),
-    "server/saved" to EventProvider.Singleton(ServerSavedEvent),
-    "server/status" to EventProvider.Data(ServerStatusEvent.serializer()),
+    "minecraft:notification/server/started" to EventProvider.Singleton(ServerStartedEvent),
+    "minecraft:notification/server/stopping" to EventProvider.Singleton(ServerStoppingEvent),
+    "minecraft:notification/server/activity" to EventProvider.Singleton(ServerActivityEvent),
+    "minecraft:notification/server/saving" to EventProvider.Singleton(ServerSavingEvent),
+    "minecraft:notification/server/saved" to EventProvider.Singleton(ServerSavedEvent),
+    "minecraft:notification/server/status" to EventProvider.Data(ServerStatusEvent.serializer()),
 
-    "gamerules/updated" to EventProvider.Data(GameruleUpdatedEvent.serializer())
+    "minecraft:notification/gamerules/updated" to EventProvider.Data(GameruleUpdatedEvent.serializer())
 )
 
 @Serializable
