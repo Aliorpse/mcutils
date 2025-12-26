@@ -2,7 +2,6 @@
 kotlin = "2.3.0"
 kotlinx-coroutines = "1.10.2"
 kotlinx-serialization-json = "1.9.0"
-kotlinx-collections-immutable = "0.4.0"
 ktor = "3.3.3"
 dokka = "2.1.0"
 maven-publish = "0.35.0"
@@ -12,7 +11,6 @@ minidns = "1.1.1"
 minidns-hla = { module = "org.minidns:minidns-hla", version.ref = "minidns" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
-kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinx-collections-immutable" }
 
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-network = { module = "io.ktor:ktor-network", version.ref = "ktor" }

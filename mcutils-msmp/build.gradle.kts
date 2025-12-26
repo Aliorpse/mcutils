@@ -10,8 +10,6 @@ kotlin {
         commonMain.dependencies {
             api(project(":core"))
             implementation(project(":util"))
-            implementation(libs.kotlinx.collections.immutable)
-            implementation(libs.kotlinx.coroutines.core)
             implementation(libs.ktor.client.websockets)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
