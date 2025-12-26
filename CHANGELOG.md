@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.1](https://github.com/Aliorpse/mcutils/compare/v3.2.0...v3.2.1) (2025-12-26)
+
+
+### Bug Fixes
+
+* **build:** add serialization dependency for server-status module [skip ci] ([6b7b7c2](https://github.com/Aliorpse/mcutils/commit/6b7b7c2ec7ad9705f2400cdd637939da24880f1c))
+
 ## [3.2.0](https://github.com/Aliorpse/mcutils/compare/v3.1.1...v3.2.0) (2025-12-26)
 
 
