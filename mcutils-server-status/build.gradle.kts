@@ -12,6 +12,7 @@ kotlin {
             implementation(project(":util"))
             api(project(":color"))
             implementation(libs.ktor.network)
+                       implementation(libs.kotlinx.serialization.json)
         }
         jvmMain.dependencies {
             implementation(libs.minidns.hla)
