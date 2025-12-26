@@ -7,6 +7,6 @@ import kotlinx.serialization.json.JsonElement
 public data class MsmpRequest(
     val id: Int,
     val method: String,
-    val params: JsonElement?,
+    val params: JsonElement,
     val jsonrpc: String = "2.0"
 )
