@@ -21,9 +21,9 @@ internal val eventMap: Map<String, EventProvider> = mapOf(
     "minecraft:notification/allowlist/added" to EventProvider.Data(AllowlistAddedEvent.serializer()),
     "minecraft:notification/allowlist/removed" to EventProvider.Data(AllowlistRemovedEvent.serializer()),
 
-    "minecraft:notification/ip_bans/added" to EventProvider.Data(IpBanAddedEvent.serializer()),
+    "minecraft:notification/ip_bans/added" to EventProvider.Data(IPBanAddedEvent.serializer()),
     "minecraft:notification/ip_bans/removed" to EventProvider.Custom { p ->
-        IpBanRemovedEvent(p?.jsonPrimitive?.content ?: "")
+        IPBanRemovedEvent(p?.jsonPrimitive?.content ?: "")
     },
     "minecraft:notification/bans/added" to EventProvider.Data(UserBanAddedEvent.serializer()),
     "minecraft:notification/bans/removed" to EventProvider.Data(UserBanRemovedEvent.serializer()),
@@ -67,10 +67,10 @@ public data class AllowlistRemovedEvent(val eventCtx: PlayerDto) : MsmpEvent
 // Ban Events
 
 @Serializable
-public data class IpBanAddedEvent(val eventCtx: IpBanDto) : MsmpEvent
+public data class IPBanAddedEvent(val eventCtx: IPBanDto) : MsmpEvent
 
 @Serializable
-public data class IpBanRemovedEvent(val eventCtx: String) : MsmpEvent
+public data class IPBanRemovedEvent(val eventCtx: String) : MsmpEvent
 
 @Serializable
 public data class UserBanAddedEvent(val eventCtx: UserBanDto) : MsmpEvent
@@ -101,7 +101,7 @@ public data class ServerStatusEvent(val eventCtx: ServerStateDto) : MsmpEvent
 // Gamerule Events
 
 @Serializable
-public data class GameruleUpdatedEvent(val eventCtx: TypedRuleDto) : MsmpEvent
+public data class GameruleUpdatedEvent(val eventCtx: TypedGameruleDto) : MsmpEvent
 
 // Fallback
 

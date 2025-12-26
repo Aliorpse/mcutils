@@ -19,10 +19,10 @@ import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.encodeToJsonElement
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.serializer
 import tech.aliorpse.mcutils.entity.EventProvider
 import tech.aliorpse.mcutils.entity.MsmpEvent
 import tech.aliorpse.mcutils.entity.MsmpRequest
@@ -57,12 +57,20 @@ internal class MsmpConnectionImpl internal constructor(
     internal val idCounter = AtomicInt(0)
 
     @PublishedApi
-    internal val json = Json { ignoreUnknownKeys = true }
+    internal val json = Json {
+        ignoreUnknownKeys = true
+        encodeDefaults = true
+    }
 
     @PublishedApi
     internal suspend inline fun <reified T> call(method: String, params: T?, timeout: Long): JsonElement {
         val id = idCounter.fetchAndIncrement()
-        val paramElement = if (params != null) json.encodeToJsonElement(listOf(params)) else JsonArray(emptyList())
+
+        val paramElement: JsonElement = when (params) {
+            null -> JsonArray(emptyList())
+            is JsonArray -> JsonArray(params)
+            else -> json.encodeToJsonElement(json.serializersModule.serializer<T>(), params)
+        }
 
         val request = MsmpRequest(
             id = id,
@@ -114,8 +122,9 @@ internal class MsmpConnectionImpl internal constructor(
         val deferred = pendingRequests.get(response.id) ?: return
 
         if (response.error != null) {
+            val error = response.error
             deferred.completeExceptionally(
-                IllegalStateException("RPC Error ${response.error.code}: ${response.error.message}")
+                IllegalStateException("RPC Error: ${error.message}(${error.code}): ${error.data}")
             )
         } else {
             deferred.complete(response.result ?: JsonNull)
