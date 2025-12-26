@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.2.0](https://github.com/Aliorpse/mcutils/compare/v3.1.1...v3.2.0) (2025-12-26)
+
+
+### Features
+
+* **msmp:** complete all existing MSMP API wrapping ([9a93104](https://github.com/Aliorpse/mcutils/commit/9a93104dc6983e8683f2712beaca321763ee380d))
+* **msmp:** implement basic MSMP API ([eeec9ba](https://github.com/Aliorpse/mcutils/commit/eeec9bae4bb5ecab29af414300e9fde693f8a497))
+* **msmp:** implement MSMP event listening ([f6a10b1](https://github.com/Aliorpse/mcutils/commit/f6a10b16f26a158768ed1c09147adada68ba7c94))
+
 ## [3.1.1](https://github.com/Aliorpse/mcutils/compare/v3.1.0...v3.1.1) (2025-12-20)
 
 
