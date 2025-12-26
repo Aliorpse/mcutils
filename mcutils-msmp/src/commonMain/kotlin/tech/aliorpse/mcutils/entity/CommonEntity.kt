@@ -1,7 +1,10 @@
 package tech.aliorpse.mcutils.entity
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.boolean
+import kotlinx.serialization.json.int
 
 @Serializable
 public data class PlayerDto(
@@ -18,7 +21,7 @@ public data class UserBanDto(
 )
 
 @Serializable
-public data class IpBanDto(
+public data class IPBanDto(
     val expires: String? = "forever",
     val ip: String,
     val reason: String? = null,
@@ -40,14 +43,67 @@ public data class ServerVersionDto(
 
 @Serializable
 public data class ServerStateDto(
-    val players: List<PlayerDto>,
+    val players: Set<PlayerDto>? = emptySet(),
     val started: Boolean,
     val version: ServerVersionDto
 )
 
+/**
+ * @property type "boolean" or "integer", refers to the actual type of [value]
+ */
 @Serializable
-public data class TypedRuleDto(
+public data class TypedGameruleDto(
     val key: String,
-    val type: String, // "boolean" or "integer"
+    val type: String,
     val value: JsonPrimitive
+) {
+    init {
+        require(type == "boolean" || type == "integer") {
+            "'type' must be either 'boolean' or 'integer'"
+        }
+    }
+
+    public val valueAsInt: Int
+        get() = value.int
+
+    public val valueAsBoolean: Boolean
+        get() = value.boolean
+}
+
+@Serializable
+public data class KickPlayerDto(
+    val player: PlayerDto,
+    val message: MessageDto = MessageDto(literal = "")
+)
+
+/**
+ * Should be either literal or translatable.
+ */
+@Serializable
+public data class MessageDto(
+    val translatable: String? = null,
+    val translatableParams: List<String>? = null,
+    val literal: String? = null
+) {
+    init {
+        require((translatable == null) != (literal == null)) {
+            "Exactly one of 'translatable' or 'literal' must be provided"
+        }
+    }
+}
+
+/**
+ * @property overlay Whether the message should be displayed in the actionbar.
+ */
+@Serializable
+public data class SystemMessageDto(
+    val receivingPlayers: Set<PlayerDto>,
+    val message: MessageDto,
+    val overlay: Boolean = false
+)
+
+@Serializable
+public data class UntypedGameruleDto(
+    val key: String,
+    val value: JsonElement
 )
