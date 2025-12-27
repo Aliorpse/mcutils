@@ -8,6 +8,10 @@ module:core
 tech.aliorpse.mcutils.annotation
 tech.aliorpse.mcutils.api
 tech.aliorpse.mcutils.util
+module:msmp
+tech.aliorpse.mcutils.api
+tech.aliorpse.mcutils.api.api
+tech.aliorpse.mcutils.entity
 module:player
 tech.aliorpse.mcutils.api
 tech.aliorpse.mcutils.entity
