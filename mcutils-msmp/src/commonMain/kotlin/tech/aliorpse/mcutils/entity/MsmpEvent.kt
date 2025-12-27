@@ -3,40 +3,46 @@ package tech.aliorpse.mcutils.entity
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.jsonPrimitive
+import tech.aliorpse.mcutils.api.registry.MsmpEventRegistry
+import tech.aliorpse.mcutils.internal.util.AtomicCopyOnWriteMap
 
-internal sealed class EventProvider {
-    class Data<T : MsmpEvent>(val serializer: KSerializer<T>) : EventProvider()
-    class Singleton(val instance: MsmpEvent) : EventProvider()
-    class Custom(val block: (JsonElement?) -> MsmpEvent) : EventProvider()
+public interface IMsmpEventRegistry {
+    public fun <T : MsmpEvent> registerData(method: String, serializer: KSerializer<T>)
+    public fun registerSingleton(method: String, instance: MsmpEvent)
+    public fun registerCustom(method: String, block: (JsonElement?) -> MsmpEvent)
+
+    public infix fun <T : MsmpEvent> String.register(serializer: KSerializer<T>): Unit =
+        registerData(this, serializer)
+
+    public infix fun String.bind(instance: MsmpEvent): Unit =
+        registerSingleton(this, instance)
+
+    public fun String.define(block: (JsonElement?) -> MsmpEvent): Unit =
+        registerCustom(this, block)
 }
 
-internal val eventMap: Map<String, EventProvider> = mapOf(
-    "minecraft:notification/players/joined" to EventProvider.Data(PlayerJoinedEvent.serializer()),
-    "minecraft:notification/players/left" to EventProvider.Data(PlayerLeftEvent.serializer()),
+public sealed class MsmpEventProvider {
+    public class Data<T : MsmpEvent>(public val serializer: KSerializer<T>) : MsmpEventProvider()
+    public class Singleton(public val instance: MsmpEvent) : MsmpEventProvider()
+    public class Custom(public val block: (JsonElement?) -> MsmpEvent) : MsmpEventProvider()
+}
 
-    "minecraft:notification/operators/added" to EventProvider.Data(OperatorAddedEvent.serializer()),
-    "minecraft:notification/operators/removed" to EventProvider.Data(OperatorRemovedEvent.serializer()),
+internal class MsmpEventRegistryImpl(
+    private val map: AtomicCopyOnWriteMap<String, MsmpEventProvider>
+) : IMsmpEventRegistry {
+    val registry: AtomicCopyOnWriteMap<String, MsmpEventProvider> get() = map
 
-    "minecraft:notification/allowlist/added" to EventProvider.Data(AllowlistAddedEvent.serializer()),
-    "minecraft:notification/allowlist/removed" to EventProvider.Data(AllowlistRemovedEvent.serializer()),
+    override fun <T : MsmpEvent> registerData(method: String, serializer: KSerializer<T>) =
+        map.put(method, MsmpEventProvider.Data(serializer))
 
-    "minecraft:notification/ip_bans/added" to EventProvider.Data(IPBanAddedEvent.serializer()),
-    "minecraft:notification/ip_bans/removed" to EventProvider.Custom { p ->
-        IPBanRemovedEvent(p?.jsonPrimitive?.content ?: "")
-    },
-    "minecraft:notification/bans/added" to EventProvider.Data(UserBanAddedEvent.serializer()),
-    "minecraft:notification/bans/removed" to EventProvider.Data(UserBanRemovedEvent.serializer()),
+    override fun registerSingleton(method: String, instance: MsmpEvent) =
+        map.put(method, MsmpEventProvider.Singleton(instance))
 
-    "minecraft:notification/server/started" to EventProvider.Singleton(ServerStartedEvent),
-    "minecraft:notification/server/stopping" to EventProvider.Singleton(ServerStoppingEvent),
-    "minecraft:notification/server/activity" to EventProvider.Singleton(ServerActivityEvent),
-    "minecraft:notification/server/saving" to EventProvider.Singleton(ServerSavingEvent),
-    "minecraft:notification/server/saved" to EventProvider.Singleton(ServerSavedEvent),
-    "minecraft:notification/server/status" to EventProvider.Data(ServerStatusEvent.serializer()),
+    override fun registerCustom(method: String, block: (JsonElement?) -> MsmpEvent) =
+        map.put(method, MsmpEventProvider.Custom(block))
+}
 
-    "minecraft:notification/gamerules/updated" to EventProvider.Data(GameruleUpdatedEvent.serializer())
-)
+internal val eventMap: AtomicCopyOnWriteMap<String, MsmpEventProvider> = MsmpEventRegistry.impl.registry
 
 @Serializable
 public sealed interface MsmpEvent

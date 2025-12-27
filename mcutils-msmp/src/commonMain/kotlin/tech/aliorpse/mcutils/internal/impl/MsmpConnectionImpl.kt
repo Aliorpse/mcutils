@@ -28,10 +28,10 @@ import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.serializer
 import tech.aliorpse.mcutils.entity.ConnectionClosedEvent
 import tech.aliorpse.mcutils.entity.ConnectionEstablishedEvent
-import tech.aliorpse.mcutils.entity.EventProvider
 import tech.aliorpse.mcutils.entity.JsonRpcError
 import tech.aliorpse.mcutils.entity.JsonRpcException
 import tech.aliorpse.mcutils.entity.MsmpEvent
+import tech.aliorpse.mcutils.entity.MsmpEventProvider
 import tech.aliorpse.mcutils.entity.MsmpRequest
 import tech.aliorpse.mcutils.entity.MsmpResponse
 import tech.aliorpse.mcutils.entity.UnknownMsmpEvent
@@ -158,16 +158,16 @@ internal class MsmpConnectionImpl internal constructor(
 
         val wrappedParams = JsonObject(mapOf("eventCtx" to rawParams))
 
-        val event = when (val provider = eventMap[method]) {
-            is EventProvider.Data<*> -> {
+        val event = when (val provider = eventMap.get(method)) {
+            is MsmpEventProvider.Data<*> -> {
                 if (rawParams !is JsonNull) {
                     json.decodeFromJsonElement(provider.serializer, wrappedParams)
                 } else {
                     UnknownMsmpEvent(method, rawParams)
                 }
             }
-            is EventProvider.Singleton -> provider.instance
-            is EventProvider.Custom -> provider.block(rawParams)
+            is MsmpEventProvider.Singleton -> provider.instance
+            is MsmpEventProvider.Custom -> provider.block(rawParams)
             null -> UnknownMsmpEvent(method, rawParams)
         }
 

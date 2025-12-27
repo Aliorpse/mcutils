@@ -7,6 +7,11 @@ import kotlinx.coroutines.runBlocking
 import tech.aliorpse.mcutils.annotation.ExperimentalMCUtilsApi
 import tech.aliorpse.mcutils.api.MCServer
 import tech.aliorpse.mcutils.api.createMsmpConnection
+import tech.aliorpse.mcutils.api.registry.banList
+import tech.aliorpse.mcutils.api.registry.gamerules
+import tech.aliorpse.mcutils.api.registry.players
+import tech.aliorpse.mcutils.api.registry.server
+import tech.aliorpse.mcutils.api.registry.serverSettings
 import tech.aliorpse.mcutils.entity.MessageDto
 import kotlin.test.Test
 

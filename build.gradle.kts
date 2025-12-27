@@ -81,16 +81,6 @@ subprojects {
                     }
                 }
             }
-
-            targets.all {
-                compilations.all {
-                    compileTaskProvider.configure {
-                        compilerOptions {
-                            freeCompilerArgs.add("-Xexplicit-backing-fields")
-                        }
-                    }
-                }
-            }
         }
     }
 }

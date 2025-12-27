@@ -29,9 +29,11 @@ runBlocking {
 
 `tech.aliorpse.mcutils:mcutils-msmp:$version`
 
+#### Common Usage
+
 ```kotlin
 runBlocking {
-    MCServer.createMsmpConnection("localhost", "xxx")
+    MCServer.createMsmpConnection("ws://localhost:25585", "xxx")
         .use { conn ->
             GlobalScope.launch { conn.eventFlow.collect { println(it) } }
 
@@ -39,7 +41,7 @@ runBlocking {
                 println(eventCtx.name)
             }
 
-            conn.on<PlayerLeftEvent>.take(1).collect {
+            conn.on<PlayerLeftEvent>().take(1).collect {
                 job.cancel()
             }
 
@@ -56,6 +58,55 @@ runBlocking {
             println(event.cause)
         }
 }
+```
+
+#### Custom Events
+
+```kotlin
+@Serializable
+public data class PlayerJoinedEvent(val eventCtx: PlayerDto) : MsmpEvent
+
+public data object ServerStartedEvent : MsmpEvent
+
+@Serializable
+public data class IPBanRemovedEvent(val eventCtx: String) : MsmpEvent
+
+// Not a top-level declaration
+MsmpEventRegistry.configure {
+     "minecraft:notification/players/joined" register PlayerJoinedEvent.serializer()
+
+     "minecraft:notification/server/started" bind ServerStartedEvent
+
+     "minecraft:notification/ip_bans/removed".define { p ->
+         IPBanRemovedEvent(p?.jsonPrimitive?.content ?: "")
+     }
+}
+```
+
+#### Custom Request Extensions
+
+```kotlin
+public public class ServerExtension(public val connection: MsmpConnection) {
+    internal val baseEndpoint: String = "minecraft:server"
+
+    public suspend inline fun save(flush: Boolean = false): Boolean {
+        val result = connection.call("$baseEndpoint/save", mapOf("flush" to flush))
+        return result.jsonPrimitive.boolean
+    }
+    
+    // And more...
+}
+
+public val MsmpConnection.server: ServerExtension
+    by msmpExtension("minecraft:server") { ServerExtension(it) }
+
+// Usage
+val conn: MsmpConnection
+conn.server.save(true)
+
+// Or you can also parse `registryName` to the following lambda
+public val MsmpConnection.allowList: UniversalArrayExtension<PlayerDto>
+        by msmpExtension("minecraft:allowlist") { UniversalArrayExtension(it, this) }
 ```
 
 ### Remote Console

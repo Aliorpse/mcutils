@@ -19,17 +19,11 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.JsonElement
 import tech.aliorpse.mcutils.annotation.ExperimentalMCUtilsApi
-import tech.aliorpse.mcutils.api.extension.GamerulesExtension
-import tech.aliorpse.mcutils.api.extension.PlayersExtension
-import tech.aliorpse.mcutils.api.extension.ServerExtension
-import tech.aliorpse.mcutils.api.extension.ServerSettingsExtension
 import tech.aliorpse.mcutils.api.extension.UniversalArrayExtension
 import tech.aliorpse.mcutils.entity.ConnectionClosedEvent
 import tech.aliorpse.mcutils.entity.MsmpEvent
-import tech.aliorpse.mcutils.entity.OperatorDto
-import tech.aliorpse.mcutils.entity.PlayerDto
-import tech.aliorpse.mcutils.entity.UserBanDto
 import tech.aliorpse.mcutils.internal.impl.MsmpConnectionImpl
+import tech.aliorpse.mcutils.internal.util.AtomicCopyOnWriteMap
 import tech.aliorpse.mcutils.internal.util.WebSocketClientProvider.webSocketClient
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
@@ -54,6 +48,9 @@ public class MsmpConnection internal constructor(
     @PublishedApi
     internal val defaultScope: CoroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
 
+    @PublishedApi
+    internal val callExtensions: AtomicCopyOnWriteMap<String, Any> = AtomicCopyOnWriteMap()
+
     // Listen for impl closing in any reason
     init {
         defaultScope.launch {
@@ -62,7 +59,7 @@ public class MsmpConnection internal constructor(
         }
     }
 
-    // --- Request Basic API ---
+    // --- Request API ---
 
     /**
      * The basic call method for making requests.
@@ -101,29 +98,6 @@ public class MsmpConnection internal constructor(
      * Discover the server's capabilities and features.
      */
     public suspend inline fun discover(): JsonElement = call("rpc.discover")
-
-    // --- Request Extension API ---
-
-    public val allowList: UniversalArrayExtension<PlayerDto>
-        by lazy { UniversalArrayExtension(this, "minecraft:allowlist") }
-
-    public val banList: UniversalArrayExtension<UserBanDto>
-        by lazy { UniversalArrayExtension(this, "minecraft:bans") }
-
-    public val operatorList: UniversalArrayExtension<OperatorDto>
-        by lazy { UniversalArrayExtension(this, "minecraft:operators") }
-
-    public val players: PlayersExtension
-        by lazy { PlayersExtension(this) }
-
-    public val server: ServerExtension
-        by lazy { ServerExtension(this) }
-
-    public val gamerules: GamerulesExtension
-        by lazy { GamerulesExtension(this) }
-
-    public val serverSettings: ServerSettingsExtension
-        by lazy { ServerSettingsExtension(this) }
 
     // --- Event API ---
 
