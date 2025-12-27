@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://github.com/Aliorpse/mcutils/compare/v3.2.1...v3.3.0) (2025-12-27)
+
+
+### Features
+
+* **msmp:** add connection close handling, utility functions and code refactor ([b8b7112](https://github.com/Aliorpse/mcutils/commit/b8b71129824adf7f8a18c089b20012afca404c66))
+
 ## [3.2.1](https://github.com/Aliorpse/mcutils/compare/v3.2.0...v3.2.1) (2025-12-26)
 
 
