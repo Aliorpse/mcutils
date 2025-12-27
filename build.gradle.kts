@@ -101,4 +101,5 @@ dependencies {
     dokka(project(":player"))
     dokka(project(":rcon"))
     dokka(project(":server-status"))
+    dokka(project(":msmp"))
 }
