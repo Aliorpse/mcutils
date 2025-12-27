@@ -25,22 +25,36 @@ runBlocking {
 }
 ```
 
-### Server Management Protocol (Ver. 2.0.0)
+### Server Management Protocol
 
 `tech.aliorpse.mcutils:mcutils-msmp:$version`
 
-> [!warning]
-> This module is still under development.
-
 ```kotlin
 runBlocking {
-    val connection = MCServer.createMsmpConnection("localhost","xxx")
-    
-    connection.on<PlayerJoinedEvent> {
-        println(eventCtx.name)
-    }
-    
-    while(isActive) delay(1000) // Keep alive
+    MCServer.createMsmpConnection("localhost", "xxx")
+        .use { conn ->
+            GlobalScope.launch { conn.eventFlow.collect { println(it) } }
+
+            val job = conn.on<PlayerJoinedEvent> {
+                println(eventCtx.name)
+            }
+
+            conn.on<PlayerLeftEvent>.take(1).collect {
+                job.cancel()
+            }
+
+            conn.gamerules.set("send_command_feedback", true)
+            conn.serverSettings.allowFlight.set(true)
+            conn.server.sendMessage(
+                conn.players.get(), // Targets
+                MessageDto(
+                    literal = conn.banList.get().joinToString(", ") { it.player.name!! }
+                ),
+            )
+
+            val event = conn.await() // Wait for connection close by peer
+            println(event.cause)
+        }
 }
 ```
 
