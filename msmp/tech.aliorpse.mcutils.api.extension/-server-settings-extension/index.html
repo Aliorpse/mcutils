@@ -1,0 +1,510 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>ServerSettingsExtension</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    mcutils
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector common-like" data-active="" aria-pressed="true" data-filter=":msmp/commonMain">common</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":msmp/commonMain" data-filter=":msmp/commonMain">
+                                <span class="checkbox--icon"></span>
+                                common
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    mcutils
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="msmp::tech.aliorpse.mcutils.api.extension/ServerSettingsExtension///PointingToDeclaration//1733111060">
+  <div class="breadcrumbs"><a href="../../index.html">msmp</a><span class="delimiter">/</span><a href="../index.html">tech.aliorpse.mcutils.api.extension</a><span class="delimiter">/</span><span class="current">ServerSettingsExtension</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Server</span><wbr><span>Settings</span><wbr><span><span>Extension</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">ServerSettingsExtension</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>connection<span class="token operator">: </span><a href="../../tech.aliorpse.mcutils.api/-msmp-connection/index.html">MsmpConnection</a></span></span><span class="token punctuation">)</span></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="771323011%2FConstructors%2F1733111060" anchor-label="ServerSettingsExtension" id="771323011%2FConstructors%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-server-settings-extension.html"><span>Server</span><wbr><span>Settings</span><wbr><span><span>Extension</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="771323011%2FConstructors%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">connection<span class="token operator">: </span><a href="../../tech.aliorpse.mcutils.api/-msmp-connection/index.html">MsmpConnection</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="752154787%2FClasslikes%2F1733111060" anchor-label="BoolProp" id="752154787%2FClasslikes%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-bool-prop/index.html"><span>Bool</span><wbr><span><span>Prop</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="752154787%2FClasslikes%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">inner </span><span class="token keyword">class </span><a href="-bool-prop/index.html">BoolProp</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">path<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">param<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-228893856%2FClasslikes%2F1733111060" anchor-label="IntProp" id="-228893856%2FClasslikes%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-int-prop/index.html"><span>Int</span><wbr><span><span>Prop</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-228893856%2FClasslikes%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">inner </span><span class="token keyword">class </span><a href="-int-prop/index.html">IntProp</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">path<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">param<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-105102052%2FClasslikes%2F1733111060" anchor-label="StringProp" id="-105102052%2FClasslikes%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-string-prop/index.html"><span>String</span><wbr><span><span>Prop</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-105102052%2FClasslikes%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">inner </span><span class="token keyword">class </span><a href="-string-prop/index.html">StringProp</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">path<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">param<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="367773887%2FProperties%2F1733111060" anchor-label="acceptTransfers" id="367773887%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="accept-transfers.html"><span>accept</span><wbr><span><span>Transfers</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="367773887%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="accept-transfers.html">acceptTransfers</a><span class="token operator">: </span><a href="-bool-prop/index.html">ServerSettingsExtension.BoolProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1927847802%2FProperties%2F1733111060" anchor-label="allowFlight" id="-1927847802%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="allow-flight.html"><span>allow</span><wbr><span><span>Flight</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1927847802%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="allow-flight.html">allowFlight</a><span class="token operator">: </span><a href="-bool-prop/index.html">ServerSettingsExtension.BoolProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1751065329%2FProperties%2F1733111060" anchor-label="autosave" id="-1751065329%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="autosave.html"><span><span>autosave</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1751065329%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="autosave.html">autosave</a><span class="token operator">: </span><a href="-bool-prop/index.html">ServerSettingsExtension.BoolProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="548848285%2FProperties%2F1733111060" anchor-label="connection" id="548848285%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="connection.html"><span><span>connection</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="548848285%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="connection.html">connection</a><span class="token operator">: </span><a href="../../tech.aliorpse.mcutils.api/-msmp-connection/index.html">MsmpConnection</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1793264736%2FProperties%2F1733111060" anchor-label="difficulty" id="1793264736%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="difficulty.html"><span><span>difficulty</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1793264736%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="difficulty.html">difficulty</a><span class="token operator">: </span><a href="-string-prop/index.html">ServerSettingsExtension.StringProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1774502710%2FProperties%2F1733111060" anchor-label="enforceAllowlist" id="1774502710%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="enforce-allowlist.html"><span>enforce</span><wbr><span><span>Allowlist</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1774502710%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="enforce-allowlist.html">enforceAllowlist</a><span class="token operator">: </span><a href="-bool-prop/index.html">ServerSettingsExtension.BoolProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1559925596%2FProperties%2F1733111060" anchor-label="entityBroadcastRange" id="1559925596%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="entity-broadcast-range.html"><span>entity</span><wbr><span>Broadcast</span><wbr><span><span>Range</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1559925596%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="entity-broadcast-range.html">entityBroadcastRange</a><span class="token operator">: </span><a href="-int-prop/index.html">ServerSettingsExtension.IntProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2109425215%2FProperties%2F1733111060" anchor-label="forceGameMode" id="2109425215%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="force-game-mode.html"><span>force</span><wbr><span>Game</span><wbr><span><span>Mode</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2109425215%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="force-game-mode.html">forceGameMode</a><span class="token operator">: </span><a href="-bool-prop/index.html">ServerSettingsExtension.BoolProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1336764454%2FProperties%2F1733111060" anchor-label="gameMode" id="1336764454%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="game-mode.html"><span>game</span><wbr><span><span>Mode</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1336764454%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="game-mode.html">gameMode</a><span class="token operator">: </span><a href="-string-prop/index.html">ServerSettingsExtension.StringProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1501471458%2FProperties%2F1733111060" anchor-label="hideOnlinePlayers" id="1501471458%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hide-online-players.html"><span>hide</span><wbr><span>Online</span><wbr><span><span>Players</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1501471458%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="hide-online-players.html">hideOnlinePlayers</a><span class="token operator">: </span><a href="-bool-prop/index.html">ServerSettingsExtension.BoolProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="330870733%2FProperties%2F1733111060" anchor-label="maxPlayers" id="330870733%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="max-players.html"><span>max</span><wbr><span><span>Players</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="330870733%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="max-players.html">maxPlayers</a><span class="token operator">: </span><a href="-int-prop/index.html">ServerSettingsExtension.IntProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2141237527%2FProperties%2F1733111060" anchor-label="motd" id="-2141237527%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="motd.html"><span><span>motd</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2141237527%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="motd.html">motd</a><span class="token operator">: </span><a href="-string-prop/index.html">ServerSettingsExtension.StringProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1785705945%2FProperties%2F1733111060" anchor-label="operatorUserPermissionLevel" id="1785705945%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="operator-user-permission-level.html"><span>operator</span><wbr><span>User</span><wbr><span>Permission</span><wbr><span><span>Level</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1785705945%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="operator-user-permission-level.html">operatorUserPermissionLevel</a><span class="token operator">: </span><a href="-int-prop/index.html">ServerSettingsExtension.IntProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-596819875%2FProperties%2F1733111060" anchor-label="pauseWhenEmptySeconds" id="-596819875%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="pause-when-empty-seconds.html"><span>pause</span><wbr><span>When</span><wbr><span>Empty</span><wbr><span><span>Seconds</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-596819875%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="pause-when-empty-seconds.html">pauseWhenEmptySeconds</a><span class="token operator">: </span><a href="-int-prop/index.html">ServerSettingsExtension.IntProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-105727437%2FProperties%2F1733111060" anchor-label="playerIdleTimeout" id="-105727437%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="player-idle-timeout.html"><span>player</span><wbr><span>Idle</span><wbr><span><span>Timeout</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-105727437%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="player-idle-timeout.html">playerIdleTimeout</a><span class="token operator">: </span><a href="-int-prop/index.html">ServerSettingsExtension.IntProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1308255775%2FProperties%2F1733111060" anchor-label="simulationDistance" id="1308255775%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="simulation-distance.html"><span>simulation</span><wbr><span><span>Distance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1308255775%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="simulation-distance.html">simulationDistance</a><span class="token operator">: </span><a href="-int-prop/index.html">ServerSettingsExtension.IntProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2087820967%2FProperties%2F1733111060" anchor-label="spawnProtectionRadius" id="-2087820967%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="spawn-protection-radius.html"><span>spawn</span><wbr><span>Protection</span><wbr><span><span>Radius</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2087820967%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="spawn-protection-radius.html">spawnProtectionRadius</a><span class="token operator">: </span><a href="-int-prop/index.html">ServerSettingsExtension.IntProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1584666448%2FProperties%2F1733111060" anchor-label="statusHeartbeatInterval" id="1584666448%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="status-heartbeat-interval.html"><span>status</span><wbr><span>Heartbeat</span><wbr><span><span>Interval</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1584666448%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="status-heartbeat-interval.html">statusHeartbeatInterval</a><span class="token operator">: </span><a href="-int-prop/index.html">ServerSettingsExtension.IntProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1958897417%2FProperties%2F1733111060" anchor-label="statusReplies" id="1958897417%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="status-replies.html"><span>status</span><wbr><span><span>Replies</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1958897417%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="status-replies.html">statusReplies</a><span class="token operator">: </span><a href="-bool-prop/index.html">ServerSettingsExtension.BoolProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-44216677%2FProperties%2F1733111060" anchor-label="useAllowlist" id="-44216677%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="use-allowlist.html"><span>use</span><wbr><span><span>Allowlist</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-44216677%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="use-allowlist.html">useAllowlist</a><span class="token operator">: </span><a href="-bool-prop/index.html">ServerSettingsExtension.BoolProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1217350719%2FProperties%2F1733111060" anchor-label="viewDistance" id="-1217350719%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="view-distance.html"><span>view</span><wbr><span><span>Distance</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1217350719%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="view-distance.html">viewDistance</a><span class="token operator">: </span><a href="-int-prop/index.html">ServerSettingsExtension.IntProp</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
