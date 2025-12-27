@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.0](https://github.com/Aliorpse/mcutils/compare/v3.3.0...v3.4.0) (2025-12-27)
+
+
+### Features
+
+* **msmp:** support custom event & request API extension registration ([1a74e73](https://github.com/Aliorpse/mcutils/commit/1a74e732bc4d5d861f05c300ffa734b841fd1e29))
+
 ## [3.3.0](https://github.com/Aliorpse/mcutils/compare/v3.2.1...v3.3.0) (2025-12-27)
 
 
