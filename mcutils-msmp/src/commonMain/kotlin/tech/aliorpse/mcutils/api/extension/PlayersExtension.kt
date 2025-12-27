@@ -1,4 +1,4 @@
-package tech.aliorpse.mcutils.api.api
+package tech.aliorpse.mcutils.api.extension
 
 import kotlinx.serialization.builtins.SetSerializer
 import kotlinx.serialization.json.JsonElement
@@ -7,7 +7,7 @@ import tech.aliorpse.mcutils.entity.KickPlayerDto
 import tech.aliorpse.mcutils.entity.MessageDto
 import tech.aliorpse.mcutils.entity.PlayerDto
 
-public class PlayersApi(public val connection: MsmpConnection) {
+public class PlayersExtension(public val connection: MsmpConnection) {
     @PublishedApi
     internal val baseEndpoint: String = "minecraft:players"
 

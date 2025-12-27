@@ -1,17 +1,25 @@
-package tech.aliorpse.mcutils.api.api
+package tech.aliorpse.mcutils.api.extension
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.SetSerializer
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.serializer
 import tech.aliorpse.mcutils.api.MsmpConnection
 
 // Using positional arguments here for universality, as parameter keys vary across different endpoints.
-public class UniversalArrayApi<T>(
+public class UniversalArrayExtension<T> @PublishedApi internal constructor(
     public val connection: MsmpConnection,
     public val baseEndpoint: String,
     public val serializer: KSerializer<T>
 ) {
+    public companion object {
+        public inline operator fun <reified T> invoke(
+            connection: MsmpConnection,
+            baseEndpoint: String,
+        ): UniversalArrayExtension<T> = UniversalArrayExtension(connection, baseEndpoint, serializer<T>())
+    }
+
     public suspend inline fun get(): Set<T> =
         decodeFrom(connection.call(baseEndpoint))
 
@@ -33,7 +41,8 @@ public class UniversalArrayApi<T>(
             SetSerializer(serializer),
             value.toSet()
         )
-        return JsonArray(listOf(jsonElement))
+        // Manually build positional argument
+        return JsonArray(JsonArray(listOf(jsonElement)))
     }
 
     @PublishedApi

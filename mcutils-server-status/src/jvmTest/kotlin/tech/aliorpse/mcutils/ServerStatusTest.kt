@@ -18,6 +18,7 @@ class ServerStatusTest {
     }
 
     @OptIn(ExperimentalMCUtilsApi::class)
+    @Test
     fun `fetch java server status by query`() = runBlocking {
         val result = MCServer.getQueryFull("localhost")
         val result2 = MCServer.getQueryBasic("localhost")

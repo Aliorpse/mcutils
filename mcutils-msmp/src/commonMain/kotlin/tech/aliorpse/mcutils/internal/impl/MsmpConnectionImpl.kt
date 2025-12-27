@@ -2,17 +2,20 @@ package tech.aliorpse.mcutils.internal.impl
 
 import io.ktor.client.plugins.websocket.DefaultClientWebSocketSession
 import io.ktor.websocket.Frame
+import io.ktor.websocket.close
 import io.ktor.websocket.readText
 import io.ktor.websocket.send
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.filterIsInstance
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
@@ -23,12 +26,17 @@ import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.serializer
+import tech.aliorpse.mcutils.entity.ConnectionClosedEvent
+import tech.aliorpse.mcutils.entity.ConnectionEstablishedEvent
 import tech.aliorpse.mcutils.entity.EventProvider
+import tech.aliorpse.mcutils.entity.JsonRpcError
+import tech.aliorpse.mcutils.entity.JsonRpcException
 import tech.aliorpse.mcutils.entity.MsmpEvent
 import tech.aliorpse.mcutils.entity.MsmpRequest
 import tech.aliorpse.mcutils.entity.MsmpResponse
 import tech.aliorpse.mcutils.entity.UnknownMsmpEvent
 import tech.aliorpse.mcutils.entity.eventMap
+import tech.aliorpse.mcutils.entity.fromCode
 import tech.aliorpse.mcutils.internal.util.DispatchersIO
 import tech.aliorpse.mcutils.internal.util.MutexMutableMap
 import kotlin.concurrent.atomics.AtomicInt
@@ -62,14 +70,50 @@ internal class MsmpConnectionImpl internal constructor(
         encodeDefaults = true
     }
 
+    internal var listeningJob: Job
+
+    init {
+        listeningJob = scope.launch {
+            runCatching {
+                eventFlow.emit(ConnectionEstablishedEvent)
+
+                connection.incoming.receiveAsFlow().filterIsInstance<Frame.Text>().collect { frame ->
+                    val text = frame.readText()
+                    val jsonObj = json.parseToJsonElement(text).jsonObject
+                    if (jsonObj.containsKey("id") && jsonObj["id"] !is JsonNull) {
+                        handleResponse(jsonObj)
+                    } else {
+                        handleNotification(jsonObj)
+                    }
+                }
+            }.also { result ->
+                withContext(NonCancellable) {
+                    val closeReason = runCatching { connection.closeReason.await() }.getOrNull()
+                    val exception = result.exceptionOrNull()
+
+                    val finalReason = closeReason?.message
+                        ?: exception?.message
+                        ?: exception?.toString()
+                        ?: "Connection closed (unknown reason)"
+
+                    eventFlow.emit(ConnectionClosedEvent(finalReason))
+                    cleanup(finalReason)
+                }
+            }
+        }
+    }
+
     @PublishedApi
     internal suspend inline fun <reified T> call(method: String, params: T?, timeout: Long): JsonElement {
         val id = idCounter.fetchAndIncrement()
 
         val paramElement: JsonElement = when (params) {
+            // Empty params
             null -> JsonArray(emptyList())
-            is JsonArray -> JsonArray(params)
-            else -> json.encodeToJsonElement(json.serializersModule.serializer<T>(), params)
+            // Already encoded
+            is JsonElement -> params
+            // Needs to be encoded
+            else -> json.encodeToJsonElement(serializer<T>(), params)
         }
 
         val request = MsmpRequest(
@@ -91,28 +135,6 @@ internal class MsmpConnectionImpl internal constructor(
         }
     }
 
-    init {
-        scope.launch {
-            try {
-                connection.incoming.receiveAsFlow()
-                    .filterIsInstance<Frame.Text>()
-                    .map { it.readText() }
-                    .collect { text ->
-                        val jsonObj = json.parseToJsonElement(text).jsonObject
-                        if (jsonObj.containsKey("id") && jsonObj["id"] !is JsonNull) {
-                            handleResponse(jsonObj)
-                        } else {
-                            handleNotification(jsonObj)
-                        }
-                    }
-            } finally {
-                pendingRequests.forEach { _, deferred ->
-                    deferred.completeExceptionally(IllegalStateException("Connection lost"))
-                }
-            }
-        }
-    }
-
     private suspend fun handleResponse(jsonObj: JsonObject) {
         val response = json.decodeFromJsonElement(
             MsmpResponse.serializer(),
@@ -121,11 +143,10 @@ internal class MsmpConnectionImpl internal constructor(
 
         val deferred = pendingRequests.get(response.id) ?: return
 
-        if (response.error != null) {
-            val error = response.error
-            deferred.completeExceptionally(
-                IllegalStateException("RPC Error: ${error.message}(${error.code}): ${error.data}")
-            )
+        val rawError = response.error
+        if (rawError != null) {
+            val rpcError = JsonRpcError.fromCode(rawError.code, rawError.message)
+            deferred.completeExceptionally(JsonRpcException(rpcError, rawError.data))
         } else {
             deferred.complete(response.result ?: JsonNull)
         }
@@ -151,5 +172,22 @@ internal class MsmpConnectionImpl internal constructor(
         }
 
         eventFlow.emit(event)
+    }
+
+    internal suspend fun close() {
+        try {
+            connection.close()
+        } finally {
+            cleanup("Client closed connection")
+        }
+    }
+
+    @PublishedApi
+    internal suspend fun cleanup(reason: String) {
+        pendingRequests.clearAndForEach { _, deferred ->
+            if (deferred.isActive) {
+                deferred.completeExceptionally(IllegalStateException("Connection lost: $reason"))
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-package tech.aliorpse.mcutils.api.api
+package tech.aliorpse.mcutils.api.extension
 
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.jsonPrimitive
@@ -8,7 +8,7 @@ import tech.aliorpse.mcutils.entity.PlayerDto
 import tech.aliorpse.mcutils.entity.ServerStateDto
 import tech.aliorpse.mcutils.entity.SystemMessageDto
 
-public class ServerApi(public val connection: MsmpConnection) {
+public class ServerExtension(public val connection: MsmpConnection) {
     @PublishedApi
     internal val baseEndpoint: String = "minecraft:server"
 

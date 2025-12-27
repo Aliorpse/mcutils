@@ -41,7 +41,14 @@ internal val eventMap: Map<String, EventProvider> = mapOf(
 @Serializable
 public sealed interface MsmpEvent
 
+// Connection-related Events
+
+public data object ConnectionEstablishedEvent : MsmpEvent
+
+public data class ConnectionClosedEvent(val cause: String) : MsmpEvent
+
 // Players Events
+
 @Serializable
 public data class PlayerJoinedEvent(val eventCtx: PlayerDto) : MsmpEvent
 
@@ -80,19 +87,14 @@ public data class UserBanRemovedEvent(val eventCtx: PlayerDto) : MsmpEvent
 
 // Server State Events
 
-@Serializable
 public data object ServerStartedEvent : MsmpEvent
 
-@Serializable
 public data object ServerStoppingEvent : MsmpEvent
 
-@Serializable
 public data object ServerActivityEvent : MsmpEvent
 
-@Serializable
 public data object ServerSavingEvent : MsmpEvent
 
-@Serializable
 public data object ServerSavedEvent : MsmpEvent
 
 @Serializable

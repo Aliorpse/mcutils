@@ -2,17 +2,17 @@ package tech.aliorpse.mcutils
 
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import tech.aliorpse.mcutils.annotation.ExperimentalMCUtilsApi
 import tech.aliorpse.mcutils.api.MCServer
 import tech.aliorpse.mcutils.api.createMsmpConnection
 import tech.aliorpse.mcutils.entity.MessageDto
+import kotlin.test.Test
 
 class MsmpTest {
     @OptIn(DelicateCoroutinesApi::class, ExperimentalMCUtilsApi::class)
+    @Test
     fun `test MSMP`(): Unit = runBlocking {
         MCServer.createMsmpConnection(
             "ws://localhost:25585",
@@ -30,7 +30,7 @@ class MsmpTest {
                 ),
             )
 
-            while (isActive) delay(1000)
+            conn.await()
         }
     }
 }

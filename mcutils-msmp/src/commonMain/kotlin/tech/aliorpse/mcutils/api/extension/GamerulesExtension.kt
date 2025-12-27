@@ -1,4 +1,4 @@
-package tech.aliorpse.mcutils.api.api
+package tech.aliorpse.mcutils.api.extension
 
 import kotlinx.serialization.builtins.SetSerializer
 import kotlinx.serialization.json.JsonPrimitive
@@ -6,7 +6,7 @@ import tech.aliorpse.mcutils.api.MsmpConnection
 import tech.aliorpse.mcutils.entity.TypedGameruleDto
 import tech.aliorpse.mcutils.entity.UntypedGameruleDto
 
-public class GamerulesApi(public val connection: MsmpConnection) {
+public class GamerulesExtension(public val connection: MsmpConnection) {
     @PublishedApi
     internal val baseEndpoint: String = "minecraft:gamerules"
 

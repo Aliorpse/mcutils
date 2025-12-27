@@ -1,9 +1,9 @@
 package tech.aliorpse.mcutils.api
 
+import io.ktor.client.plugins.timeout
 import io.ktor.client.plugins.websocket.webSocketSession
 import io.ktor.client.request.header
 import io.ktor.http.HttpHeaders
-import io.ktor.websocket.close
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -14,15 +14,17 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.filterIsInstance
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.JsonElement
 import tech.aliorpse.mcutils.annotation.ExperimentalMCUtilsApi
-import tech.aliorpse.mcutils.api.api.GamerulesApi
-import tech.aliorpse.mcutils.api.api.PlayersApi
-import tech.aliorpse.mcutils.api.api.ServerApi
-import tech.aliorpse.mcutils.api.api.ServerSettingsApi
-import tech.aliorpse.mcutils.api.api.UniversalArrayApi
+import tech.aliorpse.mcutils.api.extension.GamerulesExtension
+import tech.aliorpse.mcutils.api.extension.PlayersExtension
+import tech.aliorpse.mcutils.api.extension.ServerExtension
+import tech.aliorpse.mcutils.api.extension.ServerSettingsExtension
+import tech.aliorpse.mcutils.api.extension.UniversalArrayExtension
+import tech.aliorpse.mcutils.entity.ConnectionClosedEvent
 import tech.aliorpse.mcutils.entity.MsmpEvent
 import tech.aliorpse.mcutils.entity.OperatorDto
 import tech.aliorpse.mcutils.entity.PlayerDto
@@ -36,15 +38,13 @@ import kotlin.coroutines.EmptyCoroutineContext
 public suspend fun MCServer.createMsmpConnection(
     target: String,
     token: String,
-    pingIntervalMillis: Long = 10000L,
-    timeoutMillis: Long = 3000L,
+    timeout: Long = 3000L,
     eventBufferSize: Int = 64
 ): MsmpConnection {
     val session = webSocketClient.webSocketSession(target) {
         header(HttpHeaders.Authorization, "Bearer $token")
+        timeout { connectTimeoutMillis = timeout }
     }
-    session.pingIntervalMillis = pingIntervalMillis
-    session.timeoutMillis = timeoutMillis
     return MsmpConnection(MsmpConnectionImpl(session, eventBufferSize))
 }
 
@@ -54,43 +54,76 @@ public class MsmpConnection internal constructor(
     @PublishedApi
     internal val defaultScope: CoroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
 
+    // Listen for impl closing in any reason
+    init {
+        defaultScope.launch {
+            impl.listeningJob.join()
+            if (isActive) this@MsmpConnection.close()
+        }
+    }
+
     // --- Request Basic API ---
 
+    /**
+     * The basic call method for making requests.
+     *
+     * This is the none-params variant.
+     */
     public suspend inline fun call(
         method: String,
         timeout: Long = 10000L
     ): JsonElement = impl.call<JsonElement>(method, null, timeout)
 
+    /**
+     * The basic call method for making requests.
+     *
+     * This is the manually built params variant.
+     * You can use this for APIs that cannot parse type information (e.g., [UniversalArrayExtension]).
+     */
+    public suspend inline fun call(
+        method: String,
+        params: JsonElement,
+        timeout: Long = 10000L
+    ): JsonElement = impl.call<JsonElement>(method, params, timeout)
+
+    /**
+     * The basic call method for making requests.
+     *
+     * This is the auto-encoded params variant.
+     */
     public suspend inline fun <reified T> call(
         method: String,
         params: T,
         timeout: Long = 10000L,
     ): JsonElement = impl.call(method, params, timeout)
 
+    /**
+     * Discover the server's capabilities and features.
+     */
     public suspend inline fun discover(): JsonElement = call("rpc.discover")
 
     // --- Request Extension API ---
 
-    public val allowList: UniversalArrayApi<PlayerDto>
-        by lazy { UniversalArrayApi(this, "minecraft:allowlist", PlayerDto.serializer()) }
+    public val allowList: UniversalArrayExtension<PlayerDto>
+        by lazy { UniversalArrayExtension(this, "minecraft:allowlist") }
 
-    public val banList: UniversalArrayApi<UserBanDto>
-        by lazy { UniversalArrayApi(this, "minecraft:bans", UserBanDto.serializer()) }
+    public val banList: UniversalArrayExtension<UserBanDto>
+        by lazy { UniversalArrayExtension(this, "minecraft:bans") }
 
-    public val operatorList: UniversalArrayApi<OperatorDto>
-        by lazy { UniversalArrayApi(this, "minecraft:operators", OperatorDto.serializer()) }
+    public val operatorList: UniversalArrayExtension<OperatorDto>
+        by lazy { UniversalArrayExtension(this, "minecraft:operators") }
 
-    public val players: PlayersApi
-        by lazy { PlayersApi(this) }
+    public val players: PlayersExtension
+        by lazy { PlayersExtension(this) }
 
-    public val server: ServerApi
-        by lazy { ServerApi(this) }
+    public val server: ServerExtension
+        by lazy { ServerExtension(this) }
 
-    public val gamerules: GamerulesApi
-        by lazy { GamerulesApi(this) }
+    public val gamerules: GamerulesExtension
+        by lazy { GamerulesExtension(this) }
 
-    public val serverSettings: ServerSettingsApi
-        by lazy { ServerSettingsApi(this) }
+    public val serverSettings: ServerSettingsExtension
+        by lazy { ServerSettingsExtension(this) }
 
     // --- Event API ---
 
@@ -106,10 +139,12 @@ public class MsmpConnection internal constructor(
 
     // --- Universal API ---
 
+    public suspend inline fun await(): ConnectionClosedEvent =
+        eventFlow.filterIsInstance<ConnectionClosedEvent>().first()
+
     @OptIn(DelicateCoroutinesApi::class)
     public override fun close() {
         if (defaultScope.isActive) defaultScope.cancel()
-        if (impl.scope.isActive) impl.scope.cancel()
-        GlobalScope.launch { impl.connection.close() }
+        GlobalScope.launch { runCatching { impl.close() }.also { impl.scope.cancel() } }
     }
 }

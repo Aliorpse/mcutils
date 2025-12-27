@@ -8,11 +8,11 @@ public data class MsmpResponse(
     val jsonrpc: String = "2.0",
     val id: Int,
     val result: JsonElement? = null,
-    val error: MsmpError? = null
+    val error: MsmpResponseError? = null
 )
 
 @Serializable
-public data class MsmpError(
+public data class MsmpResponseError(
     val code: Int,
     val message: String,
     val data: String? = null
