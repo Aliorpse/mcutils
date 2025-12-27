@@ -106,7 +106,7 @@ conn.server.save(true)
 
 // Or you can also parse `registryName` to the following lambda
 public val MsmpConnection.allowList: UniversalArrayExtension<PlayerDto>
-        by msmpExtension("minecraft:allowlist") { UniversalArrayExtension(it, this) }
+    by msmpExtension("minecraft:allowlist") { UniversalArrayExtension(it, this) }
 ```
 
 ### Remote Console
