@@ -86,7 +86,7 @@ MsmpEventRegistry.configure {
 #### Custom Request Extensions
 
 ```kotlin
-public public class ServerExtension(public val connection: MsmpConnection) {
+public class ServerExtension(public val connection: MsmpConnection) {
     internal val baseEndpoint: String = "minecraft:server"
 
     public suspend inline fun save(flush: Boolean = false): Boolean {
