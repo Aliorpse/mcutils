@@ -71,18 +71,17 @@ public data class PlayerJoinedEvent(val eventCtx: PlayerDto) : MsmpEvent
 
 public data object ServerStartedEvent : MsmpEvent
 
-@Serializable
 public data class IPBanRemovedEvent(val eventCtx: String) : MsmpEvent
 
 // Not a top-level declaration
 MsmpEventRegistry.configure {
-    // When data is Json element
+    // When eventCtx is JSON object
     "minecraft:notification/players/joined" register PlayerJoinedEvent.serializer()
 
-    // When data is empty
+    // When eventCtx is empty
     "minecraft:notification/server/started" bind ServerStartedEvent
 
-    // When data is not Json element
+    // When eventCtx is not JSON object
     "minecraft:notification/ip_bans/removed".define { p ->
         IPBanRemovedEvent(p?.jsonPrimitive?.content ?: "")
     }
