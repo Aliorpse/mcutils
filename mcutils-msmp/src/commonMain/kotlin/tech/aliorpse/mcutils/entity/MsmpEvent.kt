@@ -82,7 +82,6 @@ public data class AllowlistRemovedEvent(val eventCtx: PlayerDto) : MsmpEvent
 @Serializable
 public data class IPBanAddedEvent(val eventCtx: IPBanDto) : MsmpEvent
 
-@Serializable
 public data class IPBanRemovedEvent(val eventCtx: String) : MsmpEvent
 
 @Serializable
