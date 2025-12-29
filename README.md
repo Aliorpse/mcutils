@@ -76,13 +76,16 @@ public data class IPBanRemovedEvent(val eventCtx: String) : MsmpEvent
 
 // Not a top-level declaration
 MsmpEventRegistry.configure {
-     "minecraft:notification/players/joined" register PlayerJoinedEvent.serializer()
+    // When data is Json element
+    "minecraft:notification/players/joined" register PlayerJoinedEvent.serializer()
 
-     "minecraft:notification/server/started" bind ServerStartedEvent
+    // When data is empty
+    "minecraft:notification/server/started" bind ServerStartedEvent
 
-     "minecraft:notification/ip_bans/removed".define { p ->
-         IPBanRemovedEvent(p?.jsonPrimitive?.content ?: "")
-     }
+    // When data is not Json element
+    "minecraft:notification/ip_bans/removed".define { p ->
+        IPBanRemovedEvent(p?.jsonPrimitive?.content ?: "")
+    }
 }
 ```
 
