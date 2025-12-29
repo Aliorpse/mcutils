@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.4.1](https://github.com/Aliorpse/mcutils/compare/v3.4.0...v3.4.1) (2025-12-29)
+
+
+### Performance Improvements
+
+* **msmp:** remove unused annotation ([df133ab](https://github.com/Aliorpse/mcutils/commit/df133ab028574d81d41190caf5c47a9571b4ad64))
+
 ## [3.4.0](https://github.com/Aliorpse/mcutils/compare/v3.3.0...v3.4.0) (2025-12-27)
 
 
