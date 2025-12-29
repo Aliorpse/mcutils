@@ -29,6 +29,9 @@ runBlocking {
 
 `tech.aliorpse.mcutils:mcutils-msmp:$version`
 
+> [!tip]
+> This module requires a Ktor client engine, e.g., `ktor-client-cio`.
+
 #### Common Usage
 
 ```kotlin
