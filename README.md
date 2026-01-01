@@ -9,7 +9,7 @@ A Kotlin multiplatform library provides utility functions for Minecraft-related 
 ## Modules
 
 - [Server Status](mcutils-server-status/README.md): Fetch Minecraft server status via SLP or Query.
-- [Server Management Protocol (MSMP)](mcutils-msmp/README.md): Comprehensive server management and event listening.
+- [Minecraft Server Management Protocol (MSMP)](mcutils-msmp/README.md): Comprehensive server management and event listening.
 - [Remote Console (RCON)](mcutils-rcon/README.md): Execute commands remotely on the server.
 - [Player Profile](mcutils-player/README.md): Retrieve player UUIDs and profiles.
 
