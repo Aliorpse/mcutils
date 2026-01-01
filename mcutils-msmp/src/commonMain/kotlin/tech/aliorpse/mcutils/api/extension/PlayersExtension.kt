@@ -3,14 +3,15 @@ package tech.aliorpse.mcutils.api.extension
 import kotlinx.serialization.builtins.SetSerializer
 import kotlinx.serialization.json.JsonElement
 import tech.aliorpse.mcutils.api.MsmpConnection
+import tech.aliorpse.mcutils.api.registry.MsmpExtension
 import tech.aliorpse.mcutils.entity.KickPlayerDto
 import tech.aliorpse.mcutils.entity.MessageDto
 import tech.aliorpse.mcutils.entity.PlayerDto
 
-public class PlayersExtension(public val connection: MsmpConnection) {
-    @PublishedApi
-    internal val baseEndpoint: String = "minecraft:players"
-
+public class PlayersExtension internal constructor(
+    public override val connection: MsmpConnection,
+    public override val baseEndpoint: String
+) : MsmpExtension {
     /**
      * Get a list of all players on the server.
      */

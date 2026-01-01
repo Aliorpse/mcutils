@@ -17,9 +17,10 @@ import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.JsonElement
 import tech.aliorpse.mcutils.annotation.ExperimentalMCUtilsApi
-import tech.aliorpse.mcutils.api.extension.UniversalArrayExtension
+import tech.aliorpse.mcutils.api.extension.ArrayExtension
 import tech.aliorpse.mcutils.entity.ConnectionClosedEvent
 import tech.aliorpse.mcutils.entity.MsmpEvent
 import tech.aliorpse.mcutils.internal.impl.MsmpConnectionImpl
@@ -69,19 +70,20 @@ public class MsmpConnection internal constructor(
     public suspend inline fun call(
         method: String,
         timeout: Long = 10000L
-    ): JsonElement = impl.call<JsonElement>(method, null, timeout)
+    ): JsonElement = impl.call<JsonElement>(method, null, null, timeout)
 
     /**
      * The basic call method for making requests.
      *
-     * This is the manually built params variant.
-     * You can use this for APIs that cannot parse type information (e.g., [UniversalArrayExtension]).
+     * This is the manually built serializer variant.
+     * You can use this for APIs that cannot parse type information (e.g., [ArrayExtension]).
      */
-    public suspend inline fun call(
+    public suspend inline fun <reified T> call(
         method: String,
-        params: JsonElement,
+        params: T,
+        serializer: KSerializer<T>,
         timeout: Long = 10000L
-    ): JsonElement = impl.call<JsonElement>(method, params, timeout)
+    ): JsonElement = impl.call<T>(method, params, serializer, timeout)
 
     /**
      * The basic call method for making requests.
@@ -92,7 +94,7 @@ public class MsmpConnection internal constructor(
         method: String,
         params: T,
         timeout: Long = 10000L,
-    ): JsonElement = impl.call(method, params, timeout)
+    ): JsonElement = impl.call(method, params, null, timeout)
 
     /**
      * Discover the server's capabilities and features.

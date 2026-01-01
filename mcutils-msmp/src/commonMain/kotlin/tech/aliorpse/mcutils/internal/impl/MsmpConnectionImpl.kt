@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
@@ -104,24 +105,30 @@ internal class MsmpConnectionImpl internal constructor(
     }
 
     @PublishedApi
-    internal suspend inline fun <reified T> call(method: String, params: T?, timeout: Long): JsonElement {
-        val id = idCounter.fetchAndIncrement()
-
-        val paramElement: JsonElement = when (params) {
-            // Empty params
-            null -> JsonArray(emptyList())
-            // Already encoded
-            is JsonElement -> params
-            // Needs to be encoded
+    internal suspend inline fun <reified T> call(
+        method: String,
+        params: T?,
+        serializer: KSerializer<T>?,
+        timeout: Long,
+    ): JsonElement {
+        val paramElement: JsonElement = when {
+            params == null -> JsonArray(emptyList())
+            serializer != null -> json.encodeToJsonElement(serializer, params)
             else -> json.encodeToJsonElement(serializer<T>(), params)
         }
 
-        val request = MsmpRequest(
-            id = id,
-            method = method,
-            params = paramElement
-        )
+        return performCall(method, paramElement, timeout)
+    }
 
+    // Factored out to keep inline call sites small
+    @PublishedApi
+    internal suspend fun performCall(
+        method: String,
+        paramElement: JsonElement,
+        timeout: Long,
+    ): JsonElement {
+        val id = idCounter.fetchAndIncrement()
+        val request = MsmpRequest(id = id, method = method, params = paramElement)
         val deferred = CompletableDeferred<JsonElement>()
         pendingRequests.put(id, deferred)
 

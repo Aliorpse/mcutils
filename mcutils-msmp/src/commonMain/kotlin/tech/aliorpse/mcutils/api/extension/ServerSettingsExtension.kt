@@ -4,11 +4,12 @@ import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonPrimitive
 import tech.aliorpse.mcutils.api.MsmpConnection
+import tech.aliorpse.mcutils.api.registry.MsmpExtension
 
-public class ServerSettingsExtension(public val connection: MsmpConnection) {
-    @PublishedApi
-    internal val baseEndpoint: String = "minecraft:serversettings"
-
+public class ServerSettingsExtension internal constructor(
+    override val connection: MsmpConnection,
+    override val baseEndpoint: String
+) : MsmpExtension {
     public val autosave: BoolProp = BoolProp("autosave", "enable")
     public val enforceAllowlist: BoolProp = BoolProp("enforce_allowlist", "enforce")
     public val useAllowlist: BoolProp = BoolProp("use_allowlist", "use")

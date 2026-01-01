@@ -3,15 +3,16 @@ package tech.aliorpse.mcutils.api.extension
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.jsonPrimitive
 import tech.aliorpse.mcutils.api.MsmpConnection
+import tech.aliorpse.mcutils.api.registry.MsmpExtension
 import tech.aliorpse.mcutils.entity.MessageDto
 import tech.aliorpse.mcutils.entity.PlayerDto
 import tech.aliorpse.mcutils.entity.ServerStateDto
 import tech.aliorpse.mcutils.entity.SystemMessageDto
 
-public class ServerExtension(public val connection: MsmpConnection) {
-    @PublishedApi
-    internal val baseEndpoint: String = "minecraft:server"
-
+public class ServerExtension internal constructor(
+    public override val connection: MsmpConnection,
+    public override val baseEndpoint: String
+) : MsmpExtension {
     public suspend inline fun status(): ServerStateDto =
         connection.impl.json.decodeFromJsonElement(
             ServerStateDto.serializer(),

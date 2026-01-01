@@ -3,13 +3,14 @@ package tech.aliorpse.mcutils.api.extension
 import kotlinx.serialization.builtins.SetSerializer
 import kotlinx.serialization.json.JsonPrimitive
 import tech.aliorpse.mcutils.api.MsmpConnection
+import tech.aliorpse.mcutils.api.registry.MsmpExtension
 import tech.aliorpse.mcutils.entity.TypedGameruleDto
 import tech.aliorpse.mcutils.entity.UntypedGameruleDto
 
-public class GamerulesExtension(public val connection: MsmpConnection) {
-    @PublishedApi
-    internal val baseEndpoint: String = "minecraft:gamerules"
-
+public class GamerulesExtension internal constructor(
+    public override val connection: MsmpConnection,
+    public override val baseEndpoint: String
+) : MsmpExtension {
     public suspend inline fun get(): Set<TypedGameruleDto> =
         connection.impl.json.decodeFromJsonElement(
             SetSerializer(TypedGameruleDto.serializer()),

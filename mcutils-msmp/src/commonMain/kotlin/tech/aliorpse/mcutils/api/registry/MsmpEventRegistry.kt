@@ -63,9 +63,7 @@ public object MsmpEventRegistry {
             "minecraft:notification/allowlist/removed" register AllowlistRemovedEvent.serializer()
 
             "minecraft:notification/ip_bans/added" register IPBanAddedEvent.serializer()
-            "minecraft:notification/ip_bans/removed".define { p ->
-                IPBanRemovedEvent(p?.jsonPrimitive?.content ?: "")
-            }
+            "minecraft:notification/ip_bans/removed".define { IPBanRemovedEvent(it?.jsonPrimitive?.content ?: "") }
 
             "minecraft:notification/bans/added" register UserBanAddedEvent.serializer()
             "minecraft:notification/bans/removed" register UserBanRemovedEvent.serializer()
