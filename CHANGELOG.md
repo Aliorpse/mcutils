@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.5.0](https://github.com/Aliorpse/mcutils/compare/v3.4.1...v3.5.0) (2026-01-01)
+
+
+### Features
+
+* **msmp:** simplify extension registration ([35b9dc4](https://github.com/Aliorpse/mcutils/commit/35b9dc4a9e6e9b393d80f3d938936934fa15a164))
+
 ## [3.4.1](https://github.com/Aliorpse/mcutils/compare/v3.4.0...v3.4.1) (2025-12-29)
 
 
