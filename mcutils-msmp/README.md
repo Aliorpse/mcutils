@@ -1,4 +1,4 @@
-# Server Management Protocol (MSMP)
+# Minecraft Server Management Protocol (MSMP)
 
 `tech.aliorpse.mcutils:mcutils-msmp:$version`
 
@@ -108,13 +108,13 @@ public class GamerulesExtension internal constructor(
     public override val baseEndpoint: String
 ) : MsmpExtension {
     public suspend fun get(): Set<TypedGameruleDto> =
-        connection.impl.json.decodeFromJsonElement(
+        Json.decodeFromJsonElement(
             SetSerializer(TypedGameruleDto.serializer()),
             connection.call(baseEndpoint)
         )
 
     public suspend inline fun set(gamerule: UntypedGameruleDto): TypedGameruleDto =
-        connection.impl.json.decodeFromJsonElement(
+        Json.decodeFromJsonElement(
             TypedGameruleDto.serializer(),
             connection.call("$baseEndpoint/update", mapOf("gamerule" to gamerule))
         )
@@ -144,7 +144,7 @@ public class ArrayExtension<T> @PublishedApi internal constructor(
 
     @PublishedApi
     internal fun decodeFrom(element: JsonElement): Set<T> =
-        connection.impl.json.decodeFromJsonElement(SetSerializer(serializer), element)
+        Json.decodeFromJsonElement(SetSerializer(serializer), element)
 
     // ...
 }
