@@ -134,6 +134,22 @@ println(state.attempt, state.nextDelay)
 
 ## Advanced Features
 
+### Reactive State Management
+Most built-in extensions (like `players`, `gamerules`, `allowList`, etc.) implement the `Syncable` interface. They maintain an internal cache automatically synchronized with the server via events, providing a seamless reactive programming experience.
+
+```kotlin
+// Get the current local cache immediately (Not recommended)
+val onlinePlayers = client.players.flow.value
+
+// Or fetch latest data from server
+val latestPlayers = client.players.get()
+
+// Or observe the state reactively using a Flow
+client.players.flow.collect { players ->
+    println("Currently online: ${players.size}")
+}
+```
+
 ### Request Batching
 To optimize network usage, the client can group multiple requests into a single JSON-RPC batch within a small time window. This is highly effective for reducing overhead during high-concurrency operations.
 
@@ -141,19 +157,6 @@ To optimize network usage, the client can group multiple requests into a single 
 val client = MCServer.msmpClient("...") {
     // Group requests occurring within 30ms (default)
     batchDelay = 30
-}
-```
-
-### State Synchronization
-Most built-in extensions (like `players`, `gamerules`, `allowList`, etc.) implement the `Syncable` interface. They maintain an internal cache automatically synchronized with the server via events.
-
-```kotlin
-// Get an immediate snapshot of the current state without network calls
-val onlinePlayers = client.players.snapshot()
-
-// Or observe the state reactively using a Flow
-client.players.flow.collect { players ->
-    println("Currently online: ${players.size}")
 }
 ```
 
@@ -207,8 +210,8 @@ public class ArrayExtension<T> @PublishedApi internal constructor(
 ) : MsmpExtension, Syncable {
     internal val cache = MutableStateFlow<Set<T>>(emptySet())
     public override val flow: StateFlow<Set<T>> = cache.asStateFlow()
-
-    public fun snapshot(): Set<T> = cache.value
+    
+    public suspend inline fun get(): Set<T> = decodeFrom(client.call(baseEndpoint))
 
     public suspend inline fun set(vararg value: T): Set<T> =
         decodeFrom(client.call("$baseEndpoint/set", listOf(value.toSet()), argsSerializer))

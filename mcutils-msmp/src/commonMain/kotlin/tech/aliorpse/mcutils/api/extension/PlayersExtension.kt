@@ -20,7 +20,7 @@ public class PlayersExtension internal constructor(
 
     public override val flow: StateFlow<Set<PlayerDto>> = cache.asStateFlow()
 
-    public fun snapshot(): Set<PlayerDto> = cache.value
+    public suspend inline fun get(): Set<PlayerDto> = decodeFrom(client.call(baseEndpoint))
 
     public suspend inline fun kick(vararg player: KickPlayerDto): Set<PlayerDto> =
         decodeFrom(client.call("$baseEndpoint/kick", player.toSet()))

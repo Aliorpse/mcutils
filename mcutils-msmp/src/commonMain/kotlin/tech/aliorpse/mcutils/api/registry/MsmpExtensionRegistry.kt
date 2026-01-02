@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.builtins.SetSerializer
 import kotlinx.serialization.serializer
 import tech.aliorpse.mcutils.api.MsmpClient
 import tech.aliorpse.mcutils.api.MsmpState
@@ -29,7 +28,6 @@ import tech.aliorpse.mcutils.entity.OperatorRemovedEvent
 import tech.aliorpse.mcutils.entity.PlayerDto
 import tech.aliorpse.mcutils.entity.PlayerJoinedEvent
 import tech.aliorpse.mcutils.entity.PlayerLeftEvent
-import tech.aliorpse.mcutils.entity.TypedGameruleDto
 import tech.aliorpse.mcutils.entity.UserBanAddedEvent
 import tech.aliorpse.mcutils.entity.UserBanDto
 import tech.aliorpse.mcutils.entity.UserBanRemovedEvent
@@ -112,7 +110,7 @@ public val MsmpClient.allowList: ArrayExtension<PlayerDto>
         on<AllowlistAddedEvent> { evt -> cache.update { it.plus(evt.eventCtx) } }
         on<AllowlistRemovedEvent> { evt -> cache.update { it.minus(evt.eventCtx) } }
 
-        onConnection { cache.update { decodeFrom(client.call(baseEndpoint)) } }
+        onConnection { cache.update { get() } }
     }
 
 public val MsmpClient.banList: ArrayExtension<UserBanDto>
@@ -120,7 +118,7 @@ public val MsmpClient.banList: ArrayExtension<UserBanDto>
         on<UserBanAddedEvent> { evt -> cache.update { it.plus(evt.eventCtx) } }
         on<UserBanRemovedEvent> { evt -> cache.update { it.filterNot { ctx -> ctx.player == evt.eventCtx }.toSet() } }
 
-        onConnection { cache.update { decodeFrom(client.call(baseEndpoint)) } }
+        onConnection { cache.update { get() } }
     }
 
 public val MsmpClient.ipBanList: ArrayExtension<IPBanDto>
@@ -128,7 +126,7 @@ public val MsmpClient.ipBanList: ArrayExtension<IPBanDto>
         on<IPBanAddedEvent> { evt -> cache.update { it.plus(evt.eventCtx) } }
         on<IPBanRemovedEvent> { evt -> cache.update { it.filterNot { ctx -> ctx.ip == evt.eventCtx }.toSet() } }
 
-        onConnection { cache.update { decodeFrom(client.call(baseEndpoint)) } }
+        onConnection { cache.update { get() } }
     }
 
 public val MsmpClient.operatorList: ArrayExtension<OperatorDto>
@@ -136,7 +134,7 @@ public val MsmpClient.operatorList: ArrayExtension<OperatorDto>
         on<OperatorAddedEvent> { evt -> cache.update { it.plus(evt.eventCtx) } }
         on<OperatorRemovedEvent> { evt -> cache.update { it.minus(evt.eventCtx) } }
 
-        onConnection { cache.update { decodeFrom(client.call(baseEndpoint)) } }
+        onConnection { cache.update { get() } }
     }
 
 public val MsmpClient.players: PlayersExtension
@@ -144,7 +142,7 @@ public val MsmpClient.players: PlayersExtension
         on<PlayerJoinedEvent> { evt -> cache.update { it.plus(evt.eventCtx) } }
         on<PlayerLeftEvent> { evt -> cache.update { it.minus(evt.eventCtx) } }
 
-        onConnection { cache.update { decodeFrom(client.call(baseEndpoint)) } }
+        onConnection { cache.update { get() } }
     }
 
 public val MsmpClient.gamerules: GamerulesExtension
@@ -155,14 +153,7 @@ public val MsmpClient.gamerules: GamerulesExtension
             }
         }
 
-        onConnection {
-            cache.update {
-                client.json.decodeFromJsonElement(
-                    SetSerializer(TypedGameruleDto.serializer()),
-                    client.call(baseEndpoint)
-                )
-            }
-        }
+        onConnection { cache.update { get() } }
     }
 
 public val MsmpClient.server: ServerExtension

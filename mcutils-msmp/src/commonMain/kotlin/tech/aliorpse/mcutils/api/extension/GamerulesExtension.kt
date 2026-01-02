@@ -3,6 +3,7 @@ package tech.aliorpse.mcutils.api.extension
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.serialization.builtins.SetSerializer
 import kotlinx.serialization.json.JsonPrimitive
 import tech.aliorpse.mcutils.api.MsmpClient
 import tech.aliorpse.mcutils.api.registry.MsmpExtension
@@ -18,7 +19,11 @@ public class GamerulesExtension internal constructor(
 
     public override val flow: StateFlow<Set<TypedGameruleDto>> = cache.asStateFlow()
 
-    public fun snapshot(): Set<TypedGameruleDto> = cache.value
+    public suspend inline fun get(): Set<TypedGameruleDto> =
+        client.json.decodeFromJsonElement(
+            SetSerializer(TypedGameruleDto.serializer()),
+            client.call(baseEndpoint)
+        )
 
     public suspend inline fun set(gamerule: UntypedGameruleDto): TypedGameruleDto =
         client.json.decodeFromJsonElement(

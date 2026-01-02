@@ -20,7 +20,7 @@ public class ArrayExtension<T> @PublishedApi internal constructor(
 
     public override val flow: StateFlow<Set<T>> = cache.asStateFlow()
 
-    public fun snapshot(): Set<T> = cache.value
+    public suspend inline fun get(): Set<T> = decodeFrom(client.call(baseEndpoint))
 
     public suspend inline fun clear(): Set<T> =
         decodeFrom(client.call("$baseEndpoint/clear"))

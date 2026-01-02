@@ -109,17 +109,12 @@ internal class MsmpConnection internal constructor(
 
                     if (batchDelay > 0) {
                         delay(batchDelay)
-                        var next = requestChannel.tryReceive().getOrNull()
-                        while (next != null) {
-                            batch.add(next)
-                            next = requestChannel.tryReceive().getOrNull()
-                        }
-                    } else {
-                        var next = requestChannel.tryReceive().getOrNull()
-                        while (next != null) {
-                            batch.add(next)
-                            next = requestChannel.tryReceive().getOrNull()
-                        }
+                    }
+
+                    var next = requestChannel.tryReceive().getOrNull()
+                    while (next != null) {
+                        batch.add(next)
+                        next = requestChannel.tryReceive().getOrNull()
                     }
 
                     sendBatch(batch)
@@ -136,12 +131,10 @@ internal class MsmpConnection internal constructor(
         runCatching {
             val requests = batch.map { it.request }
             val payload = if (requests.size == 1) {
-                json.encodeToString(ListSerializer(MsmpRequest.serializer()), requests)
+                json.encodeToString(MsmpRequest.serializer(), requests[0])
             } else {
                 json.encodeToString(ListSerializer(MsmpRequest.serializer()), requests)
             }
-
-            println(payload)
 
             connection.send(payload)
         }.onFailure { e ->
@@ -163,18 +156,12 @@ internal class MsmpConnection internal constructor(
 
         pendingRequests.put(id, deferred)
 
-        runCatching {
+        return runCatching {
             requestChannel.send(PendingRequestCtx(request, deferred))
-        }.onFailure { e ->
-            pendingRequests.remove(id)
-            throw e
-        }
-
-        return try {
             deferred.await()
-        } finally {
+        }.also {
             pendingRequests.remove(id)
-        }
+        }.getOrThrow()
     }
 
     private suspend fun handleIncomingJson(jsonObj: JsonObject) {

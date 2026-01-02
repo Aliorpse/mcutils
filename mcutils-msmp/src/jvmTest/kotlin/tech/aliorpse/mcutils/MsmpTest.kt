@@ -31,23 +31,25 @@ class MsmpTest {
             GlobalScope.launch { client.eventFlow.collect { println(it) } }
             GlobalScope.launch { client.stateFlow.collect { println(it) } }
 
+            client.server
+            client.players
+            client.ipBanList
+            client.gamerules
+            client.serverSettings
+            client.allowList
+            client.banList
+
             println(client.server.status())
             client.gamerules.set("send_command_feedback", true)
             client.serverSettings.allowFlight.set(true)
             client.server.sendMessage(
-                client.players.snapshot(),
+                client.players.get(),
                 MessageDto(
-                    literal = client.banList.snapshot().joinToString(", ") { it.player.name!! }
+                    literal = client.banList.get().joinToString(", ") { it.player.name!! }
                 ),
             )
 
             delay(1000)
-
-            println(client.players.snapshot())
-            println(client.banList.snapshot())
-            println(client.ipBanList.snapshot())
-            println(client.allowList.snapshot())
-            println(client.gamerules.snapshot())
 
             client.await()
         }
