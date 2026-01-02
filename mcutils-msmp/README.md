@@ -135,14 +135,11 @@ println(state.attempt, state.nextDelay)
 ## Advanced Features
 
 ### Reactive State Management
-Most built-in extensions (like `players`, `gamerules`, `allowList`, etc.) implement the `Syncable` interface. They maintain an internal cache automatically synchronized with the server via events, providing a seamless reactive programming experience.
+Some built-in extensions (like `players`, `gamerules`, `allowList`, etc.) implement the `Syncable` interface. They maintain an internal cache automatically synchronized with the server via events.
 
 ```kotlin
-// Get the current local cache immediately (Not recommended)
+// Get the current local cache immediately (Not recommended, use get() to fetch data from server if possible)
 val onlinePlayers = client.players.flow.value
-
-// Or fetch latest data from server
-val latestPlayers = client.players.get()
 
 // Or observe the state reactively using a Flow
 client.players.flow.collect { players ->
