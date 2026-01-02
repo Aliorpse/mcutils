@@ -1,6 +1,5 @@
 package tech.aliorpse.mcutils.api
 
-import tech.aliorpse.mcutils.annotation.ExperimentalMCUtilsApi
 import tech.aliorpse.mcutils.entity.QueryStatusBasic
 import tech.aliorpse.mcutils.entity.QueryStatusFull
 import tech.aliorpse.mcutils.entity.ServerStatus
@@ -22,7 +21,6 @@ public suspend fun MinecraftServer.getStatus(
 /**
  * Fetch server status by [Query](https://minecraft.wiki/w/Query).
  */
-@ExperimentalMCUtilsApi
 public suspend fun MinecraftServer.getQueryBasic(
     host: String,
     port: Int = 25565,
@@ -32,7 +30,6 @@ public suspend fun MinecraftServer.getQueryBasic(
 /**
  * Fetch server status by [Query](https://minecraft.wiki/w/Query).
  */
-@ExperimentalMCUtilsApi
 public suspend fun MinecraftServer.getQueryFull(
     host: String,
     port: Int = 25565,

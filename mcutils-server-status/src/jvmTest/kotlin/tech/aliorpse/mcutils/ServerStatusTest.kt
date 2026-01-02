@@ -1,7 +1,6 @@
 package tech.aliorpse.mcutils
 
 import kotlinx.coroutines.runBlocking
-import tech.aliorpse.mcutils.annotation.ExperimentalMCUtilsApi
 import tech.aliorpse.mcutils.api.MCServer
 import tech.aliorpse.mcutils.api.getQueryBasic
 import tech.aliorpse.mcutils.api.getQueryFull
@@ -17,7 +16,6 @@ class ServerStatusTest {
         println(result)
     }
 
-    @OptIn(ExperimentalMCUtilsApi::class)
     @Test
     fun `fetch java server status by query`() = runBlocking {
         val result = MCServer.getQueryFull("localhost")

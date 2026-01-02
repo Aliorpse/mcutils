@@ -1,28 +1,29 @@
 package tech.aliorpse.mcutils.api.extension
 
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.serialization.builtins.SetSerializer
 import kotlinx.serialization.json.JsonElement
-import tech.aliorpse.mcutils.api.MsmpConnection
+import tech.aliorpse.mcutils.api.MsmpClient
 import tech.aliorpse.mcutils.api.registry.MsmpExtension
+import tech.aliorpse.mcutils.api.registry.Syncable
 import tech.aliorpse.mcutils.entity.KickPlayerDto
 import tech.aliorpse.mcutils.entity.MessageDto
 import tech.aliorpse.mcutils.entity.PlayerDto
 
 public class PlayersExtension internal constructor(
-    public override val connection: MsmpConnection,
+    public override val client: MsmpClient,
     public override val baseEndpoint: String
-) : MsmpExtension {
-    /**
-     * Get a list of all players on the server.
-     */
-    public suspend inline fun get(): Set<PlayerDto> =
-        decodeFrom(connection.call(baseEndpoint))
+) : MsmpExtension, Syncable {
+    internal val cache: MutableStateFlow<Set<PlayerDto>> = MutableStateFlow(emptySet())
 
-    /**
-     * Kick the given players.
-     */
+    public override val flow: StateFlow<Set<PlayerDto>> = cache.asStateFlow()
+
+    public fun snapshot(): Set<PlayerDto> = cache.value
+
     public suspend inline fun kick(vararg player: KickPlayerDto): Set<PlayerDto> =
-        decodeFrom(connection.call("$baseEndpoint/kick", player.toSet()))
+        decodeFrom(client.call("$baseEndpoint/kick", player.toSet()))
 
     /**
      * Kick the given players by their name, and message in literal.
@@ -34,12 +35,12 @@ public class PlayersExtension internal constructor(
                 message = MessageDto(literal = message)
             )
         }
-        return decodeFrom(connection.call("$baseEndpoint/kick", kickList.toSet()))
+        return decodeFrom(client.call("$baseEndpoint/kick", kickList.toSet()))
     }
 
     @PublishedApi
     internal fun decodeFrom(element: JsonElement): Set<PlayerDto> =
-        connection.impl.json.decodeFromJsonElement(
+        client.json.decodeFromJsonElement(
             SetSerializer(PlayerDto.serializer()),
             element
         )

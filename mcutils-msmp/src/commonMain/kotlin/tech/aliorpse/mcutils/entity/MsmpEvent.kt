@@ -51,7 +51,7 @@ public sealed interface MsmpEvent
 
 public data object ConnectionEstablishedEvent : MsmpEvent
 
-public data class ConnectionClosedEvent(val cause: String) : MsmpEvent
+public data class ConnectionClosedEvent(val cause: String, val willRetry: Boolean) : MsmpEvent
 
 // Players Events
 
