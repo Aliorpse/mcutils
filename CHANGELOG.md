@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.1](https://github.com/Aliorpse/mcutils/compare/v3.6.0...v3.6.1) (2026-01-02)
+
+
+### Bug Fixes
+
+* **msmp:** remove duplicated code, use get() to replace snapshot() ([f1f18c2](https://github.com/Aliorpse/mcutils/commit/f1f18c22aa5492e3df1815afa74c96a7b3b7eb2e))
+
 ## [3.6.0](https://github.com/Aliorpse/mcutils/compare/v3.5.0...v3.6.0) (2026-01-02)
 
 
