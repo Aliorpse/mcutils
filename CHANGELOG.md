@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.0](https://github.com/Aliorpse/mcutils/compare/v3.5.0...v3.6.0) (2026-01-02)
+
+
+### Features
+
+* MsmpClient, auto-reconnect, request batching, syncable extensions, stabilize several API. ([9d1b2e2](https://github.com/Aliorpse/mcutils/commit/9d1b2e21548be934c70a58e60c8e823e76770074))
+
 ## [3.5.0](https://github.com/Aliorpse/mcutils/compare/v3.4.1...v3.5.0) (2026-01-01)
 
 
