@@ -94,7 +94,7 @@
   <div class="breadcrumbs"><a href="../../index.html">msmp</a><span class="delimiter">/</span><a href="../index.html">tech.aliorpse.mcutils.api.extension</a><span class="delimiter">/</span><span class="current">GamerulesExtension</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Gamerules</span><wbr><span><span>Extension</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">GamerulesExtension</a> : <a href="../../tech.aliorpse.mcutils.api.registry/-msmp-extension/index.html">MsmpExtension</a></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">GamerulesExtension</a> : <a href="../../tech.aliorpse.mcutils.api.registry/-msmp-extension/index.html">MsmpExtension</a>, <a href="../../tech.aliorpse.mcutils.api.registry/-syncable/index.html">Syncable</a></div></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
@@ -116,17 +116,32 @@
               </div>
             </div>
           </div>
-<a data-name="-1169276074%2FProperties%2F1733111060" anchor-label="connection" id="-1169276074%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+<a data-name="1762866825%2FProperties%2F1733111060" anchor-label="client" id="1762866825%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
           <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="connection.html"><span><span>connection</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1169276074%2FProperties%2F1733111060"></span>
+                  <div><a href="client.html"><span><span>client</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1762866825%2FProperties%2F1733111060"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="connection.html">connection</a><span class="token operator">: </span><a href="../../tech.aliorpse.mcutils.api/-msmp-connection/index.html">MsmpConnection</a></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="client.html">client</a><span class="token operator">: </span><a href="../../tech.aliorpse.mcutils.api/-msmp-client/index.html">MsmpClient</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1881567162%2FProperties%2F1733111060" anchor-label="flow" id="-1881567162%2FProperties%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="flow.html"><span><span>flow</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1881567162%2FProperties%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="flow.html">flow</a><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines.flow/StateFlow///PointingToDeclaration/">StateFlow</span><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="../../tech.aliorpse.mcutils.entity/-typed-gamerule-dto/index.html">TypedGameruleDto</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -135,22 +150,7 @@
       </div>
       <div data-togglable="FUNCTION">
         <h2 class="tableheader">Functions</h2>
-        <div class="table"><a data-name="1366681680%2FFunctions%2F1733111060" anchor-label="get" id="1366681680%2FFunctions%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
-          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
-            <div class="main-subrow keyValue ">
-              <div class=""><span class="inline-flex">
-                  <div><a href="get.html"><span><span>get</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1366681680%2FFunctions%2F1733111060"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-              <div>
-                <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">inline suspend </span><span class="token keyword">fun </span><a href="get.html"><span class="token function">get</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="../../tech.aliorpse.mcutils.entity/-typed-gamerule-dto/index.html">TypedGameruleDto</a><span class="token operator">&gt;</span></div></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-<a data-name="2110331284%2FFunctions%2F1733111060" anchor-label="set" id="2110331284%2FFunctions%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+        <div class="table"><a data-name="2110331284%2FFunctions%2F1733111060" anchor-label="set" id="2110331284%2FFunctions%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
           <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
@@ -161,6 +161,21 @@
               <div>
                 <div class="title">
                   <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">inline suspend </span><span class="token keyword">fun </span><a href="set.html"><span class="token function">set</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">gamerule<span class="token operator">: </span><a href="../../tech.aliorpse.mcutils.entity/-untyped-gamerule-dto/index.html">UntypedGameruleDto</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../tech.aliorpse.mcutils.entity/-typed-gamerule-dto/index.html">TypedGameruleDto</a></div><div class="symbol monospace"><span class="token keyword">inline suspend </span><span class="token keyword">fun </span><a href="set.html"><span class="token function">set</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">gamerule<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../tech.aliorpse.mcutils.entity/-typed-gamerule-dto/index.html">TypedGameruleDto</a></div><div class="symbol monospace"><span class="token keyword">inline suspend </span><span class="token keyword">fun </span><a href="set.html"><span class="token function">set</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">gamerule<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../tech.aliorpse.mcutils.entity/-typed-gamerule-dto/index.html">TypedGameruleDto</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="199105776%2FFunctions%2F1733111060" anchor-label="snapshot" id="199105776%2FFunctions%2F1733111060" data-filterable-set=":msmp/commonMain"></a>
+          <div class="table-row table-row_content" data-filterable-current=":msmp/commonMain" data-filterable-set=":msmp/commonMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="snapshot.html"><span><span>snapshot</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="199105776%2FFunctions%2F1733111060"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":msmp/commonMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="snapshot.html"><span class="token function">snapshot</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="../../tech.aliorpse.mcutils.entity/-typed-gamerule-dto/index.html">TypedGameruleDto</a><span class="token operator">&gt;</span></div></div></div>
                 </div>
               </div>
             </div>
