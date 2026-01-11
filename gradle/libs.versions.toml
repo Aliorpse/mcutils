@@ -6,6 +6,7 @@ ktor = "3.3.3"
 dokka = "2.1.0"
 maven-publish = "0.35.0"
 minidns = "1.1.1"
+# agp = "8.13.2"
 
 [libraries]
 minidns-hla = { module = "org.minidns:minidns-hla", version.ref = "minidns" }
@@ -21,6 +22,7 @@ ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+# android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }

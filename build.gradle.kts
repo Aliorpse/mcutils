@@ -1,8 +1,17 @@
+@file:OptIn(ExperimentalWasmDsl::class)
+
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.maven.publish) apply false
     alias(libs.plugins.dokka)
 }
+
+fun Project.hasKtorNetworkDependency(): Boolean =
+    configurations.any { it.dependencies.any { deps -> deps.name.contains("ktor-network") } }
+
+val jvmTarget = 17
 
 allprojects {
     group = project.property("group") as String
@@ -57,10 +66,12 @@ subprojects {
 
     pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
         configure<org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension> {
-            jvmToolchain(21)
+            jvmToolchain(jvmTarget)
             explicitApi()
             applyDefaultHierarchyTemplate()
 
+            androidNativeX64()
+            androidNativeArm64()
             iosArm64()
             iosX64()
             iosSimulatorArm64()
@@ -70,15 +81,25 @@ subprojects {
             macosX64()
             mingwX64()
 
-            js(IR) { nodejs() }
-
             jvm {
                 compilations.configureEach {
                     compileTaskProvider.configure {
                         compilerOptions {
-                            freeCompilerArgs.add("-jvm-default=enable")
+                            freeCompilerArgs.addAll("-jvm-default=enable", "-Xjsr305=strict")
                         }
                     }
+                }
+            }
+
+            afterEvaluate {
+                js(IR) {
+                    nodejs()
+                    if (!hasKtorNetworkDependency()) browser()
+                }
+
+                wasmJs {
+                    nodejs()
+                    if (!hasKtorNetworkDependency()) browser()
                 }
             }
         }
