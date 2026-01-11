@@ -145,7 +145,7 @@ client.players.flow.collect { players ->
 }
 ```
 
-But please note that the flow may be empty the first time you access the extension. Initial cache sync is performed asynchronously.
+But please note that the flow may be empty the first time you access the extension.
 
 ## Custom Extensions
 
@@ -201,16 +201,6 @@ MsmpEventRegistry.configure {
     // Manual parsing for primitive or complex logic
     "minecraft:notification/ip_bans/removed".define { IPBanRemovedEvent(it?.jsonPrimitive?.content ?: "") }
 }
-```
-
-### Usage
-
-Now feel free to use them like the built-in ones.
-
-```kotlin
-client.allowList.set(PlayerDto(name = "Aliorpse"))
-
-client.on<PlayerJoinedEvent> { println(eventCtx) }
 ```
 
 For the full API reference, please refer to the project's [dokka](https://aliorpse.github.io/mcutils/msmp/).
