@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.2](https://github.com/Aliorpse/mcutils/compare/v3.6.1...v3.6.2) (2026-01-11)
+
+
+### Bug Fixes
+
+* **publish:** make it publish ([c7a67a0](https://github.com/Aliorpse/mcutils/commit/c7a67a0f501ec1c2a99373603362f1429f21f0fd))
+
 ## [3.6.1](https://github.com/Aliorpse/mcutils/compare/v3.6.0...v3.6.1) (2026-01-02)
 
 
