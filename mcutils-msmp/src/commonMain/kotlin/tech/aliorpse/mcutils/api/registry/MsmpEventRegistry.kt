@@ -20,7 +20,7 @@ import tech.aliorpse.mcutils.entity.ServerStatusEvent
 import tech.aliorpse.mcutils.entity.ServerStoppingEvent
 import tech.aliorpse.mcutils.entity.UserBanAddedEvent
 import tech.aliorpse.mcutils.entity.UserBanRemovedEvent
-import tech.aliorpse.mcutils.internal.util.AtomicCopyOnWriteMap
+import tech.aliorpse.mcutils.internal.util.AtomicMutableMap
 
 /**
  * Registry for MSMP events.
@@ -47,7 +47,7 @@ import tech.aliorpse.mcutils.internal.util.AtomicCopyOnWriteMap
  */
 public object MsmpEventRegistry {
     @PublishedApi
-    internal val impl: MsmpEventRegistryImpl = MsmpEventRegistryImpl(AtomicCopyOnWriteMap())
+    internal val impl: MsmpEventRegistryImpl = MsmpEventRegistryImpl(AtomicMutableMap())
 
     public fun configure(block: IMsmpEventRegistry.() -> Unit): Unit = impl.block()
 

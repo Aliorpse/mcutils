@@ -1,51 +1,33 @@
 package tech.aliorpse.mcutils.api
 
-import io.ktor.client.plugins.timeout
-import io.ktor.client.plugins.websocket.webSocketSession
-import io.ktor.client.request.header
-import io.ktor.http.HttpHeaders
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.takeWhile
-import kotlinx.coroutines.flow.transform
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeout
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.encodeToJsonElement
+import kotlinx.serialization.serializer
 import tech.aliorpse.mcutils.annotation.ExperimentalMCUtilsApi
 import tech.aliorpse.mcutils.entity.MsmpEvent
-import tech.aliorpse.mcutils.entity.ServerStoppingEvent
-import tech.aliorpse.mcutils.internal.impl.MsmpConnection
-import tech.aliorpse.mcutils.internal.util.AtomicCopyOnWriteMap
-import tech.aliorpse.mcutils.internal.util.DispatchersIO
-import tech.aliorpse.mcutils.internal.util.WebSocketClientProvider.webSocketClient
-import kotlin.concurrent.atomics.AtomicReference
+import tech.aliorpse.mcutils.internal.MsmpConnection
+import tech.aliorpse.mcutils.internal.MsmpLifecycleManager
+import tech.aliorpse.mcutils.internal.util.AtomicMutableMap
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
 
 @Suppress("MagicNumber")
@@ -107,154 +89,49 @@ public fun MCServer.msmpClient(
 @OptIn(ExperimentalAtomicApi::class)
 @Suppress("TooManyFunctions")
 public class MsmpClient internal constructor(
-    private val target: String,
-    private val token: String,
+    target: String,
+    token: String,
     @PublishedApi internal val config: MsmpClientConfig
 ) : AutoCloseable {
     @PublishedApi
     internal val scope: CoroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
 
-    private val _state = MutableStateFlow<MsmpState>(MsmpState.Disconnected(null))
-    public val stateFlow: StateFlow<MsmpState> = _state.asStateFlow()
-
-    private var connectJob = AtomicReference<Job?>(null)
+    private val lifecycleManager = MsmpLifecycleManager(target, token, config, scope)
 
     @PublishedApi
-    internal val callExtensions: AtomicCopyOnWriteMap<String, Any> = AtomicCopyOnWriteMap()
-
-    internal suspend fun awaitConnection(): MsmpConnection =
-        stateFlow.transform { s ->
-            when (s) {
-                is MsmpState.Connected -> emit(s.connection)
-                is MsmpState.Closed ->
-                    error("MsmpClient was closed while waiting for connection, with pending requests not sent.")
-                is MsmpState.Disconnected if !config.autoReconnect ->
-                    error("Client disconnected with no auto reconnect enabled, with pending requests not sent.")
-                else -> {}
-            }
-        }.first()
+    internal val callExtensions: AtomicMutableMap<String, Any> = AtomicMutableMap()
 
     @PublishedApi
-    internal suspend fun awaitCall(method: String, params: JsonElement, totalTimeout: Long): JsonElement {
-        // It's the user's fault calling this function when the client closed
-        check(stateFlow.value !is MsmpState.Closed) { "Client already closed, but there are still pending requests." }
+    internal suspend fun awaitCall(
+        method: String,
+        params: JsonElement,
+        totalTimeout: Long,
+    ): JsonElement {
+        check(stateFlow.value !is MsmpState.Closed) { "Client already closed, but with pending requests not sent." }
+        return withTimeout(totalTimeout) {
+            lifecycleManager.awaitConnection().call(method, params)
+        }
+    }
 
-        return withTimeout(totalTimeout) { awaitConnection().call(method, params) }
+    @PublishedApi
+    internal fun <R> JsonElement.decodeBy(
+        responseSerializer: KSerializer<R>
+    ): R = json.decodeFromJsonElement(responseSerializer, this)
+
+    @PublishedApi
+    internal val json: Json = Json {
+        encodeDefaults = true
+        ignoreUnknownKeys = true
     }
 
     // -- Universal API --
 
-    /**
-     * Default for serialization.
-     */
-    public val json: Json = Json {
-        ignoreUnknownKeys = true
-        encodeDefaults = true
-    }
+    public val stateFlow: StateFlow<MsmpState> get() = lifecycleManager.stateFlow
 
-    /**
-     * Start connection to the server.
-     */
-    public fun startConnection() {
-        // Use a local flag to track if we should stop completely
-        connectJob.exchange(null)?.cancel()
+    public fun connect(): Unit = lifecycleManager.start()
 
-        val newJob = scope.launch(DispatchersIO) {
-            var isServerStopping = false
-            var attempt = 0L
-
-            try {
-                while (isActive) {
-                    _state.value = MsmpState.Connecting
-
-                    // Use runCatching specifically for the connection process
-                    val result = runCatching {
-                        doConnect {
-                            isServerStopping = true
-                        }
-                    }
-
-                    if (result.isSuccess) {
-                        attempt = 0 // Reset on success
-                    } else {
-                        val error = result.exceptionOrNull()
-                        _state.value = MsmpState.Disconnected(error)
-
-                        // Fail-fast: only on the very first attempt
-                        if (config.failFast && attempt == 0L) {
-                            isServerStopping = true
-                        }
-                    }
-
-                    // Centralized exit check
-                    val maxReached = config.maxReconnectAttempts != -1L && attempt >= config.maxReconnectAttempts
-
-                    if (isServerStopping || !config.autoReconnect || !isActive || maxReached) {
-                        // Ensure the state is set to Closed if we are not reconnecting anymore
-                        _state.value = MsmpState.Closed
-                        break
-                    }
-
-                    // Prepare for reconnection
-                    val delayTime = calculateDelay(attempt++, config.initialRetryDelay, config.maxRetryDelay)
-                    _state.value = MsmpState.Reconnecting(attempt, delayTime)
-
-                    // Delay could be interrupted by job cancellation
-                    delay(delayTime)
-                }
-            } finally {
-                // Guaranteed state transition to Closed on terminal exit
-                withContext(NonCancellable) {
-                    _state.value = MsmpState.Closed
-                    connectJob.compareAndExchange(coroutineContext[Job], null)
-                }
-            }
-        }
-        connectJob.store(newJob)
-    }
-
-    private suspend fun doConnect(onServerStopping: () -> Unit) {
-        val session = webSocketClient.webSocketSession(target) {
-            header(HttpHeaders.Authorization, "Bearer $token")
-            timeout { connectTimeoutMillis = config.connectTimeout }
-        }
-
-        val connection = MsmpConnection(session, config.eventBufferSize, config.batchDelay)
-        _state.value = MsmpState.Connected(connection)
-
-        // Monitor server stopping signal
-        // We use another scope or supervisor to ensure this collector doesn't fail the whole block
-        val stopObserver = connection.eventFlow
-            .filterIsInstance<ServerStoppingEvent>()
-            .take(1)
-            .onEach {
-                onServerStopping()
-                connection.retryOnDisconnected = false
-            }
-            .launchIn(scope)
-
-        try {
-            connection.listeningJob.join()
-        } finally {
-            stopObserver.cancel()
-        }
-    }
-
-    @OptIn(DelicateCoroutinesApi::class)
     override fun close() {
-        connectJob.exchange(null)?.cancel()
-
-        val current = _state.value
-        _state.value = MsmpState.Closed
-
-        if (current is MsmpState.Connected) {
-            GlobalScope.launch(DispatchersIO) {
-                withContext(NonCancellable) {
-                    runCatching { current.connection.closeConnection() }
-                }
-            }
-        }
-
+        lifecycleManager.close()
         scope.cancel()
     }
 
@@ -268,27 +145,10 @@ public class MsmpClient internal constructor(
      * @throws IllegalStateException if the client is [MsmpState.Closed].
      * @throws TimeoutCancellationException if no response is received within [timeout].
      */
-    public suspend inline fun call(
+    public suspend inline fun <reified R> call(
         method: String,
         timeout: Long = config.requestTimeout
-    ): JsonElement = awaitCall(method, JsonArray(emptyList()), timeout)
-
-    /**
-     * Sends a request with parameters using a manual [serializer].
-     *
-     * Useful for types where standard reified type inference might fail (e.g., generic collections).
-     *
-     * **Suspends** if the client is connecting or reconnecting; it waits for a valid connection.
-     *
-     * @throws IllegalStateException if the client is [MsmpState.Closed].
-     * @throws TimeoutCancellationException if no response is received within [timeout].
-     */
-    public suspend inline fun <reified T> call(
-        method: String,
-        params: T,
-        serializer: KSerializer<T>,
-        timeout: Long = config.requestTimeout
-    ): JsonElement = awaitCall(method, json.encodeToJsonElement(serializer, params), timeout)
+    ): R = awaitCall(method, JsonArray(emptyList()), timeout).decodeBy(serializer<R>())
 
     /**
      * Sends a request with parameters using automatic serialization.
@@ -298,11 +158,45 @@ public class MsmpClient internal constructor(
      * @throws IllegalStateException if the client is [MsmpState.Closed].
      * @throws TimeoutCancellationException if no response is received within [timeout].
      */
-    public suspend inline fun <reified T> call(
+    public suspend inline fun <reified P, reified R> call(
         method: String,
-        params: T,
+        params: P,
         timeout: Long = config.requestTimeout
-    ): JsonElement = awaitCall(method, json.encodeToJsonElement(params), timeout)
+    ): R = awaitCall(method, json.encodeToJsonElement(params), timeout).decodeBy(serializer<R>())
+
+    /**
+     * Sends a request with parameters using a manual serializer.
+     *
+     * Useful for types where standard reified type inference might fail (e.g., generic collections).
+     *
+     * **Suspends** if the client is connecting or reconnecting; it waits for a valid connection.
+     *
+     * @throws IllegalStateException if the client is [MsmpState.Closed].
+     * @throws TimeoutCancellationException if no response is received within [timeout].
+     */
+    public suspend fun <R> call(
+        method: String,
+        responseSerializer: KSerializer<R>,
+        timeout: Long = config.requestTimeout
+    ): R = awaitCall(method, JsonArray(emptyList()), timeout).decodeBy(responseSerializer)
+
+    /**
+     * Sends a request with parameters using a manual serializer.
+     *
+     * Useful for types where standard reified type inference might fail (e.g., generic collections).
+     *
+     * **Suspends** if the client is connecting or reconnecting; it waits for a valid connection.
+     *
+     * @throws IllegalStateException if the client is [MsmpState.Closed].
+     * @throws TimeoutCancellationException if no response is received within [timeout].
+     */
+    public suspend inline fun <P, R> call(
+        method: String,
+        params: P,
+        paramSerializer: KSerializer<P>,
+        responseSerializer: KSerializer<R>,
+        timeout: Long = config.requestTimeout
+    ): R = awaitCall(method, json.encodeToJsonElement(paramSerializer, params), timeout).decodeBy(responseSerializer)
 
     // --- Event API ---
 
@@ -375,10 +269,4 @@ public sealed class MsmpState {
     public data class Disconnected(val exception: Throwable?) : MsmpState()
     public data class Reconnecting(val attempt: Long, val nextDelay: Long) : MsmpState()
     public data object Closed : MsmpState()
-}
-
-@Suppress("MagicNumber")
-private fun calculateDelay(attempt: Long, initialDelay: Long, maxDelay: Long): Long {
-    val base = (initialDelay shl attempt.toInt().coerceAtMost(10)).coerceAtMost(maxDelay)
-    return (base + (0..500).random()).coerceAtMost(maxDelay)
 }

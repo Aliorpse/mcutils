@@ -1,7 +1,5 @@
 package tech.aliorpse.mcutils.api.extension
 
-import kotlinx.serialization.json.boolean
-import kotlinx.serialization.json.jsonPrimitive
 import tech.aliorpse.mcutils.api.MsmpClient
 import tech.aliorpse.mcutils.api.registry.MsmpExtension
 import tech.aliorpse.mcutils.entity.MessageDto
@@ -14,25 +12,16 @@ public class ServerExtension internal constructor(
     public override val baseEndpoint: String
 ) : MsmpExtension {
     public suspend inline fun status(): ServerStateDto =
-        client.json.decodeFromJsonElement(
-            ServerStateDto.serializer(),
-            client.call("$baseEndpoint/status")
-        )
+        client.call("$baseEndpoint/status")
 
-    public suspend inline fun save(flush: Boolean = false): Boolean {
-        val result = client.call("$baseEndpoint/save", mapOf("flush" to flush))
-        return result.jsonPrimitive.boolean
-    }
+    public suspend inline fun save(flush: Boolean = false): Boolean =
+        client.call("$baseEndpoint/save", mapOf("flush" to flush))
 
-    public suspend inline fun stop(): Boolean {
-        val result = client.call("$baseEndpoint/stop")
-        return result.jsonPrimitive.boolean
-    }
+    public suspend inline fun stop(): Boolean =
+        client.call("$baseEndpoint/stop")
 
-    public suspend inline fun sendMessage(message: SystemMessageDto): Boolean {
-        val result = client.call("$baseEndpoint/system_message", mapOf("message" to message))
-        return result.jsonPrimitive.boolean
-    }
+    public suspend inline fun sendMessage(message: SystemMessageDto): Boolean =
+        client.call("$baseEndpoint/system_message", mapOf("message" to message))
 
     public suspend inline fun sendMessage(
         targets: Set<PlayerDto>,

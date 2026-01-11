@@ -36,7 +36,7 @@ import kotlin.properties.ReadOnlyProperty
 /**
  * Registry for MSMP request extension.
  *
- * This variant automatically injects [registryName] and the [KSerializer] for [T] into the [factory].
+ * This variant automatically injects [registryName] and the [KSerializer] for [P] and [R] into the [factory].
  *
  * Example:
  * ```kotlin
@@ -45,16 +45,16 @@ import kotlin.properties.ReadOnlyProperty
  * ```
  */
 @Suppress("UNCHECKED_CAST")
-public inline fun <reified T : Any, R : MsmpExtension> msmpExtension(
+public inline fun <reified P : Any, reified R : Any, T : MsmpExtension> msmpExtension(
     registryName: String,
-    crossinline factory: (MsmpClient, String, KSerializer<T>) -> R,
-    crossinline config: MsmpExtensionConfig<R>.() -> Unit = {}
-): ReadOnlyProperty<MsmpClient, R> = ReadOnlyProperty { thisRef, _ ->
+    crossinline factory: (MsmpClient, String, KSerializer<P>, KSerializer<R>) -> T,
+    crossinline config: MsmpExtensionConfig<T>.() -> Unit = {}
+): ReadOnlyProperty<MsmpClient, T> = ReadOnlyProperty { thisRef, _ ->
     thisRef.callExtensions.getOrPut(registryName) {
-        val extension = factory(thisRef, registryName, serializer<T>())
+        val extension = factory(thisRef, registryName, serializer<P>(), serializer<R>())
         MsmpExtensionConfig(extension).apply(config)
         extension
-    } as R
+    } as T
 }
 
 /**
@@ -71,16 +71,16 @@ public inline fun <reified T : Any, R : MsmpExtension> msmpExtension(
  * ```
  */
 @Suppress("UNCHECKED_CAST")
-public inline fun <R : MsmpExtension> msmpExtension(
+public inline fun <T : MsmpExtension> msmpExtension(
     registryName: String,
-    crossinline factory: (MsmpClient, String) -> R,
-    crossinline config: MsmpExtensionConfig<R>.() -> Unit = {}
-): ReadOnlyProperty<MsmpClient, R> = ReadOnlyProperty { thisRef, _ ->
+    crossinline factory: (MsmpClient, String) -> T,
+    crossinline config: MsmpExtensionConfig<T>.() -> Unit = {}
+): ReadOnlyProperty<MsmpClient, T> = ReadOnlyProperty { thisRef, _ ->
     thisRef.callExtensions.getOrPut(registryName) {
         val extension = factory(thisRef, registryName)
         MsmpExtensionConfig(extension).apply(config)
         extension
-    } as R
+    } as T
 }
 
 public interface MsmpExtension {

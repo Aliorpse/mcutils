@@ -4,7 +4,7 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
 import tech.aliorpse.mcutils.api.registry.MsmpEventRegistry
-import tech.aliorpse.mcutils.internal.util.AtomicCopyOnWriteMap
+import tech.aliorpse.mcutils.internal.util.AtomicMutableMap
 
 public interface IMsmpEventRegistry {
     public fun <T : MsmpEvent> registerData(method: String, serializer: KSerializer<T>)
@@ -28,9 +28,9 @@ public sealed class MsmpEventProvider {
 }
 
 internal class MsmpEventRegistryImpl(
-    private val map: AtomicCopyOnWriteMap<String, MsmpEventProvider>
+    private val map: AtomicMutableMap<String, MsmpEventProvider>
 ) : IMsmpEventRegistry {
-    val registry: AtomicCopyOnWriteMap<String, MsmpEventProvider> get() = map
+    val registry: AtomicMutableMap<String, MsmpEventProvider> get() = map
 
     override fun <T : MsmpEvent> registerData(method: String, serializer: KSerializer<T>) =
         map.put(method, MsmpEventProvider.Data(serializer))
@@ -42,7 +42,7 @@ internal class MsmpEventRegistryImpl(
         map.put(method, MsmpEventProvider.Custom(block))
 }
 
-internal val eventMap: AtomicCopyOnWriteMap<String, MsmpEventProvider> = MsmpEventRegistry.impl.registry
+internal val eventMap: AtomicMutableMap<String, MsmpEventProvider> = MsmpEventRegistry.impl.registry
 
 @Serializable
 public sealed interface MsmpEvent

@@ -26,7 +26,7 @@ class MsmpTest {
             "ws://localhost:25585",
             "n2pQcIG1OQ92jot2xG1M0aw0ZWnrh4F3Z3jw8qRP"
         ).use { client ->
-            client.startConnection()
+            client.connect()
 
             GlobalScope.launch { client.eventFlow.collect { println(it) } }
             GlobalScope.launch { client.stateFlow.collect { println(it) } }

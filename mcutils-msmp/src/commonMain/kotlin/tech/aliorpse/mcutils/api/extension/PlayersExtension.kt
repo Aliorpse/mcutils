@@ -3,8 +3,6 @@ package tech.aliorpse.mcutils.api.extension
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.serialization.builtins.SetSerializer
-import kotlinx.serialization.json.JsonElement
 import tech.aliorpse.mcutils.api.MsmpClient
 import tech.aliorpse.mcutils.api.registry.MsmpExtension
 import tech.aliorpse.mcutils.api.registry.Syncable
@@ -20,10 +18,11 @@ public class PlayersExtension internal constructor(
 
     public override val flow: StateFlow<Set<PlayerDto>> = cache.asStateFlow()
 
-    public suspend inline fun get(): Set<PlayerDto> = decodeFrom(client.call(baseEndpoint))
+    public suspend inline fun get(): Set<PlayerDto> =
+        client.call(baseEndpoint)
 
     public suspend inline fun kick(vararg player: KickPlayerDto): Set<PlayerDto> =
-        decodeFrom(client.call("$baseEndpoint/kick", player.toSet()))
+        client.call("$baseEndpoint/kick", player.toSet())
 
     /**
      * Kick the given players by their name, and message in literal.
@@ -35,13 +34,7 @@ public class PlayersExtension internal constructor(
                 message = MessageDto(literal = message)
             )
         }
-        return decodeFrom(client.call("$baseEndpoint/kick", kickList.toSet()))
-    }
 
-    @PublishedApi
-    internal fun decodeFrom(element: JsonElement): Set<PlayerDto> =
-        client.json.decodeFromJsonElement(
-            SetSerializer(PlayerDto.serializer()),
-            element
-        )
+        return kick(*kickList.toTypedArray())
+    }
 }

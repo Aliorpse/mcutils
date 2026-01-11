@@ -1,8 +1,5 @@
 package tech.aliorpse.mcutils.api.extension
 
-import kotlinx.serialization.json.boolean
-import kotlinx.serialization.json.int
-import kotlinx.serialization.json.jsonPrimitive
 import tech.aliorpse.mcutils.api.MsmpClient
 import tech.aliorpse.mcutils.api.registry.MsmpExtension
 
@@ -35,22 +32,22 @@ public class ServerSettingsExtension internal constructor(
 
     public inner class BoolProp(@PublishedApi internal val path: String, @PublishedApi internal val param: String) {
         public suspend inline fun get(): Boolean =
-            client.call("$baseEndpoint/$path").jsonPrimitive.boolean
+            client.call("$baseEndpoint/$path")
         public suspend inline fun set(value: Boolean): Boolean =
-            client.call("$baseEndpoint/$path/set", mapOf(param to value)).jsonPrimitive.boolean
+            client.call("$baseEndpoint/$path/set", mapOf(param to value))
     }
 
     public inner class IntProp(@PublishedApi internal val path: String, @PublishedApi internal val param: String) {
         public suspend inline fun get(): Int =
-            client.call("$baseEndpoint/$path").jsonPrimitive.int
+            client.call("$baseEndpoint/$path")
         public suspend inline fun set(value: Int): Int =
-            client.call("$baseEndpoint/$path/set", mapOf(param to value)).jsonPrimitive.int
+            client.call("$baseEndpoint/$path/set", mapOf(param to value))
     }
 
     public inner class StringProp(@PublishedApi internal val path: String, @PublishedApi internal val param: String) {
         public suspend inline fun get(): String =
-            client.call("$baseEndpoint/$path").jsonPrimitive.content
+            client.call("$baseEndpoint/$path")
         public suspend inline fun set(value: String): String =
-            client.call("$baseEndpoint/$path/set", mapOf(param to value)).jsonPrimitive.content
+            client.call("$baseEndpoint/$path/set", mapOf(param to value))
     }
 }
