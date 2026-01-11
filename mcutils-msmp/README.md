@@ -7,233 +7,180 @@
 
 ## Common Usage
 
-### Connection
+### Basic Connection
+
+The easiest way to connect is using the `msmpClient` DSL.
 
 ```kotlin
 val client = MCServer.msmpClient("ws://localhost:25585", "your_token") {
     // Optional configuration
     autoReconnect = true
     maxReconnectAttempts = 5
-    failFast = true // Stop reconnecting if the first attempt fails
-    batchDelay = 30 // Group concurrent requests (ms)
 }
 
 client.use { client ->
-    client.startConnection()
+    // Start connection logic
+    client.connect()
+
+    // Wait until connected, or you can skip this; all requests will be suspended until connected
+    client.awaitState<MsmpState.Connected>()
 
     // Interact with the server
-    client.call("...")
+    val players = client.players.get()
+    println("Online players: ${players.size}")
 
     // Await client to be closed (e.g., server stopping or manual close)
     client.await()
 }
 ```
 
-#### Connection Behavior
+### Built-in Extensions
 
-- **Automatic Reconnection**: Enabled by default. The client uses an exponential backoff strategy to reconnect if the connection is lost. Use `failFast` to stop if the initial connection fails.
-- **Request Buffering**: `call()` and other API methods will **suspend** if the client is connecting or reconnecting, waiting for a valid connection.
-- **Request Batching**: Concurrent requests are automatically coalesced into JSON-RPC batches based on `batchDelay`.
+MSMP comes with high-level extensions for common tasks.
 
 ```kotlin
-// The `call` function will wait for `requestTimeout`
-client.startConnection()
-client.call("...")
+// Server management
+client.server.status()
+client.server.stop()
+client.server.sendMessage(message = "Hello World!", overlay = true)
 
-// The `call` will wait for connection and then `requestTimeout`
-client.startConnection()
-client.awaitState<MsmpState.Connected>()
-client.call("...")
-```
+// Player management
+val players: Set<PlayerDto> = client.players.get()
+client.players.kick("Aliorpse", message = "Kicked by admin")
 
-- **Lifecycle**: `client.on<T> { ... }` (Job-returning) listeners are bound to the client's internal scope. They remain active during reconnection and are canceled when the client is closed.
-
-
-### Infrastructure API
-
-#### Sending a request
-
-```kotlin
-val response: JsonElement = client.call(
-    "minecraft:players/kick",
-    // Passing arguments by position
-    setOf(
-        setOf(
-            KickPlayerDto(
-                PlayerDto(name = "Aliorpse"),
-                MessageDto(literal = "Kicked by server")
-            )
-        )
-    )
-)
-
-val response2: JsonElement = client.call(
-    "minecraft:players/kick",
-    // Passing arguments by name
-    mapOf(
-        "kick" to setOf(
-            KickPlayerDto(
-                PlayerDto(name = "Aliorpse"),
-                MessageDto(literal = "Kicked by server")
-            )
-        )
-    )
-)
-
-println(
-    Json.decodeFromJsonElement(
-        SetSerializer(PlayerDto.serializer()),
-        response
-    )
-)
-```
-
-#### Receiving an event
-
-```kotlin
-// Suspend until event is received
-client.eventFlow.filterIsInstance<PlayerJoinedEvent>().first().apply {
-    println(eventCtx)
-} // PlayerDto(name = ..., id = ...)
-
-// Of course, you can launch a coroutine to handle events asynchronously
-val job = GlobalScope.launch { client.eventFlow.collect { println(it) } }
-```
-
-### High-level Built-In API
-
-#### Sending a request
-
-```kotlin
-val players: Set<PlayerDto> = client.allowList.add(PlayerDto(name = "Aliorpse"), PlayerDto(name = "MosCro"))
-
-println(players)
-
+// Settings
 client.serverSettings.allowFlight.set(true)
 client.gamerules.set("send_command_feedback", true)
 
-// And more...
+// Allow/Ban lists
+client.allowList.add(PlayerDto(name = "Aliorpse"))
+client.banList.remove(UserBanDto(name = "Aliorpse"))
 ```
 
-#### Receiving an event
+### Events
+
+You can listen for events or state changes.
 
 ```kotlin
-val job: Job = client.on<PlayerJoinedEvent> { println(eventCtx.player) }
+// Observe state
+client.on<MsmpState> {
+    println("State changed: $this")
+}
 
-// Suspend until the event is received, then clean up the previous listener
-client.on<PlayerLeftEvent>().first().also { job.cancel() }
+// Receive events
+client.on<PlayerJoinedEvent> {
+    println("${eventCtx.name} joined the server")
+}
 
-val event = client.awaitEvent<OperatorAddedEvent>()
-println(event.eventCtx.player.name)
-
-val state = client.awaitState<MsmpState.Reconnecting>()
-println(state.attempt, state.nextDelay)
+// Suspend until a specific event
+val event = client.awaitEvent<ServerStartedEvent>()
 ```
 
-**Note**: The on function has multiple overloads. This demonstrates using both the Job-returning variant for persistent observation and the Flow-returning variant for one-time suspension.
+You don't need to re-register listeners after reconnection. eventFlow will be empty when reconnecting.
+
+### Lifecycle
+
+```mermaid
+stateDiagram-v2
+    [*] --> Connecting: start()
+
+    Connecting --> Connected: Handshake Success
+    Connecting --> Disconnected: Handshake Failed
+
+    Connected --> Disconnected: Connection Lost / Network Error
+    Connected --> Closed: Server Stopping Event
+
+    state "Disconnected (Error)" as Disconnected
+    Disconnected --> Reconnecting: AutoReconnect ON & < MaxAttempts
+    Disconnected --> Closed: AutoReconnect OFF or MaxAttempts Reached
+
+    state "Reconnecting (Waiting)" as Reconnecting
+    Reconnecting --> Connecting: Delay Finished
+
+    Closed --> [*]
+```
 
 ## Advanced Features
 
-### Reactive State Management
-Some built-in extensions (like `players`, `gamerules`, `allowList`, etc.) implement the `Syncable` interface. They maintain an internal cache automatically synchronized with the server via events.
+### Configuration
 
-```kotlin
-// Get the current local cache immediately (Not recommended, use get() to fetch data from server if possible)
-val onlinePlayers = client.players.flow.value
-
-// Or observe the state reactively using a Flow
-client.players.flow.collect { players ->
-    println("Currently online: ${players.size}")
-}
-```
-
-### Request Batching
-To optimize network usage, the client can group multiple requests into a single JSON-RPC batch within a small time window. This is highly effective for reducing overhead during high-concurrency operations.
+Some configuration options for `msmpClient`:
 
 ```kotlin
 val client = MCServer.msmpClient("...") {
-    // Group requests occurring within 30ms (default)
-    batchDelay = 30
+    autoReconnect = true
+    maxRetryDelay = 30000
+    failFast = true // Stop if the first connection attempt fails
+    batchDelay = 30 // Group concurrent requests (ms)
 }
 ```
 
-## Customize
-
-### Build your own High-level API
-
-#### Request
+### Infrastructure API (Raw Calls)
 
 ```kotlin
-public class GamerulesExtension internal constructor(
+// Simple call
+val response: JsonElement = client.call("minecraft:server/status")
+
+// Call with arguments
+client.call(
+    "minecraft:players/kick",
+    // You can pass arguments as Maps or DTOs
+    mapOf("player" to "Aliorpse", "reason" to "Bye")
+)
+
+// Call with manual serialization
+val players: Set<PlayerDto> = client.call(
+    "minecraft:players",
+    SetSerializer(PlayerDto.serializer())
+)
+```
+
+### Reactive State Management
+
+Extensions implementing `Syncable` (like `players`, `gamerules`) maintain a local cache synchronized with the server.
+
+```kotlin
+client.players.flow.collect { players ->
+    println("Online players: ${players.size}")
+}
+```
+
+But please note that the flow may be empty the first time you access the extension. Initial cache sync is performed asynchronously.
+
+## Custom Extensions
+
+You can build your own high-level API extensions.
+
+### Creating an Extension
+
+```kotlin
+public class WorldExtension internal constructor(
     public override val client: MsmpClient,
     public override val baseEndpoint: String
 ) : MsmpExtension {
-    public suspend fun get(): Set<TypedGameruleDto> =
-        client.json.decodeFromJsonElement(
-            SetSerializer(TypedGameruleDto.serializer()),
-            client.call(baseEndpoint)
+    public suspend fun getTime(): Long =
+        client.call(
+            "$baseEndpoint/time",
+            Long.serializer()
         )
 
-    public suspend inline fun set(gamerule: UntypedGameruleDto): TypedGameruleDto =
-        client.json.decodeFromJsonElement(
-            TypedGameruleDto.serializer(),
-            client.call("$baseEndpoint/update", mapOf("gamerule" to gamerule))
+    public suspend inline fun setTime(time: Long): Long =
+        client.call(
+            "$baseEndpoint/time/set",
+            mapOf("time" to time)
         )
-    
-    // Other methods and overloads...
 }
 
-// Then register like this:
-public val MsmpClient.gamerules: GamerulesExtension
-    by msmpExtension("minecraft:gamerules", ::GamerulesExtension) {
-        // Optional: set up automatic synchronization
-        on<GameruleUpdatedEvent> { evt ->
-            // Assume 'cache' is a MutableStateFlow in your extension
-            cache.update { it.filterNot { ctx -> ctx.key == evt.eventCtx.key }.toSet() + evt.eventCtx }
-        }
-        
-        // Refresh cache on every successful connection
-        onConnection { cache.update { yourFunction() } }
+// Registering the extension
+public val MsmpClient.world: WorldExtension
+    by msmpExtension("minecraft:world", ::WorldExtension) {
+        // Optional: setup logic, e.g., cache sync
     }
 ```
 
-Generic extensions are also supported via the reified delegate variant:
+There is a variant of `msmpExtension` that allows you to use explicit serializers for generic typed extensions. Check the documentation for it.
 
-```kotlin
-public class ArrayExtension<T> @PublishedApi internal constructor(
-    public override val client: MsmpClient,
-    public override val baseEndpoint: String,
-    public val serializer: KSerializer<T>
-) : MsmpExtension, Syncable {
-    internal val cache = MutableStateFlow<Set<T>>(emptySet())
-    public override val flow: StateFlow<Set<T>> = cache.asStateFlow()
-    
-    public suspend inline fun get(): Set<T> = decodeFrom(client.call(baseEndpoint))
-
-    public suspend inline fun set(vararg value: T): Set<T> =
-        decodeFrom(client.call("$baseEndpoint/set", listOf(value.toSet()), argsSerializer))
-    
-    @PublishedApi
-    internal val argsSerializer: KSerializer<List<Set<T>>> = ListSerializer(SetSerializer(serializer))
-
-    @PublishedApi
-    internal fun decodeFrom(element: JsonElement): Set<T> =
-        client.json.decodeFromJsonElement(SetSerializer(serializer), element)
-
-    // ...
-}
-
-// Same as above:
-public val MsmpClient.allowList: ArrayExtension<PlayerDto>
-    by msmpExtension("minecraft:allowlist", ::ArrayExtension)
-
-public val MsmpClient.banList: ArrayExtension<UserBanDto>
-    by msmpExtension("minecraft:bans", ::ArrayExtension)
-```
-
-**Note**: It is highly recommended to use inline for your extension methods. The library is internally designed to minimize code duplication.
-
-#### Event
+### Custom Events
 
 ```kotlin
 @Serializable
