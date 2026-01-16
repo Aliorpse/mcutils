@@ -4,10 +4,6 @@ $dokka.linkExtension:html
 module:color
 tech.aliorpse.mcutils.entity
 tech.aliorpse.mcutils.util
-module:core
-tech.aliorpse.mcutils.annotation
-tech.aliorpse.mcutils.api
-tech.aliorpse.mcutils.util
 module:msmp
 tech.aliorpse.mcutils.api
 tech.aliorpse.mcutils.api.extension
@@ -21,3 +17,7 @@ tech.aliorpse.mcutils.api
 module:server-status
 tech.aliorpse.mcutils.api
 tech.aliorpse.mcutils.entity
+module:shared
+tech.aliorpse.mcutils.annotation
+tech.aliorpse.mcutils.api
+tech.aliorpse.mcutils.util
