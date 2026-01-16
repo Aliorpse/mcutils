@@ -1,0 +1,187 @@
+// Klib ABI Dump
+// Targets: [androidNativeArm64, androidNativeX64, iosArm64, iosSimulatorArm64, iosX64, js, linuxArm64, linuxX64, macosArm64, macosX64, mingwX64, wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <tech.aliorpse.mcutils:server-status>
+abstract interface tech.aliorpse.mcutils.entity/QueryStatus { // tech.aliorpse.mcutils.entity/QueryStatus|null[0]
+    abstract val description // tech.aliorpse.mcutils.entity/QueryStatus.description|{}description[0]
+        abstract fun <get-description>(): kotlin/String // tech.aliorpse.mcutils.entity/QueryStatus.description.<get-description>|<get-description>(){}[0]
+    abstract val map // tech.aliorpse.mcutils.entity/QueryStatus.map|{}map[0]
+        abstract fun <get-map>(): kotlin/String // tech.aliorpse.mcutils.entity/QueryStatus.map.<get-map>|<get-map>(){}[0]
+    abstract val players // tech.aliorpse.mcutils.entity/QueryStatus.players|{}players[0]
+        abstract fun <get-players>(): tech.aliorpse.mcutils.entity/Players // tech.aliorpse.mcutils.entity/QueryStatus.players.<get-players>|<get-players>(){}[0]
+}
+
+final class tech.aliorpse.mcutils.entity/Players { // tech.aliorpse.mcutils.entity/Players|null[0]
+    constructor <init>(kotlin/Int, kotlin/Int, kotlin.collections/Set<tech.aliorpse.mcutils.entity/Sample>? = ...) // tech.aliorpse.mcutils.entity/Players.<init>|<init>(kotlin.Int;kotlin.Int;kotlin.collections.Set<tech.aliorpse.mcutils.entity.Sample>?){}[0]
+
+    final val max // tech.aliorpse.mcutils.entity/Players.max|{}max[0]
+        final fun <get-max>(): kotlin/Int // tech.aliorpse.mcutils.entity/Players.max.<get-max>|<get-max>(){}[0]
+    final val online // tech.aliorpse.mcutils.entity/Players.online|{}online[0]
+        final fun <get-online>(): kotlin/Int // tech.aliorpse.mcutils.entity/Players.online.<get-online>|<get-online>(){}[0]
+    final val sample // tech.aliorpse.mcutils.entity/Players.sample|{}sample[0]
+        final fun <get-sample>(): kotlin.collections/Set<tech.aliorpse.mcutils.entity/Sample>? // tech.aliorpse.mcutils.entity/Players.sample.<get-sample>|<get-sample>(){}[0]
+
+    final fun component1(): kotlin/Int // tech.aliorpse.mcutils.entity/Players.component1|component1(){}[0]
+    final fun component2(): kotlin/Int // tech.aliorpse.mcutils.entity/Players.component2|component2(){}[0]
+    final fun component3(): kotlin.collections/Set<tech.aliorpse.mcutils.entity/Sample>? // tech.aliorpse.mcutils.entity/Players.component3|component3(){}[0]
+    final fun copy(kotlin/Int = ..., kotlin/Int = ..., kotlin.collections/Set<tech.aliorpse.mcutils.entity/Sample>? = ...): tech.aliorpse.mcutils.entity/Players // tech.aliorpse.mcutils.entity/Players.copy|copy(kotlin.Int;kotlin.Int;kotlin.collections.Set<tech.aliorpse.mcutils.entity.Sample>?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/Players.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/Players.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/Players.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/Players> { // tech.aliorpse.mcutils.entity/Players.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/Players.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/Players.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/Players.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/Players // tech.aliorpse.mcutils.entity/Players.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/Players) // tech.aliorpse.mcutils.entity/Players.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.Players){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/Players.Companion|null[0]
+        final val $childSerializers // tech.aliorpse.mcutils.entity/Players.Companion.$childSerializers|{}$childSerializers[0]
+
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/Players> // tech.aliorpse.mcutils.entity/Players.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/QueryStatusBasic : tech.aliorpse.mcutils.entity/QueryStatus { // tech.aliorpse.mcutils.entity/QueryStatusBasic|null[0]
+    constructor <init>(kotlin/String, kotlin/String, tech.aliorpse.mcutils.entity/Players) // tech.aliorpse.mcutils.entity/QueryStatusBasic.<init>|<init>(kotlin.String;kotlin.String;tech.aliorpse.mcutils.entity.Players){}[0]
+
+    final val description // tech.aliorpse.mcutils.entity/QueryStatusBasic.description|{}description[0]
+        final fun <get-description>(): kotlin/String // tech.aliorpse.mcutils.entity/QueryStatusBasic.description.<get-description>|<get-description>(){}[0]
+    final val map // tech.aliorpse.mcutils.entity/QueryStatusBasic.map|{}map[0]
+        final fun <get-map>(): kotlin/String // tech.aliorpse.mcutils.entity/QueryStatusBasic.map.<get-map>|<get-map>(){}[0]
+    final val players // tech.aliorpse.mcutils.entity/QueryStatusBasic.players|{}players[0]
+        final fun <get-players>(): tech.aliorpse.mcutils.entity/Players // tech.aliorpse.mcutils.entity/QueryStatusBasic.players.<get-players>|<get-players>(){}[0]
+
+    final fun component1(): kotlin/String // tech.aliorpse.mcutils.entity/QueryStatusBasic.component1|component1(){}[0]
+    final fun component2(): kotlin/String // tech.aliorpse.mcutils.entity/QueryStatusBasic.component2|component2(){}[0]
+    final fun component3(): tech.aliorpse.mcutils.entity/Players // tech.aliorpse.mcutils.entity/QueryStatusBasic.component3|component3(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., tech.aliorpse.mcutils.entity/Players = ...): tech.aliorpse.mcutils.entity/QueryStatusBasic // tech.aliorpse.mcutils.entity/QueryStatusBasic.copy|copy(kotlin.String;kotlin.String;tech.aliorpse.mcutils.entity.Players){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/QueryStatusBasic.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/QueryStatusBasic.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/QueryStatusBasic.toString|toString(){}[0]
+}
+
+final class tech.aliorpse.mcutils.entity/QueryStatusFull : tech.aliorpse.mcutils.entity/QueryStatus { // tech.aliorpse.mcutils.entity/QueryStatusFull|null[0]
+    constructor <init>(kotlin/String, kotlin/String, tech.aliorpse.mcutils.entity/Players, kotlin/String, kotlin.collections/Set<kotlin/String>) // tech.aliorpse.mcutils.entity/QueryStatusFull.<init>|<init>(kotlin.String;kotlin.String;tech.aliorpse.mcutils.entity.Players;kotlin.String;kotlin.collections.Set<kotlin.String>){}[0]
+
+    final val description // tech.aliorpse.mcutils.entity/QueryStatusFull.description|{}description[0]
+        final fun <get-description>(): kotlin/String // tech.aliorpse.mcutils.entity/QueryStatusFull.description.<get-description>|<get-description>(){}[0]
+    final val map // tech.aliorpse.mcutils.entity/QueryStatusFull.map|{}map[0]
+        final fun <get-map>(): kotlin/String // tech.aliorpse.mcutils.entity/QueryStatusFull.map.<get-map>|<get-map>(){}[0]
+    final val players // tech.aliorpse.mcutils.entity/QueryStatusFull.players|{}players[0]
+        final fun <get-players>(): tech.aliorpse.mcutils.entity/Players // tech.aliorpse.mcutils.entity/QueryStatusFull.players.<get-players>|<get-players>(){}[0]
+    final val plugins // tech.aliorpse.mcutils.entity/QueryStatusFull.plugins|{}plugins[0]
+        final fun <get-plugins>(): kotlin.collections/Set<kotlin/String> // tech.aliorpse.mcutils.entity/QueryStatusFull.plugins.<get-plugins>|<get-plugins>(){}[0]
+    final val version // tech.aliorpse.mcutils.entity/QueryStatusFull.version|{}version[0]
+        final fun <get-version>(): kotlin/String // tech.aliorpse.mcutils.entity/QueryStatusFull.version.<get-version>|<get-version>(){}[0]
+
+    final fun component1(): kotlin/String // tech.aliorpse.mcutils.entity/QueryStatusFull.component1|component1(){}[0]
+    final fun component2(): kotlin/String // tech.aliorpse.mcutils.entity/QueryStatusFull.component2|component2(){}[0]
+    final fun component3(): tech.aliorpse.mcutils.entity/Players // tech.aliorpse.mcutils.entity/QueryStatusFull.component3|component3(){}[0]
+    final fun component4(): kotlin/String // tech.aliorpse.mcutils.entity/QueryStatusFull.component4|component4(){}[0]
+    final fun component5(): kotlin.collections/Set<kotlin/String> // tech.aliorpse.mcutils.entity/QueryStatusFull.component5|component5(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., tech.aliorpse.mcutils.entity/Players = ..., kotlin/String = ..., kotlin.collections/Set<kotlin/String> = ...): tech.aliorpse.mcutils.entity/QueryStatusFull // tech.aliorpse.mcutils.entity/QueryStatusFull.copy|copy(kotlin.String;kotlin.String;tech.aliorpse.mcutils.entity.Players;kotlin.String;kotlin.collections.Set<kotlin.String>){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/QueryStatusFull.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/QueryStatusFull.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/QueryStatusFull.toString|toString(){}[0]
+}
+
+final class tech.aliorpse.mcutils.entity/Sample { // tech.aliorpse.mcutils.entity/Sample|null[0]
+    constructor <init>(kotlin/String, kotlin/String) // tech.aliorpse.mcutils.entity/Sample.<init>|<init>(kotlin.String;kotlin.String){}[0]
+
+    final val id // tech.aliorpse.mcutils.entity/Sample.id|{}id[0]
+        final fun <get-id>(): kotlin/String // tech.aliorpse.mcutils.entity/Sample.id.<get-id>|<get-id>(){}[0]
+    final val name // tech.aliorpse.mcutils.entity/Sample.name|{}name[0]
+        final fun <get-name>(): kotlin/String // tech.aliorpse.mcutils.entity/Sample.name.<get-name>|<get-name>(){}[0]
+
+    final fun component1(): kotlin/String // tech.aliorpse.mcutils.entity/Sample.component1|component1(){}[0]
+    final fun component2(): kotlin/String // tech.aliorpse.mcutils.entity/Sample.component2|component2(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ...): tech.aliorpse.mcutils.entity/Sample // tech.aliorpse.mcutils.entity/Sample.copy|copy(kotlin.String;kotlin.String){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/Sample.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/Sample.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/Sample.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/Sample> { // tech.aliorpse.mcutils.entity/Sample.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/Sample.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/Sample.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/Sample.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/Sample // tech.aliorpse.mcutils.entity/Sample.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/Sample) // tech.aliorpse.mcutils.entity/Sample.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.Sample){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/Sample.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/Sample> // tech.aliorpse.mcutils.entity/Sample.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/ServerStatus { // tech.aliorpse.mcutils.entity/ServerStatus|null[0]
+    constructor <init>(tech.aliorpse.mcutils.entity/TextComponent, tech.aliorpse.mcutils.entity/Players, tech.aliorpse.mcutils.entity/Version, kotlin/Long, kotlin/Boolean, kotlin/String?, kotlin/String?) // tech.aliorpse.mcutils.entity/ServerStatus.<init>|<init>(tech.aliorpse.mcutils.entity.TextComponent;tech.aliorpse.mcutils.entity.Players;tech.aliorpse.mcutils.entity.Version;kotlin.Long;kotlin.Boolean;kotlin.String?;kotlin.String?){}[0]
+
+    final val description // tech.aliorpse.mcutils.entity/ServerStatus.description|{}description[0]
+        final fun <get-description>(): tech.aliorpse.mcutils.entity/TextComponent // tech.aliorpse.mcutils.entity/ServerStatus.description.<get-description>|<get-description>(){}[0]
+    final val favicon // tech.aliorpse.mcutils.entity/ServerStatus.favicon|{}favicon[0]
+        final fun <get-favicon>(): kotlin/String? // tech.aliorpse.mcutils.entity/ServerStatus.favicon.<get-favicon>|<get-favicon>(){}[0]
+    final val ping // tech.aliorpse.mcutils.entity/ServerStatus.ping|{}ping[0]
+        final fun <get-ping>(): kotlin/Long // tech.aliorpse.mcutils.entity/ServerStatus.ping.<get-ping>|<get-ping>(){}[0]
+    final val players // tech.aliorpse.mcutils.entity/ServerStatus.players|{}players[0]
+        final fun <get-players>(): tech.aliorpse.mcutils.entity/Players // tech.aliorpse.mcutils.entity/ServerStatus.players.<get-players>|<get-players>(){}[0]
+    final val secureChatEnforced // tech.aliorpse.mcutils.entity/ServerStatus.secureChatEnforced|{}secureChatEnforced[0]
+        final fun <get-secureChatEnforced>(): kotlin/Boolean // tech.aliorpse.mcutils.entity/ServerStatus.secureChatEnforced.<get-secureChatEnforced>|<get-secureChatEnforced>(){}[0]
+    final val srvRecord // tech.aliorpse.mcutils.entity/ServerStatus.srvRecord|{}srvRecord[0]
+        final fun <get-srvRecord>(): kotlin/String? // tech.aliorpse.mcutils.entity/ServerStatus.srvRecord.<get-srvRecord>|<get-srvRecord>(){}[0]
+    final val version // tech.aliorpse.mcutils.entity/ServerStatus.version|{}version[0]
+        final fun <get-version>(): tech.aliorpse.mcutils.entity/Version // tech.aliorpse.mcutils.entity/ServerStatus.version.<get-version>|<get-version>(){}[0]
+
+    final fun component1(): tech.aliorpse.mcutils.entity/TextComponent // tech.aliorpse.mcutils.entity/ServerStatus.component1|component1(){}[0]
+    final fun component2(): tech.aliorpse.mcutils.entity/Players // tech.aliorpse.mcutils.entity/ServerStatus.component2|component2(){}[0]
+    final fun component3(): tech.aliorpse.mcutils.entity/Version // tech.aliorpse.mcutils.entity/ServerStatus.component3|component3(){}[0]
+    final fun component4(): kotlin/Long // tech.aliorpse.mcutils.entity/ServerStatus.component4|component4(){}[0]
+    final fun component5(): kotlin/Boolean // tech.aliorpse.mcutils.entity/ServerStatus.component5|component5(){}[0]
+    final fun component6(): kotlin/String? // tech.aliorpse.mcutils.entity/ServerStatus.component6|component6(){}[0]
+    final fun component7(): kotlin/String? // tech.aliorpse.mcutils.entity/ServerStatus.component7|component7(){}[0]
+    final fun copy(tech.aliorpse.mcutils.entity/TextComponent = ..., tech.aliorpse.mcutils.entity/Players = ..., tech.aliorpse.mcutils.entity/Version = ..., kotlin/Long = ..., kotlin/Boolean = ..., kotlin/String? = ..., kotlin/String? = ...): tech.aliorpse.mcutils.entity/ServerStatus // tech.aliorpse.mcutils.entity/ServerStatus.copy|copy(tech.aliorpse.mcutils.entity.TextComponent;tech.aliorpse.mcutils.entity.Players;tech.aliorpse.mcutils.entity.Version;kotlin.Long;kotlin.Boolean;kotlin.String?;kotlin.String?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/ServerStatus.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/ServerStatus.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/ServerStatus.toString|toString(){}[0]
+}
+
+final class tech.aliorpse.mcutils.entity/Version { // tech.aliorpse.mcutils.entity/Version|null[0]
+    constructor <init>(kotlin/String, kotlin/Long) // tech.aliorpse.mcutils.entity/Version.<init>|<init>(kotlin.String;kotlin.Long){}[0]
+
+    final val name // tech.aliorpse.mcutils.entity/Version.name|{}name[0]
+        final fun <get-name>(): kotlin/String // tech.aliorpse.mcutils.entity/Version.name.<get-name>|<get-name>(){}[0]
+    final val protocol // tech.aliorpse.mcutils.entity/Version.protocol|{}protocol[0]
+        final fun <get-protocol>(): kotlin/Long // tech.aliorpse.mcutils.entity/Version.protocol.<get-protocol>|<get-protocol>(){}[0]
+
+    final fun component1(): kotlin/String // tech.aliorpse.mcutils.entity/Version.component1|component1(){}[0]
+    final fun component2(): kotlin/Long // tech.aliorpse.mcutils.entity/Version.component2|component2(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/Long = ...): tech.aliorpse.mcutils.entity/Version // tech.aliorpse.mcutils.entity/Version.copy|copy(kotlin.String;kotlin.Long){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/Version.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/Version.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/Version.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/Version> { // tech.aliorpse.mcutils.entity/Version.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/Version.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/Version.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/Version.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/Version // tech.aliorpse.mcutils.entity/Version.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/Version) // tech.aliorpse.mcutils.entity/Version.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.Version){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/Version.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/Version> // tech.aliorpse.mcutils.entity/Version.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final suspend fun (tech.aliorpse.mcutils.api/MinecraftServer).tech.aliorpse.mcutils.api/getQueryBasic(kotlin/String, kotlin/Int = ..., kotlin/Long = ...): tech.aliorpse.mcutils.entity/QueryStatusBasic // tech.aliorpse.mcutils.api/getQueryBasic|getQueryBasic@tech.aliorpse.mcutils.api.MinecraftServer(kotlin.String;kotlin.Int;kotlin.Long){}[0]
+final suspend fun (tech.aliorpse.mcutils.api/MinecraftServer).tech.aliorpse.mcutils.api/getQueryFull(kotlin/String, kotlin/Int = ..., kotlin/Long = ...): tech.aliorpse.mcutils.entity/QueryStatusFull // tech.aliorpse.mcutils.api/getQueryFull|getQueryFull@tech.aliorpse.mcutils.api.MinecraftServer(kotlin.String;kotlin.Int;kotlin.Long){}[0]
+final suspend fun (tech.aliorpse.mcutils.api/MinecraftServer).tech.aliorpse.mcutils.api/getStatus(kotlin/String, kotlin/Int = ..., kotlin/Long = ..., kotlin/Boolean = ...): tech.aliorpse.mcutils.entity/ServerStatus // tech.aliorpse.mcutils.api/getStatus|getStatus@tech.aliorpse.mcutils.api.MinecraftServer(kotlin.String;kotlin.Int;kotlin.Long;kotlin.Boolean){}[0]

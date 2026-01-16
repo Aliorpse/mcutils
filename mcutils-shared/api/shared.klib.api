@@ -1,0 +1,37 @@
+// Klib ABI Dump
+// Targets: [androidNativeArm64, androidNativeX64, iosArm64, iosSimulatorArm64, iosX64, js, linuxArm64, linuxX64, macosArm64, macosX64, mingwX64, wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <tech.aliorpse.mcutils:shared>
+open annotation class tech.aliorpse.mcutils.annotation/ExperimentalMCUtilsApi : kotlin/Annotation { // tech.aliorpse.mcutils.annotation/ExperimentalMCUtilsApi|null[0]
+    constructor <init>() // tech.aliorpse.mcutils.annotation/ExperimentalMCUtilsApi.<init>|<init>(){}[0]
+}
+
+open annotation class tech.aliorpse.mcutils.annotation/InternalMCUtilsApi : kotlin/Annotation { // tech.aliorpse.mcutils.annotation/InternalMCUtilsApi|null[0]
+    constructor <init>() // tech.aliorpse.mcutils.annotation/InternalMCUtilsApi.<init>|<init>(){}[0]
+}
+
+final class tech.aliorpse.mcutils.util/HostPort { // tech.aliorpse.mcutils.util/HostPort|null[0]
+    constructor <init>(kotlin/String?, kotlin/Int?) // tech.aliorpse.mcutils.util/HostPort.<init>|<init>(kotlin.String?;kotlin.Int?){}[0]
+
+    final val host // tech.aliorpse.mcutils.util/HostPort.host|{}host[0]
+        final fun <get-host>(): kotlin/String? // tech.aliorpse.mcutils.util/HostPort.host.<get-host>|<get-host>(){}[0]
+    final val port // tech.aliorpse.mcutils.util/HostPort.port|{}port[0]
+        final fun <get-port>(): kotlin/Int? // tech.aliorpse.mcutils.util/HostPort.port.<get-port>|<get-port>(){}[0]
+
+    final fun component1(): kotlin/String? // tech.aliorpse.mcutils.util/HostPort.component1|component1(){}[0]
+    final fun component2(): kotlin/Int? // tech.aliorpse.mcutils.util/HostPort.component2|component2(){}[0]
+    final fun copy(kotlin/String? = ..., kotlin/Int? = ...): tech.aliorpse.mcutils.util/HostPort // tech.aliorpse.mcutils.util/HostPort.copy|copy(kotlin.String?;kotlin.Int?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.util/HostPort.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.util/HostPort.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.util/HostPort.toString|toString(){}[0]
+}
+
+final object tech.aliorpse.mcutils.api/MinecraftPlayer // tech.aliorpse.mcutils.api/MinecraftPlayer|null[0]
+
+final object tech.aliorpse.mcutils.api/MinecraftServer // tech.aliorpse.mcutils.api/MinecraftServer|null[0]
+
+final fun tech.aliorpse.mcutils.util/hostPortOf(kotlin/String?): tech.aliorpse.mcutils.util/HostPort // tech.aliorpse.mcutils.util/hostPortOf|hostPortOf(kotlin.String?){}[0]

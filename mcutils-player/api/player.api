@@ -1,0 +1,39 @@
+public final class tech/aliorpse/mcutils/api/MinecraftPlayerModuleKt {
+	public static final fun getProfile (Ltech/aliorpse/mcutils/api/MinecraftPlayer;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun getUuid (Ltech/aliorpse/mcutils/api/MinecraftPlayer;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class tech/aliorpse/mcutils/entity/PlayerProfile {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;Ltech/aliorpse/mcutils/entity/SkinModel;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Z
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ltech/aliorpse/mcutils/entity/SkinModel;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;Ltech/aliorpse/mcutils/entity/SkinModel;)Ltech/aliorpse/mcutils/entity/PlayerProfile;
+	public static synthetic fun copy$default (Ltech/aliorpse/mcutils/entity/PlayerProfile;Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;Ltech/aliorpse/mcutils/entity/SkinModel;ILjava/lang/Object;)Ltech/aliorpse/mcutils/entity/PlayerProfile;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCapeUrl ()Ljava/lang/String;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getLegacy ()Z
+	public final fun getName ()Ljava/lang/String;
+	public final fun getSkinModel ()Ltech/aliorpse/mcutils/entity/SkinModel;
+	public final fun getSkinUrl ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class tech/aliorpse/mcutils/entity/SkinModel : java/lang/Enum {
+	public static final field CLASSIC Ltech/aliorpse/mcutils/entity/SkinModel;
+	public static final field Companion Ltech/aliorpse/mcutils/entity/SkinModel$Companion;
+	public static final field SLIM Ltech/aliorpse/mcutils/entity/SkinModel;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Ltech/aliorpse/mcutils/entity/SkinModel;
+	public static fun values ()[Ltech/aliorpse/mcutils/entity/SkinModel;
+}
+
+public final class tech/aliorpse/mcutils/entity/SkinModel$Companion {
+	public final fun from (Ljava/lang/String;)Ltech/aliorpse/mcutils/entity/SkinModel;
+}
+

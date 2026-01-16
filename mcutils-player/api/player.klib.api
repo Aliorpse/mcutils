@@ -1,0 +1,53 @@
+// Klib ABI Dump
+// Targets: [androidNativeArm64, androidNativeX64, iosArm64, iosSimulatorArm64, iosX64, js, linuxArm64, linuxX64, macosArm64, macosX64, mingwX64, wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <tech.aliorpse.mcutils:player>
+final enum class tech.aliorpse.mcutils.entity/SkinModel : kotlin/Enum<tech.aliorpse.mcutils.entity/SkinModel> { // tech.aliorpse.mcutils.entity/SkinModel|null[0]
+    enum entry CLASSIC // tech.aliorpse.mcutils.entity/SkinModel.CLASSIC|null[0]
+    enum entry SLIM // tech.aliorpse.mcutils.entity/SkinModel.SLIM|null[0]
+
+    final val entries // tech.aliorpse.mcutils.entity/SkinModel.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<tech.aliorpse.mcutils.entity/SkinModel> // tech.aliorpse.mcutils.entity/SkinModel.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): tech.aliorpse.mcutils.entity/SkinModel // tech.aliorpse.mcutils.entity/SkinModel.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<tech.aliorpse.mcutils.entity/SkinModel> // tech.aliorpse.mcutils.entity/SkinModel.values|values#static(){}[0]
+
+    final object Companion { // tech.aliorpse.mcutils.entity/SkinModel.Companion|null[0]
+        final fun from(kotlin/String?): tech.aliorpse.mcutils.entity/SkinModel // tech.aliorpse.mcutils.entity/SkinModel.Companion.from|from(kotlin.String?){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/PlayerProfile { // tech.aliorpse.mcutils.entity/PlayerProfile|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/Boolean, kotlin/String?, kotlin/String?, tech.aliorpse.mcutils.entity/SkinModel) // tech.aliorpse.mcutils.entity/PlayerProfile.<init>|<init>(kotlin.String;kotlin.String;kotlin.Boolean;kotlin.String?;kotlin.String?;tech.aliorpse.mcutils.entity.SkinModel){}[0]
+
+    final val capeUrl // tech.aliorpse.mcutils.entity/PlayerProfile.capeUrl|{}capeUrl[0]
+        final fun <get-capeUrl>(): kotlin/String? // tech.aliorpse.mcutils.entity/PlayerProfile.capeUrl.<get-capeUrl>|<get-capeUrl>(){}[0]
+    final val id // tech.aliorpse.mcutils.entity/PlayerProfile.id|{}id[0]
+        final fun <get-id>(): kotlin/String // tech.aliorpse.mcutils.entity/PlayerProfile.id.<get-id>|<get-id>(){}[0]
+    final val legacy // tech.aliorpse.mcutils.entity/PlayerProfile.legacy|{}legacy[0]
+        final fun <get-legacy>(): kotlin/Boolean // tech.aliorpse.mcutils.entity/PlayerProfile.legacy.<get-legacy>|<get-legacy>(){}[0]
+    final val name // tech.aliorpse.mcutils.entity/PlayerProfile.name|{}name[0]
+        final fun <get-name>(): kotlin/String // tech.aliorpse.mcutils.entity/PlayerProfile.name.<get-name>|<get-name>(){}[0]
+    final val skinModel // tech.aliorpse.mcutils.entity/PlayerProfile.skinModel|{}skinModel[0]
+        final fun <get-skinModel>(): tech.aliorpse.mcutils.entity/SkinModel // tech.aliorpse.mcutils.entity/PlayerProfile.skinModel.<get-skinModel>|<get-skinModel>(){}[0]
+    final val skinUrl // tech.aliorpse.mcutils.entity/PlayerProfile.skinUrl|{}skinUrl[0]
+        final fun <get-skinUrl>(): kotlin/String? // tech.aliorpse.mcutils.entity/PlayerProfile.skinUrl.<get-skinUrl>|<get-skinUrl>(){}[0]
+
+    final fun component1(): kotlin/String // tech.aliorpse.mcutils.entity/PlayerProfile.component1|component1(){}[0]
+    final fun component2(): kotlin/String // tech.aliorpse.mcutils.entity/PlayerProfile.component2|component2(){}[0]
+    final fun component3(): kotlin/Boolean // tech.aliorpse.mcutils.entity/PlayerProfile.component3|component3(){}[0]
+    final fun component4(): kotlin/String? // tech.aliorpse.mcutils.entity/PlayerProfile.component4|component4(){}[0]
+    final fun component5(): kotlin/String? // tech.aliorpse.mcutils.entity/PlayerProfile.component5|component5(){}[0]
+    final fun component6(): tech.aliorpse.mcutils.entity/SkinModel // tech.aliorpse.mcutils.entity/PlayerProfile.component6|component6(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin/Boolean = ..., kotlin/String? = ..., kotlin/String? = ..., tech.aliorpse.mcutils.entity/SkinModel = ...): tech.aliorpse.mcutils.entity/PlayerProfile // tech.aliorpse.mcutils.entity/PlayerProfile.copy|copy(kotlin.String;kotlin.String;kotlin.Boolean;kotlin.String?;kotlin.String?;tech.aliorpse.mcutils.entity.SkinModel){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/PlayerProfile.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/PlayerProfile.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/PlayerProfile.toString|toString(){}[0]
+}
+
+final suspend fun (tech.aliorpse.mcutils.api/MinecraftPlayer).tech.aliorpse.mcutils.api/getProfile(kotlin/String): tech.aliorpse.mcutils.entity/PlayerProfile // tech.aliorpse.mcutils.api/getProfile|getProfile@tech.aliorpse.mcutils.api.MinecraftPlayer(kotlin.String){}[0]
+final suspend fun (tech.aliorpse.mcutils.api/MinecraftPlayer).tech.aliorpse.mcutils.api/getUuid(kotlin/String): kotlin/String // tech.aliorpse.mcutils.api/getUuid|getUuid@tech.aliorpse.mcutils.api.MinecraftPlayer(kotlin.String){}[0]

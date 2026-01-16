@@ -1,0 +1,162 @@
+public final class tech/aliorpse/mcutils/api/MinecraftServerModuleKt {
+	public static final fun getQueryBasic (Ltech/aliorpse/mcutils/api/MinecraftServer;Ljava/lang/String;IJLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getQueryBasic$default (Ltech/aliorpse/mcutils/api/MinecraftServer;Ljava/lang/String;IJLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun getQueryFull (Ltech/aliorpse/mcutils/api/MinecraftServer;Ljava/lang/String;IJLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getQueryFull$default (Ltech/aliorpse/mcutils/api/MinecraftServer;Ljava/lang/String;IJLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun getStatus (Ltech/aliorpse/mcutils/api/MinecraftServer;Ljava/lang/String;IJZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getStatus$default (Ltech/aliorpse/mcutils/api/MinecraftServer;Ljava/lang/String;IJZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class tech/aliorpse/mcutils/entity/Players {
+	public static final field Companion Ltech/aliorpse/mcutils/entity/Players$Companion;
+	public fun <init> (IILjava/util/Set;)V
+	public synthetic fun <init> (IILjava/util/Set;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()I
+	public final fun component2 ()I
+	public final fun component3 ()Ljava/util/Set;
+	public final fun copy (IILjava/util/Set;)Ltech/aliorpse/mcutils/entity/Players;
+	public static synthetic fun copy$default (Ltech/aliorpse/mcutils/entity/Players;IILjava/util/Set;ILjava/lang/Object;)Ltech/aliorpse/mcutils/entity/Players;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMax ()I
+	public final fun getOnline ()I
+	public final fun getSample ()Ljava/util/Set;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class tech/aliorpse/mcutils/entity/Players$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Ltech/aliorpse/mcutils/entity/Players$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ltech/aliorpse/mcutils/entity/Players;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ltech/aliorpse/mcutils/entity/Players;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class tech/aliorpse/mcutils/entity/Players$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class tech/aliorpse/mcutils/entity/QueryStatus {
+	public abstract fun getDescription ()Ljava/lang/String;
+	public abstract fun getMap ()Ljava/lang/String;
+	public abstract fun getPlayers ()Ltech/aliorpse/mcutils/entity/Players;
+}
+
+public final class tech/aliorpse/mcutils/entity/QueryStatusBasic : tech/aliorpse/mcutils/entity/QueryStatus {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ltech/aliorpse/mcutils/entity/Players;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ltech/aliorpse/mcutils/entity/Players;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ltech/aliorpse/mcutils/entity/Players;)Ltech/aliorpse/mcutils/entity/QueryStatusBasic;
+	public static synthetic fun copy$default (Ltech/aliorpse/mcutils/entity/QueryStatusBasic;Ljava/lang/String;Ljava/lang/String;Ltech/aliorpse/mcutils/entity/Players;ILjava/lang/Object;)Ltech/aliorpse/mcutils/entity/QueryStatusBasic;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getDescription ()Ljava/lang/String;
+	public fun getMap ()Ljava/lang/String;
+	public fun getPlayers ()Ltech/aliorpse/mcutils/entity/Players;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class tech/aliorpse/mcutils/entity/QueryStatusFull : tech/aliorpse/mcutils/entity/QueryStatus {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ltech/aliorpse/mcutils/entity/Players;Ljava/lang/String;Ljava/util/Set;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ltech/aliorpse/mcutils/entity/Players;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/util/Set;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ltech/aliorpse/mcutils/entity/Players;Ljava/lang/String;Ljava/util/Set;)Ltech/aliorpse/mcutils/entity/QueryStatusFull;
+	public static synthetic fun copy$default (Ltech/aliorpse/mcutils/entity/QueryStatusFull;Ljava/lang/String;Ljava/lang/String;Ltech/aliorpse/mcutils/entity/Players;Ljava/lang/String;Ljava/util/Set;ILjava/lang/Object;)Ltech/aliorpse/mcutils/entity/QueryStatusFull;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getDescription ()Ljava/lang/String;
+	public fun getMap ()Ljava/lang/String;
+	public fun getPlayers ()Ltech/aliorpse/mcutils/entity/Players;
+	public final fun getPlugins ()Ljava/util/Set;
+	public final fun getVersion ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class tech/aliorpse/mcutils/entity/Sample {
+	public static final field Companion Ltech/aliorpse/mcutils/entity/Sample$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Ltech/aliorpse/mcutils/entity/Sample;
+	public static synthetic fun copy$default (Ltech/aliorpse/mcutils/entity/Sample;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Ltech/aliorpse/mcutils/entity/Sample;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()Ljava/lang/String;
+	public final fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class tech/aliorpse/mcutils/entity/Sample$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Ltech/aliorpse/mcutils/entity/Sample$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ltech/aliorpse/mcutils/entity/Sample;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ltech/aliorpse/mcutils/entity/Sample;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class tech/aliorpse/mcutils/entity/Sample$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class tech/aliorpse/mcutils/entity/ServerStatus {
+	public fun <init> (Ltech/aliorpse/mcutils/entity/TextComponent;Ltech/aliorpse/mcutils/entity/Players;Ltech/aliorpse/mcutils/entity/Version;JZLjava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ltech/aliorpse/mcutils/entity/TextComponent;
+	public final fun component2 ()Ltech/aliorpse/mcutils/entity/Players;
+	public final fun component3 ()Ltech/aliorpse/mcutils/entity/Version;
+	public final fun component4 ()J
+	public final fun component5 ()Z
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun copy (Ltech/aliorpse/mcutils/entity/TextComponent;Ltech/aliorpse/mcutils/entity/Players;Ltech/aliorpse/mcutils/entity/Version;JZLjava/lang/String;Ljava/lang/String;)Ltech/aliorpse/mcutils/entity/ServerStatus;
+	public static synthetic fun copy$default (Ltech/aliorpse/mcutils/entity/ServerStatus;Ltech/aliorpse/mcutils/entity/TextComponent;Ltech/aliorpse/mcutils/entity/Players;Ltech/aliorpse/mcutils/entity/Version;JZLjava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Ltech/aliorpse/mcutils/entity/ServerStatus;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDescription ()Ltech/aliorpse/mcutils/entity/TextComponent;
+	public final fun getFavicon ()Ljava/lang/String;
+	public final fun getPing ()J
+	public final fun getPlayers ()Ltech/aliorpse/mcutils/entity/Players;
+	public final fun getSecureChatEnforced ()Z
+	public final fun getSrvRecord ()Ljava/lang/String;
+	public final fun getVersion ()Ltech/aliorpse/mcutils/entity/Version;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class tech/aliorpse/mcutils/entity/Version {
+	public static final field Companion Ltech/aliorpse/mcutils/entity/Version$Companion;
+	public fun <init> (Ljava/lang/String;J)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()J
+	public final fun copy (Ljava/lang/String;J)Ltech/aliorpse/mcutils/entity/Version;
+	public static synthetic fun copy$default (Ltech/aliorpse/mcutils/entity/Version;Ljava/lang/String;JILjava/lang/Object;)Ltech/aliorpse/mcutils/entity/Version;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName ()Ljava/lang/String;
+	public final fun getProtocol ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class tech/aliorpse/mcutils/entity/Version$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Ltech/aliorpse/mcutils/entity/Version$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ltech/aliorpse/mcutils/entity/Version;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ltech/aliorpse/mcutils/entity/Version;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class tech/aliorpse/mcutils/entity/Version$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+

@@ -1,6 +1,8 @@
 @file:OptIn(ExperimentalWasmDsl::class)
 
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.abi.AbiValidationMultiplatformExtension
+import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform) apply false
@@ -27,7 +29,7 @@ allprojects {
 subprojects {
     pluginManager.withPlugin("com.vanniktech.maven.publish") {
         configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
-            publishToMavenCentral()
+            publishToMavenCentral(automaticRelease = true, validateDeployment = false)
             signAllPublications()
 
             coordinates(
@@ -71,6 +73,11 @@ subprojects {
             jvmToolchain(jvmTarget)
             explicitApi()
             applyDefaultHierarchyTemplate()
+
+            @OptIn(ExperimentalAbiValidation::class)
+            (this as ExtensionAware).extensions.configure<AbiValidationMultiplatformExtension>("abiValidation") {
+                enabled.set(true)
+            }
 
             jvm {
                 compilations.configureEach {

@@ -1,0 +1,56 @@
+// Klib ABI Dump
+// Targets: [androidNativeArm64, androidNativeX64, iosArm64, iosSimulatorArm64, iosX64, js, linuxArm64, linuxX64, macosArm64, macosX64, mingwX64, wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <tech.aliorpse.mcutils:color>
+final enum class tech.aliorpse.mcutils.entity/TextStyle : kotlin/Enum<tech.aliorpse.mcutils.entity/TextStyle> { // tech.aliorpse.mcutils.entity/TextStyle|null[0]
+    enum entry BOLD // tech.aliorpse.mcutils.entity/TextStyle.BOLD|null[0]
+    enum entry ITALIC // tech.aliorpse.mcutils.entity/TextStyle.ITALIC|null[0]
+    enum entry OBFUSCATED // tech.aliorpse.mcutils.entity/TextStyle.OBFUSCATED|null[0]
+    enum entry STRIKETHROUGH // tech.aliorpse.mcutils.entity/TextStyle.STRIKETHROUGH|null[0]
+    enum entry UNDERLINED // tech.aliorpse.mcutils.entity/TextStyle.UNDERLINED|null[0]
+
+    final val entries // tech.aliorpse.mcutils.entity/TextStyle.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<tech.aliorpse.mcutils.entity/TextStyle> // tech.aliorpse.mcutils.entity/TextStyle.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): tech.aliorpse.mcutils.entity/TextStyle // tech.aliorpse.mcutils.entity/TextStyle.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<tech.aliorpse.mcutils.entity/TextStyle> // tech.aliorpse.mcutils.entity/TextStyle.values|values#static(){}[0]
+
+    final object Companion : kotlinx.serialization.internal/SerializerFactory { // tech.aliorpse.mcutils.entity/TextStyle.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/TextStyle> // tech.aliorpse.mcutils.entity/TextStyle.Companion.serializer|serializer(){}[0]
+        final fun serializer(kotlin/Array<out kotlinx.serialization/KSerializer<*>>...): kotlinx.serialization/KSerializer<*> // tech.aliorpse.mcutils.entity/TextStyle.Companion.serializer|serializer(kotlin.Array<out|kotlinx.serialization.KSerializer<*>>...){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/TextComponent { // tech.aliorpse.mcutils.entity/TextComponent|null[0]
+    constructor <init>(kotlin/String, kotlin/String = ..., kotlin.collections/Set<tech.aliorpse.mcutils.entity/TextStyle> = ..., kotlin.collections/List<tech.aliorpse.mcutils.entity/TextComponent> = ...) // tech.aliorpse.mcutils.entity/TextComponent.<init>|<init>(kotlin.String;kotlin.String;kotlin.collections.Set<tech.aliorpse.mcutils.entity.TextStyle>;kotlin.collections.List<tech.aliorpse.mcutils.entity.TextComponent>){}[0]
+
+    final val color // tech.aliorpse.mcutils.entity/TextComponent.color|{}color[0]
+        final fun <get-color>(): kotlin/String // tech.aliorpse.mcutils.entity/TextComponent.color.<get-color>|<get-color>(){}[0]
+    final val extra // tech.aliorpse.mcutils.entity/TextComponent.extra|{}extra[0]
+        final fun <get-extra>(): kotlin.collections/List<tech.aliorpse.mcutils.entity/TextComponent> // tech.aliorpse.mcutils.entity/TextComponent.extra.<get-extra>|<get-extra>(){}[0]
+    final val styles // tech.aliorpse.mcutils.entity/TextComponent.styles|{}styles[0]
+        final fun <get-styles>(): kotlin.collections/Set<tech.aliorpse.mcutils.entity/TextStyle> // tech.aliorpse.mcutils.entity/TextComponent.styles.<get-styles>|<get-styles>(){}[0]
+    final val text // tech.aliorpse.mcutils.entity/TextComponent.text|{}text[0]
+        final fun <get-text>(): kotlin/String // tech.aliorpse.mcutils.entity/TextComponent.text.<get-text>|<get-text>(){}[0]
+
+    final fun component1(): kotlin/String // tech.aliorpse.mcutils.entity/TextComponent.component1|component1(){}[0]
+    final fun component2(): kotlin/String // tech.aliorpse.mcutils.entity/TextComponent.component2|component2(){}[0]
+    final fun component3(): kotlin.collections/Set<tech.aliorpse.mcutils.entity/TextStyle> // tech.aliorpse.mcutils.entity/TextComponent.component3|component3(){}[0]
+    final fun component4(): kotlin.collections/List<tech.aliorpse.mcutils.entity/TextComponent> // tech.aliorpse.mcutils.entity/TextComponent.component4|component4(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin.collections/Set<tech.aliorpse.mcutils.entity/TextStyle> = ..., kotlin.collections/List<tech.aliorpse.mcutils.entity/TextComponent> = ...): tech.aliorpse.mcutils.entity/TextComponent // tech.aliorpse.mcutils.entity/TextComponent.copy|copy(kotlin.String;kotlin.String;kotlin.collections.Set<tech.aliorpse.mcutils.entity.TextStyle>;kotlin.collections.List<tech.aliorpse.mcutils.entity.TextComponent>){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/TextComponent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/TextComponent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/TextComponent.toString|toString(){}[0]
+
+    final object Companion // tech.aliorpse.mcutils.entity/TextComponent.Companion|null[0]
+}
+
+final fun (tech.aliorpse.mcutils.entity/TextComponent).tech.aliorpse.mcutils.util/toHtml(): kotlin/String // tech.aliorpse.mcutils.util/toHtml|toHtml@tech.aliorpse.mcutils.entity.TextComponent(){}[0]
+final fun (tech.aliorpse.mcutils.entity/TextComponent).tech.aliorpse.mcutils.util/toPlainText(): kotlin/String // tech.aliorpse.mcutils.util/toPlainText|toPlainText@tech.aliorpse.mcutils.entity.TextComponent(){}[0]
+final fun (tech.aliorpse.mcutils.entity/TextComponent.Companion).tech.aliorpse.mcutils.util/fromJson(kotlin/String): tech.aliorpse.mcutils.entity/TextComponent // tech.aliorpse.mcutils.util/fromJson|fromJson@tech.aliorpse.mcutils.entity.TextComponent.Companion(kotlin.String){}[0]
+final fun (tech.aliorpse.mcutils.entity/TextComponent.Companion).tech.aliorpse.mcutils.util/fromJson(kotlinx.serialization.json/JsonElement): tech.aliorpse.mcutils.entity/TextComponent // tech.aliorpse.mcutils.util/fromJson|fromJson@tech.aliorpse.mcutils.entity.TextComponent.Companion(kotlinx.serialization.json.JsonElement){}[0]
+final fun (tech.aliorpse.mcutils.entity/TextComponent.Companion).tech.aliorpse.mcutils.util/fromString(kotlin/String): tech.aliorpse.mcutils.entity/TextComponent // tech.aliorpse.mcutils.util/fromString|fromString@tech.aliorpse.mcutils.entity.TextComponent.Companion(kotlin.String){}[0]

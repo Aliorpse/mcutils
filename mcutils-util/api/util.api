@@ -1,0 +1,13 @@
+public final class tech/aliorpse/mcutils/internal/util/DispatchersIOKt {
+	public static final fun withDispatchersIO (Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class tech/aliorpse/mcutils/internal/util/DispatchersIO_jvmKt {
+	public static final fun getDispatchersIO ()Lkotlinx/coroutines/CoroutineDispatcher;
+}
+
+public final class tech/aliorpse/mcutils/internal/util/Punycode {
+	public static final field INSTANCE Ltech/aliorpse/mcutils/internal/util/Punycode;
+	public final fun from (Ljava/lang/String;)Ljava/lang/String;
+}
+

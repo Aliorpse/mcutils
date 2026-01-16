@@ -1,0 +1,14 @@
+// Klib ABI Dump
+// Targets: [androidNativeArm64, androidNativeX64, iosArm64, iosSimulatorArm64, iosX64, js, linuxArm64, linuxX64, macosArm64, macosX64, mingwX64, wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <tech.aliorpse.mcutils:rcon>
+final class tech.aliorpse.mcutils.api/RconConnection : kotlin/AutoCloseable { // tech.aliorpse.mcutils.api/RconConnection|null[0]
+    final fun close() // tech.aliorpse.mcutils.api/RconConnection.close|close(){}[0]
+    final suspend fun execute(kotlin/String): kotlin/String // tech.aliorpse.mcutils.api/RconConnection.execute|execute(kotlin.String){}[0]
+}
+
+final suspend fun (tech.aliorpse.mcutils.api/MinecraftServer).tech.aliorpse.mcutils.api/createRconConnection(kotlin/String, kotlin/Int = ..., kotlin/String, kotlin/Long = ...): tech.aliorpse.mcutils.api/RconConnection // tech.aliorpse.mcutils.api/createRconConnection|createRconConnection@tech.aliorpse.mcutils.api.MinecraftServer(kotlin.String;kotlin.Int;kotlin.String;kotlin.Long){}[0]

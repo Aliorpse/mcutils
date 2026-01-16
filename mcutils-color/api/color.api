@@ -1,0 +1,46 @@
+public final class tech/aliorpse/mcutils/entity/TextComponent {
+	public static final field Companion Ltech/aliorpse/mcutils/entity/TextComponent$Companion;
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/Set;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/util/Set;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/util/Set;
+	public final fun component4 ()Ljava/util/List;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;Ljava/util/Set;Ljava/util/List;)Ltech/aliorpse/mcutils/entity/TextComponent;
+	public static synthetic fun copy$default (Ltech/aliorpse/mcutils/entity/TextComponent;Ljava/lang/String;Ljava/lang/String;Ljava/util/Set;Ljava/util/List;ILjava/lang/Object;)Ltech/aliorpse/mcutils/entity/TextComponent;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getColor ()Ljava/lang/String;
+	public final fun getExtra ()Ljava/util/List;
+	public final fun getStyles ()Ljava/util/Set;
+	public final fun getText ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class tech/aliorpse/mcutils/entity/TextComponent$Companion {
+}
+
+public final class tech/aliorpse/mcutils/entity/TextStyle : java/lang/Enum {
+	public static final field BOLD Ltech/aliorpse/mcutils/entity/TextStyle;
+	public static final field Companion Ltech/aliorpse/mcutils/entity/TextStyle$Companion;
+	public static final field ITALIC Ltech/aliorpse/mcutils/entity/TextStyle;
+	public static final field OBFUSCATED Ltech/aliorpse/mcutils/entity/TextStyle;
+	public static final field STRIKETHROUGH Ltech/aliorpse/mcutils/entity/TextStyle;
+	public static final field UNDERLINED Ltech/aliorpse/mcutils/entity/TextStyle;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Ltech/aliorpse/mcutils/entity/TextStyle;
+	public static fun values ()[Ltech/aliorpse/mcutils/entity/TextStyle;
+}
+
+public final class tech/aliorpse/mcutils/entity/TextStyle$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class tech/aliorpse/mcutils/util/TextComponentKt {
+	public static final fun fromJson (Ltech/aliorpse/mcutils/entity/TextComponent$Companion;Ljava/lang/String;)Ltech/aliorpse/mcutils/entity/TextComponent;
+	public static final fun fromJson (Ltech/aliorpse/mcutils/entity/TextComponent$Companion;Lkotlinx/serialization/json/JsonElement;)Ltech/aliorpse/mcutils/entity/TextComponent;
+	public static final fun fromString (Ltech/aliorpse/mcutils/entity/TextComponent$Companion;Ljava/lang/String;)Ltech/aliorpse/mcutils/entity/TextComponent;
+	public static final fun toHtml (Ltech/aliorpse/mcutils/entity/TextComponent;)Ljava/lang/String;
+	public static final fun toPlainText (Ltech/aliorpse/mcutils/entity/TextComponent;)Ljava/lang/String;
+}
+

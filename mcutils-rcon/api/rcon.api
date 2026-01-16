@@ -1,0 +1,10 @@
+public final class tech/aliorpse/mcutils/api/RconConnection : java/lang/AutoCloseable {
+	public fun close ()V
+	public final fun execute (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class tech/aliorpse/mcutils/api/RconConnectionModuleKt {
+	public static final fun createRconConnection (Ltech/aliorpse/mcutils/api/MinecraftServer;Ljava/lang/String;ILjava/lang/String;JLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun createRconConnection$default (Ltech/aliorpse/mcutils/api/MinecraftServer;Ljava/lang/String;ILjava/lang/String;JLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+

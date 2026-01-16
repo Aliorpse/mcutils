@@ -1,0 +1,31 @@
+public abstract interface annotation class tech/aliorpse/mcutils/annotation/ExperimentalMCUtilsApi : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class tech/aliorpse/mcutils/annotation/InternalMCUtilsApi : java/lang/annotation/Annotation {
+}
+
+public final class tech/aliorpse/mcutils/api/MinecraftPlayer {
+	public static final field INSTANCE Ltech/aliorpse/mcutils/api/MinecraftPlayer;
+}
+
+public final class tech/aliorpse/mcutils/api/MinecraftServer {
+	public static final field INSTANCE Ltech/aliorpse/mcutils/api/MinecraftServer;
+}
+
+public final class tech/aliorpse/mcutils/util/HostPort {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Integer;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/Integer;
+	public final fun copy (Ljava/lang/String;Ljava/lang/Integer;)Ltech/aliorpse/mcutils/util/HostPort;
+	public static synthetic fun copy$default (Ltech/aliorpse/mcutils/util/HostPort;Ljava/lang/String;Ljava/lang/Integer;ILjava/lang/Object;)Ltech/aliorpse/mcutils/util/HostPort;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getHost ()Ljava/lang/String;
+	public final fun getPort ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class tech/aliorpse/mcutils/util/HostPortKt {
+	public static final fun hostPortOf (Ljava/lang/String;)Ltech/aliorpse/mcutils/util/HostPort;
+}
+

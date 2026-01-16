@@ -1,0 +1,1336 @@
+// Klib ABI Dump
+// Targets: [androidNativeArm64, androidNativeX64, iosArm64, iosSimulatorArm64, iosX64, js, linuxArm64, linuxX64, macosArm64, macosX64, mingwX64, wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <tech.aliorpse.mcutils:msmp>
+abstract interface tech.aliorpse.mcutils.api.registry/MsmpExtension { // tech.aliorpse.mcutils.api.registry/MsmpExtension|null[0]
+    abstract val baseEndpoint // tech.aliorpse.mcutils.api.registry/MsmpExtension.baseEndpoint|{}baseEndpoint[0]
+        abstract fun <get-baseEndpoint>(): kotlin/String // tech.aliorpse.mcutils.api.registry/MsmpExtension.baseEndpoint.<get-baseEndpoint>|<get-baseEndpoint>(){}[0]
+    abstract val client // tech.aliorpse.mcutils.api.registry/MsmpExtension.client|{}client[0]
+        abstract fun <get-client>(): tech.aliorpse.mcutils.api/MsmpClient // tech.aliorpse.mcutils.api.registry/MsmpExtension.client.<get-client>|<get-client>(){}[0]
+}
+
+abstract interface tech.aliorpse.mcutils.api.registry/Syncable : tech.aliorpse.mcutils.api.registry/MsmpExtension { // tech.aliorpse.mcutils.api.registry/Syncable|null[0]
+    abstract val flow // tech.aliorpse.mcutils.api.registry/Syncable.flow|{}flow[0]
+        abstract fun <get-flow>(): kotlinx.coroutines.flow/StateFlow<*> // tech.aliorpse.mcutils.api.registry/Syncable.flow.<get-flow>|<get-flow>(){}[0]
+}
+
+abstract interface tech.aliorpse.mcutils.entity/IMsmpEventRegistry { // tech.aliorpse.mcutils.entity/IMsmpEventRegistry|null[0]
+    abstract fun <#A1: tech.aliorpse.mcutils.entity/MsmpEvent> registerData(kotlin/String, kotlinx.serialization/KSerializer<#A1>) // tech.aliorpse.mcutils.entity/IMsmpEventRegistry.registerData|registerData(kotlin.String;kotlinx.serialization.KSerializer<0:0>){0§<tech.aliorpse.mcutils.entity.MsmpEvent>}[0]
+    abstract fun registerCustom(kotlin/String, kotlin/Function1<kotlinx.serialization.json/JsonElement?, tech.aliorpse.mcutils.entity/MsmpEvent>) // tech.aliorpse.mcutils.entity/IMsmpEventRegistry.registerCustom|registerCustom(kotlin.String;kotlin.Function1<kotlinx.serialization.json.JsonElement?,tech.aliorpse.mcutils.entity.MsmpEvent>){}[0]
+    abstract fun registerSingleton(kotlin/String, tech.aliorpse.mcutils.entity/MsmpEvent) // tech.aliorpse.mcutils.entity/IMsmpEventRegistry.registerSingleton|registerSingleton(kotlin.String;tech.aliorpse.mcutils.entity.MsmpEvent){}[0]
+    open fun (kotlin/String).bind(tech.aliorpse.mcutils.entity/MsmpEvent) // tech.aliorpse.mcutils.entity/IMsmpEventRegistry.bind|bind@kotlin.String(tech.aliorpse.mcutils.entity.MsmpEvent){}[0]
+    open fun (kotlin/String).define(kotlin/Function1<kotlinx.serialization.json/JsonElement?, tech.aliorpse.mcutils.entity/MsmpEvent>) // tech.aliorpse.mcutils.entity/IMsmpEventRegistry.define|define@kotlin.String(kotlin.Function1<kotlinx.serialization.json.JsonElement?,tech.aliorpse.mcutils.entity.MsmpEvent>){}[0]
+    open fun <#A1: tech.aliorpse.mcutils.entity/MsmpEvent> (kotlin/String).register(kotlinx.serialization/KSerializer<#A1>) // tech.aliorpse.mcutils.entity/IMsmpEventRegistry.register|register@kotlin.String(kotlinx.serialization.KSerializer<0:0>){0§<tech.aliorpse.mcutils.entity.MsmpEvent>}[0]
+}
+
+sealed interface tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/MsmpEvent|null[0]
+    final object Companion : kotlinx.serialization.internal/SerializerFactory { // tech.aliorpse.mcutils.entity/MsmpEvent.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/MsmpEvent> // tech.aliorpse.mcutils.entity/MsmpEvent.Companion.serializer|serializer(){}[0]
+        final fun serializer(kotlin/Array<out kotlinx.serialization/KSerializer<*>>...): kotlinx.serialization/KSerializer<*> // tech.aliorpse.mcutils.entity/MsmpEvent.Companion.serializer|serializer(kotlin.Array<out|kotlinx.serialization.KSerializer<*>>...){}[0]
+    }
+}
+
+abstract class tech.aliorpse.mcutils.entity/JsonRpcError { // tech.aliorpse.mcutils.entity/JsonRpcError|null[0]
+    constructor <init>() // tech.aliorpse.mcutils.entity/JsonRpcError.<init>|<init>(){}[0]
+    constructor <init>(kotlin/Int, kotlinx.serialization.internal/SerializationConstructorMarker?) // tech.aliorpse.mcutils.entity/JsonRpcError.<init>|<init>(kotlin.Int;kotlinx.serialization.internal.SerializationConstructorMarker?){}[0]
+
+    abstract val code // tech.aliorpse.mcutils.entity/JsonRpcError.code|{}code[0]
+        abstract fun <get-code>(): kotlin/Int // tech.aliorpse.mcutils.entity/JsonRpcError.code.<get-code>|<get-code>(){}[0]
+    abstract val data // tech.aliorpse.mcutils.entity/JsonRpcError.data|{}data[0]
+        abstract fun <get-data>(): kotlin/String? // tech.aliorpse.mcutils.entity/JsonRpcError.data.<get-data>|<get-data>(){}[0]
+    abstract val message // tech.aliorpse.mcutils.entity/JsonRpcError.message|{}message[0]
+        abstract fun <get-message>(): kotlin/String // tech.aliorpse.mcutils.entity/JsonRpcError.message.<get-message>|<get-message>(){}[0]
+
+    final object Companion : kotlinx.serialization.internal/SerializerFactory { // tech.aliorpse.mcutils.entity/JsonRpcError.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/JsonRpcError> // tech.aliorpse.mcutils.entity/JsonRpcError.Companion.serializer|serializer(){}[0]
+        final fun serializer(kotlin/Array<out kotlinx.serialization/KSerializer<*>>...): kotlinx.serialization/KSerializer<*> // tech.aliorpse.mcutils.entity/JsonRpcError.Companion.serializer|serializer(kotlin.Array<out|kotlinx.serialization.KSerializer<*>>...){}[0]
+    }
+}
+
+final class <#A: kotlin/Any?, #B: kotlin/Any?> tech.aliorpse.mcutils.internal.util/SpinLockedMutableMap { // tech.aliorpse.mcutils.internal.util/SpinLockedMutableMap|null[0]
+    constructor <init>() // tech.aliorpse.mcutils.internal.util/SpinLockedMutableMap.<init>|<init>(){}[0]
+
+    final fun <#A1: kotlin/Any?> withLock(kotlin/Function1<kotlin.collections/MutableMap<#A, #B>, #A1>): #A1 // tech.aliorpse.mcutils.internal.util/SpinLockedMutableMap.withLock|withLock(kotlin.Function1<kotlin.collections.MutableMap<1:0,1:1>,0:0>){0§<kotlin.Any?>}[0]
+    final fun clearAndForEach(kotlin/Function2<#A, #B, kotlin/Unit>) // tech.aliorpse.mcutils.internal.util/SpinLockedMutableMap.clearAndForEach|clearAndForEach(kotlin.Function2<1:0,1:1,kotlin.Unit>){}[0]
+    final fun get(#A): #B? // tech.aliorpse.mcutils.internal.util/SpinLockedMutableMap.get|get(1:0){}[0]
+    final fun getOrPut(#A, kotlin/Function0<#B>): #B // tech.aliorpse.mcutils.internal.util/SpinLockedMutableMap.getOrPut|getOrPut(1:0;kotlin.Function0<1:1>){}[0]
+    final fun put(#A, #B) // tech.aliorpse.mcutils.internal.util/SpinLockedMutableMap.put|put(1:0;1:1){}[0]
+    final fun remove(#A): #B? // tech.aliorpse.mcutils.internal.util/SpinLockedMutableMap.remove|remove(1:0){}[0]
+}
+
+final class <#A: kotlin/Any?> tech.aliorpse.mcutils.api.extension/ArrayExtension : tech.aliorpse.mcutils.api.registry/MsmpExtension, tech.aliorpse.mcutils.api.registry/Syncable { // tech.aliorpse.mcutils.api.extension/ArrayExtension|null[0]
+    constructor <init>(tech.aliorpse.mcutils.api/MsmpClient, kotlin/String, kotlinx.serialization/KSerializer<#A>, kotlinx.serialization/KSerializer<#A>) // tech.aliorpse.mcutils.api.extension/ArrayExtension.<init>|<init>(tech.aliorpse.mcutils.api.MsmpClient;kotlin.String;kotlinx.serialization.KSerializer<1:0>;kotlinx.serialization.KSerializer<1:0>){}[0]
+
+    final val baseEndpoint // tech.aliorpse.mcutils.api.extension/ArrayExtension.baseEndpoint|{}baseEndpoint[0]
+        final fun <get-baseEndpoint>(): kotlin/String // tech.aliorpse.mcutils.api.extension/ArrayExtension.baseEndpoint.<get-baseEndpoint>|<get-baseEndpoint>(){}[0]
+    final val client // tech.aliorpse.mcutils.api.extension/ArrayExtension.client|{}client[0]
+        final fun <get-client>(): tech.aliorpse.mcutils.api/MsmpClient // tech.aliorpse.mcutils.api.extension/ArrayExtension.client.<get-client>|<get-client>(){}[0]
+    final val flow // tech.aliorpse.mcutils.api.extension/ArrayExtension.flow|{}flow[0]
+        final fun <get-flow>(): kotlinx.coroutines.flow/StateFlow<kotlin.collections/Set<#A>> // tech.aliorpse.mcutils.api.extension/ArrayExtension.flow.<get-flow>|<get-flow>(){}[0]
+    final val paramSerializer // tech.aliorpse.mcutils.api.extension/ArrayExtension.paramSerializer|{}paramSerializer[0]
+        final fun <get-paramSerializer>(): kotlinx.serialization/KSerializer<kotlin.collections/List<kotlin.collections/Set<#A>>> // tech.aliorpse.mcutils.api.extension/ArrayExtension.paramSerializer.<get-paramSerializer>|<get-paramSerializer>(){}[0]
+    final val responseSerializer // tech.aliorpse.mcutils.api.extension/ArrayExtension.responseSerializer|{}responseSerializer[0]
+        final fun <get-responseSerializer>(): kotlinx.serialization/KSerializer<kotlin.collections/Set<#A>> // tech.aliorpse.mcutils.api.extension/ArrayExtension.responseSerializer.<get-responseSerializer>|<get-responseSerializer>(){}[0]
+
+    final suspend inline fun add(kotlin/Array<out #A>...): kotlin.collections/Set<#A> // tech.aliorpse.mcutils.api.extension/ArrayExtension.add|add(kotlin.Array<out|1:0>...){}[0]
+    final suspend inline fun clear(): kotlin.collections/Set<#A> // tech.aliorpse.mcutils.api.extension/ArrayExtension.clear|clear(){}[0]
+    final suspend inline fun get(): kotlin.collections/Set<#A> // tech.aliorpse.mcutils.api.extension/ArrayExtension.get|get(){}[0]
+    final suspend inline fun remove(kotlin/Array<out #A>...): kotlin.collections/Set<#A> // tech.aliorpse.mcutils.api.extension/ArrayExtension.remove|remove(kotlin.Array<out|1:0>...){}[0]
+    final suspend inline fun set(kotlin/Array<out #A>...): kotlin.collections/Set<#A> // tech.aliorpse.mcutils.api.extension/ArrayExtension.set|set(kotlin.Array<out|1:0>...){}[0]
+}
+
+final class <#A: tech.aliorpse.mcutils.api.registry/MsmpExtension> tech.aliorpse.mcutils.api.registry/MsmpExtensionConfig { // tech.aliorpse.mcutils.api.registry/MsmpExtensionConfig|null[0]
+    constructor <init>(#A) // tech.aliorpse.mcutils.api.registry/MsmpExtensionConfig.<init>|<init>(1:0){}[0]
+
+    final val extension // tech.aliorpse.mcutils.api.registry/MsmpExtensionConfig.extension|{}extension[0]
+        final fun <get-extension>(): #A // tech.aliorpse.mcutils.api.registry/MsmpExtensionConfig.extension.<get-extension>|<get-extension>(){}[0]
+
+    final fun onConnection(kotlin.coroutines/SuspendFunction1<#A, kotlin/Unit>) // tech.aliorpse.mcutils.api.registry/MsmpExtensionConfig.onConnection|onConnection(kotlin.coroutines.SuspendFunction1<1:0,kotlin.Unit>){}[0]
+    final inline fun <#A1: reified tech.aliorpse.mcutils.entity/MsmpEvent> on(crossinline kotlin/Function2<#A, #A1, kotlin/Unit>): kotlinx.coroutines/Job // tech.aliorpse.mcutils.api.registry/MsmpExtensionConfig.on|on(kotlin.Function2<1:0,0:0,kotlin.Unit>){0§<tech.aliorpse.mcutils.entity.MsmpEvent>}[0]
+}
+
+final class tech.aliorpse.mcutils.api.extension/GamerulesExtension : tech.aliorpse.mcutils.api.registry/MsmpExtension, tech.aliorpse.mcutils.api.registry/Syncable { // tech.aliorpse.mcutils.api.extension/GamerulesExtension|null[0]
+    final val baseEndpoint // tech.aliorpse.mcutils.api.extension/GamerulesExtension.baseEndpoint|{}baseEndpoint[0]
+        final fun <get-baseEndpoint>(): kotlin/String // tech.aliorpse.mcutils.api.extension/GamerulesExtension.baseEndpoint.<get-baseEndpoint>|<get-baseEndpoint>(){}[0]
+    final val client // tech.aliorpse.mcutils.api.extension/GamerulesExtension.client|{}client[0]
+        final fun <get-client>(): tech.aliorpse.mcutils.api/MsmpClient // tech.aliorpse.mcutils.api.extension/GamerulesExtension.client.<get-client>|<get-client>(){}[0]
+    final val flow // tech.aliorpse.mcutils.api.extension/GamerulesExtension.flow|{}flow[0]
+        final fun <get-flow>(): kotlinx.coroutines.flow/StateFlow<kotlin.collections/Set<tech.aliorpse.mcutils.entity/TypedGameruleDto>> // tech.aliorpse.mcutils.api.extension/GamerulesExtension.flow.<get-flow>|<get-flow>(){}[0]
+
+    final suspend inline fun get(): kotlin.collections/Set<tech.aliorpse.mcutils.entity/TypedGameruleDto> // tech.aliorpse.mcutils.api.extension/GamerulesExtension.get|get(){}[0]
+    final suspend inline fun set(kotlin/String, kotlin/Boolean): tech.aliorpse.mcutils.entity/TypedGameruleDto // tech.aliorpse.mcutils.api.extension/GamerulesExtension.set|set(kotlin.String;kotlin.Boolean){}[0]
+    final suspend inline fun set(kotlin/String, kotlin/Int): tech.aliorpse.mcutils.entity/TypedGameruleDto // tech.aliorpse.mcutils.api.extension/GamerulesExtension.set|set(kotlin.String;kotlin.Int){}[0]
+    final suspend inline fun set(tech.aliorpse.mcutils.entity/UntypedGameruleDto): tech.aliorpse.mcutils.entity/TypedGameruleDto // tech.aliorpse.mcutils.api.extension/GamerulesExtension.set|set(tech.aliorpse.mcutils.entity.UntypedGameruleDto){}[0]
+}
+
+final class tech.aliorpse.mcutils.api.extension/PlayersExtension : tech.aliorpse.mcutils.api.registry/MsmpExtension, tech.aliorpse.mcutils.api.registry/Syncable { // tech.aliorpse.mcutils.api.extension/PlayersExtension|null[0]
+    final val baseEndpoint // tech.aliorpse.mcutils.api.extension/PlayersExtension.baseEndpoint|{}baseEndpoint[0]
+        final fun <get-baseEndpoint>(): kotlin/String // tech.aliorpse.mcutils.api.extension/PlayersExtension.baseEndpoint.<get-baseEndpoint>|<get-baseEndpoint>(){}[0]
+    final val client // tech.aliorpse.mcutils.api.extension/PlayersExtension.client|{}client[0]
+        final fun <get-client>(): tech.aliorpse.mcutils.api/MsmpClient // tech.aliorpse.mcutils.api.extension/PlayersExtension.client.<get-client>|<get-client>(){}[0]
+    final val flow // tech.aliorpse.mcutils.api.extension/PlayersExtension.flow|{}flow[0]
+        final fun <get-flow>(): kotlinx.coroutines.flow/StateFlow<kotlin.collections/Set<tech.aliorpse.mcutils.entity/PlayerDto>> // tech.aliorpse.mcutils.api.extension/PlayersExtension.flow.<get-flow>|<get-flow>(){}[0]
+
+    final suspend inline fun get(): kotlin.collections/Set<tech.aliorpse.mcutils.entity/PlayerDto> // tech.aliorpse.mcutils.api.extension/PlayersExtension.get|get(){}[0]
+    final suspend inline fun kick(kotlin/Array<out kotlin/String>..., kotlin/String = ...): kotlin.collections/Set<tech.aliorpse.mcutils.entity/PlayerDto> // tech.aliorpse.mcutils.api.extension/PlayersExtension.kick|kick(kotlin.Array<out|kotlin.String>...;kotlin.String){}[0]
+    final suspend inline fun kick(kotlin/Array<out tech.aliorpse.mcutils.entity/KickPlayerDto>...): kotlin.collections/Set<tech.aliorpse.mcutils.entity/PlayerDto> // tech.aliorpse.mcutils.api.extension/PlayersExtension.kick|kick(kotlin.Array<out|tech.aliorpse.mcutils.entity.KickPlayerDto>...){}[0]
+}
+
+final class tech.aliorpse.mcutils.api.extension/ServerExtension : tech.aliorpse.mcutils.api.registry/MsmpExtension { // tech.aliorpse.mcutils.api.extension/ServerExtension|null[0]
+    final val baseEndpoint // tech.aliorpse.mcutils.api.extension/ServerExtension.baseEndpoint|{}baseEndpoint[0]
+        final fun <get-baseEndpoint>(): kotlin/String // tech.aliorpse.mcutils.api.extension/ServerExtension.baseEndpoint.<get-baseEndpoint>|<get-baseEndpoint>(){}[0]
+    final val client // tech.aliorpse.mcutils.api.extension/ServerExtension.client|{}client[0]
+        final fun <get-client>(): tech.aliorpse.mcutils.api/MsmpClient // tech.aliorpse.mcutils.api.extension/ServerExtension.client.<get-client>|<get-client>(){}[0]
+
+    final suspend inline fun save(kotlin/Boolean = ...): kotlin/Boolean // tech.aliorpse.mcutils.api.extension/ServerExtension.save|save(kotlin.Boolean){}[0]
+    final suspend inline fun sendMessage(kotlin.collections/Set<tech.aliorpse.mcutils.entity/PlayerDto>, tech.aliorpse.mcutils.entity/MessageDto, kotlin/Boolean = ...): kotlin/Boolean // tech.aliorpse.mcutils.api.extension/ServerExtension.sendMessage|sendMessage(kotlin.collections.Set<tech.aliorpse.mcutils.entity.PlayerDto>;tech.aliorpse.mcutils.entity.MessageDto;kotlin.Boolean){}[0]
+    final suspend inline fun sendMessage(kotlin/Array<out kotlin/String>..., kotlin/String, kotlin/Boolean = ...): kotlin/Boolean // tech.aliorpse.mcutils.api.extension/ServerExtension.sendMessage|sendMessage(kotlin.Array<out|kotlin.String>...;kotlin.String;kotlin.Boolean){}[0]
+    final suspend inline fun sendMessage(tech.aliorpse.mcutils.entity/SystemMessageDto): kotlin/Boolean // tech.aliorpse.mcutils.api.extension/ServerExtension.sendMessage|sendMessage(tech.aliorpse.mcutils.entity.SystemMessageDto){}[0]
+    final suspend inline fun status(): tech.aliorpse.mcutils.entity/ServerStateDto // tech.aliorpse.mcutils.api.extension/ServerExtension.status|status(){}[0]
+    final suspend inline fun stop(): kotlin/Boolean // tech.aliorpse.mcutils.api.extension/ServerExtension.stop|stop(){}[0]
+}
+
+final class tech.aliorpse.mcutils.api.extension/ServerSettingsExtension : tech.aliorpse.mcutils.api.registry/MsmpExtension { // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension|null[0]
+    final val acceptTransfers // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.acceptTransfers|{}acceptTransfers[0]
+        final fun <get-acceptTransfers>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.BoolProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.acceptTransfers.<get-acceptTransfers>|<get-acceptTransfers>(){}[0]
+    final val allowFlight // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.allowFlight|{}allowFlight[0]
+        final fun <get-allowFlight>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.BoolProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.allowFlight.<get-allowFlight>|<get-allowFlight>(){}[0]
+    final val autosave // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.autosave|{}autosave[0]
+        final fun <get-autosave>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.BoolProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.autosave.<get-autosave>|<get-autosave>(){}[0]
+    final val baseEndpoint // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.baseEndpoint|{}baseEndpoint[0]
+        final fun <get-baseEndpoint>(): kotlin/String // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.baseEndpoint.<get-baseEndpoint>|<get-baseEndpoint>(){}[0]
+    final val client // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.client|{}client[0]
+        final fun <get-client>(): tech.aliorpse.mcutils.api/MsmpClient // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.client.<get-client>|<get-client>(){}[0]
+    final val difficulty // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.difficulty|{}difficulty[0]
+        final fun <get-difficulty>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.StringProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.difficulty.<get-difficulty>|<get-difficulty>(){}[0]
+    final val enforceAllowlist // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.enforceAllowlist|{}enforceAllowlist[0]
+        final fun <get-enforceAllowlist>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.BoolProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.enforceAllowlist.<get-enforceAllowlist>|<get-enforceAllowlist>(){}[0]
+    final val entityBroadcastRange // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.entityBroadcastRange|{}entityBroadcastRange[0]
+        final fun <get-entityBroadcastRange>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.IntProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.entityBroadcastRange.<get-entityBroadcastRange>|<get-entityBroadcastRange>(){}[0]
+    final val forceGameMode // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.forceGameMode|{}forceGameMode[0]
+        final fun <get-forceGameMode>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.BoolProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.forceGameMode.<get-forceGameMode>|<get-forceGameMode>(){}[0]
+    final val gameMode // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.gameMode|{}gameMode[0]
+        final fun <get-gameMode>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.StringProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.gameMode.<get-gameMode>|<get-gameMode>(){}[0]
+    final val hideOnlinePlayers // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.hideOnlinePlayers|{}hideOnlinePlayers[0]
+        final fun <get-hideOnlinePlayers>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.BoolProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.hideOnlinePlayers.<get-hideOnlinePlayers>|<get-hideOnlinePlayers>(){}[0]
+    final val maxPlayers // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.maxPlayers|{}maxPlayers[0]
+        final fun <get-maxPlayers>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.IntProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.maxPlayers.<get-maxPlayers>|<get-maxPlayers>(){}[0]
+    final val motd // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.motd|{}motd[0]
+        final fun <get-motd>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.StringProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.motd.<get-motd>|<get-motd>(){}[0]
+    final val operatorUserPermissionLevel // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.operatorUserPermissionLevel|{}operatorUserPermissionLevel[0]
+        final fun <get-operatorUserPermissionLevel>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.IntProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.operatorUserPermissionLevel.<get-operatorUserPermissionLevel>|<get-operatorUserPermissionLevel>(){}[0]
+    final val pauseWhenEmptySeconds // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.pauseWhenEmptySeconds|{}pauseWhenEmptySeconds[0]
+        final fun <get-pauseWhenEmptySeconds>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.IntProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.pauseWhenEmptySeconds.<get-pauseWhenEmptySeconds>|<get-pauseWhenEmptySeconds>(){}[0]
+    final val playerIdleTimeout // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.playerIdleTimeout|{}playerIdleTimeout[0]
+        final fun <get-playerIdleTimeout>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.IntProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.playerIdleTimeout.<get-playerIdleTimeout>|<get-playerIdleTimeout>(){}[0]
+    final val simulationDistance // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.simulationDistance|{}simulationDistance[0]
+        final fun <get-simulationDistance>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.IntProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.simulationDistance.<get-simulationDistance>|<get-simulationDistance>(){}[0]
+    final val spawnProtectionRadius // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.spawnProtectionRadius|{}spawnProtectionRadius[0]
+        final fun <get-spawnProtectionRadius>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.IntProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.spawnProtectionRadius.<get-spawnProtectionRadius>|<get-spawnProtectionRadius>(){}[0]
+    final val statusHeartbeatInterval // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.statusHeartbeatInterval|{}statusHeartbeatInterval[0]
+        final fun <get-statusHeartbeatInterval>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.IntProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.statusHeartbeatInterval.<get-statusHeartbeatInterval>|<get-statusHeartbeatInterval>(){}[0]
+    final val statusReplies // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.statusReplies|{}statusReplies[0]
+        final fun <get-statusReplies>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.BoolProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.statusReplies.<get-statusReplies>|<get-statusReplies>(){}[0]
+    final val useAllowlist // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.useAllowlist|{}useAllowlist[0]
+        final fun <get-useAllowlist>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.BoolProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.useAllowlist.<get-useAllowlist>|<get-useAllowlist>(){}[0]
+    final val viewDistance // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.viewDistance|{}viewDistance[0]
+        final fun <get-viewDistance>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.IntProp // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.viewDistance.<get-viewDistance>|<get-viewDistance>(){}[0]
+
+    final inner class BoolProp { // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.BoolProp|null[0]
+        constructor <init>(kotlin/String, kotlin/String) // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.BoolProp.<init>|<init>(kotlin.String;kotlin.String){}[0]
+
+        final val param // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.BoolProp.param|{}param[0]
+            final fun <get-param>(): kotlin/String // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.BoolProp.param.<get-param>|<get-param>(){}[0]
+        final val path // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.BoolProp.path|{}path[0]
+            final fun <get-path>(): kotlin/String // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.BoolProp.path.<get-path>|<get-path>(){}[0]
+
+        final suspend inline fun get(): kotlin/Boolean // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.BoolProp.get|get(){}[0]
+        final suspend inline fun set(kotlin/Boolean): kotlin/Boolean // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.BoolProp.set|set(kotlin.Boolean){}[0]
+    }
+
+    final inner class IntProp { // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.IntProp|null[0]
+        constructor <init>(kotlin/String, kotlin/String) // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.IntProp.<init>|<init>(kotlin.String;kotlin.String){}[0]
+
+        final val param // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.IntProp.param|{}param[0]
+            final fun <get-param>(): kotlin/String // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.IntProp.param.<get-param>|<get-param>(){}[0]
+        final val path // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.IntProp.path|{}path[0]
+            final fun <get-path>(): kotlin/String // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.IntProp.path.<get-path>|<get-path>(){}[0]
+
+        final suspend inline fun get(): kotlin/Int // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.IntProp.get|get(){}[0]
+        final suspend inline fun set(kotlin/Int): kotlin/Int // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.IntProp.set|set(kotlin.Int){}[0]
+    }
+
+    final inner class StringProp { // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.StringProp|null[0]
+        constructor <init>(kotlin/String, kotlin/String) // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.StringProp.<init>|<init>(kotlin.String;kotlin.String){}[0]
+
+        final val param // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.StringProp.param|{}param[0]
+            final fun <get-param>(): kotlin/String // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.StringProp.param.<get-param>|<get-param>(){}[0]
+        final val path // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.StringProp.path|{}path[0]
+            final fun <get-path>(): kotlin/String // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.StringProp.path.<get-path>|<get-path>(){}[0]
+
+        final suspend inline fun get(): kotlin/String // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.StringProp.get|get(){}[0]
+        final suspend inline fun set(kotlin/String): kotlin/String // tech.aliorpse.mcutils.api.extension/ServerSettingsExtension.StringProp.set|set(kotlin.String){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.api/MsmpClient : kotlin/AutoCloseable { // tech.aliorpse.mcutils.api/MsmpClient|null[0]
+    final val callExtensions // tech.aliorpse.mcutils.api/MsmpClient.callExtensions|{}callExtensions[0]
+        final fun <get-callExtensions>(): tech.aliorpse.mcutils.internal.util/SpinLockedMutableMap<kotlin/String, kotlin/Any> // tech.aliorpse.mcutils.api/MsmpClient.callExtensions.<get-callExtensions>|<get-callExtensions>(){}[0]
+    final val config // tech.aliorpse.mcutils.api/MsmpClient.config|{}config[0]
+        final fun <get-config>(): tech.aliorpse.mcutils.api/MsmpClientConfig // tech.aliorpse.mcutils.api/MsmpClient.config.<get-config>|<get-config>(){}[0]
+    final val eventFlow // tech.aliorpse.mcutils.api/MsmpClient.eventFlow|{}eventFlow[0]
+        final fun <get-eventFlow>(): kotlinx.coroutines.flow/Flow<tech.aliorpse.mcutils.entity/MsmpEvent> // tech.aliorpse.mcutils.api/MsmpClient.eventFlow.<get-eventFlow>|<get-eventFlow>(){}[0]
+    final val json // tech.aliorpse.mcutils.api/MsmpClient.json|{}json[0]
+        final fun <get-json>(): kotlinx.serialization.json/Json // tech.aliorpse.mcutils.api/MsmpClient.json.<get-json>|<get-json>(){}[0]
+    final val scope // tech.aliorpse.mcutils.api/MsmpClient.scope|{}scope[0]
+        final fun <get-scope>(): kotlinx.coroutines/CoroutineScope // tech.aliorpse.mcutils.api/MsmpClient.scope.<get-scope>|<get-scope>(){}[0]
+    final val stateFlow // tech.aliorpse.mcutils.api/MsmpClient.stateFlow|{}stateFlow[0]
+        final fun <get-stateFlow>(): kotlinx.coroutines.flow/StateFlow<tech.aliorpse.mcutils.api/MsmpState> // tech.aliorpse.mcutils.api/MsmpClient.stateFlow.<get-stateFlow>|<get-stateFlow>(){}[0]
+
+    final fun <#A1: kotlin/Any?> (kotlinx.serialization.json/JsonElement).decodeBy(kotlinx.serialization/KSerializer<#A1>): #A1 // tech.aliorpse.mcutils.api/MsmpClient.decodeBy|decodeBy@kotlinx.serialization.json.JsonElement(kotlinx.serialization.KSerializer<0:0>){0§<kotlin.Any?>}[0]
+    final fun close() // tech.aliorpse.mcutils.api/MsmpClient.close|close(){}[0]
+    final fun connect() // tech.aliorpse.mcutils.api/MsmpClient.connect|connect(){}[0]
+    final inline fun <#A1: reified tech.aliorpse.mcutils.entity/MsmpEvent> on(): kotlinx.coroutines.flow/Flow<#A1> // tech.aliorpse.mcutils.api/MsmpClient.on|on(){0§<tech.aliorpse.mcutils.entity.MsmpEvent>}[0]
+    final inline fun <#A1: reified tech.aliorpse.mcutils.entity/MsmpEvent> on(crossinline kotlin.coroutines/SuspendFunction1<#A1, kotlin/Unit>): kotlinx.coroutines/Job // tech.aliorpse.mcutils.api/MsmpClient.on|on(kotlin.coroutines.SuspendFunction1<0:0,kotlin.Unit>){0§<tech.aliorpse.mcutils.entity.MsmpEvent>}[0]
+    final suspend fun <#A1: kotlin/Any?> call(kotlin/String, kotlinx.serialization/KSerializer<#A1>, kotlin/Long = ...): #A1 // tech.aliorpse.mcutils.api/MsmpClient.call|call(kotlin.String;kotlinx.serialization.KSerializer<0:0>;kotlin.Long){0§<kotlin.Any?>}[0]
+    final suspend fun awaitCall(kotlin/String, kotlinx.serialization.json/JsonElement, kotlin/Long): kotlinx.serialization.json/JsonElement // tech.aliorpse.mcutils.api/MsmpClient.awaitCall|awaitCall(kotlin.String;kotlinx.serialization.json.JsonElement;kotlin.Long){}[0]
+    final suspend inline fun <#A1: kotlin/Any?, #B1: kotlin/Any?> call(kotlin/String, #A1, kotlinx.serialization/KSerializer<#A1>, kotlinx.serialization/KSerializer<#B1>, kotlin/Long = ...): #B1 // tech.aliorpse.mcutils.api/MsmpClient.call|call(kotlin.String;0:0;kotlinx.serialization.KSerializer<0:0>;kotlinx.serialization.KSerializer<0:1>;kotlin.Long){0§<kotlin.Any?>;1§<kotlin.Any?>}[0]
+    final suspend inline fun <#A1: reified kotlin/Any?, #B1: reified kotlin/Any?> call(kotlin/String, #A1, kotlin/Long = ...): #B1 // tech.aliorpse.mcutils.api/MsmpClient.call|call(kotlin.String;0:0;kotlin.Long){0§<kotlin.Any?>;1§<kotlin.Any?>}[0]
+    final suspend inline fun <#A1: reified kotlin/Any?> call(kotlin/String, kotlin/Long = ...): #A1 // tech.aliorpse.mcutils.api/MsmpClient.call|call(kotlin.String;kotlin.Long){0§<kotlin.Any?>}[0]
+    final suspend inline fun <#A1: reified tech.aliorpse.mcutils.api/MsmpState> awaitState(): #A1? // tech.aliorpse.mcutils.api/MsmpClient.awaitState|awaitState(){0§<tech.aliorpse.mcutils.api.MsmpState>}[0]
+    final suspend inline fun <#A1: reified tech.aliorpse.mcutils.entity/MsmpEvent> awaitEvent(): #A1? // tech.aliorpse.mcutils.api/MsmpClient.awaitEvent|awaitEvent(){0§<tech.aliorpse.mcutils.entity.MsmpEvent>}[0]
+    final suspend inline fun await(): tech.aliorpse.mcutils.api/MsmpState.Closed // tech.aliorpse.mcutils.api/MsmpClient.await|await(){}[0]
+}
+
+final class tech.aliorpse.mcutils.api/MsmpClientConfig { // tech.aliorpse.mcutils.api/MsmpClientConfig|null[0]
+    constructor <init>() // tech.aliorpse.mcutils.api/MsmpClientConfig.<init>|<init>(){}[0]
+
+    final var autoReconnect // tech.aliorpse.mcutils.api/MsmpClientConfig.autoReconnect|{}autoReconnect[0]
+        final fun <get-autoReconnect>(): kotlin/Boolean // tech.aliorpse.mcutils.api/MsmpClientConfig.autoReconnect.<get-autoReconnect>|<get-autoReconnect>(){}[0]
+        final fun <set-autoReconnect>(kotlin/Boolean) // tech.aliorpse.mcutils.api/MsmpClientConfig.autoReconnect.<set-autoReconnect>|<set-autoReconnect>(kotlin.Boolean){}[0]
+    final var batchDelay // tech.aliorpse.mcutils.api/MsmpClientConfig.batchDelay|{}batchDelay[0]
+        final fun <get-batchDelay>(): kotlin/Long // tech.aliorpse.mcutils.api/MsmpClientConfig.batchDelay.<get-batchDelay>|<get-batchDelay>(){}[0]
+        final fun <set-batchDelay>(kotlin/Long) // tech.aliorpse.mcutils.api/MsmpClientConfig.batchDelay.<set-batchDelay>|<set-batchDelay>(kotlin.Long){}[0]
+    final var connectTimeout // tech.aliorpse.mcutils.api/MsmpClientConfig.connectTimeout|{}connectTimeout[0]
+        final fun <get-connectTimeout>(): kotlin/Long // tech.aliorpse.mcutils.api/MsmpClientConfig.connectTimeout.<get-connectTimeout>|<get-connectTimeout>(){}[0]
+        final fun <set-connectTimeout>(kotlin/Long) // tech.aliorpse.mcutils.api/MsmpClientConfig.connectTimeout.<set-connectTimeout>|<set-connectTimeout>(kotlin.Long){}[0]
+    final var eventBufferSize // tech.aliorpse.mcutils.api/MsmpClientConfig.eventBufferSize|{}eventBufferSize[0]
+        final fun <get-eventBufferSize>(): kotlin/Int // tech.aliorpse.mcutils.api/MsmpClientConfig.eventBufferSize.<get-eventBufferSize>|<get-eventBufferSize>(){}[0]
+        final fun <set-eventBufferSize>(kotlin/Int) // tech.aliorpse.mcutils.api/MsmpClientConfig.eventBufferSize.<set-eventBufferSize>|<set-eventBufferSize>(kotlin.Int){}[0]
+    final var failFast // tech.aliorpse.mcutils.api/MsmpClientConfig.failFast|{}failFast[0]
+        final fun <get-failFast>(): kotlin/Boolean // tech.aliorpse.mcutils.api/MsmpClientConfig.failFast.<get-failFast>|<get-failFast>(){}[0]
+        final fun <set-failFast>(kotlin/Boolean) // tech.aliorpse.mcutils.api/MsmpClientConfig.failFast.<set-failFast>|<set-failFast>(kotlin.Boolean){}[0]
+    final var initialRetryDelay // tech.aliorpse.mcutils.api/MsmpClientConfig.initialRetryDelay|{}initialRetryDelay[0]
+        final fun <get-initialRetryDelay>(): kotlin/Long // tech.aliorpse.mcutils.api/MsmpClientConfig.initialRetryDelay.<get-initialRetryDelay>|<get-initialRetryDelay>(){}[0]
+        final fun <set-initialRetryDelay>(kotlin/Long) // tech.aliorpse.mcutils.api/MsmpClientConfig.initialRetryDelay.<set-initialRetryDelay>|<set-initialRetryDelay>(kotlin.Long){}[0]
+    final var maxReconnectAttempts // tech.aliorpse.mcutils.api/MsmpClientConfig.maxReconnectAttempts|{}maxReconnectAttempts[0]
+        final fun <get-maxReconnectAttempts>(): kotlin/Long // tech.aliorpse.mcutils.api/MsmpClientConfig.maxReconnectAttempts.<get-maxReconnectAttempts>|<get-maxReconnectAttempts>(){}[0]
+        final fun <set-maxReconnectAttempts>(kotlin/Long) // tech.aliorpse.mcutils.api/MsmpClientConfig.maxReconnectAttempts.<set-maxReconnectAttempts>|<set-maxReconnectAttempts>(kotlin.Long){}[0]
+    final var maxRetryDelay // tech.aliorpse.mcutils.api/MsmpClientConfig.maxRetryDelay|{}maxRetryDelay[0]
+        final fun <get-maxRetryDelay>(): kotlin/Long // tech.aliorpse.mcutils.api/MsmpClientConfig.maxRetryDelay.<get-maxRetryDelay>|<get-maxRetryDelay>(){}[0]
+        final fun <set-maxRetryDelay>(kotlin/Long) // tech.aliorpse.mcutils.api/MsmpClientConfig.maxRetryDelay.<set-maxRetryDelay>|<set-maxRetryDelay>(kotlin.Long){}[0]
+    final var requestTimeout // tech.aliorpse.mcutils.api/MsmpClientConfig.requestTimeout|{}requestTimeout[0]
+        final fun <get-requestTimeout>(): kotlin/Long // tech.aliorpse.mcutils.api/MsmpClientConfig.requestTimeout.<get-requestTimeout>|<get-requestTimeout>(){}[0]
+        final fun <set-requestTimeout>(kotlin/Long) // tech.aliorpse.mcutils.api/MsmpClientConfig.requestTimeout.<set-requestTimeout>|<set-requestTimeout>(kotlin.Long){}[0]
+}
+
+final class tech.aliorpse.mcutils.entity/AllowlistAddedEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/AllowlistAddedEvent|null[0]
+    constructor <init>(tech.aliorpse.mcutils.entity/PlayerDto) // tech.aliorpse.mcutils.entity/AllowlistAddedEvent.<init>|<init>(tech.aliorpse.mcutils.entity.PlayerDto){}[0]
+
+    final val eventCtx // tech.aliorpse.mcutils.entity/AllowlistAddedEvent.eventCtx|{}eventCtx[0]
+        final fun <get-eventCtx>(): tech.aliorpse.mcutils.entity/PlayerDto // tech.aliorpse.mcutils.entity/AllowlistAddedEvent.eventCtx.<get-eventCtx>|<get-eventCtx>(){}[0]
+
+    final fun component1(): tech.aliorpse.mcutils.entity/PlayerDto // tech.aliorpse.mcutils.entity/AllowlistAddedEvent.component1|component1(){}[0]
+    final fun copy(tech.aliorpse.mcutils.entity/PlayerDto = ...): tech.aliorpse.mcutils.entity/AllowlistAddedEvent // tech.aliorpse.mcutils.entity/AllowlistAddedEvent.copy|copy(tech.aliorpse.mcutils.entity.PlayerDto){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/AllowlistAddedEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/AllowlistAddedEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/AllowlistAddedEvent.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/AllowlistAddedEvent> { // tech.aliorpse.mcutils.entity/AllowlistAddedEvent.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/AllowlistAddedEvent.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/AllowlistAddedEvent.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/AllowlistAddedEvent.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/AllowlistAddedEvent // tech.aliorpse.mcutils.entity/AllowlistAddedEvent.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/AllowlistAddedEvent) // tech.aliorpse.mcutils.entity/AllowlistAddedEvent.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.AllowlistAddedEvent){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/AllowlistAddedEvent.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/AllowlistAddedEvent> // tech.aliorpse.mcutils.entity/AllowlistAddedEvent.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/AllowlistRemovedEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/AllowlistRemovedEvent|null[0]
+    constructor <init>(tech.aliorpse.mcutils.entity/PlayerDto) // tech.aliorpse.mcutils.entity/AllowlistRemovedEvent.<init>|<init>(tech.aliorpse.mcutils.entity.PlayerDto){}[0]
+
+    final val eventCtx // tech.aliorpse.mcutils.entity/AllowlistRemovedEvent.eventCtx|{}eventCtx[0]
+        final fun <get-eventCtx>(): tech.aliorpse.mcutils.entity/PlayerDto // tech.aliorpse.mcutils.entity/AllowlistRemovedEvent.eventCtx.<get-eventCtx>|<get-eventCtx>(){}[0]
+
+    final fun component1(): tech.aliorpse.mcutils.entity/PlayerDto // tech.aliorpse.mcutils.entity/AllowlistRemovedEvent.component1|component1(){}[0]
+    final fun copy(tech.aliorpse.mcutils.entity/PlayerDto = ...): tech.aliorpse.mcutils.entity/AllowlistRemovedEvent // tech.aliorpse.mcutils.entity/AllowlistRemovedEvent.copy|copy(tech.aliorpse.mcutils.entity.PlayerDto){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/AllowlistRemovedEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/AllowlistRemovedEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/AllowlistRemovedEvent.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/AllowlistRemovedEvent> { // tech.aliorpse.mcutils.entity/AllowlistRemovedEvent.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/AllowlistRemovedEvent.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/AllowlistRemovedEvent.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/AllowlistRemovedEvent.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/AllowlistRemovedEvent // tech.aliorpse.mcutils.entity/AllowlistRemovedEvent.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/AllowlistRemovedEvent) // tech.aliorpse.mcutils.entity/AllowlistRemovedEvent.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.AllowlistRemovedEvent){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/AllowlistRemovedEvent.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/AllowlistRemovedEvent> // tech.aliorpse.mcutils.entity/AllowlistRemovedEvent.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/ConnectionClosedEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/ConnectionClosedEvent|null[0]
+    constructor <init>(kotlin/String, kotlin/Boolean) // tech.aliorpse.mcutils.entity/ConnectionClosedEvent.<init>|<init>(kotlin.String;kotlin.Boolean){}[0]
+
+    final val cause // tech.aliorpse.mcutils.entity/ConnectionClosedEvent.cause|{}cause[0]
+        final fun <get-cause>(): kotlin/String // tech.aliorpse.mcutils.entity/ConnectionClosedEvent.cause.<get-cause>|<get-cause>(){}[0]
+    final val willRetry // tech.aliorpse.mcutils.entity/ConnectionClosedEvent.willRetry|{}willRetry[0]
+        final fun <get-willRetry>(): kotlin/Boolean // tech.aliorpse.mcutils.entity/ConnectionClosedEvent.willRetry.<get-willRetry>|<get-willRetry>(){}[0]
+
+    final fun component1(): kotlin/String // tech.aliorpse.mcutils.entity/ConnectionClosedEvent.component1|component1(){}[0]
+    final fun component2(): kotlin/Boolean // tech.aliorpse.mcutils.entity/ConnectionClosedEvent.component2|component2(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/Boolean = ...): tech.aliorpse.mcutils.entity/ConnectionClosedEvent // tech.aliorpse.mcutils.entity/ConnectionClosedEvent.copy|copy(kotlin.String;kotlin.Boolean){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/ConnectionClosedEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/ConnectionClosedEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/ConnectionClosedEvent.toString|toString(){}[0]
+}
+
+final class tech.aliorpse.mcutils.entity/GameruleUpdatedEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/GameruleUpdatedEvent|null[0]
+    constructor <init>(tech.aliorpse.mcutils.entity/TypedGameruleDto) // tech.aliorpse.mcutils.entity/GameruleUpdatedEvent.<init>|<init>(tech.aliorpse.mcutils.entity.TypedGameruleDto){}[0]
+
+    final val eventCtx // tech.aliorpse.mcutils.entity/GameruleUpdatedEvent.eventCtx|{}eventCtx[0]
+        final fun <get-eventCtx>(): tech.aliorpse.mcutils.entity/TypedGameruleDto // tech.aliorpse.mcutils.entity/GameruleUpdatedEvent.eventCtx.<get-eventCtx>|<get-eventCtx>(){}[0]
+
+    final fun component1(): tech.aliorpse.mcutils.entity/TypedGameruleDto // tech.aliorpse.mcutils.entity/GameruleUpdatedEvent.component1|component1(){}[0]
+    final fun copy(tech.aliorpse.mcutils.entity/TypedGameruleDto = ...): tech.aliorpse.mcutils.entity/GameruleUpdatedEvent // tech.aliorpse.mcutils.entity/GameruleUpdatedEvent.copy|copy(tech.aliorpse.mcutils.entity.TypedGameruleDto){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/GameruleUpdatedEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/GameruleUpdatedEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/GameruleUpdatedEvent.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/GameruleUpdatedEvent> { // tech.aliorpse.mcutils.entity/GameruleUpdatedEvent.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/GameruleUpdatedEvent.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/GameruleUpdatedEvent.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/GameruleUpdatedEvent.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/GameruleUpdatedEvent // tech.aliorpse.mcutils.entity/GameruleUpdatedEvent.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/GameruleUpdatedEvent) // tech.aliorpse.mcutils.entity/GameruleUpdatedEvent.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.GameruleUpdatedEvent){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/GameruleUpdatedEvent.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/GameruleUpdatedEvent> // tech.aliorpse.mcutils.entity/GameruleUpdatedEvent.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/IPBanAddedEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/IPBanAddedEvent|null[0]
+    constructor <init>(tech.aliorpse.mcutils.entity/IPBanDto) // tech.aliorpse.mcutils.entity/IPBanAddedEvent.<init>|<init>(tech.aliorpse.mcutils.entity.IPBanDto){}[0]
+
+    final val eventCtx // tech.aliorpse.mcutils.entity/IPBanAddedEvent.eventCtx|{}eventCtx[0]
+        final fun <get-eventCtx>(): tech.aliorpse.mcutils.entity/IPBanDto // tech.aliorpse.mcutils.entity/IPBanAddedEvent.eventCtx.<get-eventCtx>|<get-eventCtx>(){}[0]
+
+    final fun component1(): tech.aliorpse.mcutils.entity/IPBanDto // tech.aliorpse.mcutils.entity/IPBanAddedEvent.component1|component1(){}[0]
+    final fun copy(tech.aliorpse.mcutils.entity/IPBanDto = ...): tech.aliorpse.mcutils.entity/IPBanAddedEvent // tech.aliorpse.mcutils.entity/IPBanAddedEvent.copy|copy(tech.aliorpse.mcutils.entity.IPBanDto){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/IPBanAddedEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/IPBanAddedEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/IPBanAddedEvent.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/IPBanAddedEvent> { // tech.aliorpse.mcutils.entity/IPBanAddedEvent.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/IPBanAddedEvent.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/IPBanAddedEvent.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/IPBanAddedEvent.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/IPBanAddedEvent // tech.aliorpse.mcutils.entity/IPBanAddedEvent.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/IPBanAddedEvent) // tech.aliorpse.mcutils.entity/IPBanAddedEvent.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.IPBanAddedEvent){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/IPBanAddedEvent.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/IPBanAddedEvent> // tech.aliorpse.mcutils.entity/IPBanAddedEvent.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/IPBanDto { // tech.aliorpse.mcutils.entity/IPBanDto|null[0]
+    constructor <init>(kotlin/String? = ..., kotlin/String, kotlin/String? = ..., kotlin/String? = ...) // tech.aliorpse.mcutils.entity/IPBanDto.<init>|<init>(kotlin.String?;kotlin.String;kotlin.String?;kotlin.String?){}[0]
+
+    final val expires // tech.aliorpse.mcutils.entity/IPBanDto.expires|{}expires[0]
+        final fun <get-expires>(): kotlin/String? // tech.aliorpse.mcutils.entity/IPBanDto.expires.<get-expires>|<get-expires>(){}[0]
+    final val ip // tech.aliorpse.mcutils.entity/IPBanDto.ip|{}ip[0]
+        final fun <get-ip>(): kotlin/String // tech.aliorpse.mcutils.entity/IPBanDto.ip.<get-ip>|<get-ip>(){}[0]
+    final val reason // tech.aliorpse.mcutils.entity/IPBanDto.reason|{}reason[0]
+        final fun <get-reason>(): kotlin/String? // tech.aliorpse.mcutils.entity/IPBanDto.reason.<get-reason>|<get-reason>(){}[0]
+    final val source // tech.aliorpse.mcutils.entity/IPBanDto.source|{}source[0]
+        final fun <get-source>(): kotlin/String? // tech.aliorpse.mcutils.entity/IPBanDto.source.<get-source>|<get-source>(){}[0]
+
+    final fun component1(): kotlin/String? // tech.aliorpse.mcutils.entity/IPBanDto.component1|component1(){}[0]
+    final fun component2(): kotlin/String // tech.aliorpse.mcutils.entity/IPBanDto.component2|component2(){}[0]
+    final fun component3(): kotlin/String? // tech.aliorpse.mcutils.entity/IPBanDto.component3|component3(){}[0]
+    final fun component4(): kotlin/String? // tech.aliorpse.mcutils.entity/IPBanDto.component4|component4(){}[0]
+    final fun copy(kotlin/String? = ..., kotlin/String = ..., kotlin/String? = ..., kotlin/String? = ...): tech.aliorpse.mcutils.entity/IPBanDto // tech.aliorpse.mcutils.entity/IPBanDto.copy|copy(kotlin.String?;kotlin.String;kotlin.String?;kotlin.String?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/IPBanDto.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/IPBanDto.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/IPBanDto.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/IPBanDto> { // tech.aliorpse.mcutils.entity/IPBanDto.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/IPBanDto.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/IPBanDto.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/IPBanDto.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/IPBanDto // tech.aliorpse.mcutils.entity/IPBanDto.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/IPBanDto) // tech.aliorpse.mcutils.entity/IPBanDto.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.IPBanDto){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/IPBanDto.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/IPBanDto> // tech.aliorpse.mcutils.entity/IPBanDto.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/IPBanRemovedEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/IPBanRemovedEvent|null[0]
+    constructor <init>(kotlin/String) // tech.aliorpse.mcutils.entity/IPBanRemovedEvent.<init>|<init>(kotlin.String){}[0]
+
+    final val eventCtx // tech.aliorpse.mcutils.entity/IPBanRemovedEvent.eventCtx|{}eventCtx[0]
+        final fun <get-eventCtx>(): kotlin/String // tech.aliorpse.mcutils.entity/IPBanRemovedEvent.eventCtx.<get-eventCtx>|<get-eventCtx>(){}[0]
+
+    final fun component1(): kotlin/String // tech.aliorpse.mcutils.entity/IPBanRemovedEvent.component1|component1(){}[0]
+    final fun copy(kotlin/String = ...): tech.aliorpse.mcutils.entity/IPBanRemovedEvent // tech.aliorpse.mcutils.entity/IPBanRemovedEvent.copy|copy(kotlin.String){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/IPBanRemovedEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/IPBanRemovedEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/IPBanRemovedEvent.toString|toString(){}[0]
+}
+
+final class tech.aliorpse.mcutils.entity/JsonRpcException : kotlin/IllegalStateException { // tech.aliorpse.mcutils.entity/JsonRpcException|null[0]
+    constructor <init>(tech.aliorpse.mcutils.entity/JsonRpcError, kotlin/String? = ...) // tech.aliorpse.mcutils.entity/JsonRpcException.<init>|<init>(tech.aliorpse.mcutils.entity.JsonRpcError;kotlin.String?){}[0]
+
+    final val data // tech.aliorpse.mcutils.entity/JsonRpcException.data|{}data[0]
+        final fun <get-data>(): kotlin/String? // tech.aliorpse.mcutils.entity/JsonRpcException.data.<get-data>|<get-data>(){}[0]
+    final val error // tech.aliorpse.mcutils.entity/JsonRpcException.error|{}error[0]
+        final fun <get-error>(): tech.aliorpse.mcutils.entity/JsonRpcError // tech.aliorpse.mcutils.entity/JsonRpcException.error.<get-error>|<get-error>(){}[0]
+}
+
+final class tech.aliorpse.mcutils.entity/KickPlayerDto { // tech.aliorpse.mcutils.entity/KickPlayerDto|null[0]
+    constructor <init>(tech.aliorpse.mcutils.entity/PlayerDto, tech.aliorpse.mcutils.entity/MessageDto = ...) // tech.aliorpse.mcutils.entity/KickPlayerDto.<init>|<init>(tech.aliorpse.mcutils.entity.PlayerDto;tech.aliorpse.mcutils.entity.MessageDto){}[0]
+
+    final val message // tech.aliorpse.mcutils.entity/KickPlayerDto.message|{}message[0]
+        final fun <get-message>(): tech.aliorpse.mcutils.entity/MessageDto // tech.aliorpse.mcutils.entity/KickPlayerDto.message.<get-message>|<get-message>(){}[0]
+    final val player // tech.aliorpse.mcutils.entity/KickPlayerDto.player|{}player[0]
+        final fun <get-player>(): tech.aliorpse.mcutils.entity/PlayerDto // tech.aliorpse.mcutils.entity/KickPlayerDto.player.<get-player>|<get-player>(){}[0]
+
+    final fun component1(): tech.aliorpse.mcutils.entity/PlayerDto // tech.aliorpse.mcutils.entity/KickPlayerDto.component1|component1(){}[0]
+    final fun component2(): tech.aliorpse.mcutils.entity/MessageDto // tech.aliorpse.mcutils.entity/KickPlayerDto.component2|component2(){}[0]
+    final fun copy(tech.aliorpse.mcutils.entity/PlayerDto = ..., tech.aliorpse.mcutils.entity/MessageDto = ...): tech.aliorpse.mcutils.entity/KickPlayerDto // tech.aliorpse.mcutils.entity/KickPlayerDto.copy|copy(tech.aliorpse.mcutils.entity.PlayerDto;tech.aliorpse.mcutils.entity.MessageDto){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/KickPlayerDto.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/KickPlayerDto.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/KickPlayerDto.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/KickPlayerDto> { // tech.aliorpse.mcutils.entity/KickPlayerDto.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/KickPlayerDto.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/KickPlayerDto.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/KickPlayerDto.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/KickPlayerDto // tech.aliorpse.mcutils.entity/KickPlayerDto.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/KickPlayerDto) // tech.aliorpse.mcutils.entity/KickPlayerDto.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.KickPlayerDto){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/KickPlayerDto.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/KickPlayerDto> // tech.aliorpse.mcutils.entity/KickPlayerDto.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/MessageDto { // tech.aliorpse.mcutils.entity/MessageDto|null[0]
+    constructor <init>(kotlin/String? = ..., kotlin.collections/List<kotlin/String>? = ..., kotlin/String? = ...) // tech.aliorpse.mcutils.entity/MessageDto.<init>|<init>(kotlin.String?;kotlin.collections.List<kotlin.String>?;kotlin.String?){}[0]
+
+    final val literal // tech.aliorpse.mcutils.entity/MessageDto.literal|{}literal[0]
+        final fun <get-literal>(): kotlin/String? // tech.aliorpse.mcutils.entity/MessageDto.literal.<get-literal>|<get-literal>(){}[0]
+    final val translatable // tech.aliorpse.mcutils.entity/MessageDto.translatable|{}translatable[0]
+        final fun <get-translatable>(): kotlin/String? // tech.aliorpse.mcutils.entity/MessageDto.translatable.<get-translatable>|<get-translatable>(){}[0]
+    final val translatableParams // tech.aliorpse.mcutils.entity/MessageDto.translatableParams|{}translatableParams[0]
+        final fun <get-translatableParams>(): kotlin.collections/List<kotlin/String>? // tech.aliorpse.mcutils.entity/MessageDto.translatableParams.<get-translatableParams>|<get-translatableParams>(){}[0]
+
+    final fun component1(): kotlin/String? // tech.aliorpse.mcutils.entity/MessageDto.component1|component1(){}[0]
+    final fun component2(): kotlin.collections/List<kotlin/String>? // tech.aliorpse.mcutils.entity/MessageDto.component2|component2(){}[0]
+    final fun component3(): kotlin/String? // tech.aliorpse.mcutils.entity/MessageDto.component3|component3(){}[0]
+    final fun copy(kotlin/String? = ..., kotlin.collections/List<kotlin/String>? = ..., kotlin/String? = ...): tech.aliorpse.mcutils.entity/MessageDto // tech.aliorpse.mcutils.entity/MessageDto.copy|copy(kotlin.String?;kotlin.collections.List<kotlin.String>?;kotlin.String?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/MessageDto.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/MessageDto.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/MessageDto.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/MessageDto> { // tech.aliorpse.mcutils.entity/MessageDto.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/MessageDto.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/MessageDto.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/MessageDto.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/MessageDto // tech.aliorpse.mcutils.entity/MessageDto.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/MessageDto) // tech.aliorpse.mcutils.entity/MessageDto.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.MessageDto){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/MessageDto.Companion|null[0]
+        final val $childSerializers // tech.aliorpse.mcutils.entity/MessageDto.Companion.$childSerializers|{}$childSerializers[0]
+
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/MessageDto> // tech.aliorpse.mcutils.entity/MessageDto.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/MsmpRequest { // tech.aliorpse.mcutils.entity/MsmpRequest|null[0]
+    constructor <init>(kotlin/Int, kotlin/String, kotlinx.serialization.json/JsonElement, kotlin/String = ...) // tech.aliorpse.mcutils.entity/MsmpRequest.<init>|<init>(kotlin.Int;kotlin.String;kotlinx.serialization.json.JsonElement;kotlin.String){}[0]
+
+    final val id // tech.aliorpse.mcutils.entity/MsmpRequest.id|{}id[0]
+        final fun <get-id>(): kotlin/Int // tech.aliorpse.mcutils.entity/MsmpRequest.id.<get-id>|<get-id>(){}[0]
+    final val jsonrpc // tech.aliorpse.mcutils.entity/MsmpRequest.jsonrpc|{}jsonrpc[0]
+        final fun <get-jsonrpc>(): kotlin/String // tech.aliorpse.mcutils.entity/MsmpRequest.jsonrpc.<get-jsonrpc>|<get-jsonrpc>(){}[0]
+    final val method // tech.aliorpse.mcutils.entity/MsmpRequest.method|{}method[0]
+        final fun <get-method>(): kotlin/String // tech.aliorpse.mcutils.entity/MsmpRequest.method.<get-method>|<get-method>(){}[0]
+    final val params // tech.aliorpse.mcutils.entity/MsmpRequest.params|{}params[0]
+        final fun <get-params>(): kotlinx.serialization.json/JsonElement // tech.aliorpse.mcutils.entity/MsmpRequest.params.<get-params>|<get-params>(){}[0]
+
+    final fun component1(): kotlin/Int // tech.aliorpse.mcutils.entity/MsmpRequest.component1|component1(){}[0]
+    final fun component2(): kotlin/String // tech.aliorpse.mcutils.entity/MsmpRequest.component2|component2(){}[0]
+    final fun component3(): kotlinx.serialization.json/JsonElement // tech.aliorpse.mcutils.entity/MsmpRequest.component3|component3(){}[0]
+    final fun component4(): kotlin/String // tech.aliorpse.mcutils.entity/MsmpRequest.component4|component4(){}[0]
+    final fun copy(kotlin/Int = ..., kotlin/String = ..., kotlinx.serialization.json/JsonElement = ..., kotlin/String = ...): tech.aliorpse.mcutils.entity/MsmpRequest // tech.aliorpse.mcutils.entity/MsmpRequest.copy|copy(kotlin.Int;kotlin.String;kotlinx.serialization.json.JsonElement;kotlin.String){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/MsmpRequest.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/MsmpRequest.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/MsmpRequest.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/MsmpRequest> { // tech.aliorpse.mcutils.entity/MsmpRequest.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/MsmpRequest.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/MsmpRequest.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/MsmpRequest.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/MsmpRequest // tech.aliorpse.mcutils.entity/MsmpRequest.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/MsmpRequest) // tech.aliorpse.mcutils.entity/MsmpRequest.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.MsmpRequest){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/MsmpRequest.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/MsmpRequest> // tech.aliorpse.mcutils.entity/MsmpRequest.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/MsmpResponse { // tech.aliorpse.mcutils.entity/MsmpResponse|null[0]
+    constructor <init>(kotlin/String = ..., kotlin/Int, kotlinx.serialization.json/JsonElement? = ..., tech.aliorpse.mcutils.entity/MsmpResponseError? = ...) // tech.aliorpse.mcutils.entity/MsmpResponse.<init>|<init>(kotlin.String;kotlin.Int;kotlinx.serialization.json.JsonElement?;tech.aliorpse.mcutils.entity.MsmpResponseError?){}[0]
+
+    final val error // tech.aliorpse.mcutils.entity/MsmpResponse.error|{}error[0]
+        final fun <get-error>(): tech.aliorpse.mcutils.entity/MsmpResponseError? // tech.aliorpse.mcutils.entity/MsmpResponse.error.<get-error>|<get-error>(){}[0]
+    final val id // tech.aliorpse.mcutils.entity/MsmpResponse.id|{}id[0]
+        final fun <get-id>(): kotlin/Int // tech.aliorpse.mcutils.entity/MsmpResponse.id.<get-id>|<get-id>(){}[0]
+    final val jsonrpc // tech.aliorpse.mcutils.entity/MsmpResponse.jsonrpc|{}jsonrpc[0]
+        final fun <get-jsonrpc>(): kotlin/String // tech.aliorpse.mcutils.entity/MsmpResponse.jsonrpc.<get-jsonrpc>|<get-jsonrpc>(){}[0]
+    final val result // tech.aliorpse.mcutils.entity/MsmpResponse.result|{}result[0]
+        final fun <get-result>(): kotlinx.serialization.json/JsonElement? // tech.aliorpse.mcutils.entity/MsmpResponse.result.<get-result>|<get-result>(){}[0]
+
+    final fun component1(): kotlin/String // tech.aliorpse.mcutils.entity/MsmpResponse.component1|component1(){}[0]
+    final fun component2(): kotlin/Int // tech.aliorpse.mcutils.entity/MsmpResponse.component2|component2(){}[0]
+    final fun component3(): kotlinx.serialization.json/JsonElement? // tech.aliorpse.mcutils.entity/MsmpResponse.component3|component3(){}[0]
+    final fun component4(): tech.aliorpse.mcutils.entity/MsmpResponseError? // tech.aliorpse.mcutils.entity/MsmpResponse.component4|component4(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/Int = ..., kotlinx.serialization.json/JsonElement? = ..., tech.aliorpse.mcutils.entity/MsmpResponseError? = ...): tech.aliorpse.mcutils.entity/MsmpResponse // tech.aliorpse.mcutils.entity/MsmpResponse.copy|copy(kotlin.String;kotlin.Int;kotlinx.serialization.json.JsonElement?;tech.aliorpse.mcutils.entity.MsmpResponseError?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/MsmpResponse.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/MsmpResponse.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/MsmpResponse.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/MsmpResponse> { // tech.aliorpse.mcutils.entity/MsmpResponse.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/MsmpResponse.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/MsmpResponse.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/MsmpResponse.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/MsmpResponse // tech.aliorpse.mcutils.entity/MsmpResponse.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/MsmpResponse) // tech.aliorpse.mcutils.entity/MsmpResponse.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.MsmpResponse){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/MsmpResponse.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/MsmpResponse> // tech.aliorpse.mcutils.entity/MsmpResponse.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/MsmpResponseError { // tech.aliorpse.mcutils.entity/MsmpResponseError|null[0]
+    constructor <init>(kotlin/Int, kotlin/String, kotlin/String? = ...) // tech.aliorpse.mcutils.entity/MsmpResponseError.<init>|<init>(kotlin.Int;kotlin.String;kotlin.String?){}[0]
+
+    final val code // tech.aliorpse.mcutils.entity/MsmpResponseError.code|{}code[0]
+        final fun <get-code>(): kotlin/Int // tech.aliorpse.mcutils.entity/MsmpResponseError.code.<get-code>|<get-code>(){}[0]
+    final val data // tech.aliorpse.mcutils.entity/MsmpResponseError.data|{}data[0]
+        final fun <get-data>(): kotlin/String? // tech.aliorpse.mcutils.entity/MsmpResponseError.data.<get-data>|<get-data>(){}[0]
+    final val message // tech.aliorpse.mcutils.entity/MsmpResponseError.message|{}message[0]
+        final fun <get-message>(): kotlin/String // tech.aliorpse.mcutils.entity/MsmpResponseError.message.<get-message>|<get-message>(){}[0]
+
+    final fun component1(): kotlin/Int // tech.aliorpse.mcutils.entity/MsmpResponseError.component1|component1(){}[0]
+    final fun component2(): kotlin/String // tech.aliorpse.mcutils.entity/MsmpResponseError.component2|component2(){}[0]
+    final fun component3(): kotlin/String? // tech.aliorpse.mcutils.entity/MsmpResponseError.component3|component3(){}[0]
+    final fun copy(kotlin/Int = ..., kotlin/String = ..., kotlin/String? = ...): tech.aliorpse.mcutils.entity/MsmpResponseError // tech.aliorpse.mcutils.entity/MsmpResponseError.copy|copy(kotlin.Int;kotlin.String;kotlin.String?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/MsmpResponseError.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/MsmpResponseError.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/MsmpResponseError.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/MsmpResponseError> { // tech.aliorpse.mcutils.entity/MsmpResponseError.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/MsmpResponseError.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/MsmpResponseError.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/MsmpResponseError.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/MsmpResponseError // tech.aliorpse.mcutils.entity/MsmpResponseError.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/MsmpResponseError) // tech.aliorpse.mcutils.entity/MsmpResponseError.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.MsmpResponseError){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/MsmpResponseError.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/MsmpResponseError> // tech.aliorpse.mcutils.entity/MsmpResponseError.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/OperatorAddedEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/OperatorAddedEvent|null[0]
+    constructor <init>(tech.aliorpse.mcutils.entity/OperatorDto) // tech.aliorpse.mcutils.entity/OperatorAddedEvent.<init>|<init>(tech.aliorpse.mcutils.entity.OperatorDto){}[0]
+
+    final val eventCtx // tech.aliorpse.mcutils.entity/OperatorAddedEvent.eventCtx|{}eventCtx[0]
+        final fun <get-eventCtx>(): tech.aliorpse.mcutils.entity/OperatorDto // tech.aliorpse.mcutils.entity/OperatorAddedEvent.eventCtx.<get-eventCtx>|<get-eventCtx>(){}[0]
+
+    final fun component1(): tech.aliorpse.mcutils.entity/OperatorDto // tech.aliorpse.mcutils.entity/OperatorAddedEvent.component1|component1(){}[0]
+    final fun copy(tech.aliorpse.mcutils.entity/OperatorDto = ...): tech.aliorpse.mcutils.entity/OperatorAddedEvent // tech.aliorpse.mcutils.entity/OperatorAddedEvent.copy|copy(tech.aliorpse.mcutils.entity.OperatorDto){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/OperatorAddedEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/OperatorAddedEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/OperatorAddedEvent.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/OperatorAddedEvent> { // tech.aliorpse.mcutils.entity/OperatorAddedEvent.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/OperatorAddedEvent.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/OperatorAddedEvent.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/OperatorAddedEvent.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/OperatorAddedEvent // tech.aliorpse.mcutils.entity/OperatorAddedEvent.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/OperatorAddedEvent) // tech.aliorpse.mcutils.entity/OperatorAddedEvent.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.OperatorAddedEvent){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/OperatorAddedEvent.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/OperatorAddedEvent> // tech.aliorpse.mcutils.entity/OperatorAddedEvent.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/OperatorDto { // tech.aliorpse.mcutils.entity/OperatorDto|null[0]
+    constructor <init>(kotlin/Boolean, kotlin/Int, tech.aliorpse.mcutils.entity/PlayerDto) // tech.aliorpse.mcutils.entity/OperatorDto.<init>|<init>(kotlin.Boolean;kotlin.Int;tech.aliorpse.mcutils.entity.PlayerDto){}[0]
+
+    final val bypassesPlayerLimit // tech.aliorpse.mcutils.entity/OperatorDto.bypassesPlayerLimit|{}bypassesPlayerLimit[0]
+        final fun <get-bypassesPlayerLimit>(): kotlin/Boolean // tech.aliorpse.mcutils.entity/OperatorDto.bypassesPlayerLimit.<get-bypassesPlayerLimit>|<get-bypassesPlayerLimit>(){}[0]
+    final val permissionLevel // tech.aliorpse.mcutils.entity/OperatorDto.permissionLevel|{}permissionLevel[0]
+        final fun <get-permissionLevel>(): kotlin/Int // tech.aliorpse.mcutils.entity/OperatorDto.permissionLevel.<get-permissionLevel>|<get-permissionLevel>(){}[0]
+    final val player // tech.aliorpse.mcutils.entity/OperatorDto.player|{}player[0]
+        final fun <get-player>(): tech.aliorpse.mcutils.entity/PlayerDto // tech.aliorpse.mcutils.entity/OperatorDto.player.<get-player>|<get-player>(){}[0]
+
+    final fun component1(): kotlin/Boolean // tech.aliorpse.mcutils.entity/OperatorDto.component1|component1(){}[0]
+    final fun component2(): kotlin/Int // tech.aliorpse.mcutils.entity/OperatorDto.component2|component2(){}[0]
+    final fun component3(): tech.aliorpse.mcutils.entity/PlayerDto // tech.aliorpse.mcutils.entity/OperatorDto.component3|component3(){}[0]
+    final fun copy(kotlin/Boolean = ..., kotlin/Int = ..., tech.aliorpse.mcutils.entity/PlayerDto = ...): tech.aliorpse.mcutils.entity/OperatorDto // tech.aliorpse.mcutils.entity/OperatorDto.copy|copy(kotlin.Boolean;kotlin.Int;tech.aliorpse.mcutils.entity.PlayerDto){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/OperatorDto.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/OperatorDto.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/OperatorDto.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/OperatorDto> { // tech.aliorpse.mcutils.entity/OperatorDto.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/OperatorDto.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/OperatorDto.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/OperatorDto.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/OperatorDto // tech.aliorpse.mcutils.entity/OperatorDto.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/OperatorDto) // tech.aliorpse.mcutils.entity/OperatorDto.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.OperatorDto){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/OperatorDto.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/OperatorDto> // tech.aliorpse.mcutils.entity/OperatorDto.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/OperatorRemovedEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/OperatorRemovedEvent|null[0]
+    constructor <init>(tech.aliorpse.mcutils.entity/OperatorDto) // tech.aliorpse.mcutils.entity/OperatorRemovedEvent.<init>|<init>(tech.aliorpse.mcutils.entity.OperatorDto){}[0]
+
+    final val eventCtx // tech.aliorpse.mcutils.entity/OperatorRemovedEvent.eventCtx|{}eventCtx[0]
+        final fun <get-eventCtx>(): tech.aliorpse.mcutils.entity/OperatorDto // tech.aliorpse.mcutils.entity/OperatorRemovedEvent.eventCtx.<get-eventCtx>|<get-eventCtx>(){}[0]
+
+    final fun component1(): tech.aliorpse.mcutils.entity/OperatorDto // tech.aliorpse.mcutils.entity/OperatorRemovedEvent.component1|component1(){}[0]
+    final fun copy(tech.aliorpse.mcutils.entity/OperatorDto = ...): tech.aliorpse.mcutils.entity/OperatorRemovedEvent // tech.aliorpse.mcutils.entity/OperatorRemovedEvent.copy|copy(tech.aliorpse.mcutils.entity.OperatorDto){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/OperatorRemovedEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/OperatorRemovedEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/OperatorRemovedEvent.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/OperatorRemovedEvent> { // tech.aliorpse.mcutils.entity/OperatorRemovedEvent.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/OperatorRemovedEvent.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/OperatorRemovedEvent.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/OperatorRemovedEvent.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/OperatorRemovedEvent // tech.aliorpse.mcutils.entity/OperatorRemovedEvent.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/OperatorRemovedEvent) // tech.aliorpse.mcutils.entity/OperatorRemovedEvent.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.OperatorRemovedEvent){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/OperatorRemovedEvent.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/OperatorRemovedEvent> // tech.aliorpse.mcutils.entity/OperatorRemovedEvent.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/PlayerDto { // tech.aliorpse.mcutils.entity/PlayerDto|null[0]
+    constructor <init>(kotlin/String? = ..., kotlin/String? = ...) // tech.aliorpse.mcutils.entity/PlayerDto.<init>|<init>(kotlin.String?;kotlin.String?){}[0]
+
+    final val id // tech.aliorpse.mcutils.entity/PlayerDto.id|{}id[0]
+        final fun <get-id>(): kotlin/String? // tech.aliorpse.mcutils.entity/PlayerDto.id.<get-id>|<get-id>(){}[0]
+    final val name // tech.aliorpse.mcutils.entity/PlayerDto.name|{}name[0]
+        final fun <get-name>(): kotlin/String? // tech.aliorpse.mcutils.entity/PlayerDto.name.<get-name>|<get-name>(){}[0]
+
+    final fun component1(): kotlin/String? // tech.aliorpse.mcutils.entity/PlayerDto.component1|component1(){}[0]
+    final fun component2(): kotlin/String? // tech.aliorpse.mcutils.entity/PlayerDto.component2|component2(){}[0]
+    final fun copy(kotlin/String? = ..., kotlin/String? = ...): tech.aliorpse.mcutils.entity/PlayerDto // tech.aliorpse.mcutils.entity/PlayerDto.copy|copy(kotlin.String?;kotlin.String?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/PlayerDto.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/PlayerDto.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/PlayerDto.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/PlayerDto> { // tech.aliorpse.mcutils.entity/PlayerDto.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/PlayerDto.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/PlayerDto.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/PlayerDto.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/PlayerDto // tech.aliorpse.mcutils.entity/PlayerDto.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/PlayerDto) // tech.aliorpse.mcutils.entity/PlayerDto.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.PlayerDto){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/PlayerDto.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/PlayerDto> // tech.aliorpse.mcutils.entity/PlayerDto.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/PlayerJoinedEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/PlayerJoinedEvent|null[0]
+    constructor <init>(tech.aliorpse.mcutils.entity/PlayerDto) // tech.aliorpse.mcutils.entity/PlayerJoinedEvent.<init>|<init>(tech.aliorpse.mcutils.entity.PlayerDto){}[0]
+
+    final val eventCtx // tech.aliorpse.mcutils.entity/PlayerJoinedEvent.eventCtx|{}eventCtx[0]
+        final fun <get-eventCtx>(): tech.aliorpse.mcutils.entity/PlayerDto // tech.aliorpse.mcutils.entity/PlayerJoinedEvent.eventCtx.<get-eventCtx>|<get-eventCtx>(){}[0]
+
+    final fun component1(): tech.aliorpse.mcutils.entity/PlayerDto // tech.aliorpse.mcutils.entity/PlayerJoinedEvent.component1|component1(){}[0]
+    final fun copy(tech.aliorpse.mcutils.entity/PlayerDto = ...): tech.aliorpse.mcutils.entity/PlayerJoinedEvent // tech.aliorpse.mcutils.entity/PlayerJoinedEvent.copy|copy(tech.aliorpse.mcutils.entity.PlayerDto){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/PlayerJoinedEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/PlayerJoinedEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/PlayerJoinedEvent.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/PlayerJoinedEvent> { // tech.aliorpse.mcutils.entity/PlayerJoinedEvent.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/PlayerJoinedEvent.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/PlayerJoinedEvent.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/PlayerJoinedEvent.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/PlayerJoinedEvent // tech.aliorpse.mcutils.entity/PlayerJoinedEvent.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/PlayerJoinedEvent) // tech.aliorpse.mcutils.entity/PlayerJoinedEvent.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.PlayerJoinedEvent){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/PlayerJoinedEvent.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/PlayerJoinedEvent> // tech.aliorpse.mcutils.entity/PlayerJoinedEvent.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/PlayerLeftEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/PlayerLeftEvent|null[0]
+    constructor <init>(tech.aliorpse.mcutils.entity/PlayerDto) // tech.aliorpse.mcutils.entity/PlayerLeftEvent.<init>|<init>(tech.aliorpse.mcutils.entity.PlayerDto){}[0]
+
+    final val eventCtx // tech.aliorpse.mcutils.entity/PlayerLeftEvent.eventCtx|{}eventCtx[0]
+        final fun <get-eventCtx>(): tech.aliorpse.mcutils.entity/PlayerDto // tech.aliorpse.mcutils.entity/PlayerLeftEvent.eventCtx.<get-eventCtx>|<get-eventCtx>(){}[0]
+
+    final fun component1(): tech.aliorpse.mcutils.entity/PlayerDto // tech.aliorpse.mcutils.entity/PlayerLeftEvent.component1|component1(){}[0]
+    final fun copy(tech.aliorpse.mcutils.entity/PlayerDto = ...): tech.aliorpse.mcutils.entity/PlayerLeftEvent // tech.aliorpse.mcutils.entity/PlayerLeftEvent.copy|copy(tech.aliorpse.mcutils.entity.PlayerDto){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/PlayerLeftEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/PlayerLeftEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/PlayerLeftEvent.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/PlayerLeftEvent> { // tech.aliorpse.mcutils.entity/PlayerLeftEvent.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/PlayerLeftEvent.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/PlayerLeftEvent.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/PlayerLeftEvent.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/PlayerLeftEvent // tech.aliorpse.mcutils.entity/PlayerLeftEvent.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/PlayerLeftEvent) // tech.aliorpse.mcutils.entity/PlayerLeftEvent.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.PlayerLeftEvent){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/PlayerLeftEvent.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/PlayerLeftEvent> // tech.aliorpse.mcutils.entity/PlayerLeftEvent.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/ServerStateDto { // tech.aliorpse.mcutils.entity/ServerStateDto|null[0]
+    constructor <init>(kotlin.collections/Set<tech.aliorpse.mcutils.entity/PlayerDto>? = ..., kotlin/Boolean, tech.aliorpse.mcutils.entity/ServerVersionDto) // tech.aliorpse.mcutils.entity/ServerStateDto.<init>|<init>(kotlin.collections.Set<tech.aliorpse.mcutils.entity.PlayerDto>?;kotlin.Boolean;tech.aliorpse.mcutils.entity.ServerVersionDto){}[0]
+
+    final val players // tech.aliorpse.mcutils.entity/ServerStateDto.players|{}players[0]
+        final fun <get-players>(): kotlin.collections/Set<tech.aliorpse.mcutils.entity/PlayerDto>? // tech.aliorpse.mcutils.entity/ServerStateDto.players.<get-players>|<get-players>(){}[0]
+    final val started // tech.aliorpse.mcutils.entity/ServerStateDto.started|{}started[0]
+        final fun <get-started>(): kotlin/Boolean // tech.aliorpse.mcutils.entity/ServerStateDto.started.<get-started>|<get-started>(){}[0]
+    final val version // tech.aliorpse.mcutils.entity/ServerStateDto.version|{}version[0]
+        final fun <get-version>(): tech.aliorpse.mcutils.entity/ServerVersionDto // tech.aliorpse.mcutils.entity/ServerStateDto.version.<get-version>|<get-version>(){}[0]
+
+    final fun component1(): kotlin.collections/Set<tech.aliorpse.mcutils.entity/PlayerDto>? // tech.aliorpse.mcutils.entity/ServerStateDto.component1|component1(){}[0]
+    final fun component2(): kotlin/Boolean // tech.aliorpse.mcutils.entity/ServerStateDto.component2|component2(){}[0]
+    final fun component3(): tech.aliorpse.mcutils.entity/ServerVersionDto // tech.aliorpse.mcutils.entity/ServerStateDto.component3|component3(){}[0]
+    final fun copy(kotlin.collections/Set<tech.aliorpse.mcutils.entity/PlayerDto>? = ..., kotlin/Boolean = ..., tech.aliorpse.mcutils.entity/ServerVersionDto = ...): tech.aliorpse.mcutils.entity/ServerStateDto // tech.aliorpse.mcutils.entity/ServerStateDto.copy|copy(kotlin.collections.Set<tech.aliorpse.mcutils.entity.PlayerDto>?;kotlin.Boolean;tech.aliorpse.mcutils.entity.ServerVersionDto){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/ServerStateDto.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/ServerStateDto.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/ServerStateDto.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/ServerStateDto> { // tech.aliorpse.mcutils.entity/ServerStateDto.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/ServerStateDto.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/ServerStateDto.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/ServerStateDto.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/ServerStateDto // tech.aliorpse.mcutils.entity/ServerStateDto.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/ServerStateDto) // tech.aliorpse.mcutils.entity/ServerStateDto.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.ServerStateDto){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/ServerStateDto.Companion|null[0]
+        final val $childSerializers // tech.aliorpse.mcutils.entity/ServerStateDto.Companion.$childSerializers|{}$childSerializers[0]
+
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/ServerStateDto> // tech.aliorpse.mcutils.entity/ServerStateDto.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/ServerStatusEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/ServerStatusEvent|null[0]
+    constructor <init>(tech.aliorpse.mcutils.entity/ServerStateDto) // tech.aliorpse.mcutils.entity/ServerStatusEvent.<init>|<init>(tech.aliorpse.mcutils.entity.ServerStateDto){}[0]
+
+    final val eventCtx // tech.aliorpse.mcutils.entity/ServerStatusEvent.eventCtx|{}eventCtx[0]
+        final fun <get-eventCtx>(): tech.aliorpse.mcutils.entity/ServerStateDto // tech.aliorpse.mcutils.entity/ServerStatusEvent.eventCtx.<get-eventCtx>|<get-eventCtx>(){}[0]
+
+    final fun component1(): tech.aliorpse.mcutils.entity/ServerStateDto // tech.aliorpse.mcutils.entity/ServerStatusEvent.component1|component1(){}[0]
+    final fun copy(tech.aliorpse.mcutils.entity/ServerStateDto = ...): tech.aliorpse.mcutils.entity/ServerStatusEvent // tech.aliorpse.mcutils.entity/ServerStatusEvent.copy|copy(tech.aliorpse.mcutils.entity.ServerStateDto){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/ServerStatusEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/ServerStatusEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/ServerStatusEvent.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/ServerStatusEvent> { // tech.aliorpse.mcutils.entity/ServerStatusEvent.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/ServerStatusEvent.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/ServerStatusEvent.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/ServerStatusEvent.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/ServerStatusEvent // tech.aliorpse.mcutils.entity/ServerStatusEvent.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/ServerStatusEvent) // tech.aliorpse.mcutils.entity/ServerStatusEvent.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.ServerStatusEvent){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/ServerStatusEvent.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/ServerStatusEvent> // tech.aliorpse.mcutils.entity/ServerStatusEvent.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/ServerVersionDto { // tech.aliorpse.mcutils.entity/ServerVersionDto|null[0]
+    constructor <init>(kotlin/String, kotlin/Int) // tech.aliorpse.mcutils.entity/ServerVersionDto.<init>|<init>(kotlin.String;kotlin.Int){}[0]
+
+    final val name // tech.aliorpse.mcutils.entity/ServerVersionDto.name|{}name[0]
+        final fun <get-name>(): kotlin/String // tech.aliorpse.mcutils.entity/ServerVersionDto.name.<get-name>|<get-name>(){}[0]
+    final val protocol // tech.aliorpse.mcutils.entity/ServerVersionDto.protocol|{}protocol[0]
+        final fun <get-protocol>(): kotlin/Int // tech.aliorpse.mcutils.entity/ServerVersionDto.protocol.<get-protocol>|<get-protocol>(){}[0]
+
+    final fun component1(): kotlin/String // tech.aliorpse.mcutils.entity/ServerVersionDto.component1|component1(){}[0]
+    final fun component2(): kotlin/Int // tech.aliorpse.mcutils.entity/ServerVersionDto.component2|component2(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/Int = ...): tech.aliorpse.mcutils.entity/ServerVersionDto // tech.aliorpse.mcutils.entity/ServerVersionDto.copy|copy(kotlin.String;kotlin.Int){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/ServerVersionDto.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/ServerVersionDto.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/ServerVersionDto.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/ServerVersionDto> { // tech.aliorpse.mcutils.entity/ServerVersionDto.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/ServerVersionDto.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/ServerVersionDto.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/ServerVersionDto.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/ServerVersionDto // tech.aliorpse.mcutils.entity/ServerVersionDto.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/ServerVersionDto) // tech.aliorpse.mcutils.entity/ServerVersionDto.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.ServerVersionDto){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/ServerVersionDto.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/ServerVersionDto> // tech.aliorpse.mcutils.entity/ServerVersionDto.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/SystemMessageDto { // tech.aliorpse.mcutils.entity/SystemMessageDto|null[0]
+    constructor <init>(kotlin.collections/Set<tech.aliorpse.mcutils.entity/PlayerDto>, tech.aliorpse.mcutils.entity/MessageDto, kotlin/Boolean = ...) // tech.aliorpse.mcutils.entity/SystemMessageDto.<init>|<init>(kotlin.collections.Set<tech.aliorpse.mcutils.entity.PlayerDto>;tech.aliorpse.mcutils.entity.MessageDto;kotlin.Boolean){}[0]
+
+    final val message // tech.aliorpse.mcutils.entity/SystemMessageDto.message|{}message[0]
+        final fun <get-message>(): tech.aliorpse.mcutils.entity/MessageDto // tech.aliorpse.mcutils.entity/SystemMessageDto.message.<get-message>|<get-message>(){}[0]
+    final val overlay // tech.aliorpse.mcutils.entity/SystemMessageDto.overlay|{}overlay[0]
+        final fun <get-overlay>(): kotlin/Boolean // tech.aliorpse.mcutils.entity/SystemMessageDto.overlay.<get-overlay>|<get-overlay>(){}[0]
+    final val receivingPlayers // tech.aliorpse.mcutils.entity/SystemMessageDto.receivingPlayers|{}receivingPlayers[0]
+        final fun <get-receivingPlayers>(): kotlin.collections/Set<tech.aliorpse.mcutils.entity/PlayerDto> // tech.aliorpse.mcutils.entity/SystemMessageDto.receivingPlayers.<get-receivingPlayers>|<get-receivingPlayers>(){}[0]
+
+    final fun component1(): kotlin.collections/Set<tech.aliorpse.mcutils.entity/PlayerDto> // tech.aliorpse.mcutils.entity/SystemMessageDto.component1|component1(){}[0]
+    final fun component2(): tech.aliorpse.mcutils.entity/MessageDto // tech.aliorpse.mcutils.entity/SystemMessageDto.component2|component2(){}[0]
+    final fun component3(): kotlin/Boolean // tech.aliorpse.mcutils.entity/SystemMessageDto.component3|component3(){}[0]
+    final fun copy(kotlin.collections/Set<tech.aliorpse.mcutils.entity/PlayerDto> = ..., tech.aliorpse.mcutils.entity/MessageDto = ..., kotlin/Boolean = ...): tech.aliorpse.mcutils.entity/SystemMessageDto // tech.aliorpse.mcutils.entity/SystemMessageDto.copy|copy(kotlin.collections.Set<tech.aliorpse.mcutils.entity.PlayerDto>;tech.aliorpse.mcutils.entity.MessageDto;kotlin.Boolean){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/SystemMessageDto.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/SystemMessageDto.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/SystemMessageDto.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/SystemMessageDto> { // tech.aliorpse.mcutils.entity/SystemMessageDto.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/SystemMessageDto.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/SystemMessageDto.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/SystemMessageDto.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/SystemMessageDto // tech.aliorpse.mcutils.entity/SystemMessageDto.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/SystemMessageDto) // tech.aliorpse.mcutils.entity/SystemMessageDto.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.SystemMessageDto){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/SystemMessageDto.Companion|null[0]
+        final val $childSerializers // tech.aliorpse.mcutils.entity/SystemMessageDto.Companion.$childSerializers|{}$childSerializers[0]
+
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/SystemMessageDto> // tech.aliorpse.mcutils.entity/SystemMessageDto.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/TypedGameruleDto { // tech.aliorpse.mcutils.entity/TypedGameruleDto|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlinx.serialization.json/JsonPrimitive) // tech.aliorpse.mcutils.entity/TypedGameruleDto.<init>|<init>(kotlin.String;kotlin.String;kotlinx.serialization.json.JsonPrimitive){}[0]
+
+    final val key // tech.aliorpse.mcutils.entity/TypedGameruleDto.key|{}key[0]
+        final fun <get-key>(): kotlin/String // tech.aliorpse.mcutils.entity/TypedGameruleDto.key.<get-key>|<get-key>(){}[0]
+    final val type // tech.aliorpse.mcutils.entity/TypedGameruleDto.type|{}type[0]
+        final fun <get-type>(): kotlin/String // tech.aliorpse.mcutils.entity/TypedGameruleDto.type.<get-type>|<get-type>(){}[0]
+    final val value // tech.aliorpse.mcutils.entity/TypedGameruleDto.value|{}value[0]
+        final fun <get-value>(): kotlinx.serialization.json/JsonPrimitive // tech.aliorpse.mcutils.entity/TypedGameruleDto.value.<get-value>|<get-value>(){}[0]
+    final val valueAsBoolean // tech.aliorpse.mcutils.entity/TypedGameruleDto.valueAsBoolean|{}valueAsBoolean[0]
+        final fun <get-valueAsBoolean>(): kotlin/Boolean // tech.aliorpse.mcutils.entity/TypedGameruleDto.valueAsBoolean.<get-valueAsBoolean>|<get-valueAsBoolean>(){}[0]
+    final val valueAsInt // tech.aliorpse.mcutils.entity/TypedGameruleDto.valueAsInt|{}valueAsInt[0]
+        final fun <get-valueAsInt>(): kotlin/Int // tech.aliorpse.mcutils.entity/TypedGameruleDto.valueAsInt.<get-valueAsInt>|<get-valueAsInt>(){}[0]
+
+    final fun component1(): kotlin/String // tech.aliorpse.mcutils.entity/TypedGameruleDto.component1|component1(){}[0]
+    final fun component2(): kotlin/String // tech.aliorpse.mcutils.entity/TypedGameruleDto.component2|component2(){}[0]
+    final fun component3(): kotlinx.serialization.json/JsonPrimitive // tech.aliorpse.mcutils.entity/TypedGameruleDto.component3|component3(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., kotlinx.serialization.json/JsonPrimitive = ...): tech.aliorpse.mcutils.entity/TypedGameruleDto // tech.aliorpse.mcutils.entity/TypedGameruleDto.copy|copy(kotlin.String;kotlin.String;kotlinx.serialization.json.JsonPrimitive){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/TypedGameruleDto.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/TypedGameruleDto.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/TypedGameruleDto.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/TypedGameruleDto> { // tech.aliorpse.mcutils.entity/TypedGameruleDto.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/TypedGameruleDto.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/TypedGameruleDto.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/TypedGameruleDto.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/TypedGameruleDto // tech.aliorpse.mcutils.entity/TypedGameruleDto.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/TypedGameruleDto) // tech.aliorpse.mcutils.entity/TypedGameruleDto.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.TypedGameruleDto){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/TypedGameruleDto.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/TypedGameruleDto> // tech.aliorpse.mcutils.entity/TypedGameruleDto.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/UnknownMsmpEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/UnknownMsmpEvent|null[0]
+    constructor <init>(kotlin/String, kotlinx.serialization.json/JsonElement?) // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.<init>|<init>(kotlin.String;kotlinx.serialization.json.JsonElement?){}[0]
+
+    final val method // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.method|{}method[0]
+        final fun <get-method>(): kotlin/String // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.method.<get-method>|<get-method>(){}[0]
+    final val params // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.params|{}params[0]
+        final fun <get-params>(): kotlinx.serialization.json/JsonElement? // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.params.<get-params>|<get-params>(){}[0]
+
+    final fun component1(): kotlin/String // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.component1|component1(){}[0]
+    final fun component2(): kotlinx.serialization.json/JsonElement? // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.component2|component2(){}[0]
+    final fun copy(kotlin/String = ..., kotlinx.serialization.json/JsonElement? = ...): tech.aliorpse.mcutils.entity/UnknownMsmpEvent // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.copy|copy(kotlin.String;kotlinx.serialization.json.JsonElement?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/UnknownMsmpEvent> { // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/UnknownMsmpEvent // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/UnknownMsmpEvent) // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.UnknownMsmpEvent){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/UnknownMsmpEvent> // tech.aliorpse.mcutils.entity/UnknownMsmpEvent.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/UntypedGameruleDto { // tech.aliorpse.mcutils.entity/UntypedGameruleDto|null[0]
+    constructor <init>(kotlin/String, kotlinx.serialization.json/JsonElement) // tech.aliorpse.mcutils.entity/UntypedGameruleDto.<init>|<init>(kotlin.String;kotlinx.serialization.json.JsonElement){}[0]
+
+    final val key // tech.aliorpse.mcutils.entity/UntypedGameruleDto.key|{}key[0]
+        final fun <get-key>(): kotlin/String // tech.aliorpse.mcutils.entity/UntypedGameruleDto.key.<get-key>|<get-key>(){}[0]
+    final val value // tech.aliorpse.mcutils.entity/UntypedGameruleDto.value|{}value[0]
+        final fun <get-value>(): kotlinx.serialization.json/JsonElement // tech.aliorpse.mcutils.entity/UntypedGameruleDto.value.<get-value>|<get-value>(){}[0]
+
+    final fun component1(): kotlin/String // tech.aliorpse.mcutils.entity/UntypedGameruleDto.component1|component1(){}[0]
+    final fun component2(): kotlinx.serialization.json/JsonElement // tech.aliorpse.mcutils.entity/UntypedGameruleDto.component2|component2(){}[0]
+    final fun copy(kotlin/String = ..., kotlinx.serialization.json/JsonElement = ...): tech.aliorpse.mcutils.entity/UntypedGameruleDto // tech.aliorpse.mcutils.entity/UntypedGameruleDto.copy|copy(kotlin.String;kotlinx.serialization.json.JsonElement){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/UntypedGameruleDto.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/UntypedGameruleDto.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/UntypedGameruleDto.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/UntypedGameruleDto> { // tech.aliorpse.mcutils.entity/UntypedGameruleDto.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/UntypedGameruleDto.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/UntypedGameruleDto.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/UntypedGameruleDto.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/UntypedGameruleDto // tech.aliorpse.mcutils.entity/UntypedGameruleDto.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/UntypedGameruleDto) // tech.aliorpse.mcutils.entity/UntypedGameruleDto.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.UntypedGameruleDto){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/UntypedGameruleDto.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/UntypedGameruleDto> // tech.aliorpse.mcutils.entity/UntypedGameruleDto.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/UserBanAddedEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/UserBanAddedEvent|null[0]
+    constructor <init>(tech.aliorpse.mcutils.entity/UserBanDto) // tech.aliorpse.mcutils.entity/UserBanAddedEvent.<init>|<init>(tech.aliorpse.mcutils.entity.UserBanDto){}[0]
+
+    final val eventCtx // tech.aliorpse.mcutils.entity/UserBanAddedEvent.eventCtx|{}eventCtx[0]
+        final fun <get-eventCtx>(): tech.aliorpse.mcutils.entity/UserBanDto // tech.aliorpse.mcutils.entity/UserBanAddedEvent.eventCtx.<get-eventCtx>|<get-eventCtx>(){}[0]
+
+    final fun component1(): tech.aliorpse.mcutils.entity/UserBanDto // tech.aliorpse.mcutils.entity/UserBanAddedEvent.component1|component1(){}[0]
+    final fun copy(tech.aliorpse.mcutils.entity/UserBanDto = ...): tech.aliorpse.mcutils.entity/UserBanAddedEvent // tech.aliorpse.mcutils.entity/UserBanAddedEvent.copy|copy(tech.aliorpse.mcutils.entity.UserBanDto){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/UserBanAddedEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/UserBanAddedEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/UserBanAddedEvent.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/UserBanAddedEvent> { // tech.aliorpse.mcutils.entity/UserBanAddedEvent.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/UserBanAddedEvent.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/UserBanAddedEvent.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/UserBanAddedEvent.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/UserBanAddedEvent // tech.aliorpse.mcutils.entity/UserBanAddedEvent.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/UserBanAddedEvent) // tech.aliorpse.mcutils.entity/UserBanAddedEvent.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.UserBanAddedEvent){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/UserBanAddedEvent.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/UserBanAddedEvent> // tech.aliorpse.mcutils.entity/UserBanAddedEvent.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/UserBanDto { // tech.aliorpse.mcutils.entity/UserBanDto|null[0]
+    constructor <init>(kotlin/String? = ..., tech.aliorpse.mcutils.entity/PlayerDto, kotlin/String? = ..., kotlin/String? = ...) // tech.aliorpse.mcutils.entity/UserBanDto.<init>|<init>(kotlin.String?;tech.aliorpse.mcutils.entity.PlayerDto;kotlin.String?;kotlin.String?){}[0]
+
+    final val expires // tech.aliorpse.mcutils.entity/UserBanDto.expires|{}expires[0]
+        final fun <get-expires>(): kotlin/String? // tech.aliorpse.mcutils.entity/UserBanDto.expires.<get-expires>|<get-expires>(){}[0]
+    final val player // tech.aliorpse.mcutils.entity/UserBanDto.player|{}player[0]
+        final fun <get-player>(): tech.aliorpse.mcutils.entity/PlayerDto // tech.aliorpse.mcutils.entity/UserBanDto.player.<get-player>|<get-player>(){}[0]
+    final val reason // tech.aliorpse.mcutils.entity/UserBanDto.reason|{}reason[0]
+        final fun <get-reason>(): kotlin/String? // tech.aliorpse.mcutils.entity/UserBanDto.reason.<get-reason>|<get-reason>(){}[0]
+    final val source // tech.aliorpse.mcutils.entity/UserBanDto.source|{}source[0]
+        final fun <get-source>(): kotlin/String? // tech.aliorpse.mcutils.entity/UserBanDto.source.<get-source>|<get-source>(){}[0]
+
+    final fun component1(): kotlin/String? // tech.aliorpse.mcutils.entity/UserBanDto.component1|component1(){}[0]
+    final fun component2(): tech.aliorpse.mcutils.entity/PlayerDto // tech.aliorpse.mcutils.entity/UserBanDto.component2|component2(){}[0]
+    final fun component3(): kotlin/String? // tech.aliorpse.mcutils.entity/UserBanDto.component3|component3(){}[0]
+    final fun component4(): kotlin/String? // tech.aliorpse.mcutils.entity/UserBanDto.component4|component4(){}[0]
+    final fun copy(kotlin/String? = ..., tech.aliorpse.mcutils.entity/PlayerDto = ..., kotlin/String? = ..., kotlin/String? = ...): tech.aliorpse.mcutils.entity/UserBanDto // tech.aliorpse.mcutils.entity/UserBanDto.copy|copy(kotlin.String?;tech.aliorpse.mcutils.entity.PlayerDto;kotlin.String?;kotlin.String?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/UserBanDto.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/UserBanDto.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/UserBanDto.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/UserBanDto> { // tech.aliorpse.mcutils.entity/UserBanDto.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/UserBanDto.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/UserBanDto.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/UserBanDto.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/UserBanDto // tech.aliorpse.mcutils.entity/UserBanDto.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/UserBanDto) // tech.aliorpse.mcutils.entity/UserBanDto.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.UserBanDto){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/UserBanDto.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/UserBanDto> // tech.aliorpse.mcutils.entity/UserBanDto.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class tech.aliorpse.mcutils.entity/UserBanRemovedEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/UserBanRemovedEvent|null[0]
+    constructor <init>(tech.aliorpse.mcutils.entity/PlayerDto) // tech.aliorpse.mcutils.entity/UserBanRemovedEvent.<init>|<init>(tech.aliorpse.mcutils.entity.PlayerDto){}[0]
+
+    final val eventCtx // tech.aliorpse.mcutils.entity/UserBanRemovedEvent.eventCtx|{}eventCtx[0]
+        final fun <get-eventCtx>(): tech.aliorpse.mcutils.entity/PlayerDto // tech.aliorpse.mcutils.entity/UserBanRemovedEvent.eventCtx.<get-eventCtx>|<get-eventCtx>(){}[0]
+
+    final fun component1(): tech.aliorpse.mcutils.entity/PlayerDto // tech.aliorpse.mcutils.entity/UserBanRemovedEvent.component1|component1(){}[0]
+    final fun copy(tech.aliorpse.mcutils.entity/PlayerDto = ...): tech.aliorpse.mcutils.entity/UserBanRemovedEvent // tech.aliorpse.mcutils.entity/UserBanRemovedEvent.copy|copy(tech.aliorpse.mcutils.entity.PlayerDto){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/UserBanRemovedEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/UserBanRemovedEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/UserBanRemovedEvent.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/UserBanRemovedEvent> { // tech.aliorpse.mcutils.entity/UserBanRemovedEvent.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/UserBanRemovedEvent.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/UserBanRemovedEvent.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/UserBanRemovedEvent.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/UserBanRemovedEvent // tech.aliorpse.mcutils.entity/UserBanRemovedEvent.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/UserBanRemovedEvent) // tech.aliorpse.mcutils.entity/UserBanRemovedEvent.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.UserBanRemovedEvent){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/UserBanRemovedEvent.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/UserBanRemovedEvent> // tech.aliorpse.mcutils.entity/UserBanRemovedEvent.Companion.serializer|serializer(){}[0]
+    }
+}
+
+sealed class tech.aliorpse.mcutils.api/MsmpState { // tech.aliorpse.mcutils.api/MsmpState|null[0]
+    final class Connected : tech.aliorpse.mcutils.api/MsmpState { // tech.aliorpse.mcutils.api/MsmpState.Connected|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.api/MsmpState.Connected.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.api/MsmpState.Connected.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // tech.aliorpse.mcutils.api/MsmpState.Connected.toString|toString(){}[0]
+    }
+
+    final class Disconnected : tech.aliorpse.mcutils.api/MsmpState { // tech.aliorpse.mcutils.api/MsmpState.Disconnected|null[0]
+        constructor <init>(kotlin/Throwable?) // tech.aliorpse.mcutils.api/MsmpState.Disconnected.<init>|<init>(kotlin.Throwable?){}[0]
+
+        final val exception // tech.aliorpse.mcutils.api/MsmpState.Disconnected.exception|{}exception[0]
+            final fun <get-exception>(): kotlin/Throwable? // tech.aliorpse.mcutils.api/MsmpState.Disconnected.exception.<get-exception>|<get-exception>(){}[0]
+
+        final fun component1(): kotlin/Throwable? // tech.aliorpse.mcutils.api/MsmpState.Disconnected.component1|component1(){}[0]
+        final fun copy(kotlin/Throwable? = ...): tech.aliorpse.mcutils.api/MsmpState.Disconnected // tech.aliorpse.mcutils.api/MsmpState.Disconnected.copy|copy(kotlin.Throwable?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.api/MsmpState.Disconnected.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.api/MsmpState.Disconnected.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // tech.aliorpse.mcutils.api/MsmpState.Disconnected.toString|toString(){}[0]
+    }
+
+    final class Reconnecting : tech.aliorpse.mcutils.api/MsmpState { // tech.aliorpse.mcutils.api/MsmpState.Reconnecting|null[0]
+        constructor <init>(kotlin/Long, kotlin/Long) // tech.aliorpse.mcutils.api/MsmpState.Reconnecting.<init>|<init>(kotlin.Long;kotlin.Long){}[0]
+
+        final val attempt // tech.aliorpse.mcutils.api/MsmpState.Reconnecting.attempt|{}attempt[0]
+            final fun <get-attempt>(): kotlin/Long // tech.aliorpse.mcutils.api/MsmpState.Reconnecting.attempt.<get-attempt>|<get-attempt>(){}[0]
+        final val nextDelay // tech.aliorpse.mcutils.api/MsmpState.Reconnecting.nextDelay|{}nextDelay[0]
+            final fun <get-nextDelay>(): kotlin/Long // tech.aliorpse.mcutils.api/MsmpState.Reconnecting.nextDelay.<get-nextDelay>|<get-nextDelay>(){}[0]
+
+        final fun component1(): kotlin/Long // tech.aliorpse.mcutils.api/MsmpState.Reconnecting.component1|component1(){}[0]
+        final fun component2(): kotlin/Long // tech.aliorpse.mcutils.api/MsmpState.Reconnecting.component2|component2(){}[0]
+        final fun copy(kotlin/Long = ..., kotlin/Long = ...): tech.aliorpse.mcutils.api/MsmpState.Reconnecting // tech.aliorpse.mcutils.api/MsmpState.Reconnecting.copy|copy(kotlin.Long;kotlin.Long){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.api/MsmpState.Reconnecting.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.api/MsmpState.Reconnecting.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // tech.aliorpse.mcutils.api/MsmpState.Reconnecting.toString|toString(){}[0]
+    }
+
+    final object Closed : tech.aliorpse.mcutils.api/MsmpState { // tech.aliorpse.mcutils.api/MsmpState.Closed|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.api/MsmpState.Closed.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.api/MsmpState.Closed.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // tech.aliorpse.mcutils.api/MsmpState.Closed.toString|toString(){}[0]
+    }
+
+    final object Connecting : tech.aliorpse.mcutils.api/MsmpState { // tech.aliorpse.mcutils.api/MsmpState.Connecting|null[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.api/MsmpState.Connecting.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.api/MsmpState.Connecting.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // tech.aliorpse.mcutils.api/MsmpState.Connecting.toString|toString(){}[0]
+    }
+}
+
+sealed class tech.aliorpse.mcutils.entity/MsmpEventProvider { // tech.aliorpse.mcutils.entity/MsmpEventProvider|null[0]
+    final class <#A1: tech.aliorpse.mcutils.entity/MsmpEvent> Data : tech.aliorpse.mcutils.entity/MsmpEventProvider { // tech.aliorpse.mcutils.entity/MsmpEventProvider.Data|null[0]
+        constructor <init>(kotlinx.serialization/KSerializer<#A1>) // tech.aliorpse.mcutils.entity/MsmpEventProvider.Data.<init>|<init>(kotlinx.serialization.KSerializer<1:0>){}[0]
+
+        final val serializer // tech.aliorpse.mcutils.entity/MsmpEventProvider.Data.serializer|{}serializer[0]
+            final fun <get-serializer>(): kotlinx.serialization/KSerializer<#A1> // tech.aliorpse.mcutils.entity/MsmpEventProvider.Data.serializer.<get-serializer>|<get-serializer>(){}[0]
+    }
+
+    final class Custom : tech.aliorpse.mcutils.entity/MsmpEventProvider { // tech.aliorpse.mcutils.entity/MsmpEventProvider.Custom|null[0]
+        constructor <init>(kotlin/Function1<kotlinx.serialization.json/JsonElement?, tech.aliorpse.mcutils.entity/MsmpEvent>) // tech.aliorpse.mcutils.entity/MsmpEventProvider.Custom.<init>|<init>(kotlin.Function1<kotlinx.serialization.json.JsonElement?,tech.aliorpse.mcutils.entity.MsmpEvent>){}[0]
+
+        final val block // tech.aliorpse.mcutils.entity/MsmpEventProvider.Custom.block|{}block[0]
+            final fun <get-block>(): kotlin/Function1<kotlinx.serialization.json/JsonElement?, tech.aliorpse.mcutils.entity/MsmpEvent> // tech.aliorpse.mcutils.entity/MsmpEventProvider.Custom.block.<get-block>|<get-block>(){}[0]
+    }
+
+    final class Singleton : tech.aliorpse.mcutils.entity/MsmpEventProvider { // tech.aliorpse.mcutils.entity/MsmpEventProvider.Singleton|null[0]
+        constructor <init>(tech.aliorpse.mcutils.entity/MsmpEvent) // tech.aliorpse.mcutils.entity/MsmpEventProvider.Singleton.<init>|<init>(tech.aliorpse.mcutils.entity.MsmpEvent){}[0]
+
+        final val instance // tech.aliorpse.mcutils.entity/MsmpEventProvider.Singleton.instance|{}instance[0]
+            final fun <get-instance>(): tech.aliorpse.mcutils.entity/MsmpEvent // tech.aliorpse.mcutils.entity/MsmpEventProvider.Singleton.instance.<get-instance>|<get-instance>(){}[0]
+    }
+}
+
+final object tech.aliorpse.mcutils.api.registry/MsmpEventRegistry { // tech.aliorpse.mcutils.api.registry/MsmpEventRegistry|null[0]
+    final val impl // tech.aliorpse.mcutils.api.registry/MsmpEventRegistry.impl|{}impl[0]
+        final fun <get-impl>(): tech.aliorpse.mcutils.entity/MsmpEventRegistryImpl // tech.aliorpse.mcutils.api.registry/MsmpEventRegistry.impl.<get-impl>|<get-impl>(){}[0]
+
+    final fun configure(kotlin/Function1<tech.aliorpse.mcutils.entity/IMsmpEventRegistry, kotlin/Unit>) // tech.aliorpse.mcutils.api.registry/MsmpEventRegistry.configure|configure(kotlin.Function1<tech.aliorpse.mcutils.entity.IMsmpEventRegistry,kotlin.Unit>){}[0]
+}
+
+final object tech.aliorpse.mcutils.entity/ConnectionEstablishedEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/ConnectionEstablishedEvent|null[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/ConnectionEstablishedEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/ConnectionEstablishedEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/ConnectionEstablishedEvent.toString|toString(){}[0]
+}
+
+final object tech.aliorpse.mcutils.entity/JsonRpcErrors { // tech.aliorpse.mcutils.entity/JsonRpcErrors|null[0]
+    final class UnknownError : tech.aliorpse.mcutils.entity/JsonRpcError { // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError|null[0]
+        constructor <init>(kotlin/Int, kotlin/String, kotlin/String? = ...) // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.<init>|<init>(kotlin.Int;kotlin.String;kotlin.String?){}[0]
+
+        final val code // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.code|{}code[0]
+            final fun <get-code>(): kotlin/Int // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.code.<get-code>|<get-code>(){}[0]
+        final val data // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.data|{}data[0]
+            final fun <get-data>(): kotlin/String? // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.data.<get-data>|<get-data>(){}[0]
+        final val message // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.message|{}message[0]
+            final fun <get-message>(): kotlin/String // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.message.<get-message>|<get-message>(){}[0]
+
+        final fun component1(): kotlin/Int // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.component1|component1(){}[0]
+        final fun component2(): kotlin/String // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.component2|component2(){}[0]
+        final fun component3(): kotlin/String? // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.component3|component3(){}[0]
+        final fun copy(kotlin/Int = ..., kotlin/String = ..., kotlin/String? = ...): tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.copy|copy(kotlin.Int;kotlin.String;kotlin.String?){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.toString|toString(){}[0]
+
+        final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError> { // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.$serializer|null[0]
+            final val descriptor // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.$serializer.descriptor|{}descriptor[0]
+                final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+            final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.$serializer.childSerializers|childSerializers(){}[0]
+            final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+            final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError) // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.JsonRpcErrors.UnknownError){}[0]
+        }
+
+        final object Companion { // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.Companion|null[0]
+            final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError> // tech.aliorpse.mcutils.entity/JsonRpcErrors.UnknownError.Companion.serializer|serializer(){}[0]
+        }
+    }
+
+    final object InternalError : kotlinx.serialization.internal/SerializerFactory, tech.aliorpse.mcutils.entity/JsonRpcError { // tech.aliorpse.mcutils.entity/JsonRpcErrors.InternalError|null[0]
+        final val code // tech.aliorpse.mcutils.entity/JsonRpcErrors.InternalError.code|{}code[0]
+            final fun <get-code>(): kotlin/Int // tech.aliorpse.mcutils.entity/JsonRpcErrors.InternalError.code.<get-code>|<get-code>(){}[0]
+        final val data // tech.aliorpse.mcutils.entity/JsonRpcErrors.InternalError.data|{}data[0]
+            final fun <get-data>(): kotlin/String? // tech.aliorpse.mcutils.entity/JsonRpcErrors.InternalError.data.<get-data>|<get-data>(){}[0]
+        final val message // tech.aliorpse.mcutils.entity/JsonRpcErrors.InternalError.message|{}message[0]
+            final fun <get-message>(): kotlin/String // tech.aliorpse.mcutils.entity/JsonRpcErrors.InternalError.message.<get-message>|<get-message>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/JsonRpcErrors.InternalError.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/JsonRpcErrors.InternalError.hashCode|hashCode(){}[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/JsonRpcErrors.InternalError> // tech.aliorpse.mcutils.entity/JsonRpcErrors.InternalError.serializer|serializer(){}[0]
+        final fun serializer(kotlin/Array<out kotlinx.serialization/KSerializer<*>>...): kotlinx.serialization/KSerializer<*> // tech.aliorpse.mcutils.entity/JsonRpcErrors.InternalError.serializer|serializer(kotlin.Array<out|kotlinx.serialization.KSerializer<*>>...){}[0]
+        final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/JsonRpcErrors.InternalError.toString|toString(){}[0]
+    }
+
+    final object InvalidParams : kotlinx.serialization.internal/SerializerFactory, tech.aliorpse.mcutils.entity/JsonRpcError { // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidParams|null[0]
+        final val code // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidParams.code|{}code[0]
+            final fun <get-code>(): kotlin/Int // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidParams.code.<get-code>|<get-code>(){}[0]
+        final val data // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidParams.data|{}data[0]
+            final fun <get-data>(): kotlin/String? // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidParams.data.<get-data>|<get-data>(){}[0]
+        final val message // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidParams.message|{}message[0]
+            final fun <get-message>(): kotlin/String // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidParams.message.<get-message>|<get-message>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidParams.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidParams.hashCode|hashCode(){}[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidParams> // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidParams.serializer|serializer(){}[0]
+        final fun serializer(kotlin/Array<out kotlinx.serialization/KSerializer<*>>...): kotlinx.serialization/KSerializer<*> // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidParams.serializer|serializer(kotlin.Array<out|kotlinx.serialization.KSerializer<*>>...){}[0]
+        final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidParams.toString|toString(){}[0]
+    }
+
+    final object InvalidRequest : kotlinx.serialization.internal/SerializerFactory, tech.aliorpse.mcutils.entity/JsonRpcError { // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidRequest|null[0]
+        final val code // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidRequest.code|{}code[0]
+            final fun <get-code>(): kotlin/Int // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidRequest.code.<get-code>|<get-code>(){}[0]
+        final val data // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidRequest.data|{}data[0]
+            final fun <get-data>(): kotlin/String? // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidRequest.data.<get-data>|<get-data>(){}[0]
+        final val message // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidRequest.message|{}message[0]
+            final fun <get-message>(): kotlin/String // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidRequest.message.<get-message>|<get-message>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidRequest.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidRequest.hashCode|hashCode(){}[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidRequest> // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidRequest.serializer|serializer(){}[0]
+        final fun serializer(kotlin/Array<out kotlinx.serialization/KSerializer<*>>...): kotlinx.serialization/KSerializer<*> // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidRequest.serializer|serializer(kotlin.Array<out|kotlinx.serialization.KSerializer<*>>...){}[0]
+        final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/JsonRpcErrors.InvalidRequest.toString|toString(){}[0]
+    }
+
+    final object MethodNotFound : kotlinx.serialization.internal/SerializerFactory, tech.aliorpse.mcutils.entity/JsonRpcError { // tech.aliorpse.mcutils.entity/JsonRpcErrors.MethodNotFound|null[0]
+        final val code // tech.aliorpse.mcutils.entity/JsonRpcErrors.MethodNotFound.code|{}code[0]
+            final fun <get-code>(): kotlin/Int // tech.aliorpse.mcutils.entity/JsonRpcErrors.MethodNotFound.code.<get-code>|<get-code>(){}[0]
+        final val data // tech.aliorpse.mcutils.entity/JsonRpcErrors.MethodNotFound.data|{}data[0]
+            final fun <get-data>(): kotlin/String? // tech.aliorpse.mcutils.entity/JsonRpcErrors.MethodNotFound.data.<get-data>|<get-data>(){}[0]
+        final val message // tech.aliorpse.mcutils.entity/JsonRpcErrors.MethodNotFound.message|{}message[0]
+            final fun <get-message>(): kotlin/String // tech.aliorpse.mcutils.entity/JsonRpcErrors.MethodNotFound.message.<get-message>|<get-message>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/JsonRpcErrors.MethodNotFound.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/JsonRpcErrors.MethodNotFound.hashCode|hashCode(){}[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/JsonRpcErrors.MethodNotFound> // tech.aliorpse.mcutils.entity/JsonRpcErrors.MethodNotFound.serializer|serializer(){}[0]
+        final fun serializer(kotlin/Array<out kotlinx.serialization/KSerializer<*>>...): kotlinx.serialization/KSerializer<*> // tech.aliorpse.mcutils.entity/JsonRpcErrors.MethodNotFound.serializer|serializer(kotlin.Array<out|kotlinx.serialization.KSerializer<*>>...){}[0]
+        final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/JsonRpcErrors.MethodNotFound.toString|toString(){}[0]
+    }
+
+    final object ParseError : kotlinx.serialization.internal/SerializerFactory, tech.aliorpse.mcutils.entity/JsonRpcError { // tech.aliorpse.mcutils.entity/JsonRpcErrors.ParseError|null[0]
+        final val code // tech.aliorpse.mcutils.entity/JsonRpcErrors.ParseError.code|{}code[0]
+            final fun <get-code>(): kotlin/Int // tech.aliorpse.mcutils.entity/JsonRpcErrors.ParseError.code.<get-code>|<get-code>(){}[0]
+        final val data // tech.aliorpse.mcutils.entity/JsonRpcErrors.ParseError.data|{}data[0]
+            final fun <get-data>(): kotlin/String? // tech.aliorpse.mcutils.entity/JsonRpcErrors.ParseError.data.<get-data>|<get-data>(){}[0]
+        final val message // tech.aliorpse.mcutils.entity/JsonRpcErrors.ParseError.message|{}message[0]
+            final fun <get-message>(): kotlin/String // tech.aliorpse.mcutils.entity/JsonRpcErrors.ParseError.message.<get-message>|<get-message>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/JsonRpcErrors.ParseError.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/JsonRpcErrors.ParseError.hashCode|hashCode(){}[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/JsonRpcErrors.ParseError> // tech.aliorpse.mcutils.entity/JsonRpcErrors.ParseError.serializer|serializer(){}[0]
+        final fun serializer(kotlin/Array<out kotlinx.serialization/KSerializer<*>>...): kotlinx.serialization/KSerializer<*> // tech.aliorpse.mcutils.entity/JsonRpcErrors.ParseError.serializer|serializer(kotlin.Array<out|kotlinx.serialization.KSerializer<*>>...){}[0]
+        final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/JsonRpcErrors.ParseError.toString|toString(){}[0]
+    }
+}
+
+final object tech.aliorpse.mcutils.entity/ServerActivityEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/ServerActivityEvent|null[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/ServerActivityEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/ServerActivityEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/ServerActivityEvent.toString|toString(){}[0]
+}
+
+final object tech.aliorpse.mcutils.entity/ServerSavedEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/ServerSavedEvent|null[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/ServerSavedEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/ServerSavedEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/ServerSavedEvent.toString|toString(){}[0]
+}
+
+final object tech.aliorpse.mcutils.entity/ServerSavingEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/ServerSavingEvent|null[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/ServerSavingEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/ServerSavingEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/ServerSavingEvent.toString|toString(){}[0]
+}
+
+final object tech.aliorpse.mcutils.entity/ServerStartedEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/ServerStartedEvent|null[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/ServerStartedEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/ServerStartedEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/ServerStartedEvent.toString|toString(){}[0]
+}
+
+final object tech.aliorpse.mcutils.entity/ServerStoppingEvent : tech.aliorpse.mcutils.entity/MsmpEvent { // tech.aliorpse.mcutils.entity/ServerStoppingEvent|null[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/ServerStoppingEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/ServerStoppingEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/ServerStoppingEvent.toString|toString(){}[0]
+}
+
+final val tech.aliorpse.mcutils.api.registry/allowList // tech.aliorpse.mcutils.api.registry/allowList|@tech.aliorpse.mcutils.api.MsmpClient{}allowList[0]
+    final fun (tech.aliorpse.mcutils.api/MsmpClient).<get-allowList>(): tech.aliorpse.mcutils.api.extension/ArrayExtension<tech.aliorpse.mcutils.entity/PlayerDto> // tech.aliorpse.mcutils.api.registry/allowList.<get-allowList>|<get-allowList>@tech.aliorpse.mcutils.api.MsmpClient(){}[0]
+final val tech.aliorpse.mcutils.api.registry/banList // tech.aliorpse.mcutils.api.registry/banList|@tech.aliorpse.mcutils.api.MsmpClient{}banList[0]
+    final fun (tech.aliorpse.mcutils.api/MsmpClient).<get-banList>(): tech.aliorpse.mcutils.api.extension/ArrayExtension<tech.aliorpse.mcutils.entity/UserBanDto> // tech.aliorpse.mcutils.api.registry/banList.<get-banList>|<get-banList>@tech.aliorpse.mcutils.api.MsmpClient(){}[0]
+final val tech.aliorpse.mcutils.api.registry/gamerules // tech.aliorpse.mcutils.api.registry/gamerules|@tech.aliorpse.mcutils.api.MsmpClient{}gamerules[0]
+    final fun (tech.aliorpse.mcutils.api/MsmpClient).<get-gamerules>(): tech.aliorpse.mcutils.api.extension/GamerulesExtension // tech.aliorpse.mcutils.api.registry/gamerules.<get-gamerules>|<get-gamerules>@tech.aliorpse.mcutils.api.MsmpClient(){}[0]
+final val tech.aliorpse.mcutils.api.registry/ipBanList // tech.aliorpse.mcutils.api.registry/ipBanList|@tech.aliorpse.mcutils.api.MsmpClient{}ipBanList[0]
+    final fun (tech.aliorpse.mcutils.api/MsmpClient).<get-ipBanList>(): tech.aliorpse.mcutils.api.extension/ArrayExtension<tech.aliorpse.mcutils.entity/IPBanDto> // tech.aliorpse.mcutils.api.registry/ipBanList.<get-ipBanList>|<get-ipBanList>@tech.aliorpse.mcutils.api.MsmpClient(){}[0]
+final val tech.aliorpse.mcutils.api.registry/operatorList // tech.aliorpse.mcutils.api.registry/operatorList|@tech.aliorpse.mcutils.api.MsmpClient{}operatorList[0]
+    final fun (tech.aliorpse.mcutils.api/MsmpClient).<get-operatorList>(): tech.aliorpse.mcutils.api.extension/ArrayExtension<tech.aliorpse.mcutils.entity/OperatorDto> // tech.aliorpse.mcutils.api.registry/operatorList.<get-operatorList>|<get-operatorList>@tech.aliorpse.mcutils.api.MsmpClient(){}[0]
+final val tech.aliorpse.mcutils.api.registry/players // tech.aliorpse.mcutils.api.registry/players|@tech.aliorpse.mcutils.api.MsmpClient{}players[0]
+    final fun (tech.aliorpse.mcutils.api/MsmpClient).<get-players>(): tech.aliorpse.mcutils.api.extension/PlayersExtension // tech.aliorpse.mcutils.api.registry/players.<get-players>|<get-players>@tech.aliorpse.mcutils.api.MsmpClient(){}[0]
+final val tech.aliorpse.mcutils.api.registry/server // tech.aliorpse.mcutils.api.registry/server|@tech.aliorpse.mcutils.api.MsmpClient{}server[0]
+    final fun (tech.aliorpse.mcutils.api/MsmpClient).<get-server>(): tech.aliorpse.mcutils.api.extension/ServerExtension // tech.aliorpse.mcutils.api.registry/server.<get-server>|<get-server>@tech.aliorpse.mcutils.api.MsmpClient(){}[0]
+final val tech.aliorpse.mcutils.api.registry/serverSettings // tech.aliorpse.mcutils.api.registry/serverSettings|@tech.aliorpse.mcutils.api.MsmpClient{}serverSettings[0]
+    final fun (tech.aliorpse.mcutils.api/MsmpClient).<get-serverSettings>(): tech.aliorpse.mcutils.api.extension/ServerSettingsExtension // tech.aliorpse.mcutils.api.registry/serverSettings.<get-serverSettings>|<get-serverSettings>@tech.aliorpse.mcutils.api.MsmpClient(){}[0]
+
+final fun (tech.aliorpse.mcutils.api/MinecraftServer).tech.aliorpse.mcutils.api/msmpClient(kotlin/String, kotlin/String, kotlin/Function1<tech.aliorpse.mcutils.api/MsmpClientConfig, kotlin/Unit> = ...): tech.aliorpse.mcutils.api/MsmpClient // tech.aliorpse.mcutils.api/msmpClient|msmpClient@tech.aliorpse.mcutils.api.MinecraftServer(kotlin.String;kotlin.String;kotlin.Function1<tech.aliorpse.mcutils.api.MsmpClientConfig,kotlin.Unit>){}[0]
+final fun (tech.aliorpse.mcutils.entity/JsonRpcError.Companion).tech.aliorpse.mcutils.entity/fromCode(kotlin/Int, kotlin/String): tech.aliorpse.mcutils.entity/JsonRpcError // tech.aliorpse.mcutils.entity/fromCode|fromCode@tech.aliorpse.mcutils.entity.JsonRpcError.Companion(kotlin.Int;kotlin.String){}[0]
+final inline fun <#A: reified kotlin/Any, #B: reified kotlin/Any, #C: tech.aliorpse.mcutils.api.registry/MsmpExtension> tech.aliorpse.mcutils.api.registry/msmpExtension(kotlin/String, crossinline kotlin/Function4<tech.aliorpse.mcutils.api/MsmpClient, kotlin/String, kotlinx.serialization/KSerializer<#A>, kotlinx.serialization/KSerializer<#B>, #C>, crossinline kotlin/Function1<tech.aliorpse.mcutils.api.registry/MsmpExtensionConfig<#C>, kotlin/Unit> = ...): kotlin.properties/ReadOnlyProperty<tech.aliorpse.mcutils.api/MsmpClient, #C> // tech.aliorpse.mcutils.api.registry/msmpExtension|msmpExtension(kotlin.String;kotlin.Function4<tech.aliorpse.mcutils.api.MsmpClient,kotlin.String,kotlinx.serialization.KSerializer<0:0>,kotlinx.serialization.KSerializer<0:1>,0:2>;kotlin.Function1<tech.aliorpse.mcutils.api.registry.MsmpExtensionConfig<0:2>,kotlin.Unit>){0§<kotlin.Any>;1§<kotlin.Any>;2§<tech.aliorpse.mcutils.api.registry.MsmpExtension>}[0]
+final inline fun <#A: tech.aliorpse.mcutils.api.registry/MsmpExtension> tech.aliorpse.mcutils.api.registry/msmpExtension(kotlin/String, crossinline kotlin/Function2<tech.aliorpse.mcutils.api/MsmpClient, kotlin/String, #A>, crossinline kotlin/Function1<tech.aliorpse.mcutils.api.registry/MsmpExtensionConfig<#A>, kotlin/Unit> = ...): kotlin.properties/ReadOnlyProperty<tech.aliorpse.mcutils.api/MsmpClient, #A> // tech.aliorpse.mcutils.api.registry/msmpExtension|msmpExtension(kotlin.String;kotlin.Function2<tech.aliorpse.mcutils.api.MsmpClient,kotlin.String,0:0>;kotlin.Function1<tech.aliorpse.mcutils.api.registry.MsmpExtensionConfig<0:0>,kotlin.Unit>){0§<tech.aliorpse.mcutils.api.registry.MsmpExtension>}[0]
