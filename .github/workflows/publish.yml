@@ -37,10 +37,9 @@ jobs:
         run: |
           version="${{ steps.release.outputs.tag_name }}"
           version="${version#v}"
-          ./gradlew publishAndReleaseToMavenCentral \
+          ./gradlew publishToMavenCentral \
           -Pversion=$version \
           -Pfull-build=true \
-          -Dorg.gradle.jvmargs="-Xmx5g -XX:MaxMetaspaceSize=1g" \
           --no-configuration-cache
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
