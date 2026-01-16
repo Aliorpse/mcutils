@@ -26,7 +26,6 @@ import kotlin.concurrent.atomics.fetchAndIncrement
 
 @OptIn(ExperimentalAtomicApi::class)
 internal class MsmpResponseHandler(
-    private val json: Json,
     eventBufferSize: Int
 ) {
     val eventFlow = MutableSharedFlow<MsmpEvent>(
@@ -63,9 +62,7 @@ internal class MsmpResponseHandler(
 
     suspend fun handleIncomingElement(element: JsonElement) {
         when (element) {
-            is JsonArray -> element.forEach { item ->
-                if (item is JsonObject) processJsonPacket(item)
-            }
+            is JsonArray -> element.forEach { processJsonPacket(it as JsonObject) }
             is JsonObject -> processJsonPacket(element)
             else -> error("Unexpected response element: $element")
         }
@@ -80,7 +77,7 @@ internal class MsmpResponseHandler(
     }
 
     private fun handleResponse(jsonObj: JsonObject) {
-        val response = json.decodeFromJsonElement(MsmpResponse.serializer(), jsonObj)
+        val response = Json.decodeFromJsonElement(MsmpResponse.serializer(), jsonObj)
         val deferred = pendingRequests.remove(response.id) ?: return
 
         val rawError = response.error
@@ -98,7 +95,7 @@ internal class MsmpResponseHandler(
 
         val event = when (val provider = eventMap.get(method)) {
             is MsmpEventProvider.Data<*> -> if (rawParams !is JsonNull) {
-                json.decodeFromJsonElement(provider.serializer, JsonObject(mapOf("eventCtx" to rawParams)))
+                Json.decodeFromJsonElement(provider.serializer, JsonObject(mapOf("eventCtx" to rawParams)))
             } else {
                 UnknownMsmpEvent(method, rawParams)
             }

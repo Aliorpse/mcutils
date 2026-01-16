@@ -163,6 +163,7 @@ private fun Sink.writeVarInt(value: Int) {
     }
 }
 
+@Suppress("DuplicatedCode")
 private fun Source.readVarInt(): Int {
     var numRead = 0
     var result = 0

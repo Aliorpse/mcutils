@@ -1,20 +1,18 @@
 package tech.aliorpse.mcutils.internal
 
 import io.ktor.client.plugins.websocket.DefaultClientWebSocketSession
+import io.ktor.client.plugins.websocket.receiveDeserialized
+import io.ktor.serialization.WebsocketDeserializeException
 import io.ktor.utils.io.CancellationException
-import io.ktor.websocket.Frame
 import io.ktor.websocket.close
-import io.ktor.websocket.readText
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.flow.filterIsInstance
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import tech.aliorpse.mcutils.entity.ConnectionClosedEvent
 import tech.aliorpse.mcutils.entity.ConnectionEstablishedEvent
@@ -29,33 +27,22 @@ internal class MsmpConnection internal constructor(
 ) {
     private val scope = CoroutineScope(DispatchersIO + SupervisorJob())
 
-    private val json = Json {
-        ignoreUnknownKeys = true
-        encodeDefaults = true
-    }
+    private val responseHandler = MsmpResponseHandler(eventBufferSize)
 
-    private val responseHandler = MsmpResponseHandler(json, eventBufferSize)
-
-    private val messageSender = MsmpRequestSender(connection, json, batchDelay, scope)
+    private val messageSender = MsmpRequestSender(connection, batchDelay, scope)
 
     val eventFlow = responseHandler.eventFlow
 
     internal var retryOnDisconnected: Boolean = true
 
     val listeningJob: Job = scope.launch {
+        responseHandler.eventFlow.emit(ConnectionEstablishedEvent)
         runCatching {
-            responseHandler.eventFlow.emit(ConnectionEstablishedEvent)
-
-            connection.incoming.receiveAsFlow()
-                .filterIsInstance<Frame.Text>()
-                .collect { frame ->
-                    val text = frame.readText()
-                    val element = json.parseToJsonElement(text)
-                    responseHandler.handleIncomingElement(element)
-                }
-        }.also { result ->
-            handleConnectionClosure(result)
-        }
+            while (isActive) responseHandler.handleIncomingElement(
+                runCatching { connection.receiveDeserialized<JsonElement>() }
+                    .getOrElse { if (it is WebsocketDeserializeException) continue else throw it }
+            )
+        }.also { handleConnectionClosure(it) }
     }
 
     init {

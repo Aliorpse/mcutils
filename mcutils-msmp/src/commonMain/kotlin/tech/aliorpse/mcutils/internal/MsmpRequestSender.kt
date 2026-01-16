@@ -1,19 +1,16 @@
 package tech.aliorpse.mcutils.internal
 
 import io.ktor.client.plugins.websocket.DefaultClientWebSocketSession
-import io.ktor.websocket.send
+import io.ktor.client.plugins.websocket.sendSerialized
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.json.Json
 import tech.aliorpse.mcutils.entity.MsmpRequest
 
 internal class MsmpRequestSender(
     private val connection: DefaultClientWebSocketSession,
-    private val json: Json,
     private val batchDelay: Long,
     scope: CoroutineScope
 ) {
@@ -33,7 +30,7 @@ internal class MsmpRequestSender(
                     next = requestChannel.tryReceive().getOrNull()
                 }
 
-                sendBatch(batch)
+                sendRequest(batch)
             }
         }
     }
@@ -42,15 +39,11 @@ internal class MsmpRequestSender(
         requestChannel.send(request)
     }
 
-    private suspend fun sendBatch(requests: List<MsmpRequest>) {
+    private suspend fun sendRequest(requests: List<MsmpRequest>) {
         if (requests.isEmpty()) return
 
-        val payload = if (requests.size == 1) {
-            json.encodeToString(MsmpRequest.serializer(), requests[0])
-        } else {
-            json.encodeToString(ListSerializer(MsmpRequest.serializer()), requests)
-        }
-        connection.send(payload)
+        val payload = if (requests.size == 1) requests[0] else requests
+        connection.sendSerialized(payload)
     }
 
     fun close() {
