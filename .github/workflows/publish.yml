@@ -34,7 +34,7 @@ jobs:
 
       - name: ABI Validation
         if: ${{ steps.release.outputs.release_created }}
-        run: ./gradlew checkLegacyAbi --no-configuration-cache
+        run: ./gradlew checkLegacyAbi -Pfull-build=true --no-configuration-cache
 
       - name: Publish and release to Maven Central
         if: ${{ steps.release.outputs.release_created }}
