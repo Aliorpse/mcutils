@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.5](https://github.com/Aliorpse/mcutils/compare/v3.6.4...v3.6.5) (2026-01-16)
+
+
+### Bug Fixes
+
+* **publish:** no more validateDeployment ([b772c20](https://github.com/Aliorpse/mcutils/commit/b772c2028ab98fbd75cec7be1940b4934269ca12))
+
 ## [3.6.4](https://github.com/Aliorpse/mcutils/compare/v3.6.3...v3.6.4) (2026-01-16)
 
 
