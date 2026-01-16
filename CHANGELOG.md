@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.4](https://github.com/Aliorpse/mcutils/compare/v3.6.3...v3.6.4) (2026-01-16)
+
+
+### Performance Improvements
+
+* **msmp:** use KotlinxWebsocketSerializationConverter for automatically serde-ing ([287d85a](https://github.com/Aliorpse/mcutils/commit/287d85af34e88965b9cb0927467f00f253d81133))
+
 ## [3.6.3](https://github.com/Aliorpse/mcutils/compare/v3.6.2...v3.6.3) (2026-01-11)
 
 
