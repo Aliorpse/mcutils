@@ -27,7 +27,7 @@ import tech.aliorpse.mcutils.annotation.ExperimentalMCUtilsApi
 import tech.aliorpse.mcutils.entity.MsmpEvent
 import tech.aliorpse.mcutils.internal.MsmpConnection
 import tech.aliorpse.mcutils.internal.MsmpLifecycleManager
-import tech.aliorpse.mcutils.internal.util.AtomicMutableMap
+import tech.aliorpse.mcutils.internal.util.SpinLockedMutableMap
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
 
 @Suppress("MagicNumber")
@@ -99,7 +99,7 @@ public class MsmpClient internal constructor(
     private val lifecycleManager = MsmpLifecycleManager(target, token, config, scope)
 
     @PublishedApi
-    internal val callExtensions: AtomicMutableMap<String, Any> = AtomicMutableMap()
+    internal val callExtensions: SpinLockedMutableMap<String, Any> = SpinLockedMutableMap()
 
     @PublishedApi
     internal suspend fun awaitCall(

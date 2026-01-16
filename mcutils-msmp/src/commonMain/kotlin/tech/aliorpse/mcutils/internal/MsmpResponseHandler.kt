@@ -19,7 +19,7 @@ import tech.aliorpse.mcutils.entity.MsmpResponse
 import tech.aliorpse.mcutils.entity.UnknownMsmpEvent
 import tech.aliorpse.mcutils.entity.eventMap
 import tech.aliorpse.mcutils.entity.fromCode
-import tech.aliorpse.mcutils.internal.util.AtomicMutableMap
+import tech.aliorpse.mcutils.internal.util.SpinLockedMutableMap
 import kotlin.concurrent.atomics.AtomicInt
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
 import kotlin.concurrent.atomics.fetchAndIncrement
@@ -34,7 +34,7 @@ internal class MsmpResponseHandler(
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
 
-    private val pendingRequests = AtomicMutableMap<Int, CompletableDeferred<JsonElement>>()
+    private val pendingRequests = SpinLockedMutableMap<Int, CompletableDeferred<JsonElement>>()
 
     private val idCounter = AtomicInt(0)
 

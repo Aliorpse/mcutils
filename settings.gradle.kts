@@ -7,8 +7,8 @@ rootProject.name = "mcutils"
 include(":color")
 project(":color").projectDir = file("mcutils-color")
 
-include(":core")
-project(":core").projectDir = file("mcutils-core")
+include(":shared")
+project(":shared").projectDir = file("mcutils-shared")
 
 include(":player")
 project(":player").projectDir = file("mcutils-player")

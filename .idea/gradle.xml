@@ -10,11 +10,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/mcutils-color" />
-            <option value="$PROJECT_DIR$/mcutils-core" />
             <option value="$PROJECT_DIR$/mcutils-msmp" />
             <option value="$PROJECT_DIR$/mcutils-player" />
             <option value="$PROJECT_DIR$/mcutils-rcon" />
             <option value="$PROJECT_DIR$/mcutils-server-status" />
+            <option value="$PROJECT_DIR$/mcutils-shared" />
             <option value="$PROJECT_DIR$/mcutils-util" />
           </set>
         </option>

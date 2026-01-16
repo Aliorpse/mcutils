@@ -8,11 +8,12 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            api(project(":core"))
+            api(project(":shared"))
             implementation(project(":util"))
             api(project(":color"))
-            implementation(libs.ktor.network)
             implementation(libs.kotlinx.serialization.json)
+            implementation(libs.ktor.network)
+            implementation(libs.kotlinx.io.core)
         }
         jvmMain.dependencies {
             implementation(libs.minidns.hla)

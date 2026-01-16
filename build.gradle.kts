@@ -13,6 +13,8 @@ fun Project.hasKtorNetworkDependency(): Boolean =
 
 val jvmTarget = 17
 
+val isFullBuild = project.findProperty("full-build") == "true"
+
 allprojects {
     group = project.property("group") as String
     version = project.property("version") as String
@@ -70,17 +72,6 @@ subprojects {
             explicitApi()
             applyDefaultHierarchyTemplate()
 
-            androidNativeX64()
-            androidNativeArm64()
-            iosArm64()
-            iosX64()
-            iosSimulatorArm64()
-            linuxArm64()
-            linuxX64()
-            macosArm64()
-            macosX64()
-            mingwX64()
-
             jvm {
                 compilations.configureEach {
                     compileTaskProvider.configure {
@@ -102,13 +93,27 @@ subprojects {
                     if (!hasKtorNetworkDependency()) browser()
                 }
             }
+
+            linuxArm64()
+            linuxX64()
+
+            if (isFullBuild) { // My poor computer...
+                androidNativeX64()
+                androidNativeArm64()
+                iosArm64()
+                iosX64()
+                iosSimulatorArm64()
+                macosArm64()
+                macosX64()
+                mingwX64()
+            }
         }
     }
 }
 
 dependencies {
     dokka(project(":color"))
-    dokka(project(":core"))
+    dokka(project(":shared"))
     dokka(project(":player"))
     dokka(project(":rcon"))
     dokka(project(":server-status"))

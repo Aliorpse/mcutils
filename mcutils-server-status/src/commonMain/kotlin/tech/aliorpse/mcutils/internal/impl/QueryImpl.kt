@@ -6,14 +6,13 @@ import io.ktor.network.sockets.ConnectedDatagramSocket
 import io.ktor.network.sockets.Datagram
 import io.ktor.network.sockets.InetSocketAddress
 import io.ktor.network.sockets.aSocket
-import io.ktor.utils.io.core.buildPacket
-import io.ktor.utils.io.core.discard
-import io.ktor.utils.io.core.readShortLittleEndian
-import io.ktor.utils.io.core.writeFully
 import kotlinx.coroutines.withTimeout
 import kotlinx.coroutines.withTimeoutOrNull
+import kotlinx.io.Buffer
 import kotlinx.io.Sink
 import kotlinx.io.Source
+import kotlinx.io.readShortLe
+import kotlinx.io.readString
 import tech.aliorpse.mcutils.entity.Players
 import tech.aliorpse.mcutils.entity.QueryStatus
 import tech.aliorpse.mcutils.entity.QueryStatusBasic
@@ -44,6 +43,7 @@ internal object QueryImpl {
             return withTimeoutOrNull(timeout) {
                 socket.getQueryStatus(token, isFull)
             } ?: run {
+                // Retry logic if token is invalid
                 val newToken = withTimeout(timeout) { socket.queryHandshake() }
                 withTimeout(timeout) { socket.getQueryStatus(newToken, isFull) }
             }
@@ -54,7 +54,7 @@ internal object QueryImpl {
 private suspend fun ConnectedDatagramSocket.getQueryStatus(token: Int, isFull: Boolean): QueryStatus {
     sendQueryPacket(0x00) {
         writeInt(token)
-        if (isFull) writeFully(byteArrayOf(0, 0, 0, 0))
+        if (isFull) writeInt(0)
     }
     return readQueryPacket(0x00) {
         if (isFull) readStatsFull() else readStatsBasic()
@@ -63,15 +63,15 @@ private suspend fun ConnectedDatagramSocket.getQueryStatus(token: Int, isFull: B
 
 private suspend fun ConnectedDatagramSocket.queryHandshake(): Int {
     sendQueryPacket(0x09) {}
-    return readQueryPacket(0x09) { readNullTerminatedString() }.toInt()
+    return readQueryPacket(0x09) { readNullTerminatedString() }.toIntOrNull() ?: -1
 }
 
 private fun Source.readStatsFull(): QueryStatusFull {
-    discard(11)
+    skip(11)
 
     val kv = readKVPairs()
 
-    discard(10)
+    skip(10)
 
     val players = readPlayerList()
     val plugins = parsePlugins(kv["plugins"])
@@ -110,7 +110,8 @@ private fun parsePlugins(raw: String?): Set<String> =
     raw?.takeIf { it.isNotBlank() }
         ?.substringAfter(':', raw)
         ?.splitToSequence(';')
-        ?.mapNotNull { it.trim().takeIf { it1 -> it1.isNotEmpty() } }
+        ?.map { it.trim() }
+        ?.filter { it.isNotEmpty() }
         ?.toSet()
         ?: emptySet()
 
@@ -120,7 +121,7 @@ private fun Source.readStatsBasic(): QueryStatusBasic {
     val map = readNullTerminatedString()
     val numPlayers = readNullTerminatedString().toIntOrNull() ?: 0
     val maxPlayers = readNullTerminatedString().toIntOrNull() ?: 0
-    readShortLittleEndian() // Port
+    readShortLe() // Port (Little Endian)
     readNullTerminatedString() // IP
 
     return QueryStatusBasic(motd, map, Players(maxPlayers, numPlayers))
@@ -130,13 +131,18 @@ private suspend fun ConnectedDatagramSocket.sendQueryPacket(
     packetType: Byte,
     payloadBuilder: Sink.() -> Unit
 ) {
-    val packet = buildPacket {
-        writeFully(byteArrayOf(0xFE.toByte(), 0xFD.toByte())) // Magic short 0xFEFD
-        writeByte(packetType)
-        writeInt(QUERY_SESSION_ID)
-        payloadBuilder()
-    }
-    send(Datagram(packet, remoteAddress))
+    val buffer = Buffer()
+
+    // Magic short 0xFEFD
+    buffer.writeByte(0xFE.toByte())
+    buffer.writeByte(0xFD.toByte())
+
+    buffer.writeByte(packetType)
+    buffer.writeInt(QUERY_SESSION_ID)
+
+    buffer.payloadBuilder()
+
+    send(Datagram(buffer, remoteAddress))
 }
 
 private suspend fun <T> ConnectedDatagramSocket.readQueryPacket(
@@ -144,33 +150,32 @@ private suspend fun <T> ConnectedDatagramSocket.readQueryPacket(
     readPayload: Source.() -> T
 ): T {
     val datagram = receive()
-    val packet = datagram.packet
+    val source = datagram.packet
 
     try {
-        val packetTypeResp = packet.readByte()
-        require(packetTypeResp == packetType) { "Packet type mismatch: expected $packetType, got $packetTypeResp" }
-
-        val session = packet.readInt()
-        require(session and QUERY_SESSION_MASK == QUERY_SESSION_ID) {
-            "Session ID mismatch: expected ${QUERY_SESSION_ID}, got ${session and QUERY_SESSION_MASK}"
+        val packetTypeResp = source.readByte()
+        require(packetTypeResp == packetType) {
+            "Packet type mismatch: expected $packetType, got $packetTypeResp"
         }
 
-        return packet.readPayload()
+        val session = source.readInt()
+        require(session and QUERY_SESSION_MASK == QUERY_SESSION_ID) {
+            "Session ID mismatch: expected $QUERY_SESSION_ID, got ${session and QUERY_SESSION_MASK}"
+        }
+
+        return source.readPayload()
     } finally {
-        packet.close()
+        // Source must be closed or exhausted to release resources
+        source.close()
     }
 }
 
 private fun Source.readNullTerminatedString(): String {
-    var buffer = ByteArray(64)
-    var count = 0
-    while (true) {
-        val b = readByte()
-        if (b == 0.toByte()) break
-        if (count == buffer.size) {
-            buffer = buffer.copyOf(buffer.size * 2)
-        }
-        buffer[count++] = b
+    val buffer = Buffer()
+    while (!exhausted()) {
+        val byte = readByte()
+        if (byte == 0.toByte()) break
+        buffer.writeByte(byte)
     }
-    return buffer.decodeToString(endIndex = count)
+    return buffer.readString()
 }

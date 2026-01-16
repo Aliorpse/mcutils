@@ -7,17 +7,15 @@ import io.ktor.network.sockets.openReadChannel
 import io.ktor.network.sockets.openWriteChannel
 import io.ktor.utils.io.ByteReadChannel
 import io.ktor.utils.io.ByteWriteChannel
-import io.ktor.utils.io.charsets.Charsets
-import io.ktor.utils.io.core.buildPacket
-import io.ktor.utils.io.core.remaining
-import io.ktor.utils.io.core.toByteArray
-import io.ktor.utils.io.core.writeFully
 import io.ktor.utils.io.readByte
 import io.ktor.utils.io.readFully
-import io.ktor.utils.io.readLong
-import io.ktor.utils.io.writeByte
-import io.ktor.utils.io.writePacket
+import io.ktor.utils.io.writeFully
+import kotlinx.coroutines.withTimeout
+import kotlinx.io.Buffer
 import kotlinx.io.Sink
+import kotlinx.io.Source
+import kotlinx.io.readByteArray
+import kotlinx.io.readString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
@@ -54,83 +52,109 @@ internal object ServerListPingImpl {
             socketTimeout = timeout
             noDelay = true
         }.use { socket ->
-            val output = socket.openWriteChannel()
+            val output = socket.openWriteChannel(autoFlush = true)
             val input = socket.openReadChannel()
 
-            // Send handshake packet
-            output.sendMCPacket(0x00) {
-                writeVarInt(-1)
-                writeMCString(connectHost)
-                writeShort(connectPort.toShort())
-                writeVarInt(1)
+            return withTimeout(timeout) {
+                // 1. Handshake Packet (ID 0x00)
+                output.sendMCPacket(0x00) {
+                    writeVarInt(-1) // Protocol version
+                    writeMCString(connectHost)
+                    writeShort(connectPort.toShort())
+                    writeVarInt(1) // Next state: 1 (Status)
+                }
+
+                // 2. Request Packet (ID 0x00)
+                output.sendMCPacket(0x00) {}
+
+                // 3. Read Status Response (ID 0x00)
+                val jsonString = input.readMCPacket(0x00) {
+                    readMCString()
+                }
+
+                // Parse JSON
+                val jsonElement = json.parseToJsonElement(jsonString)
+
+                // 4. Ping Packet (ID 0x01)
+                val pingStart = Clock.System.now().toEpochMilliseconds()
+                output.sendMCPacket(0x01) {
+                    writeLong(pingStart)
+                }
+
+                // 5. Read Pong Response (ID 0x01)
+                input.readMCPacket(0x01) {
+                    readLong()
+                }
+                val latency = Clock.System.now().toEpochMilliseconds() - pingStart
+
+                return@withTimeout ServerStatus(
+                    description = when (val desc = jsonElement.jsonObject["description"]) {
+                        is JsonPrimitive -> TextComponent.fromString(desc.content)
+                        is JsonObject -> TextComponent.fromJson(desc)
+                        else -> TextComponent(text = "")
+                    },
+                    players = json.decodeFromString(
+                        Players.serializer(),
+                        jsonElement.jsonObject["players"]?.toString() ?: error("Element `players` missing")
+                    ),
+                    version = json.decodeFromString(
+                        Version.serializer(),
+                        jsonElement.jsonObject["version"]?.toString() ?: error("Element `version` missing")
+                    ),
+                    ping = latency,
+                    secureChatEnforced = jsonElement.jsonObject["enforceSecureChat"]?.jsonPrimitive?.boolean ?: false,
+                    favicon = jsonElement.jsonObject["favicon"]?.jsonPrimitive?.content,
+                    srvRecord = "$connectHost:$connectPort"
+                )
             }
-
-            // Send status request
-            output.sendMCPacket(0x00) {}
-
-            // Read status response
-            val jsonString = input.readMCPacket(0x00) { readMCString() }
-            val jsonElement = json.parseToJsonElement(jsonString)
-
-            // Send ping request
-            val pingStart = Clock.System.now().toEpochMilliseconds()
-            output.sendMCPacket(0x01) {
-                writeLong(pingStart)
-            }
-
-            // Read pong response
-            input.readMCPacket(0x01) { readLong() }
-            val latency = Clock.System.now().toEpochMilliseconds() - pingStart
-
-            return ServerStatus(
-                description = when (val desc = jsonElement.jsonObject["description"]) {
-                    is JsonPrimitive -> TextComponent.fromString(desc.content)
-                    is JsonObject -> TextComponent.fromJson(desc)
-                    else -> TextComponent(text = "")
-                },
-                players = json.decodeFromString(
-                    Players.serializer(),
-                    jsonElement.jsonObject["players"]?.toString() ?: error("Element `players` missing")
-                ),
-                version = json.decodeFromString(
-                    Version.serializer(),
-                    jsonElement.jsonObject["version"]?.toString() ?: error("Element `version` missing")
-                ),
-                ping = latency,
-                secureChatEnforced = jsonElement.jsonObject["enforceSecureChat"]?.jsonPrimitive?.boolean ?: false,
-                favicon = jsonElement.jsonObject["favicon"]?.jsonPrimitive?.content,
-                srvRecord = "$connectHost:$connectPort"
-            )
         }
     }
 }
 
-private suspend fun ByteWriteChannel.sendMCPacket(packetId: Int, buildPacketBlock: Sink.() -> Unit) {
-    val packet = buildPacket(buildPacketBlock)
+private suspend fun ByteWriteChannel.sendMCPacket(
+    packetId: Int,
+    block: Sink.() -> Unit
+) {
+    val packetData = Buffer()
+    packetData.writeVarInt(packetId)
+    packetData.block()
 
-    writeVarInt(packet.remaining.toInt() + 1)
-    writeVarInt(packetId)
-    writePacket(packet)
+    val length = packetData.size
+
+    val finalBuffer = Buffer()
+    finalBuffer.writeVarInt(length.toInt())
+    finalBuffer.write(packetData, packetData.size)
+
+    writeFully(finalBuffer.readByteArray())
     flush()
 }
 
 private suspend fun <T> ByteReadChannel.readMCPacket(
-    packetId: Int,
-    readPacketBlock: suspend ByteReadChannel.() -> T
+    expectedPacketId: Int,
+    block: Source.() -> T
 ): T {
-    val packetLength = readVarInt()
-    val packetBytes = ByteArray(packetLength)
-    readFully(packetBytes)
-    val buffer = ByteReadChannel(packetBytes)
-    val packetIdResp = buffer.readByte().toInt()
-    require(packetId == packetIdResp) { "Packet id mismatch: expected $packetId, got $packetIdResp" }
-    return buffer.readPacketBlock()
+    val length = readVarInt() // Read directly from a channel
+    val data = ByteArray(length)
+    readFully(data) // Read exact bytes
+
+    val buffer = Buffer()
+    buffer.write(data)
+
+    try {
+        val actualPacketId = buffer.readVarInt()
+        require(actualPacketId == expectedPacketId) {
+            "Packet ID mismatch: expected $expectedPacketId, got $actualPacketId"
+        }
+        return buffer.block()
+    } finally {
+        buffer.close()
+    }
 }
 
-private suspend fun ByteWriteChannel.writeVarInt(value: Int) {
+private fun Sink.writeVarInt(value: Int) {
     var v = value
     while (true) {
-        if (v and 0x7F.inv() == 0) {
+        if ((v and 0x7F.inv()) == 0) {
             writeByte(v.toByte())
             return
         }
@@ -139,19 +163,24 @@ private suspend fun ByteWriteChannel.writeVarInt(value: Int) {
     }
 }
 
-private fun Sink.writeVarInt(value: Int) {
-    var v = value
-    while (true) {
-        if (v and 0x7F.inv() == 0) {
-            write(ByteArray(1) { v.toByte() })
-            flush()
-            return
-        }
-        write(ByteArray(1) { ((v and 0x7F) or 0x80).toByte() })
-        v = v ushr 7
-    }
+private fun Source.readVarInt(): Int {
+    var numRead = 0
+    var result = 0
+    var read: Int
+    do {
+        read = readByte().toInt()
+        val value = read and 0b01111111
+        result = result or (value shl (7 * numRead))
+        numRead++
+        if (numRead > 5) error("VarInt is too big")
+    } while ((read and 0b10000000) != 0)
+    return result
 }
 
+/**
+ * Necessary because it'd need to read the packet length before buffering the rest.
+ */
+@Suppress("DuplicatedCode")
 private suspend fun ByteReadChannel.readVarInt(): Int {
     var numRead = 0
     var result = 0
@@ -159,22 +188,20 @@ private suspend fun ByteReadChannel.readVarInt(): Int {
     do {
         read = readByte().toInt()
         val value = read and 0b01111111
-        result = result or (value shl 7 * numRead)
+        result = result or (value shl (7 * numRead))
         numRead++
-        if (numRead > 5) error("VarInt too big")
-    } while (read and 0b10000000 != 0)
+        if (numRead > 5) error("VarInt is too big")
+    } while ((read and 0b10000000) != 0)
     return result
 }
 
 private fun Sink.writeMCString(value: String) {
-    val bytes = value.toByteArray(Charsets.UTF_8)
+    val bytes = value.encodeToByteArray()
     writeVarInt(bytes.size)
-    writeFully(bytes)
+    write(bytes)
 }
 
-private suspend fun ByteReadChannel.readMCString(): String {
+private fun Source.readMCString(): String {
     val length = readVarInt()
-    val bytes = ByteArray(length)
-    readFully(bytes)
-    return bytes.decodeToString()
+    return readString(byteCount = length.toLong())
 }

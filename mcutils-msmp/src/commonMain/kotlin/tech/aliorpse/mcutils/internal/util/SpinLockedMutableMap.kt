@@ -1,7 +1,7 @@
 package tech.aliorpse.mcutils.internal.util
 
 @PublishedApi
-internal class AtomicMutableMap<K, V> {
+internal class SpinLockedMutableMap<K, V> {
     private val map = mutableMapOf<K, V>()
     private val lock = AtomicSpinLock()
 
