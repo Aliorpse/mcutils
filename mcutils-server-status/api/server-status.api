@@ -46,6 +46,7 @@ public abstract interface class tech/aliorpse/mcutils/entity/QueryStatus {
 }
 
 public final class tech/aliorpse/mcutils/entity/QueryStatusBasic : tech/aliorpse/mcutils/entity/QueryStatus {
+	public static final field Companion Ltech/aliorpse/mcutils/entity/QueryStatusBasic$Companion;
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ltech/aliorpse/mcutils/entity/Players;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2 ()Ljava/lang/String;
@@ -60,7 +61,23 @@ public final class tech/aliorpse/mcutils/entity/QueryStatusBasic : tech/aliorpse
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class tech/aliorpse/mcutils/entity/QueryStatusBasic$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Ltech/aliorpse/mcutils/entity/QueryStatusBasic$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ltech/aliorpse/mcutils/entity/QueryStatusBasic;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ltech/aliorpse/mcutils/entity/QueryStatusBasic;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class tech/aliorpse/mcutils/entity/QueryStatusBasic$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class tech/aliorpse/mcutils/entity/QueryStatusFull : tech/aliorpse/mcutils/entity/QueryStatus {
+	public static final field Companion Ltech/aliorpse/mcutils/entity/QueryStatusFull$Companion;
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ltech/aliorpse/mcutils/entity/Players;Ljava/lang/String;Ljava/util/Set;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2 ()Ljava/lang/String;
@@ -77,6 +94,21 @@ public final class tech/aliorpse/mcutils/entity/QueryStatusFull : tech/aliorpse/
 	public final fun getVersion ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class tech/aliorpse/mcutils/entity/QueryStatusFull$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Ltech/aliorpse/mcutils/entity/QueryStatusFull$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ltech/aliorpse/mcutils/entity/QueryStatusFull;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ltech/aliorpse/mcutils/entity/QueryStatusFull;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class tech/aliorpse/mcutils/entity/QueryStatusFull$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class tech/aliorpse/mcutils/entity/Sample {
@@ -109,6 +141,7 @@ public final class tech/aliorpse/mcutils/entity/Sample$Companion {
 }
 
 public final class tech/aliorpse/mcutils/entity/ServerStatus {
+	public static final field Companion Ltech/aliorpse/mcutils/entity/ServerStatus$Companion;
 	public fun <init> (Ltech/aliorpse/mcutils/entity/TextComponent;Ltech/aliorpse/mcutils/entity/Players;Ltech/aliorpse/mcutils/entity/Version;JZLjava/lang/String;Ljava/lang/String;)V
 	public final fun component1 ()Ltech/aliorpse/mcutils/entity/TextComponent;
 	public final fun component2 ()Ltech/aliorpse/mcutils/entity/Players;
@@ -129,6 +162,21 @@ public final class tech/aliorpse/mcutils/entity/ServerStatus {
 	public final fun getVersion ()Ltech/aliorpse/mcutils/entity/Version;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class tech/aliorpse/mcutils/entity/ServerStatus$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Ltech/aliorpse/mcutils/entity/ServerStatus$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ltech/aliorpse/mcutils/entity/ServerStatus;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ltech/aliorpse/mcutils/entity/ServerStatus;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class tech/aliorpse/mcutils/entity/ServerStatus$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class tech/aliorpse/mcutils/entity/Version {

@@ -4,6 +4,7 @@ public final class tech/aliorpse/mcutils/api/MinecraftPlayerModuleKt {
 }
 
 public final class tech/aliorpse/mcutils/entity/PlayerProfile {
+	public static final field Companion Ltech/aliorpse/mcutils/entity/PlayerProfile$Companion;
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;Ltech/aliorpse/mcutils/entity/SkinModel;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2 ()Ljava/lang/String;
@@ -22,6 +23,21 @@ public final class tech/aliorpse/mcutils/entity/PlayerProfile {
 	public final fun getSkinUrl ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class tech/aliorpse/mcutils/entity/PlayerProfile$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Ltech/aliorpse/mcutils/entity/PlayerProfile$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ltech/aliorpse/mcutils/entity/PlayerProfile;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ltech/aliorpse/mcutils/entity/PlayerProfile;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class tech/aliorpse/mcutils/entity/PlayerProfile$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class tech/aliorpse/mcutils/entity/SkinModel : java/lang/Enum {

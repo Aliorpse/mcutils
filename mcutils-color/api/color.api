@@ -17,7 +17,19 @@ public final class tech/aliorpse/mcutils/entity/TextComponent {
 	public fun toString ()Ljava/lang/String;
 }
 
+public final synthetic class tech/aliorpse/mcutils/entity/TextComponent$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Ltech/aliorpse/mcutils/entity/TextComponent$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ltech/aliorpse/mcutils/entity/TextComponent;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ltech/aliorpse/mcutils/entity/TextComponent;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
 public final class tech/aliorpse/mcutils/entity/TextComponent$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class tech/aliorpse/mcutils/entity/TextStyle : java/lang/Enum {

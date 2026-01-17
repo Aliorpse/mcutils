@@ -66,6 +66,19 @@ final class tech.aliorpse.mcutils.entity/QueryStatusBasic : tech.aliorpse.mcutil
     final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/QueryStatusBasic.equals|equals(kotlin.Any?){}[0]
     final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/QueryStatusBasic.hashCode|hashCode(){}[0]
     final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/QueryStatusBasic.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/QueryStatusBasic> { // tech.aliorpse.mcutils.entity/QueryStatusBasic.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/QueryStatusBasic.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/QueryStatusBasic.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/QueryStatusBasic.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/QueryStatusBasic // tech.aliorpse.mcutils.entity/QueryStatusBasic.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/QueryStatusBasic) // tech.aliorpse.mcutils.entity/QueryStatusBasic.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.QueryStatusBasic){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/QueryStatusBasic.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/QueryStatusBasic> // tech.aliorpse.mcutils.entity/QueryStatusBasic.Companion.serializer|serializer(){}[0]
+    }
 }
 
 final class tech.aliorpse.mcutils.entity/QueryStatusFull : tech.aliorpse.mcutils.entity/QueryStatus { // tech.aliorpse.mcutils.entity/QueryStatusFull|null[0]
@@ -91,6 +104,21 @@ final class tech.aliorpse.mcutils.entity/QueryStatusFull : tech.aliorpse.mcutils
     final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/QueryStatusFull.equals|equals(kotlin.Any?){}[0]
     final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/QueryStatusFull.hashCode|hashCode(){}[0]
     final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/QueryStatusFull.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/QueryStatusFull> { // tech.aliorpse.mcutils.entity/QueryStatusFull.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/QueryStatusFull.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/QueryStatusFull.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/QueryStatusFull.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/QueryStatusFull // tech.aliorpse.mcutils.entity/QueryStatusFull.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/QueryStatusFull) // tech.aliorpse.mcutils.entity/QueryStatusFull.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.QueryStatusFull){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/QueryStatusFull.Companion|null[0]
+        final val $childSerializers // tech.aliorpse.mcutils.entity/QueryStatusFull.Companion.$childSerializers|{}$childSerializers[0]
+
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/QueryStatusFull> // tech.aliorpse.mcutils.entity/QueryStatusFull.Companion.serializer|serializer(){}[0]
+    }
 }
 
 final class tech.aliorpse.mcutils.entity/Sample { // tech.aliorpse.mcutils.entity/Sample|null[0]
@@ -151,6 +179,19 @@ final class tech.aliorpse.mcutils.entity/ServerStatus { // tech.aliorpse.mcutils
     final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/ServerStatus.equals|equals(kotlin.Any?){}[0]
     final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/ServerStatus.hashCode|hashCode(){}[0]
     final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/ServerStatus.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<tech.aliorpse.mcutils.entity/ServerStatus> { // tech.aliorpse.mcutils.entity/ServerStatus.$serializer|null[0]
+        final val descriptor // tech.aliorpse.mcutils.entity/ServerStatus.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // tech.aliorpse.mcutils.entity/ServerStatus.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // tech.aliorpse.mcutils.entity/ServerStatus.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): tech.aliorpse.mcutils.entity/ServerStatus // tech.aliorpse.mcutils.entity/ServerStatus.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, tech.aliorpse.mcutils.entity/ServerStatus) // tech.aliorpse.mcutils.entity/ServerStatus.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;tech.aliorpse.mcutils.entity.ServerStatus){}[0]
+    }
+
+    final object Companion { // tech.aliorpse.mcutils.entity/ServerStatus.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<tech.aliorpse.mcutils.entity/ServerStatus> // tech.aliorpse.mcutils.entity/ServerStatus.Companion.serializer|serializer(){}[0]
+    }
 }
 
 final class tech.aliorpse.mcutils.entity/Version { // tech.aliorpse.mcutils.entity/Version|null[0]
