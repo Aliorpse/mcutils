@@ -1,6 +1,6 @@
 # mcutils
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Aliorpse_mcutils&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Aliorpse_mcutils)
+[![CodeFactor](https://www.codefactor.io/repository/github/aliorpse/mcutils/badge)](https://www.codefactor.io/repository/github/aliorpse/mcutils)
 [![Maven Central](https://maven-badges.sml.io/sonatype-central/tech.aliorpse.mcutils/mcutils-core/badge.svg)](https://central.sonatype.com/artifact/tech.aliorpse.mcutils/mcutils-core)
 [![View on DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Aliorpse/mcutils)
 
