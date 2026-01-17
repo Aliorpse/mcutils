@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.6](https://github.com/Aliorpse/mcutils/compare/v3.6.5...v3.6.6) (2026-01-16)
+
+
+### Bug Fixes
+
+* **validation:** add -Pfull-build=true for it ([9a4a542](https://github.com/Aliorpse/mcutils/commit/9a4a5420e7a23a699003fb05230bb2f14d864f68))
+
 ## [3.6.5](https://github.com/Aliorpse/mcutils/compare/v3.6.4...v3.6.5) (2026-01-16)
 
 
