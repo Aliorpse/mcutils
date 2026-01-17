@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.6.7](https://github.com/Aliorpse/mcutils/compare/v3.6.6...v3.6.7) (2026-01-17)
+
+
+### Bug Fixes
+
+* **serialization:** add @Serializable for some public data classes, for convenience ([a8f3514](https://github.com/Aliorpse/mcutils/commit/a8f35143f8b6c5a0b7942d3b5547c800e002c311))
+* **serialization:** dump api ([f07b863](https://github.com/Aliorpse/mcutils/commit/f07b86307ae66c59206291fbe1a1cca8ab4fbd08))
+
 ## [3.6.6](https://github.com/Aliorpse/mcutils/compare/v3.6.5...v3.6.6) (2026-01-16)
 
 
