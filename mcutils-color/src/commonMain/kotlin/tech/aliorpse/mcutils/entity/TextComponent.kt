@@ -10,6 +10,7 @@ import kotlinx.serialization.Serializable
  * @property styles Text styles.
  * @property extra Child components.
  */
+@Serializable
 public data class TextComponent(
     val text: String,
     val color: String = "",

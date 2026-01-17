@@ -10,6 +10,7 @@ import kotlinx.serialization.Serializable
  * @property ping Ping in milliseconds, null if unsupported.
  * @property srvRecord  e.g. int-p-as-1.wdsj.net:55581
  */
+@Serializable
 public data class ServerStatus(
     val description: TextComponent,
     val players: Players,
@@ -31,6 +32,7 @@ public interface QueryStatus {
  *
  * @property map Name of the current map.
  */
+@Serializable
 public data class QueryStatusBasic(
     override val description: String,
     override val map: String,
@@ -42,6 +44,7 @@ public data class QueryStatusBasic(
  *
  * @property map Name of the current map.
  */
+@Serializable
 public data class QueryStatusFull(
     override val description: String,
     override val map: String,

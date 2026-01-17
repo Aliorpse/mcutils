@@ -1,11 +1,14 @@
 package tech.aliorpse.mcutils.entity
 
+import kotlinx.serialization.Serializable
+
 /**
  * Player profile from Mojang session servers.
  *
  * @property id Player's UUID without dashes.
  * @property legacy True if this is a legacy account.
  */
+@Serializable
 public data class PlayerProfile(
     val id: String,
     val name: String,
