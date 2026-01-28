@@ -1,7 +1,7 @@
 # mcutils
 
 [![CodeFactor](https://www.codefactor.io/repository/github/aliorpse/mcutils/badge)](https://www.codefactor.io/repository/github/aliorpse/mcutils)
-[![Maven Central](https://maven-badges.sml.io/sonatype-central/tech.aliorpse.mcutils/mcutils-core/badge.svg)](https://central.sonatype.com/artifact/tech.aliorpse.mcutils/mcutils-core)
+[![Maven Central](https://maven-badges.sml.io/sonatype-central/tech.aliorpse.mcutils/mcutils-shared/badge.svg)](https://central.sonatype.com/artifact/tech.aliorpse.mcutils/mcutils-shared)
 [![View on DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Aliorpse/mcutils)
 
 A Kotlin multiplatform library provides utility functions for Minecraft-related queries.
