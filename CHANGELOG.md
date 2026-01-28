@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.8](https://github.com/Aliorpse/mcutils/compare/v3.6.7...v3.6.8) (2026-01-28)
+
+
+### Bug Fixes
+
+* resolve race condition in MsmpClient.close() ([50bff45](https://github.com/Aliorpse/mcutils/commit/50bff4573e5b05c143b830718b463d1d9c6a7b26))
+
 ## [3.6.7](https://github.com/Aliorpse/mcutils/compare/v3.6.6...v3.6.7) (2026-01-17)
 
 
