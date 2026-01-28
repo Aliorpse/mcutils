@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.takeWhile
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
@@ -131,7 +132,9 @@ public class MsmpClient internal constructor(
     public fun connect(): Unit = lifecycleManager.start()
 
     override fun close() {
-        lifecycleManager.close()
+        runBlocking {
+            lifecycleManager.close()
+        }
         scope.cancel()
     }
 
