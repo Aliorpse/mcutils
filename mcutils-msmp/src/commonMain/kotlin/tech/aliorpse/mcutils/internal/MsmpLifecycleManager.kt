@@ -59,18 +59,16 @@ internal class MsmpLifecycleManager(
         }
     }
 
-    fun close() {
-        scope.launch {
-            loopMutex.withLock {
-                loopJob?.cancelAndJoin()
+    suspend fun close() {
+        loopMutex.withLock {
+            loopJob?.cancelAndJoin()
 
-                val currentState = _stateFlow.value
-                _stateFlow.value = MsmpState.Closed
+            val currentState = _stateFlow.value
+            _stateFlow.value = MsmpState.Closed
 
-                if (currentState is MsmpState.Connected) {
-                    withContext(NonCancellable) {
-                        currentState.connection.closeConnection()
-                    }
+            if (currentState is MsmpState.Connected) {
+                withContext(NonCancellable) {
+                    currentState.connection.closeConnection()
                 }
             }
         }
