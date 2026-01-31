@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.11](https://github.com/Aliorpse/mcutils/compare/v3.6.10...v3.6.11) (2026-01-31)
+
+
+### Bug Fixes
+
+* **msmp:** add checks for browser target ([eec457a](https://github.com/Aliorpse/mcutils/commit/eec457a39f6dfa64b5569bf633f3ecd843d330dc))
+
 ## [3.6.10](https://github.com/Aliorpse/mcutils/compare/v3.6.9...v3.6.10) (2026-01-31)
 
 
