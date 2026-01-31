@@ -1,9 +1,10 @@
-public final class tech/aliorpse/mcutils/internal/util/DispatchersIOKt {
+public final class tech/aliorpse/mcutils/internal/util/CoroutinesUtilKt {
 	public static final fun withDispatchersIO (Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
-public final class tech/aliorpse/mcutils/internal/util/DispatchersIO_jvmKt {
+public final class tech/aliorpse/mcutils/internal/util/CoroutinesUtil_jvmKt {
 	public static final fun getDispatchersIO ()Lkotlinx/coroutines/CoroutineDispatcher;
+	public static final fun runBlocking (Lkotlin/jvm/functions/Function2;)Ljava/lang/Object;
 }
 
 public final class tech/aliorpse/mcutils/internal/util/Punycode {

@@ -1,5 +1,6 @@
 @file:OptIn(ExperimentalWasmDsl::class)
 
+import com.vanniktech.maven.publish.DeploymentValidation
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.abi.AbiValidationMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
@@ -29,7 +30,7 @@ allprojects {
 subprojects {
     pluginManager.withPlugin("com.vanniktech.maven.publish") {
         configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
-            publishToMavenCentral(automaticRelease = true, validateDeployment = false)
+            publishToMavenCentral(automaticRelease = false, validateDeployment = DeploymentValidation.NONE)
             signAllPublications()
 
             coordinates(
@@ -76,7 +77,7 @@ subprojects {
 
             @OptIn(ExperimentalAbiValidation::class)
             (this as ExtensionAware).extensions.configure<AbiValidationMultiplatformExtension>("abiValidation") {
-                enabled.set(true)
+                enabled = true
             }
 
             jvm {

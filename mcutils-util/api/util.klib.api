@@ -13,4 +13,5 @@ final object tech.aliorpse.mcutils.internal.util/Punycode { // tech.aliorpse.mcu
 final val tech.aliorpse.mcutils.internal.util/DispatchersIO // tech.aliorpse.mcutils.internal.util/DispatchersIO|{}DispatchersIO[0]
     final fun <get-DispatchersIO>(): kotlinx.coroutines/CoroutineDispatcher // tech.aliorpse.mcutils.internal.util/DispatchersIO.<get-DispatchersIO>|<get-DispatchersIO>(){}[0]
 
+final fun <#A: kotlin/Any?> tech.aliorpse.mcutils.internal.util/runBlocking(kotlin.coroutines/SuspendFunction1<kotlinx.coroutines/CoroutineScope, #A>): #A // tech.aliorpse.mcutils.internal.util/runBlocking|runBlocking(kotlin.coroutines.SuspendFunction1<kotlinx.coroutines.CoroutineScope,0:0>){0§<kotlin.Any?>}[0]
 final suspend fun <#A: kotlin/Any?> tech.aliorpse.mcutils.internal.util/withDispatchersIO(kotlin.coroutines/SuspendFunction0<#A>): #A // tech.aliorpse.mcutils.internal.util/withDispatchersIO|withDispatchersIO(kotlin.coroutines.SuspendFunction0<0:0>){0§<kotlin.Any?>}[0]
