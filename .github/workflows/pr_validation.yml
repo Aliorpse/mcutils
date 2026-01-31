@@ -1,18 +1,41 @@
-name: PR Validation
+name: PR ABI Validation
 
 on:
-  pull_request:
-    branches: [ main ]
+  pull_request_review:
+    types: [submitted]
 
 jobs:
   validate:
+    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Grant execute permission to gradlew
-        run: chmod +x ./gradlew
+      - name: Check Review Status
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: reviews } = await github.rest.pulls.listReviews({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+            });
+
+            const latestReviews = {};
+            reviews.forEach(r => {
+              latestReviews[r.user.login] = r.state;
+            });
+
+            const states = Object.values(latestReviews);
+            const allApproved = states.every(state => state === 'APPROVED') && states.length > 0;
+
+            if (!allApproved) {
+              console.log("Skipping ABI validation because not all reviewers approved.");
+              process.exit(0);
+            }
 
       - name: Set up JDK
         uses: actions/setup-java@v4
@@ -20,6 +43,9 @@ jobs:
           distribution: zulu
           java-version: 21
           cache: 'gradle'
+
+      - name: Grant execute permission
+        run: chmod +x ./gradlew
 
       - name: ABI Validation
         run: ./gradlew checkLegacyAbi -Pfull-build=true --no-configuration-cache

@@ -1,6 +1,6 @@
 # Minecraft Server Management Protocol (MSMP)
 
-`tech.aliorpse.mcutils:mcutils-msmp:$version`
+`tech.aliorpse.mcutils:mcutils-msmp`
 
 > [!tip]
 > This module requires a Ktor client engine (e.g., `ktor-client-cio`).
@@ -29,7 +29,8 @@ client.use { client ->
     val players = client.players.get()
     println("Online players: ${players.size}")
 
-    // Await client to be closed (e.g., server stopping or manual close)
+    // Wait for the client to close (e.g., server stopping or manual close)
+    // You could use `coroutineScope { ... }` for the same effect, but you know it will add an indentation level.
     client.await()
 }
 ```
@@ -76,7 +77,7 @@ client.on<PlayerJoinedEvent> {
 val event = client.awaitEvent<ServerStartedEvent>()
 ```
 
-You don't need to re-register listeners after reconnection. eventFlow will be empty when reconnecting.
+Note: Event subscriptions persist across reconnections, but no events are buffered during the disconnected period.
 
 ### Lifecycle
 

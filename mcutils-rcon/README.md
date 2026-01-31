@@ -1,6 +1,6 @@
 # Remote Console (RCON)
 
-`tech.aliorpse.mcutils:mcutils-rcon:$version`
+`tech.aliorpse.mcutils:mcutils-rcon`
 
 ## Common Usage
 

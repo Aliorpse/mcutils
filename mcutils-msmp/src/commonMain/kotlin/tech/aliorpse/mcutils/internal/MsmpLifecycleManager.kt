@@ -30,6 +30,7 @@ import tech.aliorpse.mcutils.api.MsmpState
 import tech.aliorpse.mcutils.entity.ServerStoppingEvent
 import tech.aliorpse.mcutils.internal.util.DispatchersIO
 import tech.aliorpse.mcutils.internal.util.WebSocketClientProvider.webSocketClient
+import tech.aliorpse.mcutils.internal.util.isBrowser
 import kotlin.math.min
 import kotlin.math.pow
 import kotlin.random.Random
@@ -143,7 +144,11 @@ internal class MsmpLifecycleManager(
      */
     private suspend fun connectSession(): Boolean = coroutineScope {
         val session = webSocketClient.webSocketSession(target) {
-            header(HttpHeaders.Authorization, "Bearer $token")
+            if (isBrowser) {
+                header(HttpHeaders.SecWebSocketProtocol, "minecraft-v1,$token")
+            } else {
+                header(HttpHeaders.Authorization, "Bearer $token")
+            }
             timeout { connectTimeoutMillis = config.connectTimeout }
         }
 
