@@ -1,6 +1,6 @@
 # Player Profile
 
-`tech.aliorpse.mcutils:mcutils-player:$version`
+`tech.aliorpse.mcutils:mcutils-player`
 
 > [!tip]
 > This module requires a Ktor client engine (e.g., `ktor-client-cio`).

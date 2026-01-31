@@ -1,6 +1,6 @@
 # Server Status
 
-`tech.aliorpse.mcutils:mcutils-server-status:$version`
+`tech.aliorpse.mcutils:mcutils-server-status`
 
 > [!warning]
 > Native targets do not yet support an SRV record implementation. Setting `enableSrv = true` will not have any effect on these platforms.
