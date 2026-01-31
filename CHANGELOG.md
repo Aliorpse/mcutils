@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.10](https://github.com/Aliorpse/mcutils/compare/v3.6.9...v3.6.10) (2026-01-31)
+
+
+### Bug Fixes
+
+* ok it's quite annoying ([08f2980](https://github.com/Aliorpse/mcutils/commit/08f2980dc3fd9f375b0b85030925a014cac5191d))
+
 ## [3.6.9](https://github.com/Aliorpse/mcutils/compare/v3.6.8...v3.6.9) (2026-01-31)
 
 
