@@ -30,7 +30,7 @@ allprojects {
 subprojects {
     pluginManager.withPlugin("com.vanniktech.maven.publish") {
         configure<com.vanniktech.maven.publish.MavenPublishBaseExtension> {
-            publishToMavenCentral(automaticRelease = false, validateDeployment = DeploymentValidation.NONE)
+            publishToMavenCentral(automaticRelease = true, validateDeployment = DeploymentValidation.NONE)
             signAllPublications()
 
             coordinates(
