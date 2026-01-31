@@ -19,6 +19,9 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            // Initialize with a default value as suggested by AI review
+            core.setOutput('should_run', 'false');
+
             const { data: reviews } = await github.rest.pulls.listReviews({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -33,12 +36,11 @@ jobs:
             const states = Object.values(latestReviews);
             const allApproved = states.length > 0 && states.every(state => state === 'APPROVED');
 
-            if (!allApproved) {
-              console.log("Skipping ABI validation because not all reviewers approved.");
-              core.setOutput('should_run', 'false');
-            } else {
+            if (allApproved) {
               console.log("All reviewers approved. Proceeding with validation.");
               core.setOutput('should_run', 'true');
+            } else {
+              console.log("Skipping ABI validation because not all reviewers approved.");
             }
 
       - name: Set up JDK
