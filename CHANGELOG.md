@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.6.9](https://github.com/Aliorpse/mcutils/compare/v3.6.8...v3.6.9) (2026-01-31)
+
+
+### Bug Fixes
+
+* implement runBlocking for all targets; use a better way for base64 decoding in PlayerInfoImpl ([0b0c7d3](https://github.com/Aliorpse/mcutils/commit/0b0c7d3eaf01c81578739ac1e40be9b5e5719765))
+
 ## [3.6.8](https://github.com/Aliorpse/mcutils/compare/v3.6.7...v3.6.8) (2026-01-28)
 
 
