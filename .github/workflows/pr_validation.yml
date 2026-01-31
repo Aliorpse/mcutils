@@ -10,16 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-
       - name: Check Review Status
         id: check_reviews
         uses: actions/github-script@v7
         with:
           script: |
-            // Initialize with a default value as suggested by AI review
             core.setOutput('should_run', 'false');
 
             const { data: reviews } = await github.rest.pulls.listReviews({
@@ -41,7 +36,13 @@ jobs:
               core.setOutput('should_run', 'true');
             } else {
               console.log("Skipping ABI validation because not all reviewers approved.");
+              core.setOutput('should_run', 'false');
             }
+
+      - uses: actions/checkout@v4
+        if: steps.check_reviews.outputs.should_run == 'true'
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Set up JDK
         if: steps.check_reviews.outputs.should_run == 'true'
