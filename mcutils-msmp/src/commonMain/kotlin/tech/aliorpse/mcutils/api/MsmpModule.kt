@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.takeWhile
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeout
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
@@ -29,6 +28,7 @@ import tech.aliorpse.mcutils.entity.MsmpEvent
 import tech.aliorpse.mcutils.internal.MsmpConnection
 import tech.aliorpse.mcutils.internal.MsmpLifecycleManager
 import tech.aliorpse.mcutils.internal.util.SpinLockedMutableMap
+import tech.aliorpse.mcutils.internal.util.runBlocking
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
 
 @Suppress("MagicNumber")

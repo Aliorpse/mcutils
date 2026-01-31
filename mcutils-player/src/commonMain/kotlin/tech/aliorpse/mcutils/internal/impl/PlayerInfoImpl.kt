@@ -3,7 +3,6 @@ package tech.aliorpse.mcutils.internal.impl
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
-import io.ktor.util.decodeBase64Bytes
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
@@ -13,6 +12,7 @@ import tech.aliorpse.mcutils.internal.entity.DecodedTextures
 import tech.aliorpse.mcutils.internal.entity.PlayerProfileResponse
 import tech.aliorpse.mcutils.internal.util.HttpClientProvider.httpClient
 import tech.aliorpse.mcutils.internal.util.withDispatchersIO
+import kotlin.io.encoding.Base64
 
 internal object PlayerInfoImpl {
     const val UUID_LENGTH = 32
@@ -35,7 +35,7 @@ internal object PlayerInfoImpl {
             httpClient.get("$MOJANG_SESSION_BASE/session/minecraft/profile/$id").body()
 
         val decoded = json.decodeFromString<DecodedTextures>(
-            rawProfile.properties.first().value.decodeBase64Bytes().decodeToString()
+            Base64.decode(rawProfile.properties.first().value).decodeToString()
         )
 
         PlayerProfile(
