@@ -147,7 +147,7 @@ internal class MsmpLifecycleManager(
             if (isBrowser) {
                 header(HttpHeaders.SecWebSocketProtocol, "minecraft-v1,$token")
             } else {
-                header(HttpHeaders.Authorization, "Authorization $token")
+                header(HttpHeaders.Authorization, "Bearer $token")
             }
             timeout { connectTimeoutMillis = config.connectTimeout }
         }

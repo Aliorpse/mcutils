@@ -12,7 +12,7 @@ ping/management, fetching player profile, etc.
 * **Kotlin/JVM**
 * **Kotlin/JS, WasmJS** on
   * nodejs
-  * browser *(except modules depends on ktor-network, see [build.gradle.kts](build.gradle.kts) for more details)*
+  * browser *(except modules that depend on ktor-network, see [build.gradle.kts](build.gradle.kts) for more details)*
 * **Kotlin/Native** on
   * linuxX64 (X64/Arm64)
   * mingw (X64)
