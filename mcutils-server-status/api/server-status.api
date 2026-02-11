@@ -5,6 +5,8 @@ public final class tech/aliorpse/mcutils/api/MinecraftServerModuleKt {
 	public static synthetic fun getQueryFull$default (Ltech/aliorpse/mcutils/api/MinecraftServer;Ljava/lang/String;IJLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public static final fun getStatus (Ltech/aliorpse/mcutils/api/MinecraftServer;Ljava/lang/String;IJZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun getStatus$default (Ltech/aliorpse/mcutils/api/MinecraftServer;Ljava/lang/String;IJZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun resolveSrv (Ltech/aliorpse/mcutils/api/MinecraftServer;Ljava/lang/String;Ljava/lang/String;IJLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun resolveSrv$default (Ltech/aliorpse/mcutils/api/MinecraftServer;Ljava/lang/String;Ljava/lang/String;IJLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 }
 
 public final class tech/aliorpse/mcutils/entity/Players {
@@ -177,6 +179,23 @@ public final synthetic class tech/aliorpse/mcutils/entity/ServerStatus$$serializ
 
 public final class tech/aliorpse/mcutils/entity/ServerStatus$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class tech/aliorpse/mcutils/entity/SrvRecord {
+	public fun <init> (Ljava/lang/String;III)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()I
+	public final fun component3 ()I
+	public final fun component4 ()I
+	public final fun copy (Ljava/lang/String;III)Ltech/aliorpse/mcutils/entity/SrvRecord;
+	public static synthetic fun copy$default (Ltech/aliorpse/mcutils/entity/SrvRecord;Ljava/lang/String;IIIILjava/lang/Object;)Ltech/aliorpse/mcutils/entity/SrvRecord;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPort ()I
+	public final fun getPriority ()I
+	public final fun getTarget ()Ljava/lang/String;
+	public final fun getWeight ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
 }
 
 public final class tech/aliorpse/mcutils/entity/Version {

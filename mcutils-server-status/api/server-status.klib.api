@@ -194,6 +194,28 @@ final class tech.aliorpse.mcutils.entity/ServerStatus { // tech.aliorpse.mcutils
     }
 }
 
+final class tech.aliorpse.mcutils.entity/SrvRecord { // tech.aliorpse.mcutils.entity/SrvRecord|null[0]
+    constructor <init>(kotlin/String, kotlin/Int, kotlin/Int, kotlin/Int) // tech.aliorpse.mcutils.entity/SrvRecord.<init>|<init>(kotlin.String;kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+
+    final val port // tech.aliorpse.mcutils.entity/SrvRecord.port|{}port[0]
+        final fun <get-port>(): kotlin/Int // tech.aliorpse.mcutils.entity/SrvRecord.port.<get-port>|<get-port>(){}[0]
+    final val priority // tech.aliorpse.mcutils.entity/SrvRecord.priority|{}priority[0]
+        final fun <get-priority>(): kotlin/Int // tech.aliorpse.mcutils.entity/SrvRecord.priority.<get-priority>|<get-priority>(){}[0]
+    final val target // tech.aliorpse.mcutils.entity/SrvRecord.target|{}target[0]
+        final fun <get-target>(): kotlin/String // tech.aliorpse.mcutils.entity/SrvRecord.target.<get-target>|<get-target>(){}[0]
+    final val weight // tech.aliorpse.mcutils.entity/SrvRecord.weight|{}weight[0]
+        final fun <get-weight>(): kotlin/Int // tech.aliorpse.mcutils.entity/SrvRecord.weight.<get-weight>|<get-weight>(){}[0]
+
+    final fun component1(): kotlin/String // tech.aliorpse.mcutils.entity/SrvRecord.component1|component1(){}[0]
+    final fun component2(): kotlin/Int // tech.aliorpse.mcutils.entity/SrvRecord.component2|component2(){}[0]
+    final fun component3(): kotlin/Int // tech.aliorpse.mcutils.entity/SrvRecord.component3|component3(){}[0]
+    final fun component4(): kotlin/Int // tech.aliorpse.mcutils.entity/SrvRecord.component4|component4(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ...): tech.aliorpse.mcutils.entity/SrvRecord // tech.aliorpse.mcutils.entity/SrvRecord.copy|copy(kotlin.String;kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // tech.aliorpse.mcutils.entity/SrvRecord.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // tech.aliorpse.mcutils.entity/SrvRecord.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // tech.aliorpse.mcutils.entity/SrvRecord.toString|toString(){}[0]
+}
+
 final class tech.aliorpse.mcutils.entity/Version { // tech.aliorpse.mcutils.entity/Version|null[0]
     constructor <init>(kotlin/String, kotlin/Long) // tech.aliorpse.mcutils.entity/Version.<init>|<init>(kotlin.String;kotlin.Long){}[0]
 
@@ -226,3 +248,4 @@ final class tech.aliorpse.mcutils.entity/Version { // tech.aliorpse.mcutils.enti
 final suspend fun (tech.aliorpse.mcutils.api/MinecraftServer).tech.aliorpse.mcutils.api/getQueryBasic(kotlin/String, kotlin/Int = ..., kotlin/Long = ...): tech.aliorpse.mcutils.entity/QueryStatusBasic // tech.aliorpse.mcutils.api/getQueryBasic|getQueryBasic@tech.aliorpse.mcutils.api.MinecraftServer(kotlin.String;kotlin.Int;kotlin.Long){}[0]
 final suspend fun (tech.aliorpse.mcutils.api/MinecraftServer).tech.aliorpse.mcutils.api/getQueryFull(kotlin/String, kotlin/Int = ..., kotlin/Long = ...): tech.aliorpse.mcutils.entity/QueryStatusFull // tech.aliorpse.mcutils.api/getQueryFull|getQueryFull@tech.aliorpse.mcutils.api.MinecraftServer(kotlin.String;kotlin.Int;kotlin.Long){}[0]
 final suspend fun (tech.aliorpse.mcutils.api/MinecraftServer).tech.aliorpse.mcutils.api/getStatus(kotlin/String, kotlin/Int = ..., kotlin/Long = ..., kotlin/Boolean = ...): tech.aliorpse.mcutils.entity/ServerStatus // tech.aliorpse.mcutils.api/getStatus|getStatus@tech.aliorpse.mcutils.api.MinecraftServer(kotlin.String;kotlin.Int;kotlin.Long;kotlin.Boolean){}[0]
+final suspend fun (tech.aliorpse.mcutils.api/MinecraftServer).tech.aliorpse.mcutils.api/resolveSrv(kotlin/String, kotlin/String = ..., kotlin/Int = ..., kotlin/Long = ...): tech.aliorpse.mcutils.entity/SrvRecord? // tech.aliorpse.mcutils.api/resolveSrv|resolveSrv@tech.aliorpse.mcutils.api.MinecraftServer(kotlin.String;kotlin.String;kotlin.Int;kotlin.Long){}[0]

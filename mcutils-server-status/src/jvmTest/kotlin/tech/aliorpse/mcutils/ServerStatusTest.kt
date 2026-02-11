@@ -5,12 +5,13 @@ import tech.aliorpse.mcutils.api.MCServer
 import tech.aliorpse.mcutils.api.getQueryBasic
 import tech.aliorpse.mcutils.api.getQueryFull
 import tech.aliorpse.mcutils.api.getStatus
+import tech.aliorpse.mcutils.api.resolveSrv
 import kotlin.test.Test
 
 class ServerStatusTest {
     @Test
     fun `fetch java server status by slp`() = runBlocking {
-        val result = MCServer.getStatus("hypixel.net")
+        val result = MCServer.getStatus("wdsj.net")
 
         assert(result.ping > 0)
         println(result)
@@ -22,5 +23,10 @@ class ServerStatusTest {
         val result2 = MCServer.getQueryBasic("localhost")
         println(result)
         println(result2)
+    }
+
+    @Test
+    fun `test srv resolving`() = runBlocking {
+        println(MCServer.resolveSrv("wdsj.net"))
     }
 }
