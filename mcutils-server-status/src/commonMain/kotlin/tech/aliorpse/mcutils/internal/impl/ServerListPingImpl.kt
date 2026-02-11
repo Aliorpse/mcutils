@@ -27,8 +27,8 @@ import tech.aliorpse.mcutils.entity.ServerStatus
 import tech.aliorpse.mcutils.entity.TextComponent
 import tech.aliorpse.mcutils.entity.Version
 import tech.aliorpse.mcutils.internal.util.Punycode
-import tech.aliorpse.mcutils.internal.util.SrvResolver
 import tech.aliorpse.mcutils.internal.util.globalSelectorIO
+import tech.aliorpse.mcutils.internal.util.resolveSrvImpl
 import tech.aliorpse.mcutils.util.fromJson
 import tech.aliorpse.mcutils.util.fromString
 import kotlin.time.Clock
@@ -43,7 +43,7 @@ internal object ServerListPingImpl {
         enableSrv: Boolean,
     ): ServerStatus {
         val asciiRawHost = Punycode.from(host)
-        val srvRecord = if (enableSrv) SrvResolver.resolve("_minecraft._tcp.$asciiRawHost") else null
+        val srvRecord = if (enableSrv && port == 25565) resolveSrvImpl("_minecraft._tcp.$asciiRawHost") else null
 
         val connectHost = srvRecord?.target ?: asciiRawHost
         val connectPort = srvRecord?.port ?: port

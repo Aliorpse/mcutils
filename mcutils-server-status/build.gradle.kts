@@ -15,9 +15,7 @@ kotlin {
             implementation(libs.ktor.network)
             implementation(libs.kotlinx.io.core)
         }
-        jvmMain.dependencies {
-            implementation(libs.minidns.hla)
-        }
+
         jvmTest.dependencies {
             implementation(kotlin("test"))
         }

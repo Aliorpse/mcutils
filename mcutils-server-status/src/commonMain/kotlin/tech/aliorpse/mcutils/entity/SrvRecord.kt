@@ -1,6 +1,6 @@
-package tech.aliorpse.mcutils.internal.entity
+package tech.aliorpse.mcutils.entity
 
-internal data class SrvRecord(
+public data class SrvRecord(
     val target: String,
     val port: Int,
     val priority: Int,
