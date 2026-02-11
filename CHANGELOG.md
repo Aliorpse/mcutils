@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.7.0](https://github.com/Aliorpse/mcutils/compare/v3.6.11...v3.7.0) (2026-02-11)
+
+
+### Features
+
+* **server-status:** add a function to resolve SRV manually, with more customization options ([6475e63](https://github.com/Aliorpse/mcutils/commit/6475e631b5e386cbd65ec33ee2ca7bba90223e81))
+
 ## [3.6.11](https://github.com/Aliorpse/mcutils/compare/v3.6.10...v3.6.11) (2026-01-31)
 
 
