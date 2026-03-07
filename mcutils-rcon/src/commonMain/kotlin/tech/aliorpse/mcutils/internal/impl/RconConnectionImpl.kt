@@ -2,16 +2,10 @@
 
 package tech.aliorpse.mcutils.internal.impl
 
-import io.ktor.network.sockets.Socket
-import io.ktor.network.sockets.openReadChannel
-import io.ktor.network.sockets.openWriteChannel
-import io.ktor.utils.io.ByteReadChannel
-import io.ktor.utils.io.ByteWriteChannel
+import io.ktor.network.sockets.*
+import io.ktor.utils.io.*
 import io.ktor.utils.io.core.buildPacket
 import io.ktor.utils.io.core.remaining
-import io.ktor.utils.io.readByte
-import io.ktor.utils.io.readFully
-import io.ktor.utils.io.writeByte
 import io.ktor.utils.io.writePacket
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock

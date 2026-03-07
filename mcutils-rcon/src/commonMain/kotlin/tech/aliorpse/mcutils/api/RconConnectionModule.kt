@@ -1,6 +1,6 @@
 package tech.aliorpse.mcutils.api
 
-import io.ktor.network.sockets.aSocket
+import io.ktor.network.sockets.*
 import tech.aliorpse.mcutils.internal.impl.RconConnectionImpl
 import tech.aliorpse.mcutils.internal.util.Punycode
 import tech.aliorpse.mcutils.internal.util.globalSelectorIO

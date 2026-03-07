@@ -2,26 +2,11 @@
 
 package tech.aliorpse.mcutils.internal.impl
 
-import io.ktor.network.sockets.aSocket
-import io.ktor.network.sockets.openReadChannel
-import io.ktor.network.sockets.openWriteChannel
-import io.ktor.utils.io.ByteReadChannel
-import io.ktor.utils.io.ByteWriteChannel
-import io.ktor.utils.io.readByte
-import io.ktor.utils.io.readFully
-import io.ktor.utils.io.writeFully
+import io.ktor.network.sockets.*
+import io.ktor.utils.io.*
 import kotlinx.coroutines.withTimeout
-import kotlinx.io.Buffer
-import kotlinx.io.Sink
-import kotlinx.io.Source
-import kotlinx.io.readByteArray
-import kotlinx.io.readString
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.boolean
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.io.*
+import kotlinx.serialization.json.*
 import tech.aliorpse.mcutils.entity.Players
 import tech.aliorpse.mcutils.entity.ServerStatus
 import tech.aliorpse.mcutils.entity.TextComponent

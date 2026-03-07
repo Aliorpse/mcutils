@@ -1,25 +1,7 @@
 package tech.aliorpse.mcutils.api.registry
 
 import kotlinx.serialization.json.jsonPrimitive
-import tech.aliorpse.mcutils.entity.AllowlistAddedEvent
-import tech.aliorpse.mcutils.entity.AllowlistRemovedEvent
-import tech.aliorpse.mcutils.entity.GameruleUpdatedEvent
-import tech.aliorpse.mcutils.entity.IMsmpEventRegistry
-import tech.aliorpse.mcutils.entity.IPBanAddedEvent
-import tech.aliorpse.mcutils.entity.IPBanRemovedEvent
-import tech.aliorpse.mcutils.entity.MsmpEventRegistryImpl
-import tech.aliorpse.mcutils.entity.OperatorAddedEvent
-import tech.aliorpse.mcutils.entity.OperatorRemovedEvent
-import tech.aliorpse.mcutils.entity.PlayerJoinedEvent
-import tech.aliorpse.mcutils.entity.PlayerLeftEvent
-import tech.aliorpse.mcutils.entity.ServerActivityEvent
-import tech.aliorpse.mcutils.entity.ServerSavedEvent
-import tech.aliorpse.mcutils.entity.ServerSavingEvent
-import tech.aliorpse.mcutils.entity.ServerStartedEvent
-import tech.aliorpse.mcutils.entity.ServerStatusEvent
-import tech.aliorpse.mcutils.entity.ServerStoppingEvent
-import tech.aliorpse.mcutils.entity.UserBanAddedEvent
-import tech.aliorpse.mcutils.entity.UserBanRemovedEvent
+import tech.aliorpse.mcutils.entity.*
 import tech.aliorpse.mcutils.internal.util.SpinLockedMutableMap
 
 /**

@@ -1,15 +1,8 @@
 package tech.aliorpse.mcutils.util
 
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.booleanOrNull
+import kotlinx.serialization.json.*
 import tech.aliorpse.mcutils.entity.TextComponent
 import tech.aliorpse.mcutils.entity.TextStyle
-import kotlin.collections.component1
-import kotlin.collections.component2
 
 public fun TextComponent.Companion.fromJson(element: String): TextComponent =
     fromJson(Json.parseToJsonElement(element))

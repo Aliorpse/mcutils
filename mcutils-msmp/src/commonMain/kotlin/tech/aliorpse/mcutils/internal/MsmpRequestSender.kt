@@ -1,7 +1,6 @@
 package tech.aliorpse.mcutils.internal
 
-import io.ktor.client.plugins.websocket.DefaultClientWebSocketSession
-import io.ktor.client.plugins.websocket.sendSerialized
+import io.ktor.client.plugins.websocket.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel

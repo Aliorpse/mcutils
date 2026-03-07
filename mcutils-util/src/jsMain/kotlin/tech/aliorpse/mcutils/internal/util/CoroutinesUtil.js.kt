@@ -1,11 +1,6 @@
 package tech.aliorpse.mcutils.internal.util
 
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
+import kotlinx.coroutines.*
 
 public actual val DispatchersIO: CoroutineDispatcher = Dispatchers.Unconfined
 

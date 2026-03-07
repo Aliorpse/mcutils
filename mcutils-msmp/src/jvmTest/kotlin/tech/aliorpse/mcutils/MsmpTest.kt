@@ -1,20 +1,10 @@
 package tech.aliorpse.mcutils
 
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import tech.aliorpse.mcutils.annotation.ExperimentalMCUtilsApi
 import tech.aliorpse.mcutils.api.MCServer
 import tech.aliorpse.mcutils.api.msmpClient
-import tech.aliorpse.mcutils.api.registry.allowList
-import tech.aliorpse.mcutils.api.registry.banList
-import tech.aliorpse.mcutils.api.registry.gamerules
-import tech.aliorpse.mcutils.api.registry.ipBanList
-import tech.aliorpse.mcutils.api.registry.players
-import tech.aliorpse.mcutils.api.registry.server
-import tech.aliorpse.mcutils.api.registry.serverSettings
+import tech.aliorpse.mcutils.api.registry.*
 import tech.aliorpse.mcutils.entity.MessageDto
 import kotlin.test.Test
 

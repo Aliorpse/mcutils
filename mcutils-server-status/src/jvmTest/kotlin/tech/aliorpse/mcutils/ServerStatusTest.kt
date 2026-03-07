@@ -1,11 +1,7 @@
 package tech.aliorpse.mcutils
 
 import kotlinx.coroutines.runBlocking
-import tech.aliorpse.mcutils.api.MCServer
-import tech.aliorpse.mcutils.api.getQueryBasic
-import tech.aliorpse.mcutils.api.getQueryFull
-import tech.aliorpse.mcutils.api.getStatus
-import tech.aliorpse.mcutils.api.resolveSrv
+import tech.aliorpse.mcutils.api.*
 import kotlin.test.Test
 
 class ServerStatusTest {

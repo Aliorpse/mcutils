@@ -1,18 +1,10 @@
 package tech.aliorpse.mcutils.internal
 
-import io.ktor.client.plugins.websocket.DefaultClientWebSocketSession
-import io.ktor.client.plugins.websocket.receiveDeserialized
-import io.ktor.serialization.WebsocketDeserializeException
+import io.ktor.client.plugins.websocket.*
+import io.ktor.serialization.*
 import io.ktor.utils.io.CancellationException
-import io.ktor.websocket.close
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.NonCancellable
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import io.ktor.websocket.*
+import kotlinx.coroutines.*
 import kotlinx.serialization.json.JsonElement
 import tech.aliorpse.mcutils.entity.ConnectionClosedEvent
 import tech.aliorpse.mcutils.entity.ConnectionEstablishedEvent

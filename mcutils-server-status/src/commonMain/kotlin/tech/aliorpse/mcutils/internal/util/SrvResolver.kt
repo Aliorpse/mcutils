@@ -5,16 +5,25 @@
 
 package tech.aliorpse.mcutils.internal.util
 
-import io.ktor.network.selector.SelectorManager
-import io.ktor.network.sockets.Datagram
-import io.ktor.network.sockets.InetSocketAddress
-import io.ktor.network.sockets.aSocket
+import io.ktor.network.selector.*
+import io.ktor.network.sockets.*
 import io.ktor.utils.io.core.toByteArray
 import kotlinx.coroutines.withTimeout
 import kotlinx.io.Buffer
 import kotlinx.io.readByteArray
 import tech.aliorpse.mcutils.entity.SrvRecord
+import kotlin.Byte
+import kotlin.ByteArray
+import kotlin.Exception
+import kotlin.Int
+import kotlin.Long
+import kotlin.Short
+import kotlin.String
+import kotlin.Suppress
+import kotlin.apply
 import kotlin.random.Random
+import kotlin.repeat
+import kotlin.use
 
 /**
  * Resolves an SRV record for the given service name using raw DNS via UDP.

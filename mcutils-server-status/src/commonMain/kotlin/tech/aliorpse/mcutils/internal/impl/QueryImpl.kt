@@ -2,22 +2,11 @@
 
 package tech.aliorpse.mcutils.internal.impl
 
-import io.ktor.network.sockets.ConnectedDatagramSocket
-import io.ktor.network.sockets.Datagram
-import io.ktor.network.sockets.InetSocketAddress
-import io.ktor.network.sockets.aSocket
+import io.ktor.network.sockets.*
 import kotlinx.coroutines.withTimeout
 import kotlinx.coroutines.withTimeoutOrNull
-import kotlinx.io.Buffer
-import kotlinx.io.Sink
-import kotlinx.io.Source
-import kotlinx.io.readShortLe
-import kotlinx.io.readString
-import tech.aliorpse.mcutils.entity.Players
-import tech.aliorpse.mcutils.entity.QueryStatus
-import tech.aliorpse.mcutils.entity.QueryStatusBasic
-import tech.aliorpse.mcutils.entity.QueryStatusFull
-import tech.aliorpse.mcutils.entity.Sample
+import kotlinx.io.*
+import tech.aliorpse.mcutils.entity.*
 import tech.aliorpse.mcutils.internal.util.Punycode
 import tech.aliorpse.mcutils.internal.util.globalSelectorIO
 
