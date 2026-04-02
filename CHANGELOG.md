@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.7.1](https://github.com/Aliorpse/mcutils/compare/v3.7.0...v3.7.1) (2026-04-02)
+
+
+### Performance Improvements
+
+* release for the latest dependencies ([8236c0b](https://github.com/Aliorpse/mcutils/commit/8236c0be8bee40717f9641c537dbde0be7f7957d))
+
 ## [3.7.0](https://github.com/Aliorpse/mcutils/compare/v3.6.11...v3.7.0) (2026-02-11)
 
 
