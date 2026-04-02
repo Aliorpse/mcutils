@@ -34,7 +34,7 @@ jobs:
 
       - name: ABI Validation
         if: ${{ steps.release.outputs.release_created }}
-        run: ./gradlew checkLegacyAbi -Pfull-build=true --no-configuration-cache
+        run: ./gradlew checkKotlinAbi --no-configuration-cache
 
       - name: Publish and release to Maven Central
         if: ${{ steps.release.outputs.release_created }}
@@ -43,7 +43,6 @@ jobs:
           version="${version#v}"
           ./gradlew publishToMavenCentral \
           -Pversion=$version \
-          -Pfull-build=true \
           --no-configuration-cache
         env:
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}

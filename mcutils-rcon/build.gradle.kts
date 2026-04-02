@@ -1,14 +1,14 @@
+@file:OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
+
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.maven.publish)
+    id("mcutils.library-nobrowser")
 }
 
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            api(project(":shared"))
-            implementation(project(":util"))
+            api(projects.shared)
+            implementation(projects.util)
             implementation(libs.ktor.network)
         }
         jvmTest.dependencies {

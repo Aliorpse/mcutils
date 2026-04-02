@@ -1,16 +1,16 @@
+@file:OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
+
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.kotlinx.serialization)
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.maven.publish)
+    id("mcutils.library-nobrowser")
+    id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            api(project(":shared"))
-            implementation(project(":util"))
-            api(project(":color"))
+            api(projects.shared)
+            implementation(projects.util)
+            api(projects.color)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.ktor.network)
             implementation(libs.kotlinx.io.core)

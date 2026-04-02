@@ -58,4 +58,4 @@ jobs:
 
       - name: ABI Validation
         if: steps.check_reviews.outputs.should_run == 'true'
-        run: ./gradlew checkLegacyAbi -Pfull-build=true --no-configuration-cache
+        run: ./gradlew checkKotlinAbi --no-configuration-cache
