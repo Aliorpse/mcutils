@@ -15,6 +15,7 @@ import tech.aliorpse.mcutils.internal.MsmpLifecycleManager
 import tech.aliorpse.mcutils.internal.util.SpinLockedMutableMap
 import tech.aliorpse.mcutils.internal.util.runBlocking
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
+import kotlin.time.Duration.Companion.milliseconds
 
 @Suppress("MagicNumber")
 public class MsmpClientConfig {
@@ -94,7 +95,7 @@ public class MsmpClient internal constructor(
         totalTimeout: Long,
     ): JsonElement {
         check(stateFlow.value !is MsmpState.Closed) { "Client already closed, but with pending requests not sent." }
-        return withTimeout(totalTimeout) {
+        return withTimeout(totalTimeout.milliseconds) {
             lifecycleManager.awaitConnection().call(method, params)
         }
     }

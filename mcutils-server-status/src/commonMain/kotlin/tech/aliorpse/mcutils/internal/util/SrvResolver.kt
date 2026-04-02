@@ -23,6 +23,7 @@ import kotlin.Suppress
 import kotlin.apply
 import kotlin.random.Random
 import kotlin.repeat
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.use
 
 /**
@@ -38,7 +39,7 @@ internal suspend fun resolveSrvImpl(
         val socket = aSocket(selector).udp().bind()
 
         try {
-            withTimeout(timeoutMillis) {
+            withTimeout(timeoutMillis.milliseconds) {
                 val serverAddress = InetSocketAddress(dnsServer, dnsPort)
                 val queryId = Random.nextInt(0, 65535).toShort()
 

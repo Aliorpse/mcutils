@@ -7,6 +7,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import tech.aliorpse.mcutils.entity.MsmpRequest
+import kotlin.time.Duration.Companion.milliseconds
 
 internal class MsmpRequestSender(
     private val connection: DefaultClientWebSocketSession,
@@ -21,7 +22,7 @@ internal class MsmpRequestSender(
                 val batch = mutableListOf<MsmpRequest>()
                 batch.add(firstRequest)
 
-                if (batchDelay > 0) delay(batchDelay)
+                if (batchDelay > 0) delay(batchDelay.milliseconds)
 
                 var next = requestChannel.tryReceive().getOrNull()
                 while (next != null) {

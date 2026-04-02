@@ -17,6 +17,7 @@ import tech.aliorpse.mcutils.internal.util.resolveSrvImpl
 import tech.aliorpse.mcutils.util.fromJson
 import tech.aliorpse.mcutils.util.fromString
 import kotlin.time.Clock
+import kotlin.time.Duration.Companion.milliseconds
 
 internal object ServerListPingImpl {
     private val json = Json { ignoreUnknownKeys = true }
@@ -40,7 +41,7 @@ internal object ServerListPingImpl {
             val output = socket.openWriteChannel(autoFlush = true)
             val input = socket.openReadChannel()
 
-            return withTimeout(timeout) {
+            return withTimeout(timeout.milliseconds) {
                 // 1. Handshake Packet (ID 0x00)
                 output.sendMCPacket(0x00) {
                     writeVarInt(-1) // Protocol version

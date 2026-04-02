@@ -4,6 +4,7 @@ import io.ktor.client.plugins.*
 import io.ktor.client.plugins.websocket.*
 import io.ktor.client.request.*
 import io.ktor.http.*
+import io.ktor.util.PlatformUtils
 import io.ktor.utils.io.CancellationException
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -14,10 +15,10 @@ import tech.aliorpse.mcutils.api.MsmpState
 import tech.aliorpse.mcutils.entity.ServerStoppingEvent
 import tech.aliorpse.mcutils.internal.util.DispatchersIO
 import tech.aliorpse.mcutils.internal.util.WebSocketClientProvider.webSocketClient
-import tech.aliorpse.mcutils.internal.util.isBrowser
 import kotlin.math.min
 import kotlin.math.pow
 import kotlin.random.Random
+import kotlin.time.Duration.Companion.milliseconds
 
 internal class MsmpLifecycleManager(
     private val target: String,
@@ -60,13 +61,11 @@ internal class MsmpLifecycleManager(
     }
 
     suspend fun awaitConnection(): MsmpConnection {
-        val state = stateFlow
-            .filter {
-                it is MsmpState.Connected ||
+        val state = stateFlow.first {
+            it is MsmpState.Connected ||
                     it is MsmpState.Closed ||
                     (it is MsmpState.Disconnected && !config.autoReconnect)
-            }
-            .first()
+        }
 
         return when (state) {
             is MsmpState.Connected -> state.connection
@@ -118,7 +117,7 @@ internal class MsmpLifecycleManager(
 
                 _stateFlow.value = MsmpState.Reconnecting(connectionAttempts.toLong(), delayDuration)
 
-                delay(delayDuration)
+                delay(delayDuration.milliseconds)
             }
         }
     }
@@ -128,7 +127,7 @@ internal class MsmpLifecycleManager(
      */
     private suspend fun connectSession(): Boolean = coroutineScope {
         val session = webSocketClient.webSocketSession(target) {
-            if (isBrowser) {
+            if (PlatformUtils.IS_BROWSER) {
                 header(HttpHeaders.SecWebSocketProtocol, "minecraft-v1,$token")
             } else {
                 header(HttpHeaders.Authorization, "Bearer $token")

@@ -9,6 +9,7 @@ import kotlinx.io.*
 import tech.aliorpse.mcutils.entity.*
 import tech.aliorpse.mcutils.internal.util.Punycode
 import tech.aliorpse.mcutils.internal.util.globalSelectorIO
+import kotlin.time.Duration.Companion.milliseconds
 
 private const val QUERY_SESSION_ID: Int = 0x00070201 // Ciallo ～ (∠·ω< )⌒★
 private const val QUERY_SESSION_MASK = 0x0F0F0F0F
@@ -20,21 +21,21 @@ internal object QueryImpl {
         timeout: Long,
         isFull: Boolean,
     ): QueryStatus {
-        val socket = withTimeout(timeout) {
+        val socket = withTimeout(timeout.milliseconds) {
             aSocket(globalSelectorIO).udp().connect(
                 InetSocketAddress(Punycode.from(host), port)
             )
         }
 
         socket.use { socket ->
-            val token = withTimeout(timeout) { socket.queryHandshake() }
+            val token = withTimeout(timeout.milliseconds) { socket.queryHandshake() }
 
-            return withTimeoutOrNull(timeout) {
+            return withTimeoutOrNull(timeout.milliseconds) {
                 socket.getQueryStatus(token, isFull)
             } ?: run {
                 // Retry logic if token is invalid
-                val newToken = withTimeout(timeout) { socket.queryHandshake() }
-                withTimeout(timeout) { socket.getQueryStatus(newToken, isFull) }
+                val newToken = withTimeout(timeout.milliseconds) { socket.queryHandshake() }
+                withTimeout(timeout.milliseconds) { socket.getQueryStatus(newToken, isFull) }
             }
         }
     }
