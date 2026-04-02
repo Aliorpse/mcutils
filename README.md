@@ -18,7 +18,7 @@ ping/management, fetching player profile, etc.
   * mingw (X64)
   * ios (X64/Arm64)
   * iosSimulator (Arm64)
-  * macos (X64/Arm64)
+  * macos (Arm64)
   * androidNative (X64/Arm64)
 
 ## Modules
