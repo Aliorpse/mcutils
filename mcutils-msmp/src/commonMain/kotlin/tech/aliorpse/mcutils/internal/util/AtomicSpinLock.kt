@@ -1,16 +1,15 @@
 package tech.aliorpse.mcutils.internal.util
 
-import kotlin.concurrent.atomics.AtomicInt
+import kotlin.concurrent.atomics.AtomicBoolean
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
 
 @OptIn(ExperimentalAtomicApi::class)
 internal class AtomicSpinLock {
-    // 0 = unlocked, 1 = locked
-    private val state = AtomicInt(0)
+    private val state = AtomicBoolean(false)
 
-    fun lock() { while (!state.compareAndSet(0, 1)) {} }
+    fun lock() { while (!state.compareAndSet(expectedValue = false, newValue = true)) {} }
 
-    fun unlock() = state.store(0)
+    fun unlock() = state.store(true)
 
     inline fun <T> withLock(block: () -> T): T {
         lock()

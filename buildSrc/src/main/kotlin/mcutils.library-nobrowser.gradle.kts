@@ -1,9 +1,6 @@
 @file:OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
 
 import com.vanniktech.maven.publish.DeploymentValidation
-import org.gradle.api.plugins.ExtensionAware
-import org.jetbrains.kotlin.gradle.dsl.abi.AbiValidationMultiplatformExtension
-import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 
 plugins {
     id("org.jetbrains.kotlin.multiplatform")
@@ -58,11 +55,6 @@ kotlin {
     explicitApi()
     applyDefaultHierarchyTemplate()
 
-    @OptIn(ExperimentalAbiValidation::class)
-    (this as ExtensionAware).extensions.configure<AbiValidationMultiplatformExtension>("abiValidation") {
-        enabled = true
-    }
-
     jvm {
         compilations.configureEach {
             compileTaskProvider.configure {
@@ -83,9 +75,7 @@ kotlin {
     macosArm64()
     mingwX64()
 
-    js(IR) {
-        nodejs()
-    }
+    js { nodejs() }
 
     wasmJs {
         nodejs()
