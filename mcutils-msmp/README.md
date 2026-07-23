@@ -1,5 +1,7 @@
 # Minecraft Server Management Protocol (MSMP)
 
+Currently, this module supports up to MSMP version `3.0.0`.
+
 `tech.aliorpse.mcutils:mcutils-msmp`
 
 > [!tip]

@@ -7,6 +7,7 @@ import tech.aliorpse.mcutils.api.msmpClient
 import tech.aliorpse.mcutils.api.registry.*
 import tech.aliorpse.mcutils.entity.MessageDto
 import kotlin.test.Test
+import kotlin.time.Duration.Companion.seconds
 
 class MsmpTest {
     @OptIn(DelicateCoroutinesApi::class, ExperimentalMCUtilsApi::class)
@@ -39,7 +40,7 @@ class MsmpTest {
                 ),
             )
 
-            delay(1000)
+            delay(1.seconds)
 
             client.await()
         }
