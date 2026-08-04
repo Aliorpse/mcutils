@@ -2,7 +2,7 @@
 <html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
-    <title>RconConnection</title>
+    <title>ConnectionState</title>
 <link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
     <script>document.documentElement.classList.replace("no-js", "js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
@@ -89,62 +89,43 @@
         </nav>
         <div id="resizer" class="resizer" data-item-type="BAR"></div>
         <div id="main" data-item-type="SECTION" role="main">
-<div class="main-content" data-page-type="classlike" id="content" pageids="rcon::tech.aliorpse.mcutils.api/RconConnection///PointingToDeclaration//1850575003">
-  <div class="breadcrumbs"><a href="../../index.html">rcon</a><span class="delimiter">/</span><a href="../index.html">tech.aliorpse.mcutils.api</a><span class="delimiter">/</span><span class="current">RconConnection</span></div>
+<div class="main-content" data-page-type="classlike" id="content" pageids="rcon::tech.aliorpse.mcutils.api.model/ConnectionState///PointingToDeclaration//1850575003">
+  <div class="breadcrumbs"><a href="../../index.html">rcon</a><span class="delimiter">/</span><a href="../index.html">tech.aliorpse.mcutils.api.model</a><span class="delimiter">/</span><span class="current">ConnectionState</span></div>
   <div class="cover ">
-    <h1 class="cover"><span>Rcon</span><wbr><span><span>Connection</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":rcon/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">RconConnection</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-auto-closeable/index.html">AutoCloseable</a></div></div></div>
+    <h1 class="cover"><span>Connection</span><wbr><span><span>State</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":rcon/commonMain"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">class </span><a href="index.html">ConnectionState</a></div><h4 class="tableheader">Inheritors</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":rcon/commonMain" data-filterable-set=":rcon/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="-disconnected/index.html">Disconnected</a></div></span></div><div></div></div></div><div class="table-row table-row_content" data-filterable-current=":rcon/commonMain" data-filterable-set=":rcon/commonMain"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="-connected/index.html">Connected</a></div></span></div><div></div></div></div></div></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
-      <div data-togglable="PROPERTY">
-        <h2 class="tableheader">Properties</h2>
-        <div class="table"><a data-name="710062414%2FProperties%2F1850575003" anchor-label="connectionState" id="710062414%2FProperties%2F1850575003" data-filterable-set=":rcon/commonMain"></a>
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="1251579525%2FClasslikes%2F1850575003" anchor-label="Connected" id="1251579525%2FClasslikes%2F1850575003" data-filterable-set=":rcon/commonMain"></a>
           <div class="table-row table-row_content" data-filterable-current=":rcon/commonMain" data-filterable-set=":rcon/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="connection-state.html"><span>connection</span><wbr><span><span>State</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="710062414%2FProperties%2F1850575003"></span>
+                  <div><a href="-connected/index.html"><span><span>Connected</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1251579525%2FClasslikes%2F1850575003"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":rcon/commonMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="connection-state.html">connectionState</a><span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines.flow/StateFlow///PointingToDeclaration/">StateFlow</span><span class="token operator">&lt;</span><a href="../../tech.aliorpse.mcutils.api.model/-connection-state/index.html">ConnectionState</a><span class="token operator">&gt;</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":rcon/commonMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-connected/index.html">Connected</a> : <a href="index.html">ConnectionState</a></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div data-togglable="FUNCTION">
-        <h2 class="tableheader">Functions</h2>
-        <div class="table"><a data-name="-2108126135%2FFunctions%2F1850575003" anchor-label="close" id="-2108126135%2FFunctions%2F1850575003" data-filterable-set=":rcon/commonMain"></a>
+<a data-name="309789689%2FClasslikes%2F1850575003" anchor-label="Disconnected" id="309789689%2FClasslikes%2F1850575003" data-filterable-set=":rcon/commonMain"></a>
           <div class="table-row table-row_content" data-filterable-current=":rcon/commonMain" data-filterable-set=":rcon/commonMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="close.html"><span><span>close</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2108126135%2FFunctions%2F1850575003"></span>
+                  <div><a href="-disconnected/index.html"><span><span>Disconnected</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="309789689%2FClasslikes%2F1850575003"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":rcon/commonMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="close.html"><span class="token function">close</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
-                </div>
-              </div>
-            </div>
-          </div>
-<a data-name="-41629672%2FFunctions%2F1850575003" anchor-label="execute" id="-41629672%2FFunctions%2F1850575003" data-filterable-set=":rcon/commonMain"></a>
-          <div class="table-row table-row_content" data-filterable-current=":rcon/commonMain" data-filterable-set=":rcon/commonMain">
-            <div class="main-subrow keyValue ">
-              <div class=""><span class="inline-flex">
-                  <div><a href="execute.html"><span><span>execute</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-41629672%2FFunctions%2F1850575003"></span>
-                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
-                  </span></span></div>
-              <div>
-                <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":rcon/commonMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="execute.html"><span class="token function">execute</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">command<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Execute the given command.</p></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":rcon/commonMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="-disconnected/index.html">Disconnected</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>error<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/index.html">Throwable</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="index.html">ConnectionState</a></div></div></div>
                 </div>
               </div>
             </div>
