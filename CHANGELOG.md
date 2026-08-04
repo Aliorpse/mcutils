@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.8.0](https://github.com/Aliorpse/mcutils/compare/v3.7.1...v3.8.0) (2026-08-04)
+
+
+### Features
+
+* provide connectionState for RconConnection; delete MSMP module ([98939a9](https://github.com/Aliorpse/mcutils/commit/98939a9fd024b1214378e943796e8410d5dd7b96))
+
 ## [3.7.1](https://github.com/Aliorpse/mcutils/compare/v3.7.0...v3.7.1) (2026-04-02)
 
 
