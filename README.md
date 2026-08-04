@@ -24,7 +24,6 @@ ping/management, fetching player profile, etc.
 ## Modules
 
 - [Server Status](mcutils-server-status/README.md): Fetch Minecraft server status via SLP or Query.
-- [Minecraft Server Management Protocol (MSMP)](mcutils-msmp/README.md): Comprehensive server management and event listening.
 - [Remote Console (RCON)](mcutils-rcon/README.md): Execute commands remotely on the server.
 - [Player Profile](mcutils-player/README.md): Retrieve player UUIDs and profiles.
 

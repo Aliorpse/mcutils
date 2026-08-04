@@ -1,4 +1,4 @@
-@file:OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
     id("mcutils.library-nobrowser")
@@ -9,6 +9,7 @@ kotlin {
         browser()
     }
 
+    @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
     }

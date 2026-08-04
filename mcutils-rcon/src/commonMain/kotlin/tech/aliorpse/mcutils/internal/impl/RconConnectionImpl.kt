@@ -7,18 +7,33 @@ import io.ktor.utils.io.*
 import io.ktor.utils.io.core.buildPacket
 import io.ktor.utils.io.core.remaining
 import io.ktor.utils.io.writePacket
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.io.Sink
 import kotlinx.io.writeString
+import tech.aliorpse.mcutils.api.model.ConnectionState
 import kotlin.concurrent.atomics.AtomicInt
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
 import kotlin.concurrent.atomics.fetchAndIncrement
+import kotlin.coroutines.CoroutineContext
+import kotlin.time.Duration.Companion.seconds
 
 @OptIn(ExperimentalAtomicApi::class)
 internal class RconConnectionImpl(
     internal val connection: Socket
-) {
+) : CoroutineScope {
+    private val job = Job(connection.coroutineContext[Job])
+    override val coroutineContext: CoroutineContext = connection.coroutineContext + job
+
+    val connectionState: MutableStateFlow<ConnectionState> =
+        MutableStateFlow(ConnectionState.Disconnected(null))
+
     private val idCounter = AtomicInt(1)
     private val mutex = Mutex()
 
@@ -34,6 +49,21 @@ internal class RconConnectionImpl(
     suspend fun authenticate(password: String) {
         output.sendRconPacket(0, 3) { writeString(password) }
         input.readRconPacket(0, 2)
+
+        connectionState.update { ConnectionState.Connected }
+
+        launch {
+            var error: Throwable? = null
+            runCatching {
+                while (!input.isClosedForRead) {
+                    delay(3.seconds)
+                }
+            }.onFailure { error = it }
+
+            connection.close()
+            connectionState.update { ConnectionState.Disconnected(error) }
+            job.cancel()
+        }
     }
 }
 

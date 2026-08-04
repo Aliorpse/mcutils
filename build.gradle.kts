@@ -8,5 +8,4 @@ dependencies {
     dokka(projects.player)
     dokka(projects.rcon)
     dokka(projects.serverStatus)
-    dokka(projects.msmp)
 }

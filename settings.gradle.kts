@@ -13,7 +13,7 @@ plugins {
 
 rootProject.name = "mcutils"
 
-include("color", "shared", "player", "rcon", "server-status", "util", "msmp")
+include("color", "shared", "player", "rcon", "server-status", "util")
 
 rootProject.children.forEach {
     it.projectDir = file("mcutils-${it.name}")

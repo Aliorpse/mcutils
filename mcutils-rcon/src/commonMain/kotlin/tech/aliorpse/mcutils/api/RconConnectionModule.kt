@@ -1,6 +1,9 @@
 package tech.aliorpse.mcutils.api
 
 import io.ktor.network.sockets.*
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.StateFlow
+import tech.aliorpse.mcutils.api.model.ConnectionState
 import tech.aliorpse.mcutils.internal.impl.RconConnectionImpl
 import tech.aliorpse.mcutils.internal.util.Punycode
 import tech.aliorpse.mcutils.internal.util.globalSelectorIO
@@ -27,6 +30,8 @@ public suspend fun MinecraftServer.createRconConnection(
 public class RconConnection internal constructor(
     private val impl: RconConnectionImpl
 ) : AutoCloseable {
+    public val connectionState: StateFlow<ConnectionState> = impl.connectionState
+
     /**
      * Execute the given command.
      *
@@ -38,5 +43,8 @@ public class RconConnection internal constructor(
      */
     public suspend fun execute(command: String): String = impl.execute(command)
 
-    override fun close(): Unit = impl.connection.close()
+    override fun close() {
+        impl.connection.close()
+        impl.cancel()
+    }
 }
