@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.9.0](https://github.com/Aliorpse/mcutils/compare/v3.8.0...v3.9.0) (2026-08-05)
+
+
+### Features
+
+* fix publish ([6c6b2f9](https://github.com/Aliorpse/mcutils/commit/6c6b2f92d3d60a733812e096378cdafa945d0e7b))
+
 ## [3.8.0](https://github.com/Aliorpse/mcutils/compare/v3.7.1...v3.8.0) (2026-08-04)
 
 
