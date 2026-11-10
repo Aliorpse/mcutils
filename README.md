@@ -1,3 +1,7 @@
+# Deprecated
+
+This project will be rewrite using [kotlin-toolchain](https://kotlin-toolchain.org/) when I'm free.
+
 # mcutils
 
 [![CodeFactor](https://www.codefactor.io/repository/github/aliorpse/mcutils/badge)](https://www.codefactor.io/repository/github/aliorpse/mcutils)
