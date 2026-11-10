@@ -1,6 +1,6 @@
 # Deprecated
 
-This project will be rewrite using [kotlin-toolchain](https://kotlin-toolchain.org/) when I'm free.
+This project will be rewrite using [kotlin-toolchain](https://kotlin-toolchain.org/) when I'm free. At that time I will delete this repo.
 
 # mcutils
 
